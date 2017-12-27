@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<!-- New slizaa project wizard -->
+	<extension id="org.slizaa.core.eclipse.ui.newWizards" name="Slizaa Wizards"
+		point="org.eclipse.ui.newWizards">
+		<category id="org.slizaa.core.eclipse.ui.wizards.category" name="Slizaa"> </category>
+		<wizard
+        canFinishEarly="false"
+        category="org.slizaa.core.eclipse.ui.wizards.category"
+        class="org.slizaa.product.ui.project.wizard.NewSlizaaProjectWizard"
+        hasPages="true"
+        icon="icons/unchecked.gif"
+        id="org.slizaa.core.eclipse.ui.wizards.newwizard"
+        name="Slizaa project"
+        project="true">
+			<description> Create a Slizaa project </description>
+		</wizard>
+	</extension>
+
+	<!-- The Slizaa project content type ('slizaa.json') -->
+	<extension id="org.slizaa.core.eclipse.ui.contentTypes" name="Slizaa Contenttypes"
+		point="org.eclipse.core.contenttype.contentTypes">
+		<content-type file-names="slizaa.json"
+			id="org.slizaa.core.eclipse.ui.contenttypes.projectdescription"
+			name="Slizaa project description" priority="normal" > </content-type>
+	</extension>
+	
+	<!-- -->
+	<extension
+       point="org.eclipse.ui.ide.projectNatureImages">
+    	<image
+          icon="icons/decorator/slizaa_project_decorator.png"
+          id="org.slizaa.core.eclipse.slizaanature.image"
+          natureId="org.slizaa.rcp.workbench.slizaanature">
+    	</image>
+ 	</extension>
+ 
+	<!--  -->
+ 	<extension point="org.eclipse.ui.views">
+		<category id="org.slizaa.core.eclipse.ui.views"
+			name="Slizaa"> </category>
+	</extension>
+	
+ 	<!-- additional menus in the project navigator -->
+	<extension id="org.slizaa.core.eclipse.ui.menus" point="org.eclipse.ui.menus">
+ 		<menuContribution
+                  allPopups="false"
+                  locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+               <toolbar
+                     id="org.slizaa.core.eclipse.ui.toolbar"
+                     label="Slizaa Tools">
+                  <separator
+                        name="org.slizaa.core.eclipse.ui.toolbar.separator"
+                        visible="true">
+                  </separator>
+               </toolbar>
+            </menuContribution>
+	</extension>
+ 
+  	<!-- additional pop-up-menus in the project navigator -->
+	<extension point="org.eclipse.ui.menus">
+
+		<menuContribution
+			locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+     <!-- menu
+           id="org.bundlemaker.core.ui.tools"
+           label="Tools">
+		<visibleWhen checkEnabled="false">
+			<reference definitionId="org.bundlemaker.analysis.ui.artifactContentSelected" />
+		</visibleWhen>
+     </menu -->
+     
+     <!-- menu
+           id="org.bundlemaker.core.ui.selectors"
+           label="Select">
+		<visibleWhen checkEnabled="false">
+			<reference definitionId="org.bundlemaker.analysis.ui.artifactContentSelected" />
+		</visibleWhen>
+     </menu -->
+	
+			<!-- separator for project-related actions (open, close, ...) -->
+			<separator name="org.bundlemaker.core.ui.project.separator" visible="true"> </separator>
+			
+			<command
+         		commandId="org.slizaa.core.ui.commands.ParseSlizaaProjectCommand"
+         		icon="icons/etools/bm-parse.png"
+         		style="push">
+         		<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected" />
+				</visibleWhen>         		
+			</command>
+			
+			<command
+         		commandId="org.slizaa.core.ui.commands.OpenSlizaaProjectCommand"
+         		icon="icons/etools/bm-parse.png"
+         		style="push">
+         		<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected" />
+				</visibleWhen>         		
+			</command>
+			
+			<command
+         		commandId="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand"
+         		icon="icons/etools/bm-parse.png"
+         		style="push">
+         		<visibleWhen checkEnabled="false">
+					<reference
+						definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected" />
+				</visibleWhen>         		
+			</command>
+						
+		</menuContribution>
+	</extension>
+ 
+ 	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.slizaa.product.ui.project.handler.ParseSlizaaProjectHandler"
+			commandId="org.slizaa.core.ui.commands.ParseSlizaaProjectCommand">
+			<activeWhen>
+				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+			</activeWhen>
+			<enabledWhen>
+				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+			</enabledWhen>
+		</handler>
+		<handler class="org.slizaa.product.ui.project.handler.OpenSlizaaProjectHandler"
+			commandId="org.slizaa.core.ui.commands.OpenSlizaaProjectCommand">
+			<activeWhen>
+				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+			</activeWhen>
+			<enabledWhen>
+				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+			</enabledWhen>
+		</handler>
+		<handler class="org.slizaa.product.ui.project.handler.CreateHierarchicalGraphHandler"
+			commandId="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand">
+			<activeWhen>
+				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+			</activeWhen>
+			<enabledWhen>
+				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+			</enabledWhen>
+		</handler>
+ 	</extension>
+ 	
+ 	<extension point="org.eclipse.ui.commands">
+		<command id="org.slizaa.core.ui.commands.ParseSlizaaProjectCommand" name="Parse" />
+		<command id="org.slizaa.core.ui.commands.OpenSlizaaProjectCommand" name="Launch" />
+		<command id="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand" name="Create Model" />
+ 	</extension>
+ 	
+ 	<!-- the expression definitions -->
+	<extension point="org.eclipse.core.expressions.definitions">
+		
+		<!-- org.slizaa.core.ui.bmProjectSelected: evaluates
+             to true if a Project with Slizaa-Nature or it's slizaa.json is selected -->
+		<definition id="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected">
+			<with variable="selection">
+				<!-- exactly one item must be selected -->
+				<count value="1" />
+				<iterate ifEmpty="false" operator="and">
+						<!-- Test if a resource from a slizaa project is selected -->
+						<adapt type="org.eclipse.core.resources.IResource">
+							<test property="org.eclipse.core.resources.projectNature"
+								value="org.slizaa.tool.slizaanature"/>
+							<or>
+								<!-- either the Project itself or the slizaa.json must be selected -->
+							 <instanceof value="org.eclipse.core.resources.IProject" />
+							 <test property="org.eclipse.core.resources.name"
+                         		value="slizaa.json"/>
+							</or>
+						</adapt>
+				</iterate>
+			</with>
+		</definition>		              
+	</extension>
+
+	<!-- the navigator content
+	<extension point="org.eclipse.ui.navigator.viewer">
+		<viewer viewerId="org.eclipse.ui.navigator.ProjectExplorer"> </viewer>
+		<viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+			<includes>
+				<contentExtension isRoot="false"
+					pattern="org.slizaa.navigatorContent"
+				> 
+				
+				</contentExtension>
+			</includes>
+		</viewerContentBinding>
+	</extension>
+
+	<extension point="org.eclipse.ui.navigator.navigatorContent">
+	
+		<navigatorContent activeByDefault="true"
+			id="org.slizaa.navigatorContent"
+			contentProvider="org.slizaa.product.ui.project.content.SlizaaCNFAdapterFactoryContentProvider"
+			labelProvider="org.slizaa.product.ui.project.content.SlizaaCNFLabelProvider"
+			name="artifactContent" priority="lowest">
+			
+			<triggerPoints>
+				<and>
+					<instanceof value="org.eclipse.core.resources.IProject"> </instanceof>
+					<adapt type="org.eclipse.core.resources.IProject">
+						<test property="org.eclipse.core.resources.projectNature"
+							value="org.slizaa.tool.slizaanature"/>
+					</adapt>
+				</and>
+			</triggerPoints>
+			
+			<possibleChildren>
+				<instanceof value="org.slizaa.hierarchicalgraph.HGNode"/>
+			</possibleChildren>
+			
+		</navigatorContent>
+	</extension> -->
+
+
+</plugin>

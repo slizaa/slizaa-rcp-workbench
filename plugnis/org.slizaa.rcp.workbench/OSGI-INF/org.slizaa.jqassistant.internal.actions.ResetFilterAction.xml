@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.slizaa.jqassistant.internal.actions.ResetFilterAction">
+   <service>
+      <provide interface="org.slizaa.ui.tree.ISlizaaActionContribution"/>
+   </service>
+   <implementation class="org.slizaa.jqassistant.internal.actions.ResetFilterAction"/>
+</scr:component>

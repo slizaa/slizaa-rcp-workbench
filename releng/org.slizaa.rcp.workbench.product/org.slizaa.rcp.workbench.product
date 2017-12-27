@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="slizaa" uid="org.slizaa.rcp.workbench.product" id="org.slizaa.rcp.workbench.slizaa" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/org.slizaa.rcp.workbench/icons/about.png"/>
+      <text>
+         slizaa architecture workbench
+
+(c) Copyright Gerd Wütherich. 2015-2018. All rights reserved.
+
+Visit http://www.slizaa.org
+
+This offering is powered by Eclipse technology 
+and includes Eclipse plug-ins that can be 
+installed and used with other Eclipse-based 
+offerings.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-data workspace/
+      </programArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+   </launcherArgs>
+
+   <windowImages i16="/org.slizaa.rcp.workbench/icons/slizaa_16.png" i32="/org.slizaa.rcp.workbench/icons/slizaa_32.png" i48="/org.slizaa.rcp.workbench/icons/slizaa_48.png" i64="/org.slizaa.rcp.workbench/icons/slizaa_64.png" i128="/org.slizaa.rcp.workbench/icons/slizaa_128.png" i256="/org.slizaa.rcp.workbench/icons/slizaa_256.png"/>
+
+   <splash
+      location="org.slizaa.rcp.workbench"
+      startupProgressRect="0,180,463,16"
+      startupMessageRect="7,151,464,29"
+      startupForegroundColor="000000" />
+   <launcher name="slizaa">
+      <linux icon="icons/slizaa.xpm"/>
+      <macosx icon="icons/slizaa.icns"/>
+      <win useIco="false">
+         <bmp
+            winSmallHigh="icons/slizaa_16_16_32.bmp"
+            winSmallLow="icons/slizaa_16_16_8.bmp"
+            winMediumHigh="icons/slizaa_32_32_32.bmp"
+            winMediumLow="icons/slizaa_32_32_8.bmp"
+            winLargeHigh="icons/slizaa_48_48_32.bmp"
+            winLargeLow="icons/slizaa_48_48_8.bmp"
+            winExtraLargeHigh="icons/slizaa_256_256_32.bmp"/>
+      </win>
+   </launcher>
+
+   <vm>
+      <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</windows>
+   </vm>
+
+   <license>
+        <url>http://www.gnu.org/licenses/gpl.html</url>
+   </license>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.slizaa.hierarchicalgraph.core.feature"/>
+      <feature id="org.slizaa.hierarchicalgraph.graphdb.feature"/>
+      <feature id="org.slizaa.rcp.workbench.feature" version="1.0.0.qualifier"/>
+      <feature id="org.slizaa.neo4j.opencypher.feature"/>
+      <feature id="org.slizaa.thirdparty.feature"/>
+      <feature id="org.slizaa.opencypher.workbench.feature"/>
+      <feature id="org.eclipse.e4.rcp"/>
+      <feature id="org.eclipse.emf.ecore"/>
+      <feature id="org.eclipse.equinox.p2.user.ui"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient4.feature"/>
+      <feature id="org.eclipse.help"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature"/>
+      <feature id="org.eclipse.emf.common"/>
+      <feature id="org.eclipse.rcp"/>
+      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.ecf.core.feature"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.feature"/>
+      <feature id="org.eclipse.ecf.core.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
+      <feature id="org.eclipse.platform"/>
+      <feature id="de.cau.cs.kieler.klighd.draw2d.feature" version="0.42.1.201708311633"/>
+      <feature id="de.cau.cs.kieler.klighd.feature" version="0.42.5.201708311633"/>
+      <feature id="de.cau.cs.kieler.klighd.view.feature" version="0.42.1.201708311633"/>
+      <feature id="org.eclipse.elk.feature" version="0.2.2.201707030806"/>
+      <feature id="org.eclipse.draw2d" version="3.10.100.201606061308"/>
+      <feature id="org.eclipse.emf" version="2.13.0.v20170609-0928"/>
+      <feature id="org.eclipse.jdt" version="3.13.1.v20171009-0410"/>
+      <feature id="org.eclipse.xtext.redist" version="2.12.0.v20170519-1412"/>
+   </features>
+
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.slizaa.ui.klighd" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.ui.klighd.synthesis" autoStart="true" startLevel="0" />
+   </configurations>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+      <file path="platform:/plugin/org.slizaa.rcp.workbench/css/default.css"/>
+   </cssInfo>
+
+</product>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="org.slizaa.rcp.workbench.slizaanature"
+         point="org.eclipse.core.resources.natures"
+         name="Slizaa Nature">
+      <runtime>
+         <run
+               class="org.slizaa.rcp.workbench.core.internal.SlizaaProjectNature">
+         </run>
+      </runtime>
+   </extension>
+   
+</plugin>

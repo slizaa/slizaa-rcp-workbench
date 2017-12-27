@@ -1,0 +1,9 @@
+target/
+bin/
+/.metadata/
+screenshots/
+neo4j-home
+org.slizaa.target.target-gen
+xtend-gen/
+plugin.xml_gen
+release-merge.sh
