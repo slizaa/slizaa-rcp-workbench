@@ -5,7 +5,7 @@ target_dir=slizaa-rcp-workbench
 
 echo TRAVIS_BUILD_DIR: $TRAVIS_BUILD_DIR
 
-PRODUCTS_DIR=$TRAVIS_BUILD_DIR/releng/org.slizaa.rcp.workbench.product/target/repository
+PRODUCTS_DIR=$TRAVIS_BUILD_DIR/releng/org.slizaa.rcp.workbench.p2/target/repository
 echo PRODUCTS_DIR: $PRODUCTS_DIR
 
 filesToUpload=$(find $PRODUCTS_DIR -name "*.jar" -printf '%P\n')
