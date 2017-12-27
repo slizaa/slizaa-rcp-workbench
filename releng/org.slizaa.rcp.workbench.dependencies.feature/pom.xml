@@ -9,7 +9,7 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.slizaa.rcp.workbench.feature</artifactId>
+	<artifactId>org.slizaa.rcp.workbench.dependencies.feature</artifactId>
 	<packaging>eclipse-feature</packaging>
 
 <!-- 	<build>

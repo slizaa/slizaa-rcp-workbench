@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.slizaa.rcp.workbench.feature" version="0.0.0">
+      <category name="org.slizaa.rcp.workbench.category"/>
+   </feature>
+   <!-- feature id="org.slizaa.rcp.workbench.feature.source" version="0.0.0">
+      <category name="org.slizaa.rcp.workbench.source.category"/>
+   </feature -->
+   <category-def name="org.slizaa.rcp.workbench.category" label="org.slizaa.rcp.workbench"/>
+   <!-- category-def name="org.slizaa.rcp.workbench.source.category" label="org.slizaa.rcp.workbench.source"/ -->
+</site>

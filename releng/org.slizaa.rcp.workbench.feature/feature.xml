@@ -21,9 +21,7 @@
       <import feature="org.slizaa.hierarchicalgraph.graphdb.feature"/>
       <import feature="org.slizaa.neo4j.opencypher.feature"/>
       <import feature="org.slizaa.opencypher.workbench.feature"/>
-      <import plugin="com.google.gson"/>
-      <import plugin="com.google.guava"/>
-      <import plugin="com.google.inject"/>
+      <import feature="org.slizaa.rcp.workbench.dependencies.feature"/>
    </requires>
 
    <plugin
@@ -42,83 +40,6 @@
 
    <plugin
          id="org.slizaa.rcp.workbench.core.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.scanner.core.classpathscanner"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.scanner.core.contentdefinition"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.scanner.core.cypherregistry"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.scanner.core.mvnresolver.uber"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slizaa.scanner.core.spi-api"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.google.guava"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.google.inject"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="net.jeeeyul.eclipse.themes"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="net.jeeeyul.swtend"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.objectweb.asm"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.objectweb.asm.tree"
          download-size="0"
          install-size="0"
          version="0.0.0"

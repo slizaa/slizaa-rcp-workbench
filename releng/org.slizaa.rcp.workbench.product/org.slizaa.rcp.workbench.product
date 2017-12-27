@@ -65,7 +65,8 @@ offerings.
    <features>
       <feature id="org.slizaa.hierarchicalgraph.core.feature"/>
       <feature id="org.slizaa.hierarchicalgraph.graphdb.feature"/>
-      <feature id="org.slizaa.rcp.workbench.feature" version="1.0.0.qualifier"/>
+      <feature id="org.slizaa.rcp.workbench.dependencies.feature"/>
+      <feature id="org.slizaa.rcp.workbench.feature"/>
       <feature id="org.slizaa.neo4j.opencypher.feature"/>
       <feature id="org.slizaa.thirdparty.feature"/>
       <feature id="org.slizaa.opencypher.workbench.feature"/>
