@@ -19,7 +19,6 @@
    <requires>
       <import feature="org.slizaa.hierarchicalgraph.core.feature"/>
       <import feature="org.slizaa.hierarchicalgraph.graphdb.feature"/>
-      <import feature="net.jeeeyul.eclipse.themes.feature"/>
       <import feature="org.slizaa.neo4j.opencypher.feature"/>
       <import feature="org.slizaa.opencypher.workbench.feature"/>
       <import plugin="com.google.gson"/>

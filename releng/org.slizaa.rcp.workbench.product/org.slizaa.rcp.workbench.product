@@ -85,14 +85,14 @@ offerings.
       <feature id="org.eclipse.ecf.core.ssl.feature"/>
       <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
       <feature id="org.eclipse.platform"/>
-      <feature id="de.cau.cs.kieler.klighd.draw2d.feature" version="0.42.1.201708311633"/>
-      <feature id="de.cau.cs.kieler.klighd.feature" version="0.42.5.201708311633"/>
-      <feature id="de.cau.cs.kieler.klighd.view.feature" version="0.42.1.201708311633"/>
-      <feature id="org.eclipse.elk.feature" version="0.2.2.201707030806"/>
-      <feature id="org.eclipse.draw2d" version="3.10.100.201606061308"/>
-      <feature id="org.eclipse.emf" version="2.13.0.v20170609-0928"/>
-      <feature id="org.eclipse.jdt" version="3.13.1.v20171009-0410"/>
-      <feature id="org.eclipse.xtext.redist" version="2.12.0.v20170519-1412"/>
+      <feature id="de.cau.cs.kieler.klighd.draw2d.feature"/>
+      <feature id="de.cau.cs.kieler.klighd.feature"/>
+      <feature id="de.cau.cs.kieler.klighd.view.feature"/>
+      <feature id="org.eclipse.elk.feature"/>
+      <feature id="org.eclipse.draw2d"/>
+      <feature id="org.eclipse.emf"/>
+      <feature id="org.eclipse.jdt"/>
+      <feature id="org.eclipse.xtext.redist"/>
    </features>
 
    <configurations>

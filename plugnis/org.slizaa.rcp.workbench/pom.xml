@@ -10,6 +10,6 @@
 		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.slizaa.rcp.workbench.layout.ui</artifactId>
+	<artifactId>org.slizaa.rcp.workbench</artifactId>
 	<packaging>eclipse-plugin</packaging>
 </project>
