@@ -1,0 +1,21 @@
+jdk:
+- oraclejdk8
+
+env:
+  global:
+  - secure: FCE1bKFqB3WJVY//ax9MhUDAHiEjkMplsN3iRv0nnD9/E49UWdUZXe7g6dIU5Llfa73jbN76KmxmFJNwkwYGKIUNfmu2PynXdNeoPxBAc2gTjcKfCu2/1SWyeR2KFZ7x/OvuIWOejfs8uOsdPpopt1PJ+/gAo0AmNghhb5BeauBEcvtnHQBmSwPf9MUjHTqF+tK1iW2Sr69W3pBWu0Tj9U9l4HvRt8ChQw+zALFUwG6+N2newMe06vCtccZdFGrnxMkryNbZjwdFG7vc+vG5ATUdsdrpKFsQNmenU6oMWDMmgKSnybL66mFxOFPBnkAaEcuvEvl/Xln+X9ZbTCHpiFLQRTDydVu6QObo5NurJZaJ2S/knb64mg4IOqdqCm2FiJSRuJ+H3vYbxkhySRK1XU62E1yV/dktqPhbjuvMeeprjug49bJ+CbsC9QQ/1Zq776BiQQTi4RNz/tNQw4DUgiswEGPQ0wUnuZ6ZbLWyZglOoSh+ViNlLszGQ0vzX74UuG9+xFpp7LtP/eEuNuxS01/5tP1mgREipn/YLPKN5y/K8W9Vz1wWbpGhgs4asB3muFwY2ZPeGVrP5S+xllEzlw8J1t0ILvAaiFztQMTYNlW4piHcunRVNnZF9nX5GOTDpkk4TqI1NeUrnWs1l+pZ5+W2JmdeKuNpgx8hdrPi0I4=
+  - secure: P05phy0/WOO4BOJrePIhw1LPgbX1mGo/bsggoBoK2IS9ZAMMRT2VrEVgyOecg+k92iVY7t6ANQx2ecFhSrZlB5t3MPfuxRHYA2TYXBIhrLFWi41+NUmh9caN5544B8CDPVLqUSIeT10PEAN5jtpWL1gGV+IUfuw91sbvvBRnvLrIggrhYz7nROmBZzwLsTjsE9WQVuW6sFj3NQB09reCO9hMvQxm544BmkT6wIb050Ubv6hL3cpyeR5Jj6nPgxgu+B7m+O768MgN68lWiJ90dfH/0w7owU2HD+9Q8HEAd2vcwMQpbsbMY14HvLEaKOg8WU/cskvIdrmZqtYowFYoyWm0wIslIJNHqrnmA3nEAU8p2ozwXGAzUXO+8TYpfNU3Kf1OlExOE824vBw4nRmo5qWhzxZxAuvMn1S/d8YwaquWimYEQ82gtG9bpPcllBtTJr0s4pGOHb06XwWRyol5wT5UkhA+jks9pkFaObFC5QW15S9kZb+pYJGENfoWR8RcARPJXWN6Ukr3zTgdCMqDfoh0nJh1jzdB0uJOr0neHtpOXKvktYzFgMg2hxr1HRl6YEVIPlMY9bopT68eUlf5p/s0+TfhqlynyOz2HFCBtoW5RFVmrORwd+jx7EcQJdBK1JesLV7fx0G2Nikrei3y1+E5wLx/qi1vGK80rIcP4Hc=
+
+before_script:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- sleep 3
+
+script:
+- mvn clean install -f pom.xml
+
+after_success:
+- chmod +x ./.travis/artifact-delete.sh
+- chmod +x ./.travis/artifact-upload.sh
+- "./.travis/artifact-delete.sh"
+- "./.travis/artifact-upload.sh"
