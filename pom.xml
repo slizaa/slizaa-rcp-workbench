@@ -12,6 +12,7 @@
 	<modules>
 		<module>plugnis/org.slizaa.rcp.workbench.core</module>
 		<module>plugnis/org.slizaa.rcp.workbench.core.ui</module>
+		<module>plugnis/org.slizaa.rcp.workbench.discovery.ui</module>
 		<module>plugnis/org.slizaa.rcp.workbench</module>
 
 		<module>releng/org.slizaa.rcp.workbench.target</module>

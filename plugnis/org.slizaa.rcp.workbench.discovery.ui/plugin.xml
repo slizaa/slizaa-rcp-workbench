@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+  <!-- -->
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:help?after=additions">
+         <command
+               commandId="org.eclipse.equinox.p2.ui.discovery.commands.ShowBundleCatalog"
+               label="Install Slizaa Extensions..."
+               style="push">
+            <parameter
+                  name="org.eclipse.equinox.p2.ui.discovery.commands.DirectoryParameter"
+                  value="http://www.slizaa.org/p2/slizaa-extensions/directory.xml">
+            </parameter>
+         </command>
+      </menuContribution>
+   </extension>
+   
+   <!-- -->
+   <extension point="org.eclipse.ui.startup">
+     <startup class="org.slizaa.rcp.workbench.discovery.ui.InstallSlizaaExtensionsStartupClass"/>
+   </extension>
+</plugin>
