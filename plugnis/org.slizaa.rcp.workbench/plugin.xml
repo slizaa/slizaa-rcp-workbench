@@ -25,7 +25,6 @@
       <extension id="slizaa" name="Slizaa" point="org.eclipse.core.runtime.products">
             <product application="org.eclipse.ui.ide.workbench" description="Slizaa" name="slizaa">
                   <property name="appName" value="slizaa"></property>
-                  <property name="aboutImage" value="icons/about.png"></property>
                   <property
                         name="aboutText"
                         value="slizaa architecture workbench&#x0A;&#x0A;(c) Copyright Gerd Wütherich. 2015-2018. All rights reserved.&#x0A;&#x0A;Visit http://www.slizaa.org&#x0A;&#x0A;This offering is powered by Eclipse technology &#x0A;and includes Eclipse plug-ins that can be &#x0A;installed and used with other Eclipse-based &#x0A;offerings."></property>

@@ -4,7 +4,6 @@
 <product name="slizaa" uid="org.slizaa.rcp.workbench.product" id="org.slizaa.rcp.workbench.slizaa" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="/org.slizaa.rcp.workbench/icons/about.png"/>
       <text>
          slizaa architecture workbench
 
@@ -50,6 +49,7 @@ offerings.
             winExtraLargeHigh="icons/slizaa_256_256_32.bmp"/>
       </win>
    </launcher>
+
 
    <vm>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</windows>

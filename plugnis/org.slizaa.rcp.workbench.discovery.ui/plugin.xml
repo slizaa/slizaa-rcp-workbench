@@ -7,7 +7,7 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
-            locationURI="menu:help?after=additions">
+            locationURI="menu:help?after=org.eclipse.equinox.p2.ui.sdk.install" >
          <command
                commandId="org.eclipse.equinox.p2.ui.discovery.commands.ShowBundleCatalog"
                label="Install Slizaa Extensions..."
@@ -20,7 +20,7 @@
       </menuContribution>
    </extension>
    
-   <!-- -->
+   <!--  -->
    <extension point="org.eclipse.ui.startup">
      <startup class="org.slizaa.rcp.workbench.discovery.ui.InstallSlizaaExtensionsStartupClass"/>
    </extension>
