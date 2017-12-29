@@ -32,7 +32,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.slizaa.rcp.workbench"
+         id="org.slizaa.rcp.workbench.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

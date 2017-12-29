@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="slizaa" uid="org.slizaa.rcp.workbench.product" id="org.slizaa.rcp.workbench.slizaa" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="slizaa" uid="org.slizaa.rcp.workbench.product" id="org.slizaa.rcp.workbench.ui.slizaa" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <text>
@@ -28,10 +28,10 @@ offerings.
       </vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/org.slizaa.rcp.workbench/icons/slizaa_16.png" i32="/org.slizaa.rcp.workbench/icons/slizaa_32.png" i48="/org.slizaa.rcp.workbench/icons/slizaa_48.png" i64="/org.slizaa.rcp.workbench/icons/slizaa_64.png" i128="/org.slizaa.rcp.workbench/icons/slizaa_128.png" i256="/org.slizaa.rcp.workbench/icons/slizaa_256.png"/>
+   <windowImages i16="/org.slizaa.rcp.workbench.ui/icons/slizaa_16.png" i32="/org.slizaa.rcp.workbench.ui/icons/slizaa_32.png" i48="/org.slizaa.rcp.workbench.ui/icons/slizaa_48.png" i64="/org.slizaa.rcp.workbench.ui/icons/slizaa_64.png" i128="/org.slizaa.rcp.workbench.ui/icons/slizaa_128.png" i256="/org.slizaa.rcp.workbench.ui/icons/slizaa_256.png"/>
 
    <splash
-      location="org.slizaa.rcp.workbench"
+      location="org.slizaa.rcp.workbench.ui"
       startupProgressRect="0,180,463,16"
       startupMessageRect="7,151,464,29"
       startupForegroundColor="000000" />
@@ -49,7 +49,6 @@ offerings.
             winExtraLargeHigh="icons/slizaa_256_256_32.bmp"/>
       </win>
    </launcher>
-
 
    <vm>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</windows>
@@ -112,7 +111,7 @@ offerings.
    </preferencesInfo>
 
    <cssInfo>
-      <file path="platform:/plugin/org.slizaa.rcp.workbench/css/default.css"/>
+      <file path="/org.slizaa.rcp.workbench.ui/css/default.css"/>
    </cssInfo>
 
 </product>

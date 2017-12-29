@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.mylyn.discovery.core.connectorDiscovery">
+         
+      <connectorCategory
+            description="slizaa extensions"
+            id="org.slizaa.extensions.category"
+            name="slizaa extensions"
+            relevance="100">
+         <icon
+               image32="images/slizaacategory.png">
+         </icon>
+      </connectorCategory>
+      
+      <connectorDescriptor
+            categoryId="org.slizaa.extensions.category"
+            description="Neo4j-based backend for slizaa."
+            id="org.slizaa.extensions.neo4j"
+            license="GPL 3.0"
+            name="Slizaa Neo4j Backend"
+            provider="slizaa.org" 
+            siteUrl="http://www.slizaa.org/p2/slizaa-scanner-neo4j/">
+         <icon
+               image32="images/slizaa.png"></icon>
+         <iu
+               id="org.slizaa.scanner.neo4j.eclipse.feature">
+         </iu>
+      </connectorDescriptor>
+      
+      <connectorDescriptor
+            categoryId="org.slizaa.extensions.category"
+            description="Parse and analyse java-based applications. Requires the Neo4j backend for slizaa."
+            id="org.slizaa.extensions.jtype"
+            license="GPL 3.0"
+            name="Slizaa JType (Java Parser)"
+            provider="slizaa.org" 
+            siteUrl="http://www.slizaa.org/p2/slizaa-scanner-jtype/">
+         <icon
+               image32="images/slizaa.png"></icon>
+         <iu
+               id="org.slizaa.scanner.jtype.eclipse.feature.feature.group">
+         </iu>
+      </connectorDescriptor>
+      
+	</extension>
+</plugin>
