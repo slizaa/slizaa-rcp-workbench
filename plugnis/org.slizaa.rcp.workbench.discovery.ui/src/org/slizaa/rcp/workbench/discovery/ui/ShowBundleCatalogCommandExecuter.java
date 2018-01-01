@@ -39,6 +39,7 @@ public class ShowBundleCatalogCommandExecuter {
 
         // execute the command
         Command command = commandService.getCommand("org.eclipse.equinox.p2.ui.discovery.commands.ShowBundleCatalog");
+        Command.DEBUG_COMMAND_EXECUTION = true;
         Map<String, String> parameters = new HashMap<>();
         parameters.put("org.eclipse.equinox.p2.ui.discovery.commands.DirectoryParameter", SLIZAA_EXTENSIONS_URL);
         command.executeWithChecks(new ExecutionEvent(command, parameters, null, null));

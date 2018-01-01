@@ -4,7 +4,7 @@ Bundle-Name: org.slizaa.rcp.workbench.ui
 Bundle-SymbolicName: org.slizaa.rcp.workbench.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-Activator: org.slizaa.product.ui.project.Activator
+Bundle-Activator: org.slizaa.rcp.workbench.ui.internal.Activator
 Require-Bundle: 
  org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -38,13 +38,12 @@ Require-Bundle:
  org.slizaa.neo4j.dbadapter;bundle-version="1.0.0",
  org.slizaa.hierarchicalgraph.graphdb.mapping;bundle-version="1.0.0",
  org.eclipse.emf.edit;bundle-version="2.12.0",
- org.eclipse.emf.edit.ui;bundle-version="2.12.0"
+ org.eclipse.emf.edit.ui;bundle-version="2.12.0",
+ org.eclipse.jdt.core;bundle-version="3.13.100",
+ org.eclipse.jdt.launching;bundle-version="3.9.51",
+ org.slizaa.rcp.workbench.discovery.ui;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/org.slizaa.jqassistant.internal.actions.CypherBasedXRefFilterAction.xml,
- OSGI-INF/org.slizaa.jqassistant.internal.actions.OpenDsmTreeAction.xml,
- OSGI-INF/org.slizaa.jqassistant.internal.actions.OpenKlighdDiagramTreeAction.xml,
- OSGI-INF/org.slizaa.jqassistant.internal.actions.ResetFilterAction.xml
-Export-Package: org.slizaa.product.ui.project,
- org.slizaa.product.ui.project.handler,
- org.slizaa.product.ui.project.wizard
-
+Service-Component: OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.OpenDsmTreeAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.CypherBasedXRefFilterAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.OpenKlighdDiagramTreeAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.ResetFilterAction.xml

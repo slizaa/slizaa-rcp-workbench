@@ -2,6 +2,7 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+   <!-- -->
    <extension
          id="org.slizaa.rcp.workbench.slizaanature"
          point="org.eclipse.core.resources.natures"
@@ -11,6 +12,25 @@
                class="org.slizaa.rcp.workbench.core.internal.SlizaaProjectNature">
          </run>
       </runtime>
+   </extension>
+   
+    <extension
+         point="org.eclipse.jdt.core.classpathContainerInitializer">
+      <classpathContainerInitializer
+            class="org.slizaa.rcp.workbench.core.internal.SlizaaApiSpiClasspathContainerInitializer"
+            id="org.slizaa.rcp.workbench.core.SLIZAA_SPI_CONTAINER">
+      </classpathContainerInitializer>
+   </extension>
+   
+   <!-- -->
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+         id="org.slizaa.rcp.workbench.core.OSGiServiceTester"
+         namespace="org.slizaa.rcp.workbench.core"
+         type="java.lang.Object"
+         properties="isServiceRegistered"
+         class="org.slizaa.rcp.workbench.core.internal.OSGiServiceTester">
+      </propertyTester>
    </extension>
    
 </plugin>

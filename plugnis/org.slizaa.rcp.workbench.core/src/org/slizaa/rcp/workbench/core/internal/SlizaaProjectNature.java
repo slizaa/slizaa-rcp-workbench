@@ -48,7 +48,6 @@ public class SlizaaProjectNature implements IProjectNature {
   @Override
   public void configure() throws CoreException {
     createFolder(this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DATABASE_DIRECTORY_NAME));
-    createFolder(this._project.getFolder("_content"));
   }
 
   /**
@@ -57,7 +56,6 @@ public class SlizaaProjectNature implements IProjectNature {
   @Override
   public void deconfigure() throws CoreException {
     this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DATABASE_DIRECTORY_NAME).delete(true, null);
-    this._project.getFolder("_content").delete(true, null);
   }
 
   /**

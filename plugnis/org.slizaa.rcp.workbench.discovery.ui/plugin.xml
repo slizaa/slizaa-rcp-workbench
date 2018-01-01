@@ -5,6 +5,7 @@
   <!-- -->
    <extension
          point="org.eclipse.ui.menus">
+         
       <menuContribution
             allPopups="false"
             locationURI="menu:help?after=org.eclipse.equinox.p2.ui.sdk.install" >
@@ -18,8 +19,38 @@
             </parameter>
          </command>
       </menuContribution>
+      
+      
+      <menuContribution
+			locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+	
+			<!-- separator for project-related actions (open, close, ...) -->
+			<separator name="org.bundlemaker.core.ui.project.separator" visible="true"> </separator>
+			
+         <command
+               commandId="org.eclipse.equinox.p2.ui.discovery.commands.ShowBundleCatalog"
+               label="Install Slizaa Extensions..."
+               style="push">
+            <parameter
+                  name="org.eclipse.equinox.p2.ui.discovery.commands.DirectoryParameter"
+                  value="http://www.slizaa.org/p2/slizaa-extensions/directory.xml">
+            </parameter>
+            <visibleWhen checkEnabled="false">
+            	<not>
+            		<and>
+                		<test forcePluginActivation="true"
+         				  	  property="org.slizaa.rcp.workbench.core.isServiceRegistered"
+         				  	  value="org.slizaa.scanner.core.api.graphdb.IGraphDb"/>
+				  	 	<test forcePluginActivation="true"
+	         			  	  property="org.slizaa.rcp.workbench.core.isServiceRegistered"
+	         			      value="org.slizaa.scanner.core.api.importer.IModelImporter"/>
+ 			      	</and>
+	        	</not> 				
+            </visibleWhen>
+         </command>
+     	</menuContribution>
    </extension>
-   
+
    <!--  -->
    <extension point="org.eclipse.ui.startup">
      <startup class="org.slizaa.rcp.workbench.discovery.ui.InstallSlizaaExtensionsStartupClass"/>

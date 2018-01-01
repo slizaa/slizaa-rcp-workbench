@@ -7,6 +7,8 @@
  ******************************************************************************/
 package org.slizaa.rcp.workbench.core;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.io.File;
 import java.util.Collection;
 
@@ -22,6 +24,7 @@ import org.eclipse.core.runtime.Status;
 import org.slizaa.rcp.workbench.core.common.EclipseProjectUtils;
 import org.slizaa.rcp.workbench.core.internal.SlizaaProject;
 import org.slizaa.rcp.workbench.core.internal.SlizaaProjectCache;
+import org.slizaa.rcp.workbench.core.internal.SlizaaProjectCreator;
 
 /**
  * <p>
@@ -42,11 +45,11 @@ public final class SlizaaWorkbenchCore {
   /** the bundle make directory name */
   public static final String SLIZAA_DATABASE_DIRECTORY_NAME          = ".slizaa";
 
-  /** the project description file name */
-  public static final String PROJECT_DESCRIPTION_NAME                = "slizaa.json";
+  /** - */
+  public static final String SLIZAA_CONTAINER_ID                     = "org.slizaa.rcp.workbench.core.SLIZAA_SPI_CONTAINER";
 
-  /** the project description path */
-  public static final IPath  PROJECT_DESCRIPTION_PATH                = new Path(PROJECT_DESCRIPTION_NAME);
+  /** - */
+  public final static IPath  SLIZAA_CONTAINER_PATH                   = new Path(SLIZAA_CONTAINER_ID);
 
   /**
    * <p>
@@ -54,9 +57,10 @@ public final class SlizaaWorkbenchCore {
    *
    * @param project
    * @return
+   * @throws CoreException
    */
-  public static File getProjectDescriptionFile(IProject project) {
-    return project.getFile(PROJECT_DESCRIPTION_PATH).getRawLocation().toFile();
+  public static IProject configureSlizaaProject(IProject project) throws CoreException {
+    return SlizaaProjectCreator.configureSlizaaProject(checkNotNull(project));
   }
 
   /**

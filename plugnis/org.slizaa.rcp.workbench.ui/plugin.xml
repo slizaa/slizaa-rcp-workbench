@@ -1,34 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-      <extension point="org.eclipse.ui.perspectives">
-            <perspective class="org.slizaa.jqassistant.VisualizeDependenciesPerspectiveFactory" id="org.slizaa.jqassistant.VisualizeDependenciesPerspective" name="Dependency Visualization" icon="icons/perspectives/perspective_visdep.gif"></perspective>
-            <perspective class="org.slizaa.jqassistant.CrossReferencerPerspectiveFactory" id="org.slizaa.jqassistant.CrossReferencerPerspective" name="Cross Referencer" icon="icons/perspectives/perspective_xref.png"></perspective>
-      </extension>
-      
-      <!-- New slizaa project -->
-      <extension id="org.slizaa.tool.newWizards" name="slizaa Wizards" point="org.eclipse.ui.newWizards">
-            <wizard id="org.slizaa.tool.newCypherWizard" 
-            		canFinishEarly="false" 
-            		category="org.slizaa.ui.wizards.category" 
-            		class="org.slizaa.jqassistant.internal.wizards.NewCypherFileWizard" 
-            		hasPages="true" 
-            		name="slizaa Cypher File..." 
-            		icon="icons/wizards/newOpenCypherFile.png" project="false">
-                  <description>Create a new database definition file</description>
-            </wizard>
-      </extension>
-      
-      <extension point="org.eclipse.ui.navigator.navigatorContent">
-        <commonWizard type="new" wizardId="org.slizaa.ui.shared.newprojectwizard" menuGroupId="group.new">
-        	<enablement/>
-        </commonWizard>
-        <commonWizard type="new" wizardId="org.slizaa.tool.newCypherWizard" menuGroupId="group.new">
-			<enablement/>
-        </commonWizard>        
-      </extension>
-      
-      <extension id="slizaa" name="Slizaa" point="org.eclipse.core.runtime.products">
+
+      <!-- the product definition --> 
+      <extension 
+            id="slizaa" 
+            name="Slizaa" 
+            point="org.eclipse.core.runtime.products">
             <product application="org.eclipse.ui.ide.workbench" description="Slizaa" name="slizaa">
                   <property name="appName" value="slizaa"></property>
                   <property
@@ -46,6 +24,48 @@
                   </property>
             </product>
       </extension>
+
+	  <!-- the perspectives -->
+      <extension point="org.eclipse.ui.perspectives">
+            <perspective class="org.slizaa.rcp.workbench.ui.internal.perspectives.VisualizeDependenciesPerspectiveFactory" id="org.slizaa.rcp.workbench.ui.VisualizeDependenciesPerspective" name="Dependency Visualization" icon="icons/perspectives/perspective_visdep.gif"></perspective>
+            <perspective class="org.slizaa.rcp.workbench.ui.internal.perspectives.CrossReferencerPerspectiveFactory" id="org.slizaa.rcp.workbench.ui.CrossReferencerPerspective" name="Cross Referencer" icon="icons/perspectives/perspective_xref.png"></perspective>
+      </extension>
+      
+      <!-- wizards -->
+      <extension name="slizaa Wizards" point="org.eclipse.ui.newWizards">
+            <category id="org.slizaa.rcp.workbench.ui.wizards.category" name="Slizaa"> </category>
+			<wizard
+            		id="org.slizaa.rcp.workbench.ui.newSlizaaProjectWizard"
+            		canFinishEarly="false"
+            		category="org.slizaa.rcp.workbench.ui.wizards.category"
+            		class="org.slizaa.rcp.workbench.ui.internal.wizards.NewSlizaaProjectWizard"
+            		icon="icons/checked.gif"
+            		hasPages="true"
+            		name="slizaa Project"
+            		project="true">
+				  <description> Create a Slizaa project </description>
+            </wizard>
+            <wizard id="org.slizaa.rcp.workbench.ui.newCypherWizard" 
+            		canFinishEarly="false" 
+            		category="org.slizaa.rcp.workbench.ui.wizards.category" 
+            		class="org.slizaa.rcp.workbench.ui.internal.wizards.NewCypherFileWizard" 
+            		icon="icons/wizards/newOpenCypherFile.png" 
+            		hasPages="true" 
+            		name="Cypher File" 
+            		project="false">
+                  <description>Create a new database definition file</description>
+            </wizard>
+      </extension>
+      
+      <!-- navigator content -->
+      <extension point="org.eclipse.ui.navigator.navigatorContent">
+        <commonWizard type="new" wizardId="org.slizaa.rcp.workbench.ui.newSlizaaProjectWizard" menuGroupId="group.new">
+			<enablement/>
+        </commonWizard>        
+        <commonWizard type="new" wizardId="org.slizaa.rcp.workbench.ui.newCypherWizard" menuGroupId="group.new">
+        	<enablement/>
+        </commonWizard>
+      </extension>
       
       <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_advext_activities.htm  -->
       <extension point="org.eclipse.ui.activities">
@@ -62,7 +82,7 @@
             <activityPatternBinding activityId="menuHidingActivity" pattern="org.eclipse.team.ui/.*"></activityPatternBinding>
             <activityPatternBinding activityId="menuHidingActivity" pattern="org.eclipse.ui.externaltools/.*"></activityPatternBinding>
       </extension>
-      
+
       <extension point="org.eclipse.ui.perspectiveExtensions">
             <perspectiveExtension targetID="*">
                   <hiddenMenuItem id="org.eclipse.ui.run"></hiddenMenuItem>
@@ -71,25 +91,9 @@
       </extension>
       
       <extension point="org.eclipse.ui.startup">
-            <startup class="org.slizaa.jqassistant.internal.Startup"></startup>
+            <startup class="org.slizaa.rcp.workbench.ui.internal.perspectives.Startup"></startup>
       </extension>
-      
-      <!-- New slizaa project wizard -->
-	<extension id="org.slizaa.rcp.workbench.core.ui.newWizards" name="Slizaa Wizards"
-		point="org.eclipse.ui.newWizards">
-		<category id="org.slizaa.core.eclipse.ui.wizards.category" name="Slizaa"> </category>
-		<wizard
-        canFinishEarly="false"
-        category="org.slizaa.core.eclipse.ui.wizards.category"
-        class="org.slizaa.product.ui.project.wizard.NewSlizaaProjectWizard"
-        hasPages="true"
-        icon="icons/checked.gif"
-        id="org.slizaa.core.eclipse.ui.wizards.newwizard"
-        name="Slizaa project"
-        project="true">
-			<description> Create a Slizaa project </description>
-		</wizard>
-	</extension>
+
 
 	<!-- The Slizaa project content type ('slizaa.json') -->
 	<extension id="org.slizaa.core.eclipse.ui.contentTypes" name="Slizaa Contenttypes"
@@ -136,21 +140,6 @@
 
 		<menuContribution
 			locationURI="popup:org.eclipse.ui.popup.any?after=additions">
-     <!-- menu
-           id="org.bundlemaker.core.ui.tools"
-           label="Tools">
-		<visibleWhen checkEnabled="false">
-			<reference definitionId="org.bundlemaker.analysis.ui.artifactContentSelected" />
-		</visibleWhen>
-     </menu -->
-     
-     <!-- menu
-           id="org.bundlemaker.core.ui.selectors"
-           label="Select">
-		<visibleWhen checkEnabled="false">
-			<reference definitionId="org.bundlemaker.analysis.ui.artifactContentSelected" />
-		</visibleWhen>
-     </menu -->
 	
 			<!-- separator for project-related actions (open, close, ...) -->
 			<separator name="org.bundlemaker.core.ui.project.separator" visible="true"> </separator>
@@ -160,8 +149,7 @@
          		icon="icons/etools/bm-parse.png"
          		style="push">
          		<visibleWhen checkEnabled="false">
-					<reference
-						definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected" />
+					<reference definitionId="slizaaProjectSelected"></reference>
 				</visibleWhen>         		
 			</command>
 			
@@ -171,7 +159,7 @@
          		style="push">
          		<visibleWhen checkEnabled="false">
 					<reference
-						definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected" />
+						definitionId="slizaaProjectSelected" />
 				</visibleWhen>         		
 			</command>
 			
@@ -181,7 +169,7 @@
          		style="push">
          		<visibleWhen checkEnabled="false">
 					<reference
-						definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected" />
+						definitionId="slizaaProjectSelected" />
 				</visibleWhen>         		
 			</command>
 						
@@ -189,31 +177,31 @@
 	</extension>
  
  	<extension point="org.eclipse.ui.handlers">
-		<handler class="org.slizaa.product.ui.project.handler.ParseSlizaaProjectHandler"
+		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.ParseSlizaaProjectHandler"
 			commandId="org.slizaa.core.ui.commands.ParseSlizaaProjectCommand">
 			<activeWhen>
-				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+				<reference definitionId="noGraphDbServiceRegistered"></reference>
 			</activeWhen>
 			<enabledWhen>
-				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+				<reference definitionId="noGraphDbServiceRegistered"></reference>
 			</enabledWhen>
 		</handler>
-		<handler class="org.slizaa.product.ui.project.handler.OpenSlizaaProjectHandler"
+		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.OpenSlizaaProjectHandler"
 			commandId="org.slizaa.core.ui.commands.OpenSlizaaProjectCommand">
 			<activeWhen>
-				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+				<reference definitionId="slizaaProjectSelected"></reference>
 			</activeWhen>
 			<enabledWhen>
-				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+				<reference definitionId="slizaaProjectSelected"></reference>
 			</enabledWhen>
 		</handler>
-		<handler class="org.slizaa.product.ui.project.handler.CreateHierarchicalGraphHandler"
+		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.CreateHierarchicalGraphHandler"
 			commandId="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand">
 			<activeWhen>
-				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+				<reference definitionId="slizaaProjectSelected"></reference>
 			</activeWhen>
 			<enabledWhen>
-				<reference definitionId="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected"></reference>
+				<reference definitionId="slizaaProjectSelected"></reference>
 			</enabledWhen>
 		</handler>
  	</extension>
@@ -226,67 +214,40 @@
  	
  	<!-- the expression definitions -->
 	<extension point="org.eclipse.core.expressions.definitions">
-		
-		<!-- org.slizaa.core.ui.bmProjectSelected: evaluates
-             to true if a Project with Slizaa-Nature or it's slizaa.json is selected -->
-		<definition id="org.slizaa.product.ui.slizaaProjectOrSlizaaProjectDescriptionSelected">
+	
+		<definition id="noGraphDbServiceRegistered">
 			<with variable="selection">
-				<!-- exactly one item must be selected -->
+				<not>
+					<and>
+						<test
+							forcePluginActivation="true"
+         					property="org.slizaa.rcp.workbench.core.isServiceRegistered"
+         					value="org.slizaa.scanner.core.api.graphdb.IGraphDb"/>
+						<test
+							forcePluginActivation="true"
+	         				property="org.slizaa.rcp.workbench.core.isServiceRegistered"
+	         				value="org.slizaa.scanner.core.api.importer.IModelImporter"/>
+     				</and>
+  				</not>
+			</with>
+		</definition>	
+
+		<definition id="slizaaProjectSelected">
+			<with variable="selection">
 				<count value="1" />
 				<iterate ifEmpty="false" operator="and">
-						<!-- Test if a resource from a slizaa project is selected -->
 						<adapt type="org.eclipse.core.resources.IResource">
-							<test property="org.eclipse.core.resources.projectNature"
-								value="org.slizaa.tool.slizaanature"/>
-							<or>
-								<!-- either the Project itself or the slizaa.json must be selected -->
-							 <instanceof value="org.eclipse.core.resources.IProject" />
-							 <test property="org.eclipse.core.resources.name"
-                         		value="slizaa.json"/>
-							</or>
+							<and>
+								<test property="org.eclipse.core.resources.projectNature"
+									  value="org.slizaa.rcp.workbench.slizaanature"/>
+							 	<instanceof value="org.eclipse.core.resources.IProject" />
+							 	<test property="org.slizaa.rcp.workbench.core.isServiceRegistered" 
+							 	      value="org.slizaa.scanner.core.api.graphdb.IGraphDb"/>
+							</and> 	
 						</adapt>
 				</iterate>
 			</with>
 		</definition>		              
 	</extension>
-
-	<!-- the navigator content
-	<extension point="org.eclipse.ui.navigator.viewer">
-		<viewer viewerId="org.eclipse.ui.navigator.ProjectExplorer"> </viewer>
-		<viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
-			<includes>
-				<contentExtension isRoot="false"
-					pattern="org.slizaa.navigatorContent"
-				> 
-				
-				</contentExtension>
-			</includes>
-		</viewerContentBinding>
-	</extension>
-
-	<extension point="org.eclipse.ui.navigator.navigatorContent">
-	
-		<navigatorContent activeByDefault="true"
-			id="org.slizaa.navigatorContent"
-			contentProvider="org.slizaa.product.ui.project.content.SlizaaCNFAdapterFactoryContentProvider"
-			labelProvider="org.slizaa.product.ui.project.content.SlizaaCNFLabelProvider"
-			name="artifactContent" priority="lowest">
-			
-			<triggerPoints>
-				<and>
-					<instanceof value="org.eclipse.core.resources.IProject"> </instanceof>
-					<adapt type="org.eclipse.core.resources.IProject">
-						<test property="org.eclipse.core.resources.projectNature"
-							value="org.slizaa.tool.slizaanature"/>
-					</adapt>
-				</and>
-			</triggerPoints>
-			
-			<possibleChildren>
-				<instanceof value="org.slizaa.hierarchicalgraph.HGNode"/>
-			</possibleChildren>
-			
-		</navigatorContent>
-	</extension> -->
 
 </plugin>
