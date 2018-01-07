@@ -1,14 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2011-2015 slizaa project team.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *    slizaa project team - initial API and implementation
+ * Copyright (c) 2011-2015 slizaa project team. All rights reserved. This program and the accompanying materials are
+ * made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors: slizaa project team - initial API and implementation
  ******************************************************************************/
 package org.slizaa.rcp.workbench.core.common;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -21,16 +20,38 @@ import org.eclipse.core.runtime.Path;
  * <p>
  * Helper class that provides several utility methods for creating, getting and deleting {@link IProject IProjects}.
  * </p>
- * 
+ *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
 public class EclipseProjectUtils {
+
+  public static void addNature(IProject project, String nature) throws CoreException {
+    checkNotNull(project);
+    checkNotNull(nature);
+
+    if (!project.hasNature(nature)) {
+
+      // get the project description
+      IProjectDescription description = project.getDescription();
+
+      // set the new nature
+      String[] prevNatures = description.getNatureIds();
+      String[] newNatures = new String[prevNatures.length + 1];
+      System.arraycopy(prevNatures, 0, newNatures, 0, prevNatures.length);
+      newNatures[prevNatures.length] = nature;
+      description.setNatureIds(newNatures);
+
+      // set the new description
+      project.setDescription(description, null);
+    }
+
+  }
 
   /**
    * <p>
    * Creates a new simple project with the specified project name.
    * </p>
-   * 
+   *
    * @param projectName
    *          the project name
    * @return the {@link IProject}
@@ -63,7 +84,7 @@ public class EclipseProjectUtils {
    * <p>
    * Returns the {@link IProject} with the given name.
    * </p>
-   * 
+   *
    * @param projectName
    *          the name of the project.
    * @return the {@link IProject} with the given name.
@@ -81,8 +102,8 @@ public class EclipseProjectUtils {
    * <p>
    * Deletes the project with the given name.
    * </p>
-   * 
-   * 
+   *
+   *
    * @param projectName
    *          the name of the project to delete
    * @throws CoreException
@@ -105,7 +126,7 @@ public class EclipseProjectUtils {
   /**
    * <p>
    * </p>
-   * 
+   *
    * @param projectName
    * @throws CoreException
    */
@@ -119,7 +140,7 @@ public class EclipseProjectUtils {
    * <p>
    * Checks if a given path exists.
    * </p>
-   * 
+   *
    * @param path
    * @throws CoreException
    */

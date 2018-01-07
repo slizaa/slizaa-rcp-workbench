@@ -7,49 +7,77 @@
  ******************************************************************************/
 package org.slizaa.rcp.workbench.ui.internal.handler;
 
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.PlatformUI;
 import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
-import org.slizaa.rcp.workbench.ui.internal.SlizaaProjectOpener;
 
+/**
+ * <p>
+ * </p>
+ *
+ * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
+ */
 public class ParseSlizaaProjectHandler extends AbstractSlizaaHandler implements IHandler {
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   protected void execute(ExecutionEvent event, ISelection selection) throws Exception {
 
-    // get the selected resource
-    List<IResource> selectedObjects = getSelectedObject(selection, IResource.class);
+    // //
+    // System.out.println(EclipseContextHelper.getWorkbenchContext());
+    // System.out.println(EclipseContextHelper.getWorkbenchContext().get(EModelService.class));
+    //
+    // MApplication mapplication = EclipseContextHelper.getWorkbenchContext().get(MApplication.class);
+    // MTrimmedWindow mWindow = (MTrimmedWindow) mapplication.getChildren().get(0);
+    // System.out.println(mWindow);
+    // mWindow.setLabel("BUMM");
 
-    // check if there's at least one resource
-    if (selectedObjects.isEmpty()) {
+    // get the selected resource
+    IResource selectedObject = getSelectedObject(selection, IResource.class);
+
+    // check if there's one resource
+    if (selectedObject == null) {
       return;
     }
 
     // grab resource and get the project
-    IResource selectedResource = selectedObjects.get(0);
-    ISlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(selectedResource.getProject());
+    ISlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(selectedObject.getProject());
 
-    // // clear dependency store
-    // if (clearPersistentDependencyStore()) {
-    // BundleMakerCore.clearDependencyStore(bundleMakerProject);
-    // }
+    // TODO!!
+    System.setProperty("slizaa.project.dir", slizaaProject.getProject().getLocation().toOSString());
 
-    // open the BundleMaker project
-    SlizaaProjectOpener.openProject(slizaaProject, true);
-  }
+    try {
 
-  /**
-   * <p>
-   * </p>
-   *
-   * @return
-   */
-  protected boolean clearPersistentDependencyStore() {
-    return false;
+      // Execute runnable via IProgressService
+      try {
+        PlatformUI.getWorkbench().getProgressService().busyCursorWhile((monitor) -> {
+          try {
+            // execute with console
+            ConsoleHelper.executeWithConsole(() -> slizaaProject.parse(monitor));
+
+          } catch (Exception e) {
+            throw new RuntimeException(e);
+          }
+        });
+      } catch (InvocationTargetException ex) {
+        // Report Error to error log
+        Throwable cause = ex.getCause();
+        cause.printStackTrace();
+
+      } catch (InterruptedException ex) {
+        // ignore. User has canceled the operation
+      }
+
+    } finally {
+      System.clearProperty("slizaa.project.dir");
+    }
   }
 }

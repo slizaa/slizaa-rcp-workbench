@@ -32,7 +32,7 @@ public abstract class AbstractAnalysisModelElementBasedHandler extends AbstractS
 
   @Override
   protected void execute(ExecutionEvent event, ISelection structuredSelection) throws Exception {
-    List<HGRootNode> selectedArtifacts = getSelectedObject(structuredSelection, HGRootNode.class);
+    List<HGRootNode> selectedArtifacts = getSelectedObjects(structuredSelection, HGRootNode.class);
 
     // Invoke execution method
     execute(event, selectedArtifacts);

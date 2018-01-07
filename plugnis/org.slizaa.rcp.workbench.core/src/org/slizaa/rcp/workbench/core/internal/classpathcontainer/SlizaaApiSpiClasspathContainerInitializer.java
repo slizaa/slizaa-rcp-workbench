@@ -1,4 +1,4 @@
-package org.slizaa.rcp.workbench.core.internal;
+package org.slizaa.rcp.workbench.core.internal.classpathcontainer;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -88,18 +88,7 @@ public class SlizaaApiSpiClasspathContainerInitializer extends ClasspathContaine
   private static SlizaaApiSpiContainer getNewContainer(IPath containerPath) {
 
     //
-    IClasspathEntry entry = BuildPathSupport.getSlizaaApiSpiLibraryEntry();
-
-    //
-    IClasspathEntry[] entries;
-    if (entry == null) {
-      entries = new IClasspathEntry[] {};
-    } else {
-      entries = new IClasspathEntry[] { entry };
-    }
-
-    //
-    return new SlizaaApiSpiContainer(containerPath, entries);
+    return new SlizaaApiSpiContainer(containerPath, BuildPathSupport.getSlizaaApiSpiLibraryEntries());
   }
 
   /**

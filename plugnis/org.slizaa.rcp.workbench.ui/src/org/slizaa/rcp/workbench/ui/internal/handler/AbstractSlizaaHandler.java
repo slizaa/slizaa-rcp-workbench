@@ -1,12 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2011-2015 slizaa project team.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * 
- * Contributors:
- *    slizaa project team - initial API and implementation
+ * Copyright (c) 2011-2015 slizaa project team. All rights reserved. This program and the accompanying materials are
+ * made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors: slizaa project team - initial API and implementation
  ******************************************************************************/
 package org.slizaa.rcp.workbench.ui.internal.handler;
 
@@ -31,14 +28,14 @@ import org.slizaa.rcp.workbench.ui.internal.Activator;
  * <p>
  * This class provides some convenience methods for own handler implementations
  * </p>
- * 
+ *
  * @author Nils Hartmann (nils@nilshartmann.net)
- * 
+ *
  */
 public abstract class AbstractSlizaaHandler extends AbstractHandler implements IHandler {
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
    */
   @Override
@@ -70,7 +67,7 @@ public abstract class AbstractSlizaaHandler extends AbstractHandler implements I
 
   /**
    * Is called when the handler is executed
-   * 
+   *
    * @param event
    *          the ExecutionEvent. Never null
    * @param selection
@@ -81,7 +78,7 @@ public abstract class AbstractSlizaaHandler extends AbstractHandler implements I
 
   /**
    * Report an error via Eclipse Log service
-   * 
+   *
    * @param pluginId
    * @param message
    * @param ex
@@ -98,7 +95,7 @@ public abstract class AbstractSlizaaHandler extends AbstractHandler implements I
    * <p>
    * Selected objects in the specified selection that are <em>not</em> instances of the specified type are ignored.
    * </p>
-   * 
+   *
    * @param <T>
    *          thew requested type
    * @param selection
@@ -108,7 +105,7 @@ public abstract class AbstractSlizaaHandler extends AbstractHandler implements I
    * @return
    */
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public static <T> List<T> getSelectedObject(ISelection selection, Class<T> type) {
+  public static <T> List<T> getSelectedObjects(ISelection selection, Class<T> type) {
 
     // create the result list
     final List<T> result = new LinkedList<T>();
@@ -129,4 +126,23 @@ public abstract class AbstractSlizaaHandler extends AbstractHandler implements I
     return result;
   }
 
+  @SuppressWarnings({ "unchecked" })
+  public static <T> T getSelectedObject(ISelection selection, Class<T> type) {
+
+    // copy the selection into a list
+    if (selection instanceof IStructuredSelection) {
+      IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+      Iterator<?> iterator = structuredSelection.iterator();
+      while (iterator.hasNext()) {
+        Object element = iterator.next();
+        if (type.isInstance(element)) {
+          // return the result
+          return (T) element;
+        }
+      }
+    }
+
+    // return null
+    return null;
+  }
 }

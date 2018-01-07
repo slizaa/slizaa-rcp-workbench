@@ -62,7 +62,7 @@ public class ParseSlizaaProjectRunnable implements IRunnableWithProgress {
 
 				// parse the project
 				if (_parse) {
-					_bundleMakerProject.parseAndOpen(monitor);
+					_bundleMakerProject.parse(monitor);
 				} else {
 					_bundleMakerProject.startAndConnectGraphDatabase(monitor);
 				}

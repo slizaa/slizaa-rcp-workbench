@@ -13,7 +13,6 @@ import java.io.File;
 import java.util.Collection;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
@@ -37,19 +36,25 @@ import org.slizaa.rcp.workbench.core.internal.SlizaaProjectCreator;
  */
 public final class SlizaaWorkbenchCore {
 
-  public static final String BUNDLE_ID_ORG_SLIZAA_RCP_WORKBENCH_CORE = "org.slizaa.rcp.workbench.core";
+  public static final String BUNDLE_ID                              = SlizaaWorkbenchCore.class.getPackage().getName();
 
   /** the nature id */
-  public static final String NATURE_ID                               = "org.slizaa.rcp.workbench.slizaanature";
+  public static final String SLIZAA_NATURE_ID                       = BUNDLE_ID + ".slizaanature";
+
+  /** - */
+  public static final String SLIZAA_CONFIGURATION_PROBLEM_MARKER    = BUNDLE_ID + ".dsAnnotationProblem";
+
+  /** - */
+  public static final String SLIZAA_BUILDER                         = BUNDLE_ID + ".slizaaProjectConfigurationBuilder";
+
+  /** - */
+  public static final String SLIZAA_CONTAINER_ID                    = BUNDLE_ID + ".SLIZAA_SPI_CONTAINER";
+
+  /** - */
+  public final static IPath  SLIZAA_CONTAINER_PATH                  = new Path(SLIZAA_CONTAINER_ID);
 
   /** the bundle make directory name */
-  public static final String SLIZAA_DATABASE_DIRECTORY_NAME          = ".slizaa";
-
-  /** - */
-  public static final String SLIZAA_CONTAINER_ID                     = "org.slizaa.rcp.workbench.core.SLIZAA_SPI_CONTAINER";
-
-  /** - */
-  public final static IPath  SLIZAA_CONTAINER_PATH                   = new Path(SLIZAA_CONTAINER_ID);
+  public static final String SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME = ".slizaa";
 
   /**
    * <p>
@@ -59,7 +64,7 @@ public final class SlizaaWorkbenchCore {
    * @return
    * @throws CoreException
    */
-  public static IProject configureSlizaaProject(IProject project) throws CoreException {
+  public static ISlizaaProject configureSlizaaProject(IProject project) throws CoreException {
     return SlizaaProjectCreator.configureSlizaaProject(checkNotNull(project));
   }
 
@@ -71,7 +76,7 @@ public final class SlizaaWorkbenchCore {
    * @return
    */
   public static File getDatabaseDirectory(IProject project) {
-    return project.getFolder(SLIZAA_DATABASE_DIRECTORY_NAME).getRawLocation().toFile();
+    return project.getFolder(SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME).getRawLocation().toFile();
   }
 
   /**
@@ -91,14 +96,14 @@ public final class SlizaaWorkbenchCore {
 
     // check if nature exists
     if (!project.exists()) {
-      throw new CoreException(new Status(IStatus.ERROR, BUNDLE_ID_ORG_SLIZAA_RCP_WORKBENCH_CORE,
-          "Project '" + project.getName() + "' has to exist."));
+      throw new CoreException(
+          new Status(IStatus.ERROR, BUNDLE_ID, "Project '" + project.getName() + "' has to exist."));
     }
 
     // check if nature exists
-    if (!project.hasNature(NATURE_ID)) {
-      throw new CoreException(new Status(IStatus.ERROR, BUNDLE_ID_ORG_SLIZAA_RCP_WORKBENCH_CORE,
-          "Project '" + project.getName() + "' must have nature '" + NATURE_ID + "'."));
+    if (!project.hasNature(SLIZAA_NATURE_ID)) {
+      throw new CoreException(new Status(IStatus.ERROR, BUNDLE_ID,
+          "Project '" + project.getName() + "' must have nature '" + SLIZAA_NATURE_ID + "'."));
     }
 
     // // try to get project from cache
@@ -118,39 +123,39 @@ public final class SlizaaWorkbenchCore {
     return slizaaProject;
   }
 
-  /**
-   * <p>
-   * Create a simple project with the bundle maker nature.
-   * </p>
-   *
-   * @param projectName
-   * @return
-   * @throws CoreException
-   */
-  public static IProject getOrCreateSimpleProjectWithSlizaaNature(String projectName) throws CoreException {
+  // /**
+  // * <p>
+  // * Create a simple project with the bundle maker nature.
+  // * </p>
+  // *
+  // * @param projectName
+  // * @return
+  // * @throws CoreException
+  // */
+  // public static IProject getOrCreateSimpleProjectWithSlizaaNature(String projectName) throws CoreException {
+  //
+  // // create the bundle maker project
+  // IProject project = EclipseProjectUtils.getOrCreateSimpleProject(projectName);
+  //
+  // // add the bundle maker nature
+  // SlizaaWorkbenchCore.addSlizaaNature(project);
+  //
+  // // return the newly created project
+  // return project;
+  // }
 
-    // create the bundle maker project
-    IProject project = EclipseProjectUtils.getOrCreateSimpleProject(projectName);
-
-    // add the bundle maker nature
-    SlizaaWorkbenchCore.addSlizaaNature(project);
-
-    // return the newly created project
-    return project;
-  }
-
-  /**
-   * <p>
-   * Adds the bundle maker nature to the given project.
-   * </p>
-   *
-   * @param project
-   *          the project
-   * @throws CoreException
-   */
-  public static void addSlizaaNature(IProject project) throws CoreException {
-    addNature(project, NATURE_ID);
-  }
+  // /**
+  // * <p>
+  // * Adds the bundle maker nature to the given project.
+  // * </p>
+  // *
+  // * @param project
+  // * the project
+  // * @throws CoreException
+  // */
+  // public static void addSlizaaNature(IProject project) throws CoreException {
+  // addNature(project, SLIZAA_NATURE_ID);
+  // }
 
   // public static void addJavaNature(IProject project) throws CoreException {
   // addNature(project, JavaCore.NATURE_ID);
@@ -159,25 +164,6 @@ public final class SlizaaWorkbenchCore {
   // public static boolean isJavaProject(IProject project) throws CoreException {
   // return project.hasNature(JavaCore.NATURE_ID);
   // }
-
-  public static void addNature(IProject project, String nature) throws CoreException {
-    if (!project.hasNature(nature)) {
-
-      // get the project description
-      IProjectDescription description = project.getDescription();
-
-      // set the new nature
-      String[] prevNatures = description.getNatureIds();
-      String[] newNatures = new String[prevNatures.length + 1];
-      System.arraycopy(prevNatures, 0, newNatures, 0, prevNatures.length);
-      newNatures[prevNatures.length] = nature;
-      description.setNatureIds(newNatures);
-
-      // set the new description
-      project.setDescription(description, null);
-    }
-
-  }
 
   /**
    * <p>
@@ -192,7 +178,7 @@ public final class SlizaaWorkbenchCore {
     IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
     for (IProject iProject : projects) {
       try {
-        if (iProject.exists() && iProject.hasNature(NATURE_ID)) {
+        if (iProject.exists() && iProject.hasNature(SLIZAA_NATURE_ID)) {
           getSlizaaProject(iProject);
         }
       } catch (CoreException e) {
@@ -245,7 +231,7 @@ public final class SlizaaWorkbenchCore {
 
     // check if nature exists
     try {
-      if (!project.hasNature(NATURE_ID)) {
+      if (!project.hasNature(SLIZAA_NATURE_ID)) {
         return false;
       }
     } catch (CoreException e) {

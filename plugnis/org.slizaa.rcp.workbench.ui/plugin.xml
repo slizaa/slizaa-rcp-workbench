@@ -7,11 +7,11 @@
             id="slizaa" 
             name="Slizaa" 
             point="org.eclipse.core.runtime.products">
-            <product application="org.eclipse.ui.ide.workbench" description="Slizaa" name="slizaa">
-                  <property name="appName" value="slizaa"></property>
+            <product application="org.eclipse.ui.ide.workbench" description="Slizaa" name="Slizaa Software Architecture Workbench">
+                  <property name="appName" value="Slizaa"></property>
                   <property
                         name="aboutText"
-                        value="slizaa architecture workbench&#x0A;&#x0A;(c) Copyright Gerd Wütherich. 2015-2018. All rights reserved.&#x0A;&#x0A;Visit http://www.slizaa.org&#x0A;&#x0A;This offering is powered by Eclipse technology &#x0A;and includes Eclipse plug-ins that can be &#x0A;installed and used with other Eclipse-based &#x0A;offerings."></property>
+                        value="Slizaa Software Architecture Workbench&#x0A;&#x0A;(c) Copyright Gerd Wütherich. 2015-2018. All rights reserved.&#x0A;&#x0A;Visit http://www.slizaa.org&#x0A;&#x0A;This offering is powered by Eclipse technology &#x0A;and includes Eclipse plug-ins that can be &#x0A;installed and used with other Eclipse-based &#x0A;offerings."></property>
                   <property name="windowImages" value="icons/slizaa_16.png,icons/slizaa_32.png,icons/slizaa_48.png,icons/slizaa_64.png,icons/slizaa_128.png,icons/slizaa_256.png"></property>
                   <property name="startupProgressRect" value="0,180,463,16"></property>
                   <!-- disable this property to enable the IThemeEngine (needed for the jeeeyul ui) -->
@@ -109,7 +109,7 @@
     	<image
           icon="icons/decorator/slizaa_project_decorator.png"
           id="org.slizaa.core.eclipse.slizaanature.image"
-          natureId="org.slizaa.rcp.workbench.slizaanature">
+          natureId="org.slizaa.rcp.workbench.core.slizaanature">
     	</image>
  	</extension>
  
@@ -158,8 +158,7 @@
          		icon="icons/etools/bm-parse.png"
          		style="push">
          		<visibleWhen checkEnabled="false">
-					<reference
-						definitionId="slizaaProjectSelected" />
+					<reference definitionId="slizaaProjectSelected" />
 				</visibleWhen>         		
 			</command>
 			
@@ -168,8 +167,7 @@
          		icon="icons/etools/bm-parse.png"
          		style="push">
          		<visibleWhen checkEnabled="false">
-					<reference
-						definitionId="slizaaProjectSelected" />
+					<reference definitionId="slizaaProjectSelected" />
 				</visibleWhen>         		
 			</command>
 						
@@ -180,10 +178,10 @@
 		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.ParseSlizaaProjectHandler"
 			commandId="org.slizaa.core.ui.commands.ParseSlizaaProjectCommand">
 			<activeWhen>
-				<reference definitionId="noGraphDbServiceRegistered"></reference>
+				<reference definitionId="slizaaProjectSelected"></reference>
 			</activeWhen>
 			<enabledWhen>
-				<reference definitionId="noGraphDbServiceRegistered"></reference>
+				<reference definitionId="slizaaProjectSelected"></reference>
 			</enabledWhen>
 		</handler>
 		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.OpenSlizaaProjectHandler"
@@ -222,11 +220,11 @@
 						<test
 							forcePluginActivation="true"
          					property="org.slizaa.rcp.workbench.core.isServiceRegistered"
-         					value="org.slizaa.scanner.core.api.graphdb.IGraphDb"/>
+         					value="org.slizaa.scanner.core.api.importer.IModelImporterFactory"/>
 						<test
 							forcePluginActivation="true"
-	         				property="org.slizaa.rcp.workbench.core.isServiceRegistered"
-	         				value="org.slizaa.scanner.core.api.importer.IModelImporter"/>
+	         				property="org.slizaa.scanner.core.api.graphdb.IGraphDbFactory"
+	         				value="org.slizaa.scanner.core.api.graphdb.IGraphDbFactory"/>
      				</and>
   				</not>
 			</with>
@@ -239,10 +237,16 @@
 						<adapt type="org.eclipse.core.resources.IResource">
 							<and>
 								<test property="org.eclipse.core.resources.projectNature"
-									  value="org.slizaa.rcp.workbench.slizaanature"/>
+									  value="org.slizaa.rcp.workbench.core.slizaanature"/>
 							 	<instanceof value="org.eclipse.core.resources.IProject" />
-							 	<test property="org.slizaa.rcp.workbench.core.isServiceRegistered" 
-							 	      value="org.slizaa.scanner.core.api.graphdb.IGraphDb"/>
+								<test
+									forcePluginActivation="true"
+			     					property="org.slizaa.rcp.workbench.core.isServiceRegistered"
+			     					value="org.slizaa.scanner.core.api.graphdb.IGraphDbFactory"/>
+								<test
+									forcePluginActivation="true"
+			         				property="org.slizaa.rcp.workbench.core.isServiceRegistered"
+			         				value="org.slizaa.scanner.core.api.importer.IModelImporterFactory"/>							 	      
 							</and> 	
 						</adapt>
 				</iterate>

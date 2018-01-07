@@ -24,7 +24,7 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
   protected void execute(ExecutionEvent event, ISelection selection) throws Exception {
 
     // get the selected resource
-    List<IResource> selectedObjects = getSelectedObject(selection, IResource.class);
+    List<IResource> selectedObjects = getSelectedObjects(selection, IResource.class);
 
     // check if there's at least one resource
     if (selectedObjects.isEmpty()) {

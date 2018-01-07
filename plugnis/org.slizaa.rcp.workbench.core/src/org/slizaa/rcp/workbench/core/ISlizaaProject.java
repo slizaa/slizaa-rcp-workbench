@@ -33,12 +33,11 @@ public interface ISlizaaProject {
 
   /**
    * <p>
-   * Returns the name of the project. Convenience method for calling <code>getProject().getName()</code>.
    * </p>
    *
-   * @return the name of the project
+   * @return
    */
-  String getName();
+  IContentDefinitionProvider getContentDefinitionProvider();
 
   /**
    * <p>
@@ -80,7 +79,7 @@ public interface ISlizaaProject {
    * @param progressMonitor
    * @throws CoreException
    */
-  void parseAndOpen(IProgressMonitor progressMonitor) throws CoreException;
+  void parse(IProgressMonitor progressMonitor) throws CoreException;
 
   /**
    * <p>
@@ -97,14 +96,6 @@ public interface ISlizaaProject {
    *
    */
   void dispose();
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @return
-   */
-  IContentDefinitionProvider getContentDefinitionProvider();
 
   // /**
   // * <p>

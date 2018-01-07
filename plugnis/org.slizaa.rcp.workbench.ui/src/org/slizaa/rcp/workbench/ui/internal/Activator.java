@@ -35,12 +35,6 @@ public class Activator extends AbstractUIPlugin {
   /** - */
   private ServiceTracker<IMappingService, IMappingService>           _mappingServiceTracker;
 
-  /**
-   * The constructor
-   */
-  public Activator() {
-  }
-
   /*
    * (non-Javadoc)
    *

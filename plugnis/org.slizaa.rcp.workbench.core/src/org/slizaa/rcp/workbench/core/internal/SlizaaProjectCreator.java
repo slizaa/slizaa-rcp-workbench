@@ -10,22 +10,19 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
+import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
+import org.slizaa.rcp.workbench.core.common.EclipseProjectUtils;
 
 /**
  * <p>
  * </p>
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
- *
  */
 public class SlizaaProjectCreator {
 
@@ -37,25 +34,35 @@ public class SlizaaProjectCreator {
    * @return
    * @throws CoreException
    */
-  public static IProject configureSlizaaProject(IProject project) throws CoreException {
+  public static ISlizaaProject configureSlizaaProject(IProject project) throws CoreException {
 
     //
     checkNotNull(project);
     checkState(project.exists());
 
-    SlizaaWorkbenchCore.addSlizaaNature(project);
-    SlizaaWorkbenchCore.getSlizaaProject(project);
+    // add the slizaa nature
+    EclipseProjectUtils.addNature(project, SlizaaWorkbenchCore.SLIZAA_NATURE_ID);
+    ISlizaaProject result = SlizaaWorkbenchCore.getSlizaaProject(project);
 
-    configureJDT_2(project);
+    // configure as JDT project
+    configureJDT(project);
 
     // return the project
-    return project;
+    return result;
   }
 
-  private static void configureJDT_2(IProject project) throws CoreException, JavaModelException {
+  /**
+   * <p>
+   * </p>
+   *
+   * @param project
+   * @throws CoreException
+   * @throws JavaModelException
+   */
+  private static void configureJDT(IProject project) throws CoreException, JavaModelException {
 
     // set the Java nature
-    SlizaaWorkbenchCore.addNature(project, JavaCore.NATURE_ID);
+    EclipseProjectUtils.addNature(project, JavaCore.NATURE_ID);
 
     // create the java project
     IJavaProject javaProject = JavaCore.create(project);
@@ -70,22 +77,5 @@ public class SlizaaProjectCreator {
     // create folder by using resources package
     IFolder folder = project.getFolder("src");
     folder.create(true, true, null);
-
-    // Add folder to Java element
-    IPackageFragmentRoot srcFolder = javaProject.getPackageFragmentRoot(folder);
-
-    // create package fragment
-    IPackageFragment fragment = srcFolder.createPackageFragment("com.programcreek", true, null);
-
-    // init code string and create compilation unit
-    String str = "package com.programcreek;" + "\n" + "public class Test  {" + "\n" + " private String name;" + "\n"
-        + "}";
-
-    ICompilationUnit cu = fragment.createCompilationUnit("Test.java", str, false, null);
-
-    // create a field
-    IType type = cu.getType("Test");
-
-    type.createField("private String age;", null, true, null);
   }
 }

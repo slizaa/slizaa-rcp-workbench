@@ -15,8 +15,8 @@ import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.BundleTracker;
 import org.slizaa.scanner.core.classpathscanner.ClasspathScannerFactoryBuilder;
 import org.slizaa.scanner.core.classpathscanner.IClasspathScannerFactory;
-import org.slizaa.scanner.core.spi.annotations.SlizaaContentDefinitionProvider;
-import org.slizaa.scanner.core.spi.annotations.SlizaaParserFactory;
+import org.slizaa.scanner.core.spi.annotations.ContentDefinitionProvider;
+import org.slizaa.scanner.core.spi.annotations.ParserFactory;
 
 /**
  * <p>
@@ -67,12 +67,12 @@ public class SlizaaExtensionsBundleTracker extends BundleTracker<Map<Class<?>, L
           //
           .createScanner(bundle)
           // SlizaaContentDefinitionProvider
-          .matchClassesWithAnnotation(SlizaaContentDefinitionProvider.class,
-              (b, exts) -> extensions.computeIfAbsent(SlizaaContentDefinitionProvider.class, k -> new ArrayList<>())
+          .matchClassesWithAnnotation(ContentDefinitionProvider.class,
+              (b, exts) -> extensions.computeIfAbsent(ContentDefinitionProvider.class, k -> new ArrayList<>())
                   .addAll(exts))
           // SlizaaContentDefinitionProvider
-          .matchClassesWithAnnotation(SlizaaParserFactory.class,
-              (b, exts) -> extensions.computeIfAbsent(SlizaaParserFactory.class, k -> new ArrayList<>()).addAll(exts))
+          .matchClassesWithAnnotation(ParserFactory.class,
+              (b, exts) -> extensions.computeIfAbsent(ParserFactory.class, k -> new ArrayList<>()).addAll(exts))
           //
           .scan();
 

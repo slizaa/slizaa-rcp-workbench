@@ -7,9 +7,16 @@
  ******************************************************************************/
 package org.slizaa.rcp.workbench.core.internal;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
@@ -47,7 +54,31 @@ public class SlizaaProjectNature implements IProjectNature {
    */
   @Override
   public void configure() throws CoreException {
-    createFolder(this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DATABASE_DIRECTORY_NAME));
+
+    // create the default slizaa directory
+    createFolder(this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME));
+
+    //
+    IProjectDescription desc = this._project.getDescription();
+
+    // check if the ds annotation builder already is configured
+    ICommand[] commands = desc.getBuildSpec();
+    for (int i = 0; i < commands.length; ++i) {
+      if (commands[i].getBuilderName().equals(SlizaaWorkbenchCore.SLIZAA_BUILDER)) {
+        return;
+      }
+    }
+
+    // add builder to project
+    ICommand command = desc.newCommand();
+    command.setBuilderName(SlizaaWorkbenchCore.SLIZAA_BUILDER);
+    ICommand[] newCommands = new ICommand[commands.length + 1];
+
+    // Add it before other builders.
+    System.arraycopy(commands, 0, newCommands, 1, commands.length);
+    newCommands[0] = command;
+    desc.setBuildSpec(newCommands);
+    this._project.setDescription(desc, null);
   }
 
   /**
@@ -55,7 +86,23 @@ public class SlizaaProjectNature implements IProjectNature {
    */
   @Override
   public void deconfigure() throws CoreException {
-    this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DATABASE_DIRECTORY_NAME).delete(true, null);
+
+    //
+    this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME).delete(true, null);
+
+    // get the description
+    IProjectDescription desc = this._project.getDescription();
+
+    // remove the ds annotation builder command
+    List<ICommand> iCommands = new LinkedList<ICommand>(Arrays.asList(desc.getBuildSpec()));
+    for (Iterator<ICommand> iterator = iCommands.iterator(); iterator.hasNext();) {
+      if (iterator.next().getBuilderName().equals(SlizaaWorkbenchCore.SLIZAA_BUILDER)) {
+        iterator.remove();
+        break;
+      }
+    }
+
+    desc.setBuildSpec(iCommands.toArray(new ICommand[0]));
   }
 
   /**

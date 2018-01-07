@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="slizaa" uid="org.slizaa.rcp.workbench.product" id="org.slizaa.rcp.workbench.ui.slizaa" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Slizaa Software Architecture Workbench" uid="org.slizaa.rcp.workbench.product" id="org.slizaa.rcp.workbench.ui.slizaa" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <text>
@@ -102,6 +102,7 @@ offerings.
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.slizaa.neo4j.queryresult.ui" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.ui.klighd" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.ui.klighd.synthesis" autoStart="true" startLevel="0" />
    </configurations>

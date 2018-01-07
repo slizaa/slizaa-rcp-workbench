@@ -40,10 +40,10 @@
             		<and>
                 		<test forcePluginActivation="true"
          				  	  property="org.slizaa.rcp.workbench.core.isServiceRegistered"
-         				  	  value="org.slizaa.scanner.core.api.graphdb.IGraphDb"/>
+         				  	  value="org.slizaa.scanner.core.api.graphdb.IGraphDbFactory"/>
 				  	 	<test forcePluginActivation="true"
 	         			  	  property="org.slizaa.rcp.workbench.core.isServiceRegistered"
-	         			      value="org.slizaa.scanner.core.api.importer.IModelImporter"/>
+	         			      value="org.slizaa.scanner.core.api.importer.IModelImporterFactory"/>
  			      	</and>
 	        	</not> 				
             </visibleWhen>

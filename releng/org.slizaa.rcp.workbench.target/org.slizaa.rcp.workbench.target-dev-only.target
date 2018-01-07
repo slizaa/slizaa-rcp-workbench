@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Generated from Eclipse Platform" sequenceNumber="38">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.cau.cs.kieler.klighd.draw2d.feature.feature.group" version="0.0.0"/>
+<unit id="de.cau.cs.kieler.klighd.freehep.feature.feature.group" version="0.0.0"/>
+<unit id="de.cau.cs.kieler.klighd.sdk.feature.feature.group" version="0.0.0"/>
+<unit id="de.cau.cs.kieler.klighd.view.feature.feature.group" version="0.0.0"/>
+<repository location="http://rtsys.informatik.uni-kiel.de/~kieler/updatesite/release_pragmatics_2017-02-04/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.hierarchicalgraph.graphdb.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.hierarchicalgraph.graphdb.feature.source.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.hierarchicalgraph.graphdb.test.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.hierarchicalgraph.graphdb.test.feature.source.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph-graphdb"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.thirdparty.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.thirdparty.test.feature.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-thirdparty-dependencies"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.opencypher.workbench.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.opencypher.workbench.feature.source.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.opencypher.workbench.testfwk.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.opencypher.workbench.testfwk.feature.source.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-opencypher-workbench"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.draw2d.sdk.feature.group" version="3.10.100.201606061308"/>
+<unit id="org.eclipse.draw2d.source.feature.group" version="3.10.100.201606061308"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170609-0928"/>
+<unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.13.1.v20170811-1407"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.7.2.v20171108-1834"/>
+<unit id="org.eclipse.equinox.p2.discovery.feature.feature.group" version="1.1.1.v20170906-1259"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.13.2.v20171130-0906"/>
+<unit id="org.eclipse.sdk.ide" version="4.7.2.M20171130-0510"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
+<repository location="http://download.eclipse.org/releases/oxygen"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.elk.graphiti.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.elk.sdk.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.elk.ui.feature.feature.group" version="0.0.0"/>
+<repository location="http://download.eclipse.org/elk/updates/releases/0.2.2/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.neo4j.opencypher.feature.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-opencypher-xtext"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.hierarchicalgraph.core.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.hierarchicalgraph.core.feature.source.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.hierarchicalgraph.core.testfwk.feature.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph-core"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.scanner.core.classpathscanner" version="0.0.0"/>
+<unit id="org.slizaa.scanner.core.contentdefinition" version="0.0.0"/>
+<unit id="org.slizaa.scanner.core.cypherregistry" version="0.0.0"/>
+<unit id="org.slizaa.scanner.core.mvnresolver.uber" version="0.0.0"/>
+<unit id="org.slizaa.scanner.core.spi-api" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-scanner-core"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="net.jeeeyul.eclipse.themes.feature.feature.group" version="2.3.0.I20151022-090442"/>
+<repository location="http://eclipse.jeeeyul.net/update/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.scanner.neo4j.eclipse.feature.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-scanner-neo4j"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.scanner.jtype.eclipse.feature.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-scanner-jtype"/>
+</location>
+</locations>
+</target>

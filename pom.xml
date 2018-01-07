@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>plugnis/org.slizaa.rcp.workbench.core</module>
+		<module>plugnis/org.slizaa.rcp.workbench.core.spi-api</module>
 		<module>plugnis/org.slizaa.rcp.workbench.discovery.ui</module>
 		<module>plugnis/org.slizaa.rcp.workbench.ui</module>
 

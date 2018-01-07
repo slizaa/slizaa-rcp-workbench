@@ -13,25 +13,32 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.osgi.framework.Bundle;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.neo4j.dbadapter.DbAdapterFactory;
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
 import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
+import org.slizaa.rcp.workbench.core.internal.projectconfig.SlizaaProjectConfigurationModel;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;
 import org.slizaa.scanner.core.api.importer.IModelImporter;
-import org.slizaa.scanner.core.contentdefinition.DirectoryBasedContentDefinitionProvider;
+import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
+import org.slizaa.scanner.core.spi.annotations.ParserFactory;
 import org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider;
 import org.slizaa.scanner.core.spi.parser.IParserFactory;
 
@@ -45,19 +52,22 @@ import org.slizaa.scanner.core.spi.parser.IParserFactory;
 public class SlizaaProject implements ISlizaaProject {
 
   /** the associated eclipse project */
-  private IProject                   _project;
-
-  /** the system definition */
-  private IContentDefinitionProvider _contentDefinitionProvider;
+  private IProject                                              _project;
 
   /** - */
-  private HGRootNode                 _hierarchicalGraph;
+  private Map<IResource, List<SlizaaProjectConfigurationModel>> _projectConfigurationModels;
 
   /** - */
-  private Neo4jClient                _boltClient;
+  private SlizaaProjectConfigurationModel                       _currentConfigurationModel;
 
   /** - */
-  private IGraphDb                   _graphDb;
+  private HGRootNode                                            _hierarchicalGraph;
+
+  /** - */
+  private Neo4jClient                                           _boltClient;
+
+  /** - */
+  private IGraphDb                                              _graphDb;
 
   /**
    * <p>
@@ -70,15 +80,33 @@ public class SlizaaProject implements ISlizaaProject {
   public SlizaaProject(IProject project) throws CoreException {
 
     // TODO: CoreException
-    Assert.isTrue(project.hasNature(SlizaaWorkbenchCore.NATURE_ID));
+    Assert.isTrue(project.hasNature(SlizaaWorkbenchCore.SLIZAA_NATURE_ID));
 
     // set the project
     this._project = project;
 
     //
-    this._contentDefinitionProvider = new DirectoryBasedContentDefinitionProvider();
-    ((DirectoryBasedContentDefinitionProvider) this._contentDefinitionProvider)
-        .add(project.getFile("_content").getRawLocation().makeAbsolute().toFile());
+    this._projectConfigurationModels = new HashMap<>();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public IProject getProject() {
+    return this._project.getProject();
+  }
+
+  @Override
+  public IContentDefinitionProvider getContentDefinitionProvider() {
+
+    // TODO
+    if (this._currentConfigurationModel == null) {
+      this._currentConfigurationModel = (SlizaaProjectConfigurationModel) this._projectConfigurationModels.values()
+          .toArray(new List[0])[0].get(0);
+    }
+
+    return this._currentConfigurationModel.getContentDefinitionProvider();
   }
 
   @Override
@@ -120,11 +148,11 @@ public class SlizaaProject implements ISlizaaProject {
     // reloadSystemDefinition();
 
     // initialize
-    this._contentDefinitionProvider.getContentDefinitions();
+    // this._contentDefinitionProvider.getContentDefinitions();
   }
 
   @Override
-  public void parseAndOpen(IProgressMonitor progressMonitor) throws CoreException {
+  public void parse(IProgressMonitor progressMonitor) throws CoreException {
 
     // create new null monitor if necessary
     if (progressMonitor == null) {
@@ -169,8 +197,8 @@ public class SlizaaProject implements ISlizaaProject {
       //
       Neo4jClient neo4jClient = DbAdapterFactory.eINSTANCE.createNeo4jClient();
       neo4jClient.setUri("bolt://localhost:" + this._graphDb.getPort());
-      neo4jClient.setName(this.getName());
-      neo4jClient.setDescription(this.getName());
+      neo4jClient.setName(this.getProject().getName());
+      neo4jClient.setDescription(this.getProject().getName());
       neo4jClient.connect();
 
       //
@@ -195,6 +223,10 @@ public class SlizaaProject implements ISlizaaProject {
 
     //
     SlizaaProjectCache.instance().removeCachedBundleMakerProject(this._project);
+  }
+
+  public Map<IResource, List<SlizaaProjectConfigurationModel>> getProjectConfigurationModels() {
+    return this._projectConfigurationModels;
   }
 
   /**
@@ -234,14 +266,38 @@ public class SlizaaProject implements ISlizaaProject {
       // simply ignore
     }
 
-    // TODO
-    List<IParserFactory> parserFactories = Collections.emptyList();
+    //
+    List<IContentDefinitionProvider> definitionProviders = Collections.emptyList();
+    // SCHROTT_SlizaaProjectConfigurationResolver.findContentDefinitionProviders(this);
+
+    //
+    List<IParserFactory> parserFactories = new ArrayList<>();
+    Map<Bundle, Map<Class<?>, List<Class<?>>>> extensions = Activator.instance().getTrackedExtensionBundles();
+    for (Map<Class<?>, List<Class<?>>> entry : extensions.values()) {
+
+      List<Class<?>> parserFactoriesClasses = entry.get(ParserFactory.class);
+
+      for (Class<?> clazz : parserFactoriesClasses) {
+        try {
+          System.out.println("FOUND: " + clazz);
+          parserFactories.add((IParserFactory) clazz.newInstance());
+        } catch (InstantiationException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } catch (IllegalAccessException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+    }
+
     List<ICypherStatement> cypherStatements = Collections.emptyList();
 
     //
-    IModelImporter modelImporter = Activator.instance().getModelImporterFactory().createModelImporter(
-        this._contentDefinitionProvider, SlizaaWorkbenchCore.getDatabaseDirectory(getProject()), parserFactories,
-        cypherStatements);
+    IModelImporterFactory modelImporterFactory = Activator.instance().getModelImporterFactory();
+
+    IModelImporter modelImporter = modelImporterFactory.createModelImporter(definitionProviders.get(0),
+        SlizaaWorkbenchCore.getDatabaseDirectory(getProject()), parserFactories, cypherStatements);
 
     modelImporter.parse(progressMonitor);
   }
@@ -250,99 +306,6 @@ public class SlizaaProject implements ISlizaaProject {
    * {@inheritDoc}
    */
   @Override
-  public IProject getProject() {
-    return this._project.getProject();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getName() {
-    return getProject().getName();
-  }
-
-  @Override
-  public IContentDefinitionProvider getContentDefinitionProvider() {
-    return this._contentDefinitionProvider;
-  }
-
-  // /*
-  // * (non-Javadoc)
-  // *
-  // * @see org.bundlemaker.core.IBundleMakerProject#reloadProjectDescription()
-  // */
-  // @Override
-  // public void reloadSystemDefinition() throws CoreException {
-  //
-  // //
-  // try {
-  //
-  // // get target file
-  // File targetFile = Constants.getProjectDescriptionFile(getProject());
-  //
-  // // load system definition
-  // try (FileReader fileReader = new FileReader(targetFile)) {
-  //
-  // // TODO: CLASSLOADER
-  // // TODO: MAP
-  //
-  // // load system definition
-  // if (_contentDefinitionProvider == null) {
-  //
-  // //
-  // ISystemDefinition systemDefinition = Activator.getDefault().getSystemDefinitionFactory()
-  // .loadSystemDefinition(fileReader, this.getClass().getClassLoader(), null);
-  //
-  // //
-  // _contentDefinitionProvider = Activator.getDefault().getSystemDefinitionFactory()
-  // .createSystemDefinitionWithWorkingCopy(systemDefinition);
-  // }
-  //
-  // // re-load system definition
-  // else {
-  //
-  // //
-  // Activator.getDefault().getSystemDefinitionFactory().reloadSystemDefinition(_contentDefinitionProvider,
-  // fileReader, this.getClass().getClassLoader(), null);
-  // }
-  // }
-  // }
-  //
-  // // re-throw exception
-  // catch (IOException e) {
-  // throw new CoreException(new Status(IStatus.ERROR, Constants.BUNDLE_ID_ORG_SLIZAA, e.getMessage(), e));
-  // }
-  //
-  // //
-  // // fireDescriptionChangedEvent(new
-  // // BundleMakerProjectDescriptionChangedEvent(this,
-  // // BundleMakerProjectDescriptionChangedEvent.Type.PROJECT_DESCRIPTION_RELOADED));
-  // }
-  //
-  // @Override
-  // public void saveSystemDefinition() throws CoreException {
-  //
-  // //
-  // try {
-  //
-  // File targetFile = Constants.getProjectDescriptionFile(getProject());
-  //
-  // try (FileWriter fileWriter = new FileWriter(targetFile)) {
-  // Activator.getDefault().getSystemDefinitionFactory().save(_contentDefinitionProvider, fileWriter);
-  // }
-  //
-  // } catch (IOException e) {
-  //
-  // // throw new exception
-  // throw new CoreException(new Status(IStatus.ERROR, Constants.BUNDLE_ID_ORG_SLIZAA, e.getMessage(), e));
-  // }
-  //
-  // // refresh
-  // getProject().refreshLocal(IResource.DEPTH_ONE, null);
-  // }
-
-  @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
@@ -350,6 +313,9 @@ public class SlizaaProject implements ISlizaaProject {
     return result;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
