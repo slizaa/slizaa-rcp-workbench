@@ -102,6 +102,7 @@ public class SlizaaProject implements ISlizaaProject {
 
     // TODO
     if (this._currentConfigurationModel == null) {
+      
       this._currentConfigurationModel = (SlizaaProjectConfigurationModel) this._projectConfigurationModels.values()
           .toArray(new List[0])[0].get(0);
     }

@@ -5,6 +5,8 @@ package org.slizaa.rcp.workbench.core.internal.projectconfig;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -18,7 +20,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider;
 
 /**
@@ -30,13 +31,19 @@ import org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider;
 public class SlizaaProjectConfigurationModel {
 
   /** - */
-  private String              _className;
+  private IProject                   _project;
 
   /** - */
-  private IProject            _project;
+  private String                     _className;
 
   /** - */
-  private Map<String, String> _configurationMethodsMap;
+  private Object                     _configuration;
+
+  /** - */
+  private Map<String, String>        _configurationMethodsMap;
+
+  /** - */
+  private IContentDefinitionProvider _contentDefinitionProvider;
 
   /**
    * <p>
@@ -70,40 +77,7 @@ public class SlizaaProjectConfigurationModel {
     checkNotNull(methodName);
 
     //
-    System.out.println("registerConfigurationMethod " + returnType + " : " + methodName);
-
-    //
     this._configurationMethodsMap.put(returnType, methodName);
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @return
-   * @throws Exception
-   */
-  private static URLClassLoader createClassLoader(ISlizaaProject slizaaProject) throws Exception {
-
-    //
-    IJavaProject javaProject = JavaCore.create(slizaaProject.getProject());
-
-    // TODO
-    // https://sdqweb.ipd.kit.edu/wiki/JDT_Tutorial:_Class_Loading_in_a_running_plugin
-    String[] classPathEntries = JavaRuntime.computeDefaultRuntimeClassPath(javaProject);
-
-    List<URL> urlList = new ArrayList<URL>();
-    for (int i = 0; i < classPathEntries.length; i++) {
-      IPath path = new Path(classPathEntries[i]);
-      urlList.add(path.toFile().toURI().toURL());
-    }
-
-    //
-    ClassLoader parentClassLoader = SlizaaProjectConfigurationModel.class.getClassLoader();
-    URL[] urls = urlList.toArray(new URL[urlList.size()]);
-
-    //
-    return new URLClassLoader(urls, parentClassLoader);
   }
 
   /**
@@ -113,8 +87,22 @@ public class SlizaaProjectConfigurationModel {
    * @return
    */
   public IContentDefinitionProvider getContentDefinitionProvider() {
-    // TODO Auto-generated method stub
-    return null;
+
+    //
+    if (_contentDefinitionProvider == null) {
+      try {
+        Object configurationInstance = getConfigurationInstance();
+        String methodName = _configurationMethodsMap.get(IContentDefinitionProvider.class.getName());
+        Method method = configurationInstance.getClass().getDeclaredMethod(methodName);
+        _contentDefinitionProvider = (IContentDefinitionProvider) method.invoke(configurationInstance);
+      } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+          | InvocationTargetException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
+    //
+    return _contentDefinitionProvider;
   }
 
   /**
@@ -139,4 +127,55 @@ public class SlizaaProjectConfigurationModel {
     return null;
   }
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  private Object getConfigurationInstance() {
+
+    try {
+      if (_configuration == null) {
+        Class<?> configurationClass = createClassLoader().loadClass(_className);
+        _configuration = configurationClass.newInstance();
+      }
+    }
+    //
+    catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
+    return _configuration;
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   * @throws Exception
+   */
+  private URLClassLoader createClassLoader() throws Exception {
+
+    //
+    IJavaProject javaProject = JavaCore.create(_project);
+
+    // TODO
+    // https://sdqweb.ipd.kit.edu/wiki/JDT_Tutorial:_Class_Loading_in_a_running_plugin
+    String[] classPathEntries = JavaRuntime.computeDefaultRuntimeClassPath(javaProject);
+
+    List<URL> urlList = new ArrayList<URL>();
+    for (int i = 0; i < classPathEntries.length; i++) {
+      IPath path = new Path(classPathEntries[i]);
+      urlList.add(path.toFile().toURI().toURL());
+    }
+
+    //
+    ClassLoader parentClassLoader = SlizaaProjectConfigurationModel.class.getClassLoader();
+    URL[] urls = urlList.toArray(new URL[urlList.size()]);
+
+    //
+    return new URLClassLoader(urls, parentClassLoader);
+  }
 }
