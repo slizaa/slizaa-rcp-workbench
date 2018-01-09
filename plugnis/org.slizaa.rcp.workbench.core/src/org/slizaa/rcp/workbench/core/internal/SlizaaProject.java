@@ -51,6 +51,12 @@ import org.slizaa.scanner.core.spi.parser.IParserFactory;
  */
 public class SlizaaProject implements ISlizaaProject {
 
+  @FunctionalInterface
+  public interface SlizaaProjectDynamicAction {
+
+    void execute() throws CoreException;
+  }
+
   /** the associated eclipse project */
   private IProject                                              _project;
 
@@ -102,7 +108,7 @@ public class SlizaaProject implements ISlizaaProject {
 
     // TODO
     if (this._currentConfigurationModel == null) {
-      
+
       this._currentConfigurationModel = (SlizaaProjectConfigurationModel) this._projectConfigurationModels.values()
           .toArray(new List[0])[0].get(0);
     }
@@ -258,49 +264,120 @@ public class SlizaaProject implements ISlizaaProject {
    */
   private void internalParse(IProgressMonitor progressMonitor) {
 
-    // delete
+    //
     try {
+      BuildHelper.cleanBuildProject(_project);
+      BuildHelper.failOnErrors(_project);
+    }
+    //
+    catch (CoreException exception) {
+      //
+    }
+
+    // delete the old database directory...
+    try {
+
+      // get the root path
       Path rootPath = Paths.get(SlizaaWorkbenchCore.getDatabaseDirectory(getProject()).getAbsolutePath());
+
+      // delete all contained files
       Files.walk(rootPath, FileVisitOption.FOLLOW_LINKS).sorted(Comparator.reverseOrder()).map(Path::toFile)
           .forEach(File::delete);
+
     } catch (IOException e) {
       // simply ignore
     }
 
-    //
-    List<IContentDefinitionProvider> definitionProviders = Collections.emptyList();
-    // SCHROTT_SlizaaProjectConfigurationResolver.findContentDefinitionProviders(this);
+    try {
+      executeWithProperties(() -> {
+        
+        //
+        List<IParserFactory> parserFactories = new ArrayList<>();
+        Map<Bundle, Map<Class<?>, List<Class<?>>>> extensions = Activator.instance().getTrackedExtensionBundles();
+        for (Map<Class<?>, List<Class<?>>> entry : extensions.values()) {
 
-    //
-    List<IParserFactory> parserFactories = new ArrayList<>();
-    Map<Bundle, Map<Class<?>, List<Class<?>>>> extensions = Activator.instance().getTrackedExtensionBundles();
-    for (Map<Class<?>, List<Class<?>>> entry : extensions.values()) {
+          List<Class<?>> parserFactoriesClasses = entry.get(ParserFactory.class);
 
-      List<Class<?>> parserFactoriesClasses = entry.get(ParserFactory.class);
-
-      for (Class<?> clazz : parserFactoriesClasses) {
-        try {
-          System.out.println("FOUND: " + clazz);
-          parserFactories.add((IParserFactory) clazz.newInstance());
-        } catch (InstantiationException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        } catch (IllegalAccessException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
+          for (Class<?> clazz : parserFactoriesClasses) {
+            try {
+              System.out.println("FOUND: " + clazz);
+              parserFactories.add((IParserFactory) clazz.newInstance());
+            } catch (InstantiationException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            } catch (IllegalAccessException e) {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
+          }
         }
+
+        List<ICypherStatement> cypherStatements = Collections.emptyList();
+
+        //
+        IModelImporterFactory modelImporterFactory = Activator.instance().getModelImporterFactory();
+
+        _currentConfigurationModel = selectConfigurationModel();
+
+        // create a new model importer...
+        IModelImporter modelImporter = modelImporterFactory.createModelImporter(
+            _currentConfigurationModel.getContentDefinitionProvider(),
+            SlizaaWorkbenchCore.getDatabaseDirectory(getProject()), parserFactories, cypherStatements);
+
+        // ... and parse the content
+        modelImporter.parse(progressMonitor);
+        
+      });
+    } catch (CoreException coreException) {
+      coreException.printStackTrace();
+    }
+    
+
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  private SlizaaProjectConfigurationModel selectConfigurationModel() {
+
+    // TODO
+    for (List<SlizaaProjectConfigurationModel> configurationModels : _projectConfigurationModels.values()) {
+      for (SlizaaProjectConfigurationModel slizaaProjectConfigurationModel : configurationModels) {
+        return slizaaProjectConfigurationModel;
       }
     }
 
-    List<ICypherStatement> cypherStatements = Collections.emptyList();
+    //
+    return null;
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param dynamicAction
+   * @throws CoreException
+   */
+  private void executeWithProperties(SlizaaProjectDynamicAction dynamicAction) throws CoreException {
 
     //
-    IModelImporterFactory modelImporterFactory = Activator.instance().getModelImporterFactory();
+    Map<String, String> properties = new HashMap<>();
+    properties.put("slizaa.project.directory", _project.getLocation().toOSString());
 
-    IModelImporter modelImporter = modelImporterFactory.createModelImporter(definitionProviders.get(0),
-        SlizaaWorkbenchCore.getDatabaseDirectory(getProject()), parserFactories, cypherStatements);
+    try {
 
-    modelImporter.parse(progressMonitor);
+      //
+      properties.forEach((k, v) -> System.setProperty(k, v));
+
+      //
+      dynamicAction.execute();
+
+    } finally {
+      properties.forEach((k, v) -> System.clearProperty(k));
+    }
   }
 
   /**

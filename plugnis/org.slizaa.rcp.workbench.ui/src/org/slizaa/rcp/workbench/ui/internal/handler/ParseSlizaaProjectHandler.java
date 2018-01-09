@@ -51,33 +51,26 @@ public class ParseSlizaaProjectHandler extends AbstractSlizaaHandler implements 
     // grab resource and get the project
     ISlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(selectedObject.getProject());
 
-    // TODO!!
-    System.setProperty("slizaa.project.dir", slizaaProject.getProject().getLocation().toOSString());
-
+    // Execute runnable via IProgressService
     try {
+      PlatformUI.getWorkbench().getProgressService().busyCursorWhile((monitor) -> {
+        try {
 
-      // Execute runnable via IProgressService
-      try {
-        PlatformUI.getWorkbench().getProgressService().busyCursorWhile((monitor) -> {
-          try {
-            // execute with console
-            ConsoleHelper.executeWithConsole(() -> slizaaProject.parse(monitor));
+          // execute with console
+          ConsoleHelper.executeWithConsole(() -> slizaaProject.parse(monitor));
 
-          } catch (Exception e) {
-            throw new RuntimeException(e);
-          }
-        });
-      } catch (InvocationTargetException ex) {
-        // Report Error to error log
-        Throwable cause = ex.getCause();
-        cause.printStackTrace();
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
+      });
+    } catch (InvocationTargetException ex) {
+      
+      // Report Error to error log
+      Throwable cause = ex.getCause();
+      cause.printStackTrace();
 
-      } catch (InterruptedException ex) {
-        // ignore. User has canceled the operation
-      }
-
-    } finally {
-      System.clearProperty("slizaa.project.dir");
+    } catch (InterruptedException ex) {
+      // ignore. User has canceled the operation
     }
   }
 }
