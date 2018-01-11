@@ -66,30 +66,7 @@
         	<enablement/>
         </commonWizard>
       </extension>
-      
-      <!-- http://help.eclipse.org/neon/index.jsp?topic=%2Forg.eclipse.platform.doc.isv%2Fguide%2Fworkbench_advext_activities.htm  -->
-      <extension point="org.eclipse.ui.activities">
-            <!-- -->
-            <activity id="menuHidingActivity" name="MenuHidingActivity">
-                  <enabledWhen>
-                        <with variable="activePartId">
-                              <equals value="nonExistentPartId"/>
-                        </with>
-                  </enabledWhen>
-            </activity>
-            <!-- -->
-            <activityPatternBinding activityId="menuHidingActivity" pattern="org.eclipse.debug.ui/.*"></activityPatternBinding>
-            <activityPatternBinding activityId="menuHidingActivity" pattern="org.eclipse.team.ui/.*"></activityPatternBinding>
-            <activityPatternBinding activityId="menuHidingActivity" pattern="org.eclipse.ui.externaltools/.*"></activityPatternBinding>
-      </extension>
-
-      <extension point="org.eclipse.ui.perspectiveExtensions">
-            <perspectiveExtension targetID="*">
-                  <hiddenMenuItem id="org.eclipse.ui.run"></hiddenMenuItem>
-                  <hiddenMenuItem id="project"></hiddenMenuItem>
-            </perspectiveExtension>
-      </extension>
-      
+           
       <extension point="org.eclipse.ui.startup">
             <startup class="org.slizaa.rcp.workbench.ui.internal.perspectives.Startup"></startup>
       </extension>
