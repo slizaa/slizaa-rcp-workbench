@@ -85,7 +85,7 @@ public class Activator extends AbstractUIPlugin {
    *
    * @return
    */
-  public IMappingService getMappingServiceTracker() {
+  public IMappingService getMappingService() {
     return this._mappingServiceTracker.getService();
   }
 

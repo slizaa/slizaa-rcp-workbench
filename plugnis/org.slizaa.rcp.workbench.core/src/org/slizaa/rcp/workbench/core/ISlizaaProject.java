@@ -45,7 +45,16 @@ public interface ISlizaaProject {
    *
    * @return
    */
-  Neo4jClient getNeo4jClient();
+  Neo4jClient getBoltClient();
+
+  /**
+   * <p>
+   * Returns the default analysis model.
+   * </p>
+   *
+   * @return the default analysis model.
+   */
+  HGRootNode getHierachicalGraph();
 
   /**
    * <p>
@@ -94,31 +103,14 @@ public interface ISlizaaProject {
    * <p>
    * </p>
    *
+   * @throws CoreException
    */
-  void dispose();
-
-  // /**
-  // * <p>
-  // * </p>
-  // *
-  // * @throws CoreException
-  // */
-  // void reloadSystemDefinition() throws CoreException;
-  //
-  // /**
-  // * <p>
-  // * </p>
-  // *
-  // * @throws CoreException
-  // */
-  // void saveSystemDefinition() throws CoreException;
+  void createHierarchicalGraph() throws CoreException;
 
   /**
    * <p>
-   * Returns the default analysis model.
    * </p>
    *
-   * @return the default analysis model.
    */
-  HGRootNode getAnalysisModel();
+  void dispose();
 }

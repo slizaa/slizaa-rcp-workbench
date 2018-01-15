@@ -54,9 +54,9 @@ public class SimpleTest {
       // @formatter:off
       String str = "package org.example;\n"
           + "import org.slizaa.scanner.core.contentdefinition.DirectoryBasedContentDefinitionProvider;\n"
-          + "@org.slizaa.rcp.workbench.core.api.projectconfig.SlizaaProjectConfiguration\n" 
+          + "@org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration\n" 
           + "public class Test {\n"
-          + "  @org.slizaa.rcp.workbench.core.api.projectconfig.SlizaaConfigurationItem\n"
+          + "  @org.slizaa.rcp.workbench.core.api.annotations.SlizaaConfigurationItem\n"
           + "  public org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider getValue() {\n"
           + "    DirectoryBasedContentDefinitionProvider result = new DirectoryBasedContentDefinitionProvider();\n"
           + "    return result;\n" + "  }\n" + "}";

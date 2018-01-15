@@ -13,6 +13,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slizaa.rcp.workbench.core.internal.classpathcontainer.SlizaaSpiApiBundleTracker;
+import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker;
 import org.slizaa.scanner.core.api.graphdb.IGraphDbFactory;
 import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
 import org.slizaa.scanner.core.classpathscanner.ClasspathScannerFactoryBuilder;

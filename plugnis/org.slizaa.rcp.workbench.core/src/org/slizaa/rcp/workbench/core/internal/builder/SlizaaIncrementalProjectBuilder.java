@@ -1,5 +1,6 @@
-package org.slizaa.rcp.workbench.core.internal.projectconfig;
+package org.slizaa.rcp.workbench.core.internal.builder;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
@@ -10,8 +11,15 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 
-public class SlizaaProjectConfigurationBuilder extends IncrementalProjectBuilder {
+public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
 
+  /** - */
+  private final static String[] MARKERS_TO_DELETE_ON_CLEAN = {
+      SlizaaWorkbenchCore.SLIZAA_CONFIGURATION_PROBLEM_MARKER };
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
   protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 
@@ -28,15 +36,29 @@ public class SlizaaProjectConfigurationBuilder extends IncrementalProjectBuilder
     return null;
   }
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @param monitor
+   */
   private void fullBuild(IProgressMonitor monitor) {
     try {
-      getProject().accept(new SlizaaProjectConfigurationBuildVisitor());
+      getProject().accept(new SlizaaProjectResourceVisitor());
     } catch (CoreException e) {
     }
   }
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @param delta
+   * @param monitor
+   * @throws CoreException
+   */
   protected void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
-    delta.accept(new SlizaaProjectConfigurationBuildVisitor());
+    delta.accept(new SlizaaProjectResourceVisitor());
   }
 
   /**
@@ -45,11 +67,14 @@ public class SlizaaProjectConfigurationBuilder extends IncrementalProjectBuilder
   @Override
   protected void clean(IProgressMonitor monitor) throws CoreException {
 
-    // delete all the markers
-    getProject().deleteMarkers(SlizaaWorkbenchCore.SLIZAA_CONFIGURATION_PROBLEM_MARKER, true, IResource.DEPTH_ZERO);
-
-    // //
-    // ComponentDescriptionFactory.getComponentDescriptionWriter().removeDanglingComponentDescriptions(getProject());
+    //
+    Arrays.asList(MARKERS_TO_DELETE_ON_CLEAN).forEach(m -> {
+      try {
+        getProject().deleteMarkers(m, true, IResource.DEPTH_INFINITE);
+      } catch (CoreException e) {
+        // ignore
+      }
+    });
 
     //
     super.clean(monitor);

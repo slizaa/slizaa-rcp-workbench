@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.slizaa.rcp.workbench.core.internal;
+package org.slizaa.rcp.workbench.core.internal.extensions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +15,6 @@ import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.BundleTracker;
 import org.slizaa.scanner.core.classpathscanner.ClasspathScannerFactoryBuilder;
 import org.slizaa.scanner.core.classpathscanner.IClasspathScannerFactory;
-import org.slizaa.scanner.core.spi.annotations.ContentDefinitionProvider;
 import org.slizaa.scanner.core.spi.annotations.ParserFactory;
 
 /**
@@ -66,11 +65,7 @@ public class SlizaaExtensionsBundleTracker extends BundleTracker<Map<Class<?>, L
       this._classpathScannerFactory
           //
           .createScanner(bundle)
-          // SlizaaContentDefinitionProvider
-          .matchClassesWithAnnotation(ContentDefinitionProvider.class,
-              (b, exts) -> extensions.computeIfAbsent(ContentDefinitionProvider.class, k -> new ArrayList<>())
-                  .addAll(exts))
-          // SlizaaContentDefinitionProvider
+          // parser factory
           .matchClassesWithAnnotation(ParserFactory.class,
               (b, exts) -> extensions.computeIfAbsent(ParserFactory.class, k -> new ArrayList<>()).addAll(exts))
           //

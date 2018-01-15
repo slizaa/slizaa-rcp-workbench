@@ -1,12 +1,13 @@
 /**
  *
  */
-package org.slizaa.rcp.workbench.core.internal.projectconfig;
+package org.slizaa.rcp.workbench.core.internal.extensions;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.core.resources.IProject;
@@ -16,8 +17,6 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.NormalAnnotation;
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.slizaa.rcp.workbench.core.api.annotations.SlizaaConfigurationItem;
-import org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration;
 
 /**
  * <p>
@@ -26,45 +25,31 @@ import org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration;
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  *
  */
-public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
+public class SlizaaExtensionsAstVisitor extends ASTVisitor {
 
   /** the current type declaration */
-  private Stack<TypeDeclaration>                 _currentTypeDeclaration;
-
-  /** the current type declaration */
-  private Stack<SlizaaProjectConfigurationModel> _currentSlizaaProjectConfigurationModel;
-
-  /** - */
-  private List<SlizaaProjectConfigurationModel>  _slizaaProjectConfigurationModels;
+  private Stack<TypeDeclaration>        _currentTypeDeclaration;
 
   /** the current method declaration */
-  private MethodDeclaration                      _currentMethodDeclaration;
+  private MethodDeclaration             _currentMethodDeclaration;
 
   /** - */
-  private IProject                               _project;
+  private Map<Class<?>, List<Class<?>>> _extensions;
+
+  /** - */
+  private IProject                      _project;
 
   /**
    * <p>
    * Creates a new instance of type {@link AbstractDsAnnotationAstVisitor}.
    * </p>
    */
-  public SlizaaProjectConfigurationAstVisitor(IProject project) {
+  public SlizaaExtensionsAstVisitor(IProject project) {
 
     //
     this._project = checkNotNull(project);
     this._currentTypeDeclaration = new Stack<>();
-    this._currentSlizaaProjectConfigurationModel = new Stack<>();
-    this._slizaaProjectConfigurationModels = new ArrayList<>();
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @return
-   */
-  public List<SlizaaProjectConfigurationModel> getSlizaaProjectConfigurationModels() {
-    return this._slizaaProjectConfigurationModels;
+    this._extensions = new HashMap<>();
   }
 
   /**
@@ -110,36 +95,8 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
     // resolve the annotation type name
     String annotationTypeName = annotation.resolveTypeBinding().getQualifiedName();
 
-    //
-    if (SlizaaProjectConfiguration.class.getName().equals(annotationTypeName)
-        && !this._currentTypeDeclaration.isEmpty()) {
-
-      //
-      String currentTypeName = this._currentTypeDeclaration.peek().resolveBinding().getQualifiedName();
-
-      //
-      SlizaaProjectConfigurationModel model = new SlizaaProjectConfigurationModel(this._project, currentTypeName);
-
-      //
-      this._currentSlizaaProjectConfigurationModel.push(model);
-      this._slizaaProjectConfigurationModels.add(model);
-    }
-
-    //
-    if (SlizaaConfigurationItem.class.getName().equals(annotationTypeName) && this._currentMethodDeclaration != null) {
-
-      //
-      if (this._currentMethodDeclaration.parameters().size() == 0) {
-
-        this._currentSlizaaProjectConfigurationModel.peek().registerConfigurationMethod(
-            this._currentMethodDeclaration.resolveBinding().getReturnType().getQualifiedName(),
-            this._currentMethodDeclaration.getName().getFullyQualifiedName());
-      }
-      //
-      else {
-        // TODO
-      }
-    }
+    // TODO: HANDLE
+    System.out.println("Found " + annotationTypeName);
 
     // only visit types and methods
     return this._currentMethodDeclaration == null;

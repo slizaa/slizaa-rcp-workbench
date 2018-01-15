@@ -3,7 +3,6 @@
  */
 package org.slizaa.rcp.workbench.core.internal.classpathcontainer;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.osgi.framework.Bundle;
@@ -44,10 +43,7 @@ public class SlizaaSpiApiBundleTracker extends BundleTracker<Set<Bundle>> {
 
     //
     if (slizaaSpiApi != null && !slizaaSpiApi.isEmpty()) {
-      Set<Bundle> result = new HashSet<Bundle>();
-      result.add(bundle);
-      return result;
-      // return new OSGiTransitiveClosureResolver(bundle).computeTransitiveClosure();
+      return new OSGiTransitiveClosureResolver(bundle, slizaaSpiApi).computeTransitiveClosure();
     }
     //
     else {

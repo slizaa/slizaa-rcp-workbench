@@ -117,6 +117,12 @@ public class SlizaaProject implements ISlizaaProject {
   }
 
   @Override
+  public void createHierarchicalGraph() throws CoreException {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
   public boolean isConnected() {
     // TODO Auto-generated method stub
     return false;
@@ -133,7 +139,7 @@ public class SlizaaProject implements ISlizaaProject {
   }
 
   @Override
-  public HGRootNode getAnalysisModel() {
+  public HGRootNode getHierachicalGraph() {
     return this._hierarchicalGraph;
   }
 
@@ -141,7 +147,7 @@ public class SlizaaProject implements ISlizaaProject {
    * {@inheritDoc}
    */
   @Override
-  public Neo4jClient getNeo4jClient() {
+  public Neo4jClient getBoltClient() {
     return this._boltClient;
   }
 
@@ -266,8 +272,8 @@ public class SlizaaProject implements ISlizaaProject {
 
     //
     try {
-      BuildHelper.cleanBuildProject(_project);
-      BuildHelper.failOnErrors(_project);
+      BuildHelper.cleanBuildProject(this._project);
+      BuildHelper.failOnErrors(this._project);
     }
     //
     catch (CoreException exception) {
@@ -290,7 +296,7 @@ public class SlizaaProject implements ISlizaaProject {
 
     try {
       executeWithProperties(() -> {
-        
+
         //
         List<IParserFactory> parserFactories = new ArrayList<>();
         Map<Bundle, Map<Class<?>, List<Class<?>>>> extensions = Activator.instance().getTrackedExtensionBundles();
@@ -317,21 +323,20 @@ public class SlizaaProject implements ISlizaaProject {
         //
         IModelImporterFactory modelImporterFactory = Activator.instance().getModelImporterFactory();
 
-        _currentConfigurationModel = selectConfigurationModel();
+        this._currentConfigurationModel = selectConfigurationModel();
 
         // create a new model importer...
         IModelImporter modelImporter = modelImporterFactory.createModelImporter(
-            _currentConfigurationModel.getContentDefinitionProvider(),
+            this._currentConfigurationModel.getContentDefinitionProvider(),
             SlizaaWorkbenchCore.getDatabaseDirectory(getProject()), parserFactories, cypherStatements);
 
         // ... and parse the content
         modelImporter.parse(progressMonitor);
-        
+
       });
     } catch (CoreException coreException) {
       coreException.printStackTrace();
     }
-    
 
   }
 
@@ -344,7 +349,7 @@ public class SlizaaProject implements ISlizaaProject {
   private SlizaaProjectConfigurationModel selectConfigurationModel() {
 
     // TODO
-    for (List<SlizaaProjectConfigurationModel> configurationModels : _projectConfigurationModels.values()) {
+    for (List<SlizaaProjectConfigurationModel> configurationModels : this._projectConfigurationModels.values()) {
       for (SlizaaProjectConfigurationModel slizaaProjectConfigurationModel : configurationModels) {
         return slizaaProjectConfigurationModel;
       }
@@ -365,7 +370,7 @@ public class SlizaaProject implements ISlizaaProject {
 
     //
     Map<String, String> properties = new HashMap<>();
-    properties.put("slizaa.project.directory", _project.getLocation().toOSString());
+    properties.put("slizaa.project.directory", this._project.getLocation().toOSString());
 
     try {
 

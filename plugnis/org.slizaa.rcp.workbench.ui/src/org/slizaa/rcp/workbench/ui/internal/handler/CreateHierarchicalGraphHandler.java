@@ -11,12 +11,13 @@ import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.ISelection;
+import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
 import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
+import org.slizaa.rcp.workbench.ui.internal.Activator;
 
 public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implements IHandler {
 
@@ -33,8 +34,10 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
 
     // grab resource and get the project
     IResource selectedResource = selectedObjects.get(0);
-    IProject project = selectedResource.getProject();
-    ISlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(project);
+    ISlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(selectedResource.getProject());
+
+    //
+    IMappingService mappingService = Activator.getDefault().getMappingService();
 
     // TODO
     IMappingProvider mappingProvider = null;

@@ -2,8 +2,11 @@ package org.slizaa.rcp.workbench.core.internal.classpathcontainer;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.namespace.BundleNamespace;
@@ -19,10 +22,13 @@ import org.osgi.framework.wiring.BundleWiring;
 public class OSGiTransitiveClosureResolver {
 
   /** - */
-  private Bundle      _bundle;
+  private Bundle       _bundle;
 
   /** - */
-  private Set<Bundle> _result;
+  private List<String> _whiteList;
+
+  /** - */
+  private Set<Bundle>  _result;
 
   /**
    * <p>
@@ -30,10 +36,14 @@ public class OSGiTransitiveClosureResolver {
    * </p>
    *
    * @param bundle
-   * @param result
+   * @param whiteList
    */
-  public OSGiTransitiveClosureResolver(Bundle bundle) {
+  public OSGiTransitiveClosureResolver(Bundle bundle, String whiteList) {
     this._bundle = checkNotNull(bundle);
+
+    if (!Boolean.parseBoolean(whiteList)) {
+      this._whiteList = Arrays.asList(checkNotNull(whiteList).split(","));
+    }
   }
 
   /**
@@ -52,7 +62,9 @@ public class OSGiTransitiveClosureResolver {
     computeWiredBundles(this._bundle);
 
     //
-    return this._result;
+    return this._result.stream()
+        .filter(b -> this._bundle.equals(b) || this._whiteList == null || this._whiteList.contains(b.getSymbolicName()))
+        .collect(Collectors.toSet());
   }
 
   /**
