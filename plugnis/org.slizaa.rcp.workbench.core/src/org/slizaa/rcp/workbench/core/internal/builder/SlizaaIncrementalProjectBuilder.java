@@ -14,6 +14,7 @@ import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
 
   /** - */
+  // TODO
   private final static String[] MARKERS_TO_DELETE_ON_CLEAN = {
       SlizaaWorkbenchCore.SLIZAA_CONFIGURATION_PROBLEM_MARKER };
 
@@ -21,7 +22,7 @@ public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
    * {@inheritDoc}
    */
   @Override
-  protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
+  protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException {
 
     if (kind == IncrementalProjectBuilder.FULL_BUILD) {
       fullBuild(monitor);

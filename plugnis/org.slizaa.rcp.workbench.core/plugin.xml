@@ -19,7 +19,7 @@
    <extension id="slizaaProjectConfigurationBuilder" 
       point="org.eclipse.core.resources.builders">
       <builder hasNature="true">
-         <run class="org.slizaa.rcp.workbench.core.internal.builder.SlizaaIncrementalProjectBuilder"/>
+         <run class="org.slizaa.rcp.workbench.core.internal.SlizaaIncrementalProjectBuilderFactory"/>
       </builder>
    </extension>
 
