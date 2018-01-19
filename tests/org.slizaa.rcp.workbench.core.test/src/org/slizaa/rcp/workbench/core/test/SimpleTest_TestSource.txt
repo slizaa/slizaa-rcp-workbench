@@ -1,0 +1,15 @@
+package org.example;
+
+import org.slizaa.scanner.core.contentdefinition.DirectoryBasedContentDefinitionProvider;
+import org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration;
+import org.slizaa.rcp.workbench.core.api.annotations.SlizaaConfigurationItem;
+
+@SlizaaProjectConfiguration
+public class Test {
+
+  @SlizaaConfigurationItem
+  public org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider getValue() {
+    return new DirectoryBasedContentDefinitionProvider();
+  } 
+
+}

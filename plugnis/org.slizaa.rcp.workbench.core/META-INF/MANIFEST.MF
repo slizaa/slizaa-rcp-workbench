@@ -1,27 +1,35 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.slizaa.rcp.workbench.core
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.slizaa.rcp.workbench.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Activator: org.slizaa.rcp.workbench.core.internal.Activator
 Require-Bundle: org.slizaa.scanner.core.classpathscanner;bundle-version="1.0.0",
  org.slizaa.scanner.core.contentdefinition;bundle-version="1.0.0",
- org.slizaa.hierarchicalgraph.core.model;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.core.model;bundle-version="1.0.0";visibility:=reexport,
  org.slizaa.rcp.workbench.core.spi-api;bundle-version="1.0.0",
- org.eclipse.osgi,
  org.slizaa.scanner.core.spi-api;bundle-version="1.0.0",
  org.slizaa.scanner.core.cypherregistry,
+ org.slizaa.hierarchicalgraph.graphdb.mapping;bundle-version="1.0.0",
+ org.eclipse.osgi,
  org.eclipse.equinox.common,
  org.eclipse.core.resources,
- org.slizaa.neo4j.dbadapter,
+ org.slizaa.neo4j.dbadapter;visibility:=reexport,
  org.eclipse.core.jobs,
  org.eclipse.jdt.core;bundle-version="3.13.100",
  org.eclipse.core.runtime;bundle-version="3.13.0",
+ org.eclipse.emf.ecore;visibility:=reexport,
  com.google.guava;bundle-version="21.0.0",
  org.eclipse.jdt.launching;bundle-version="3.9.51",
  org.eclipse.core.expressions;bundle-version="3.6.0"
 Export-Package: org.slizaa.rcp.workbench.core,
- org.slizaa.rcp.workbench.core.common
+ org.slizaa.rcp.workbench.core.utils,
+ org.slizaa.rcp.workbench.core.model,
+ org.slizaa.rcp.workbench.core.model.impl,
+ org.slizaa.rcp.workbench.core.model.util
 Bundle-ActivationPolicy: lazy
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.slizaa.rcp.workbench.core/src-gen" modelPluginID="org.slizaa.rcp.workbench.core"
+    modelName="Workbenchmodel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    usedGenPackages="../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.genmodel#//hierarchicalgraph ../../org.slizaa.neo4j.dbadapter/model/neo4j-dbadapter.genmodel#//dbadapter"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>workbenchmodel.ecore</foreignModel>
+  <genPackages prefix="Model" basePackage="org.slizaa.rcp.workbench.core" disposableProviderFactory="true"
+      ecorePackage="workbenchmodel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="workbenchmodel.ecore#//IProject"/>
+    <genDataTypes ecoreDataType="workbenchmodel.ecore#//IProgressMonitor"/>
+    <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaProject">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProject/boltClient"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProject/configuration"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProject/project"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProject/hierachicalGraph"/>
+      <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProject/parse">
+        <genParameters ecoreParameter="workbenchmodel.ecore#//SlizaaProject/parse/monitor"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaProjectConfiguration"/>
+  </genPackages>
+</genmodel:GenModel>

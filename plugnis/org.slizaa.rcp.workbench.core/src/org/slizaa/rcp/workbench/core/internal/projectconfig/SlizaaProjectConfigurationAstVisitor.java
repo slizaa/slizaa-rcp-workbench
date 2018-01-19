@@ -18,6 +18,9 @@ import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.slizaa.rcp.workbench.core.api.annotations.SlizaaConfigurationItem;
 import org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration;
+import org.slizaa.rcp.workbench.core.model.ModelFactory;
+import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
+import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 
 /**
  * <p>
@@ -118,11 +121,12 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
       String currentTypeName = this._currentTypeDeclaration.peek().resolveBinding().getQualifiedName();
 
       //
-      SlizaaProjectConfigurationModel model = new SlizaaProjectConfigurationModel(this._project, currentTypeName);
+      SlizaaProjectConfigurationModel configuration = ModelFactory.eINSTANCE.createSlizaaProjectConfigurationModel();
+      configuration.setTypeName(currentTypeName);
 
       //
-      this._currentSlizaaProjectConfigurationModel.push(model);
-      this._slizaaProjectConfigurationModels.add(model);
+      this._currentSlizaaProjectConfigurationModel.push(configuration);
+      this._slizaaProjectConfigurationModels.add(configuration);
     }
 
     //
@@ -131,9 +135,16 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
       //
       if (this._currentMethodDeclaration.parameters().size() == 0) {
 
-        this._currentSlizaaProjectConfigurationModel.peek().registerConfigurationMethod(
-            this._currentMethodDeclaration.resolveBinding().getReturnType().getQualifiedName(),
-            this._currentMethodDeclaration.getName().getFullyQualifiedName());
+        //
+        SlizaaProjectConfigurationItemModel itemModel = ModelFactory.eINSTANCE
+            .createSlizaaProjectConfigurationItemModel();
+
+        //
+        itemModel.setType(this._currentMethodDeclaration.resolveBinding().getReturnType().getQualifiedName());
+        itemModel.setMethodName(this._currentMethodDeclaration.getName().getFullyQualifiedName());
+
+        //
+        this._currentSlizaaProjectConfigurationModel.peek().getConfigurationItems().add(itemModel);
       }
       //
       else {

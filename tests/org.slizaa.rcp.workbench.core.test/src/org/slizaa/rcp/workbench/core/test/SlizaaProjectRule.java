@@ -21,9 +21,9 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.junit.Assert;
 import org.junit.rules.ExternalResource;
-import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
-import org.slizaa.rcp.workbench.core.common.EclipseProjectUtils;
+import org.slizaa.rcp.workbench.core.model.SlizaaProject;
+import org.slizaa.rcp.workbench.core.utils.EclipseProjectUtils;
 
 /**
  * <p>
@@ -40,7 +40,8 @@ public class SlizaaProjectRule extends ExternalResource {
   /** - */
   private IProject              _eclipseProject;
 
-  private ISlizaaProject        _slizaaProject;
+  /** - */
+  private SlizaaProject         _slizaaProject;
 
   /** - */
   private ExampleContentCreator _exampleContentCreator;
@@ -83,7 +84,7 @@ public class SlizaaProjectRule extends ExternalResource {
     return this._eclipseProject;
   }
 
-  public ISlizaaProject getSlizaaProject() {
+  public SlizaaProject getSlizaaProject() {
     return this._slizaaProject;
   }
 
@@ -221,7 +222,7 @@ public class SlizaaProjectRule extends ExternalResource {
   @FunctionalInterface
   public interface ExampleContentCreator {
 
-    void createExampleContent(ISlizaaProject slizaaProject, IPackageFragmentRoot packageFragmentRoot) throws Exception;
+    void createExampleContent(SlizaaProject slizaaProject, IPackageFragmentRoot packageFragmentRoot) throws Exception;
   }
 
 }

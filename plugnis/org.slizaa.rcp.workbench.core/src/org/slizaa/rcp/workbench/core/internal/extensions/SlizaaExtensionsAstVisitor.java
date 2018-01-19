@@ -5,9 +5,8 @@ package org.slizaa.rcp.workbench.core.internal.extensions;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.core.resources.IProject;
@@ -17,6 +16,8 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.NormalAnnotation;
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
+import org.slizaa.rcp.workbench.core.model.ModelFactory;
+import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
 
 /**
  * <p>
@@ -28,16 +29,16 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 public class SlizaaExtensionsAstVisitor extends ASTVisitor {
 
   /** the current type declaration */
-  private Stack<TypeDeclaration>        _currentTypeDeclaration;
+  private Stack<TypeDeclaration>       _currentTypeDeclaration;
 
   /** the current method declaration */
-  private MethodDeclaration             _currentMethodDeclaration;
+  private MethodDeclaration            _currentMethodDeclaration;
 
   /** - */
-  private Map<Class<?>, List<Class<?>>> _extensions;
+  private List<SlizaaProjectExtension> _extensions;
 
   /** - */
-  private IProject                      _project;
+  private IProject                     _project;
 
   /**
    * <p>
@@ -49,7 +50,17 @@ public class SlizaaExtensionsAstVisitor extends ASTVisitor {
     //
     this._project = checkNotNull(project);
     this._currentTypeDeclaration = new Stack<>();
-    this._extensions = new HashMap<>();
+    this._extensions = new ArrayList<>();
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  public List<SlizaaProjectExtension> getExtensions() {
+    return this._extensions;
   }
 
   /**
@@ -95,8 +106,16 @@ public class SlizaaExtensionsAstVisitor extends ASTVisitor {
     // resolve the annotation type name
     String annotationTypeName = annotation.resolveTypeBinding().getQualifiedName();
 
-    // TODO: HANDLE
-    System.out.println("Found " + annotationTypeName);
+    // TODO
+    if ("org.slizaa.neo4j.hierarchicalgraph.mapping.annotations.SlizaaMappingProvider".equals(annotationTypeName)) {
+
+      SlizaaProjectExtension extension = ModelFactory.eINSTANCE.createSlizaaProjectExtension();
+      extension.setProject(this._project);
+      extension.setExtensionType(annotationTypeName);
+      extension.setTypeName(this._currentTypeDeclaration.peek().resolveBinding().getQualifiedName());
+
+      this._extensions.add(extension);
+    }
 
     // only visit types and methods
     return this._currentMethodDeclaration == null;

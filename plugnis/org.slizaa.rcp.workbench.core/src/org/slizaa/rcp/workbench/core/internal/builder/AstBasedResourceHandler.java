@@ -16,8 +16,6 @@ import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
-import org.slizaa.rcp.workbench.core.internal.projectconfig.SlizaaProjectConfigurationAstVisitor;
 
 public class AstBasedResourceHandler implements IResourceHandler {
 
@@ -32,7 +30,7 @@ public class AstBasedResourceHandler implements IResourceHandler {
    * @param javaSourceHandlers
    */
   public AstBasedResourceHandler(IJavaSourceHandler... javaSourceHandlers) {
-    _javaSourceHandlers = Arrays.asList(javaSourceHandlers);
+    this._javaSourceHandlers = Arrays.asList(javaSourceHandlers);
   }
 
   /**
@@ -43,7 +41,7 @@ public class AstBasedResourceHandler implements IResourceHandler {
    * @param javaSourceHandlers
    */
   public AstBasedResourceHandler(List<IJavaSourceHandler> javaSourceHandlers) {
-    _javaSourceHandlers = checkNotNull(javaSourceHandlers);
+    this._javaSourceHandlers = checkNotNull(javaSourceHandlers);
   }
 
   /**
@@ -83,25 +81,17 @@ public class AstBasedResourceHandler implements IResourceHandler {
     }
 
     //
-    for (IJavaSourceHandler javaSourceHandler : _javaSourceHandlers) {
+    for (IJavaSourceHandler javaSourceHandler : this._javaSourceHandlers) {
       javaSourceHandler.handleAddedOrChanged(resource, compilationUnit);
-    }
-
-    // visit the AST
-    SlizaaProjectConfigurationAstVisitor astVisitor = new SlizaaProjectConfigurationAstVisitor(resource.getProject());
-    compilationUnit.accept(astVisitor);
-
-    // delete all markers
-    try {
-      resource.deleteMarkers(SlizaaWorkbenchCore.SLIZAA_CONFIGURATION_PROBLEM_MARKER, true, IResource.DEPTH_ZERO);
-    } catch (CoreException e) {
-      //
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void handleRemoved(IResource resource) throws CoreException {
-    for (IJavaSourceHandler javaSourceHandler : _javaSourceHandlers) {
+    for (IJavaSourceHandler javaSourceHandler : this._javaSourceHandlers) {
       javaSourceHandler.handleRemoved(resource);
     }
   }

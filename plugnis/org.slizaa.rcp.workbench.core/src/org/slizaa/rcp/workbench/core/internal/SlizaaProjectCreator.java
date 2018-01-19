@@ -14,9 +14,9 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
-import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
-import org.slizaa.rcp.workbench.core.common.EclipseProjectUtils;
+import org.slizaa.rcp.workbench.core.model.SlizaaProject;
+import org.slizaa.rcp.workbench.core.utils.EclipseProjectUtils;
 
 /**
  * <p>
@@ -34,7 +34,7 @@ public class SlizaaProjectCreator {
    * @return
    * @throws CoreException
    */
-  public static ISlizaaProject configureSlizaaProject(IProject project) throws CoreException {
+  public static SlizaaProject configureSlizaaProject(IProject project) throws CoreException {
 
     //
     checkNotNull(project);
@@ -42,7 +42,7 @@ public class SlizaaProjectCreator {
 
     // add the slizaa nature
     EclipseProjectUtils.addNature(project, SlizaaWorkbenchCore.SLIZAA_NATURE_ID);
-    ISlizaaProject result = SlizaaWorkbenchCore.getSlizaaProject(project);
+    SlizaaProject result = SlizaaWorkbenchCore.getSlizaaProject(project);
 
     // configure as JDT project
     configureJDT(project);

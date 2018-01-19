@@ -1,5 +1,7 @@
 package org.slizaa.rcp.workbench.core.internal.builder;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Arrays;
 import java.util.Map;
 
@@ -9,14 +11,26 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 
 public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
 
   /** - */
-  // TODO
-  private final static String[] MARKERS_TO_DELETE_ON_CLEAN = {
-      SlizaaWorkbenchCore.SLIZAA_CONFIGURATION_PROBLEM_MARKER };
+  private String[]                     _markerTypesToDeleteOnClean;
+
+  /** - */
+  private SlizaaProjectResourceVisitor _resourceVisitor;
+
+  /**
+   * <p>
+   * Creates a new instance of type {@link SlizaaIncrementalProjectBuilder}.
+   * </p>
+   *
+   * @param markersToDeleteOnClean
+   */
+  public SlizaaIncrementalProjectBuilder(String[] markerTypesToDeleteOnClean, IResourceHandler... resourceHandlers) {
+    this._markerTypesToDeleteOnClean = markerTypesToDeleteOnClean;
+    this._resourceVisitor = new SlizaaProjectResourceVisitor(checkNotNull(resourceHandlers));
+  }
 
   /**
    * {@inheritDoc}
@@ -45,7 +59,7 @@ public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
    */
   private void fullBuild(IProgressMonitor monitor) {
     try {
-      getProject().accept(new SlizaaProjectResourceVisitor());
+      getProject().accept(this._resourceVisitor);
     } catch (CoreException e) {
     }
   }
@@ -59,7 +73,7 @@ public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
    * @throws CoreException
    */
   protected void incrementalBuild(IResourceDelta delta, IProgressMonitor monitor) throws CoreException {
-    delta.accept(new SlizaaProjectResourceVisitor());
+    delta.accept(this._resourceVisitor);
   }
 
   /**
@@ -69,13 +83,16 @@ public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
   protected void clean(IProgressMonitor monitor) throws CoreException {
 
     //
-    Arrays.asList(MARKERS_TO_DELETE_ON_CLEAN).forEach(m -> {
-      try {
-        getProject().deleteMarkers(m, true, IResource.DEPTH_INFINITE);
-      } catch (CoreException e) {
-        // ignore
-      }
-    });
+    if (this._markerTypesToDeleteOnClean != null) {
+
+      Arrays.asList(this._markerTypesToDeleteOnClean).forEach(m -> {
+        try {
+          getProject().deleteMarkers(m, true, IResource.DEPTH_INFINITE);
+        } catch (CoreException e) {
+          // ignore
+        }
+      });
+    }
 
     //
     super.clean(monitor);

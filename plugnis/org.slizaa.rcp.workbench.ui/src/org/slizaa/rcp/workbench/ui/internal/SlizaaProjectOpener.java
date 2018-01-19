@@ -10,7 +10,7 @@ package org.slizaa.rcp.workbench.ui.internal;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
-import org.slizaa.rcp.workbench.core.ISlizaaProject;
+import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 
 /**
  * Parses and opens a specified BundleMaker Project and executes all required pre- and post-actions for the UI (like
@@ -24,7 +24,7 @@ import org.slizaa.rcp.workbench.core.ISlizaaProject;
  */
 public class SlizaaProjectOpener {
 
-  public static void openProject(final ISlizaaProject slizaaProject, boolean parse) {
+  public static void openProject(final SlizaaProject slizaaProject, boolean parse) {
 
     if (slizaaProject == null) {
       return;
@@ -41,7 +41,7 @@ public class SlizaaProjectOpener {
 
   }
 
-  private static void openProjectInternal(final ISlizaaProject bundleMakerProject, boolean parse) {
+  private static void openProjectInternal(final SlizaaProject bundleMakerProject, boolean parse) {
 
     // ask user if the perspective should be opened
     // if (!BundleMakerPerspectiveHelper

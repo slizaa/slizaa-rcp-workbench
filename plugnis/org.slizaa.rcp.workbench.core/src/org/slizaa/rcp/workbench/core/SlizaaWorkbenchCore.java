@@ -20,10 +20,12 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.slizaa.rcp.workbench.core.common.EclipseProjectUtils;
-import org.slizaa.rcp.workbench.core.internal.SlizaaProject;
 import org.slizaa.rcp.workbench.core.internal.SlizaaProjectCache;
 import org.slizaa.rcp.workbench.core.internal.SlizaaProjectCreator;
+import org.slizaa.rcp.workbench.core.model.ModelFactory;
+import org.slizaa.rcp.workbench.core.model.SlizaaProject;
+import org.slizaa.rcp.workbench.core.model.impl.ExtendedSlizaaProjectImpl;
+import org.slizaa.rcp.workbench.core.utils.EclipseProjectUtils;
 
 /**
  * <p>
@@ -64,7 +66,7 @@ public final class SlizaaWorkbenchCore {
    * @return
    * @throws CoreException
    */
-  public static ISlizaaProject configureSlizaaProject(IProject project) throws CoreException {
+  public static SlizaaProject configureSlizaaProject(IProject project) throws CoreException {
     return SlizaaProjectCreator.configureSlizaaProject(checkNotNull(project));
   }
 
@@ -91,7 +93,7 @@ public final class SlizaaWorkbenchCore {
    * @return
    * @throws CoreException
    */
-  public static ISlizaaProject getSlizaaProject(IProject project) throws CoreException {
+  public static SlizaaProject getSlizaaProject(IProject project) throws CoreException {
     Assert.isNotNull(project);
 
     // check if nature exists
@@ -107,13 +109,14 @@ public final class SlizaaWorkbenchCore {
     }
 
     // // try to get project from cache
-    ISlizaaProject slizaaProject = SlizaaProjectCache.instance().getBundleMakerProject(project);
+    SlizaaProject slizaaProject = SlizaaProjectCache.instance().getSlizaaProject(project);
 
     // create project if necessary
     if (slizaaProject == null) {
 
       // step 1: create the project
-      slizaaProject = new SlizaaProject(project);
+      slizaaProject = ModelFactory.eINSTANCE.createSlizaaProject();
+      ((ExtendedSlizaaProjectImpl) slizaaProject).setProject(project);
 
       // step 2: cache the bundle maker project
       SlizaaProjectCache.instance().cacheBundleMakerProject(project, slizaaProject);
@@ -173,7 +176,7 @@ public final class SlizaaWorkbenchCore {
    * @throws CoreException
    */
   @SuppressWarnings("unchecked")
-  public static Collection<ISlizaaProject> getSlizaaProjects() {
+  public static Collection<SlizaaProject> getSlizaaProjects() {
     //
     IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
     for (IProject iProject : projects) {
@@ -187,7 +190,7 @@ public final class SlizaaWorkbenchCore {
     }
 
     //
-    return (Collection<ISlizaaProject>) SlizaaProjectCache.instance().getBundleMakerProjects();
+    return SlizaaProjectCache.instance().getSlizaaProjects();
   }
 
   /**
@@ -198,7 +201,7 @@ public final class SlizaaWorkbenchCore {
    * @return
    * @throws CoreException
    */
-  public static ISlizaaProject getSlizaaProject(String simpleProjectName) throws CoreException {
+  public static SlizaaProject getSlizaaProject(String simpleProjectName) throws CoreException {
 
     // get the project
     IProject project = EclipseProjectUtils.getProject(simpleProjectName);

@@ -1,6 +1,8 @@
 package org.slizaa.rcp.workbench.core.internal.builder;
 
-import java.util.ArrayList;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IResource;
@@ -8,7 +10,6 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
-import org.slizaa.rcp.workbench.core.internal.projectconfig.JavaSourceHandler;
 
 /**
  * <p>
@@ -26,13 +27,10 @@ public class SlizaaProjectResourceVisitor implements IResourceVisitor, IResource
    * Creates a new instance of type {@link SlizaaProjectResourceVisitor}.
    * </p>
    */
-  public SlizaaProjectResourceVisitor() {
+  public SlizaaProjectResourceVisitor(IResourceHandler... resourceHandlers) {
 
     //
-    _resourceHandler = new ArrayList<>();
-    
-    // TODO:
-    _resourceHandler.add(new AstBasedResourceHandler(new JavaSourceHandler()));
+    this._resourceHandler = Arrays.asList(checkNotNull(resourceHandlers));
   }
 
   /**
@@ -50,7 +48,7 @@ public class SlizaaProjectResourceVisitor implements IResourceVisitor, IResource
       }
 
       //
-      for (IResourceHandler resourceHandler : _resourceHandler) {
+      for (IResourceHandler resourceHandler : this._resourceHandler) {
         if (resourceHandler.canHandle(delta.getResource())) {
           resourceHandler.handleRemoved(delta.getResource());
         }
@@ -86,7 +84,7 @@ public class SlizaaProjectResourceVisitor implements IResourceVisitor, IResource
     }
 
     //
-    for (IResourceHandler resourceHandler : _resourceHandler) {
+    for (IResourceHandler resourceHandler : this._resourceHandler) {
       if (resourceHandler.canHandle(resource)) {
         resourceHandler.handleAddedOrChanged(resource);
       }

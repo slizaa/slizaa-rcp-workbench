@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://slizaa.org/rcp/workbench/core/model" nsPrefix="org.slizaa.rcp.workbench.core.model">
+  <eClassifiers xsi:type="ecore:EClass" name="SlizaaProject">
+    <eOperations name="cleanBuild"/>
+    <eOperations name="parse">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="startAndConnectDatabase">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
+    <eOperations name="dispose"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"
+        changeable="false" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" eType="#//SlizaaProjectConfigurationModel"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="projectExtensions" upperBound="-1"
+        eType="#//SlizaaProjectExtension"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="graphDatabaseInstance"
+        eType="#//IGraphDb" changeable="false" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boltClient" eType="ecore:EClass ../../org.slizaa.neo4j.dbadapter/model/neo4j-dbadapter.ecore#//Neo4jClient"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hierachicalGraph" eType="ecore:EClass ../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.ecore#//HGRootNode"
+        changeable="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectConfigurationModel" eSuperTypes="#//AbstractUserDefinedType">
+    <eOperations name="createNewConfigurationItemInstance">
+      <eGenericType eTypeParameter="#//SlizaaProjectConfigurationModel/createNewConfigurationItemInstance/T"/>
+      <eTypeParameters name="T"/>
+      <eParameters name="type">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//SlizaaProjectConfigurationModel/createNewConfigurationItemInstance/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="problems" upperBound="-1"
+        eType="#//SlizaaProjectConfigurationProblem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configurationItems" upperBound="-1"
+        eType="#//SlizaaProjectConfigurationItemModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectConfigurationItemModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="methodName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectConfigurationProblem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectExtension" eSuperTypes="#//AbstractUserDefinedType">
+    <eOperations name="createNewInstance">
+      <eGenericType eTypeParameter="#//SlizaaProjectExtension/createNewInstance/T"/>
+      <eTypeParameters name="T"/>
+      <eParameters name="type">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//SlizaaProjectExtension/createNewInstance/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extensionType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractUserDefinedType" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IProject" instanceClassName="org.eclipse.core.resources.IProject"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IGraphDb" instanceClassName="org.slizaa.scanner.core.api.graphdb.IGraphDb"
+      serializable="false"/>
+</ecore:EPackage>

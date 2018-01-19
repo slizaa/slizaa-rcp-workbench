@@ -39,10 +39,18 @@
          namespace="org.slizaa.rcp.workbench.core"
          type="java.lang.Object"
          properties="isServiceRegistered"
-         class="org.slizaa.rcp.workbench.core.internal.OSGiServiceTester">
+         class="org.slizaa.rcp.workbench.core.utils.OSGiServicePropertyTester">
       </propertyTester>
    </extension>
    
 
    
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated workbenchmodel -->
+      <package
+            uri="http://slizaa.org/rcp/workbench/core/model"
+            class="org.slizaa.rcp.workbench.core.model.ModelPackage"
+            genModel="model/workbenchmodel.genmodel"/>
+   </extension>
+
 </plugin>

@@ -3,15 +3,16 @@
  */
 package org.slizaa.rcp.workbench.core.internal.projectconfig;
 
-import java.util.ArrayList;
-
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
-import org.slizaa.rcp.workbench.core.internal.SlizaaProject;
 import org.slizaa.rcp.workbench.core.internal.builder.IJavaSourceHandler;
+import org.slizaa.rcp.workbench.core.model.SlizaaProject;
+import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
+import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem;
+import org.slizaa.rcp.workbench.core.model.impl.ExtendedSlizaaProjectImpl;
 
 /**
  * <p>
@@ -19,7 +20,7 @@ import org.slizaa.rcp.workbench.core.internal.builder.IJavaSourceHandler;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class JavaSourceHandler implements IJavaSourceHandler {
+public class SlizaaProjectConfigurationJavaSourceHandler implements IJavaSourceHandler {
 
   /**
    * {@inheritDoc}
@@ -44,10 +45,15 @@ public class JavaSourceHandler implements IJavaSourceHandler {
     deleteConfigurationModelForResource(resource);
 
     //
-    for (SlizaaProjectConfigurationModel configurationModel : astVisitor.getSlizaaProjectConfigurationModels()) {
+    if (!astVisitor.getSlizaaProjectConfigurationModels().isEmpty()) {
+
+      // TODO: HANDLE MULTIPLE!
+      SlizaaProjectConfigurationModel configurationModel = astVisitor.getSlizaaProjectConfigurationModels().get(0);
+      configurationModel.setProject(resource.getProject());
+      configurationModel.setResourcePath(resource.getProjectRelativePath().toString());
 
       // handle problems...
-      if (configurationModel.hasProblems()) {
+      if (!configurationModel.getProblems().isEmpty()) {
 
         try {
 
@@ -71,7 +77,6 @@ public class JavaSourceHandler implements IJavaSourceHandler {
         addConfigurationModelForResource(resource, configurationModel);
       }
     }
-
   }
 
   @Override
@@ -87,8 +92,17 @@ public class JavaSourceHandler implements IJavaSourceHandler {
    * @throws CoreException
    */
   private void deleteConfigurationModelForResource(IResource deletedResource) throws CoreException {
-    SlizaaProject slizaaProject = (SlizaaProject) SlizaaWorkbenchCore.getSlizaaProject(deletedResource.getProject());
-    slizaaProject.getProjectConfigurationModels().remove(deletedResource);
+
+    // get the model
+    SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(deletedResource.getProject());
+
+    //
+    if (slizaaProject.getConfiguration() != null && deletedResource.getProjectRelativePath().toString()
+        .equals(slizaaProject.getConfiguration().getResourcePath())) {
+
+      //
+      ((ExtendedSlizaaProjectImpl) slizaaProject).setConfiguration(null);
+    }
   }
 
   /**
@@ -99,13 +113,26 @@ public class JavaSourceHandler implements IJavaSourceHandler {
    * @param configurationModel
    * @throws CoreException
    */
-  private void addConfigurationModelForResource(IResource resource, SlizaaProjectConfigurationModel configurationModel)
-      throws CoreException {
+  private void addConfigurationModelForResource(IResource resource,
+      SlizaaProjectConfigurationModel projectConfiguration) throws CoreException {
+
+    // get the model
+    SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(resource.getProject());
 
     //
-    SlizaaProject slizaaProject = (SlizaaProject) SlizaaWorkbenchCore.getSlizaaProject(resource.getProject());
-    slizaaProject.getProjectConfigurationModels().computeIfAbsent(resource, key -> new ArrayList<>())
-        .add(configurationModel);
-  }
+    if (slizaaProject.getConfiguration() != null
+        && !resource.getProjectRelativePath().toString().equals(slizaaProject.getConfiguration().getResourcePath())) {
 
+      //
+      throw new RuntimeException("Configuration already set!");
+    }
+
+    //
+    else {
+
+      //
+      projectConfiguration.setResourcePath(resource.getProjectRelativePath().toString());
+      ((ExtendedSlizaaProjectImpl) slizaaProject).setConfiguration(projectConfiguration);
+    }
+  }
 }

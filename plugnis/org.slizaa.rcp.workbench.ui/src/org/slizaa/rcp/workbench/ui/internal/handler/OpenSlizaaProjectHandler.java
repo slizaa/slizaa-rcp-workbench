@@ -14,8 +14,8 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.ISelection;
-import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
+import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.ui.internal.SlizaaProjectOpener;
 
 public class OpenSlizaaProjectHandler extends AbstractSlizaaHandler implements IHandler {
@@ -36,7 +36,7 @@ public class OpenSlizaaProjectHandler extends AbstractSlizaaHandler implements I
     IProject project = selectedResource.getProject();
 
     //
-    ISlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(project);
+    SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(project);
 
     // // clear dependency store
     // if (clearPersistentDependencyStore()) {

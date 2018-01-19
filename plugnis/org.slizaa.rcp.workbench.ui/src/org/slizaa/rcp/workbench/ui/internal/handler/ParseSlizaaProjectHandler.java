@@ -14,8 +14,8 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.PlatformUI;
-import org.slizaa.rcp.workbench.core.ISlizaaProject;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
+import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 
 /**
  * <p>
@@ -49,7 +49,8 @@ public class ParseSlizaaProjectHandler extends AbstractSlizaaHandler implements 
     }
 
     // grab resource and get the project
-    ISlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(selectedObject.getProject());
+    SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(selectedObject.getProject());
+    slizaaProject.cleanBuild();
 
     // Execute runnable via IProgressService
     try {
@@ -64,7 +65,7 @@ public class ParseSlizaaProjectHandler extends AbstractSlizaaHandler implements 
         }
       });
     } catch (InvocationTargetException ex) {
-      
+
       // Report Error to error log
       Throwable cause = ex.getCause();
       cause.printStackTrace();

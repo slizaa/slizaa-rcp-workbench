@@ -1,4 +1,4 @@
-package org.slizaa.rcp.workbench.core.internal;
+package org.slizaa.rcp.workbench.core.utils;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.osgi.framework.BundleContext;
@@ -11,7 +11,7 @@ import org.osgi.framework.ServiceReference;
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class OSGiServiceTester extends PropertyTester {
+public class OSGiServicePropertyTester extends PropertyTester {
 
   /** - */
   private static final String PROPERTY_IS_SERVICE_REGISTERED = "isServiceRegistered"; // $NON-NLS-1
@@ -26,7 +26,7 @@ public class OSGiServiceTester extends PropertyTester {
     if (PROPERTY_IS_SERVICE_REGISTERED.equals(property) && expectedValue != null) {
 
       // bundle context
-      BundleContext bundleContext = FrameworkUtil.getBundle(OSGiServiceTester.class).getBundleContext();
+      BundleContext bundleContext = FrameworkUtil.getBundle(OSGiServicePropertyTester.class).getBundleContext();
 
       //
       ServiceReference<?> serviceReference = bundleContext.getServiceReference(expectedValue.toString());
