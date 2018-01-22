@@ -25,7 +25,6 @@ import org.slizaa.rcp.workbench.core.internal.SlizaaProjectCreator;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.impl.ExtendedSlizaaProjectImpl;
-import org.slizaa.rcp.workbench.core.utils.EclipseProjectUtils;
 
 /**
  * <p>

@@ -5,7 +5,7 @@
  *
  * Contributors: slizaa project team - initial API and implementation
  ******************************************************************************/
-package org.slizaa.rcp.workbench.core.utils;
+package org.slizaa.rcp.workbench.core;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

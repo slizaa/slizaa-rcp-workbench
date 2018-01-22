@@ -5,6 +5,7 @@ package org.slizaa.rcp.workbench.core.internal.extensions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,11 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.BundleTracker;
+import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker.SlizaaExtensionsHolder;
+import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 import org.slizaa.scanner.core.classpathscanner.ClasspathScannerFactoryBuilder;
 import org.slizaa.scanner.core.classpathscanner.IClasspathScannerFactory;
+import org.slizaa.scanner.core.cypherregistry.SlizaaCypherFileParser;
 import org.slizaa.scanner.core.spi.annotations.ParserFactory;
 
 /**
@@ -24,7 +28,36 @@ import org.slizaa.scanner.core.spi.annotations.ParserFactory;
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  *
  */
-public class SlizaaExtensionsBundleTracker extends BundleTracker<Map<Class<?>, List<Class<?>>>> {
+public class SlizaaExtensionsBundleTracker extends BundleTracker<SlizaaExtensionsHolder> {
+
+  public static class SlizaaExtensionsHolder {
+
+    /** - */
+    private Map<Class<?>, List<Class<?>>> _extensions       = new HashMap<>();
+
+    /** - */
+    private List<ICypherStatement>        _cypherExtensions = new LinkedList<>();
+
+    /**
+     * <p>
+     * </p>
+     *
+     * @return
+     */
+    public Map<Class<?>, List<Class<?>>> getExtensions() {
+      return _extensions;
+    }
+
+    /**
+     * <p>
+     * </p>
+     *
+     * @return
+     */
+    public List<ICypherStatement> getCypherExtensions() {
+      return _cypherExtensions;
+    }
+  }
 
   /** - */
   private IClasspathScannerFactory _classpathScannerFactory;
@@ -49,8 +82,11 @@ public class SlizaaExtensionsBundleTracker extends BundleTracker<Map<Class<?>, L
         .create();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
-  public Map<Class<?>, List<Class<?>>> addingBundle(Bundle bundle, BundleEvent event) {
+  public SlizaaExtensionsHolder addingBundle(Bundle bundle, BundleEvent event) {
 
     //
     String slizaaExtension = bundle.getHeaders().get(IClasspathScannerFactory.SLIZAA_EXTENSION_BUNDLE_HEADER);
@@ -58,21 +94,29 @@ public class SlizaaExtensionsBundleTracker extends BundleTracker<Map<Class<?>, L
     //
     if (slizaaExtension != null && !slizaaExtension.isEmpty()) {
 
-      // create the result map
-      Map<Class<?>, List<Class<?>>> extensions = new HashMap<>();
+      // create the result
+      SlizaaExtensionsHolder extensionsHolder = new SlizaaExtensionsHolder();
 
       // scan the bundle
       this._classpathScannerFactory
           //
           .createScanner(bundle)
+
           // parser factory
           .matchClassesWithAnnotation(ParserFactory.class,
-              (b, exts) -> extensions.computeIfAbsent(ParserFactory.class, k -> new ArrayList<>()).addAll(exts))
+              (b, exts) -> extensionsHolder.getExtensions().computeIfAbsent(ParserFactory.class, k -> new ArrayList<>())
+                  .addAll(exts))
+
+          // cypher extensions
+          .matchFiles("cypher",
+              (relativePath, inputStream, lengthBytes) -> SlizaaCypherFileParser.parse(relativePath, inputStream),
+              (b, contentList) -> extensionsHolder.getCypherExtensions().addAll(contentList))
+
           //
           .scan();
 
       //
-      return extensions;
+      return extensionsHolder;
     }
     //
     else {

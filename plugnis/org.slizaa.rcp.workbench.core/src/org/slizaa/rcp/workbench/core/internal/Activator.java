@@ -3,9 +3,9 @@
  */
 package org.slizaa.rcp.workbench.core.internal;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
@@ -14,10 +14,13 @@ import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slizaa.rcp.workbench.core.internal.classpathcontainer.SlizaaSpiApiBundleTracker;
 import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker;
+import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker.SlizaaExtensionsHolder;
+import org.slizaa.scanner.core.api.cypherregistry.ICypherStatementRegistry;
 import org.slizaa.scanner.core.api.graphdb.IGraphDbFactory;
 import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
 import org.slizaa.scanner.core.classpathscanner.ClasspathScannerFactoryBuilder;
 import org.slizaa.scanner.core.classpathscanner.IClasspathScannerFactory;
+import org.slizaa.scanner.core.cypherregistry.CypherStatementRegistry;
 
 /**
  * <p>
@@ -45,6 +48,9 @@ public class Activator implements BundleActivator {
   /** - */
   private IClasspathScannerFactory                                     _classpathScannerFactory;
 
+  /** - */
+  private CypherStatementRegistry                                      _cypherStatementRegistry;
+
   /**
    * <p>
    * </p>
@@ -61,7 +67,7 @@ public class Activator implements BundleActivator {
    *
    * @return
    */
-  public Map<Bundle, Map<Class<?>, List<Class<?>>>> getTrackedExtensionBundles() {
+  public Map<Bundle, SlizaaExtensionsHolder> getTrackedExtensionBundles() {
     return this._slizaaExtensionsTracker.getTracked();
   }
 
@@ -104,6 +110,12 @@ public class Activator implements BundleActivator {
         .registerCodeSourceClassLoaderProvider(ClassLoader.class, c -> c)
         .registerCodeSourceClassLoaderProvider(Bundle.class, b -> b.adapt(BundleWiring.class).getClassLoader())
         .create();
+
+    _cypherStatementRegistry = new CypherStatementRegistry(() -> {
+      return _slizaaExtensionsTracker.getTracked().values().stream()
+          .flatMap(holder -> holder.getCypherExtensions().stream()).collect(Collectors.toList());
+    });
+    context.registerService(ICypherStatementRegistry.class, _cypherStatementRegistry, null);
   }
 
   /**
@@ -137,6 +149,16 @@ public class Activator implements BundleActivator {
    */
   public IClasspathScannerFactory getClasspathScannerFactory() {
     return this._classpathScannerFactory;
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  public CypherStatementRegistry getCypherStatementRegistry() {
+    return _cypherStatementRegistry;
   }
 
   /**

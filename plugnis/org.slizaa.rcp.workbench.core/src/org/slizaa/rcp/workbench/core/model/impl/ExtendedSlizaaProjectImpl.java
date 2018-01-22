@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +22,11 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.osgi.framework.Bundle;
 import org.slizaa.neo4j.dbadapter.DbAdapterFactory;
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.internal.Activator;
+import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker.SlizaaExtensionsHolder;
 import org.slizaa.rcp.workbench.core.internal.utils.BuildHelper;
 import org.slizaa.rcp.workbench.core.model.ModelPackage;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
@@ -254,37 +253,27 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
     try {
       executeWithProperties(() -> {
 
-        //
+        // fetch all parser factories
         List<IParserFactory> parserFactories = new ArrayList<>();
-        Map<Bundle, Map<Class<?>, List<Class<?>>>> extensions = Activator.instance().getTrackedExtensionBundles();
-        for (Map<Class<?>, List<Class<?>>> entry : extensions.values()) {
-
-          List<Class<?>> parserFactoriesClasses = entry.get(ParserFactory.class);
-
-          for (Class<?> clazz : parserFactoriesClasses) {
+        for (SlizaaExtensionsHolder entry : Activator.instance().getTrackedExtensionBundles().values()) {
+          for (Class<?> clazz : entry.getExtensions().get(ParserFactory.class)) {
             try {
-              System.out.println("FOUND: " + clazz);
               parserFactories.add((IParserFactory) clazz.newInstance());
-            } catch (InstantiationException e) {
-              // TODO Auto-generated catch block
-              e.printStackTrace();
-            } catch (IllegalAccessException e) {
-              // TODO Auto-generated catch block
+            } catch (Exception e) {
               e.printStackTrace();
             }
           }
         }
 
-        List<ICypherStatement> cypherStatements = Collections.emptyList();
-
-        //
-        IModelImporterFactory modelImporterFactory = Activator.instance().getModelImporterFactory();
+        // fetch all cypher statements
+        List<ICypherStatement> cypherStatements = Activator.instance().getCypherStatementRegistry().getAllStatements();
 
         // TODO
         IContentDefinitionProvider contentDefinitionProvider = getConfiguration()
             .createNewConfigurationItemInstance(IContentDefinitionProvider.class);
 
         // create a new model importer...
+        IModelImporterFactory modelImporterFactory = Activator.instance().getModelImporterFactory();
         IModelImporter modelImporter = modelImporterFactory.createModelImporter(contentDefinitionProvider,
             SlizaaWorkbenchCore.getDatabaseDirectory(getProject()), parserFactories, cypherStatements);
 

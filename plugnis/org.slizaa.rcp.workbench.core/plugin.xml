@@ -39,7 +39,7 @@
          namespace="org.slizaa.rcp.workbench.core"
          type="java.lang.Object"
          properties="isServiceRegistered"
-         class="org.slizaa.rcp.workbench.core.utils.OSGiServicePropertyTester">
+         class="org.slizaa.rcp.workbench.core.internal.OSGiServicePropertyTester">
       </propertyTester>
    </extension>
    

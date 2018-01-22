@@ -14,9 +14,9 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
+import org.slizaa.rcp.workbench.core.EclipseProjectUtils;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
-import org.slizaa.rcp.workbench.core.utils.EclipseProjectUtils;
 
 /**
  * <p>

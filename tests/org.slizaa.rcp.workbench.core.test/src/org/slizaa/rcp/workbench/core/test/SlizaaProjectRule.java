@@ -21,9 +21,9 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.junit.Assert;
 import org.junit.rules.ExternalResource;
+import org.slizaa.rcp.workbench.core.EclipseProjectUtils;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
-import org.slizaa.rcp.workbench.core.utils.EclipseProjectUtils;
 
 /**
  * <p>
