@@ -49,7 +49,7 @@
       <!-- @generated workbenchmodel -->
       <package
             uri="http://slizaa.org/rcp/workbench/core/model"
-            class="org.slizaa.rcp.workbench.core.model.ModelPackage"
+            class="org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl"
             genModel="model/workbenchmodel.genmodel"/>
    </extension>
 

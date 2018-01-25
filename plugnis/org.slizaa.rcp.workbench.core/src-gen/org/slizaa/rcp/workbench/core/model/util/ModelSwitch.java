@@ -2,12 +2,16 @@
  */
 package org.slizaa.rcp.workbench.core.model.util;
 
+import java.util.List;
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
 import org.slizaa.rcp.workbench.core.model.*;
+
+import org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +23,7 @@ import org.slizaa.rcp.workbench.core.model.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.slizaa.rcp.workbench.core.model.ModelPackage
+ * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl
  * @generated
  */
 public class ModelSwitch<T> extends Switch<T> {
@@ -29,7 +33,7 @@ public class ModelSwitch<T> extends Switch<T> {
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static ModelPackage modelPackage;
+  protected static ModelPackageImpl modelPackage;
 
   /**
    * Creates an instance of the switch.
@@ -39,7 +43,7 @@ public class ModelSwitch<T> extends Switch<T> {
    */
   public ModelSwitch() {
     if (modelPackage == null) {
-      modelPackage = ModelPackage.eINSTANCE;
+      modelPackage = ModelPackageImpl.eINSTANCE;
     }
   }
 
@@ -66,41 +70,65 @@ public class ModelSwitch<T> extends Switch<T> {
   @Override
   protected T doSwitch(int classifierID, EObject theEObject) {
     switch (classifierID) {
-      case ModelPackage.SLIZAA_PROJECT: {
+      case ModelPackageImpl.SLIZAA_PROJECT: {
         SlizaaProject slizaaProject = (SlizaaProject)theEObject;
         T result = caseSlizaaProject(slizaaProject);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL: {
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE: {
+        AbstractUserDefinedType abstractUserDefinedType = (AbstractUserDefinedType)theEObject;
+        T result = caseAbstractUserDefinedType(abstractUserDefinedType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL: {
         SlizaaProjectConfigurationModel slizaaProjectConfigurationModel = (SlizaaProjectConfigurationModel)theEObject;
         T result = caseSlizaaProjectConfigurationModel(slizaaProjectConfigurationModel);
         if (result == null) result = caseAbstractUserDefinedType(slizaaProjectConfigurationModel);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL: {
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL: {
         SlizaaProjectConfigurationItemModel slizaaProjectConfigurationItemModel = (SlizaaProjectConfigurationItemModel)theEObject;
         T result = caseSlizaaProjectConfigurationItemModel(slizaaProjectConfigurationItemModel);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM: {
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM: {
         SlizaaProjectConfigurationProblem slizaaProjectConfigurationProblem = (SlizaaProjectConfigurationProblem)theEObject;
         T result = caseSlizaaProjectConfigurationProblem(slizaaProjectConfigurationProblem);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ModelPackage.SLIZAA_PROJECT_EXTENSION: {
+      case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION: {
         SlizaaProjectExtension slizaaProjectExtension = (SlizaaProjectExtension)theEObject;
         T result = caseSlizaaProjectExtension(slizaaProjectExtension);
         if (result == null) result = caseAbstractUserDefinedType(slizaaProjectExtension);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE: {
-        AbstractUserDefinedType abstractUserDefinedType = (AbstractUserDefinedType)theEObject;
-        T result = caseAbstractUserDefinedType(abstractUserDefinedType);
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE: {
+        SlizaaExtensionBundle slizaaExtensionBundle = (SlizaaExtensionBundle)theEObject;
+        T result = caseSlizaaExtensionBundle(slizaaExtensionBundle);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION: {
+        SlizaaExtensionBundleExtension slizaaExtensionBundleExtension = (SlizaaExtensionBundleExtension)theEObject;
+        T result = caseSlizaaExtensionBundleExtension(slizaaExtensionBundleExtension);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ModelPackageImpl.ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP: {
+        @SuppressWarnings("unchecked") Map.Entry<Class<?>, List<SlizaaProjectExtension>> annotationTypeToSlizaaProjectExtensionMap = (Map.Entry<Class<?>, List<SlizaaProjectExtension>>)theEObject;
+        T result = caseAnnotationTypeToSlizaaProjectExtensionMap(annotationTypeToSlizaaProjectExtensionMap);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ModelPackageImpl.ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP: {
+        @SuppressWarnings("unchecked") Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>> annotationTypeToSlizaaBundleExtensionMap = (Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>>)theEObject;
+        T result = caseAnnotationTypeToSlizaaBundleExtensionMap(annotationTypeToSlizaaBundleExtensionMap);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -120,6 +148,21 @@ public class ModelSwitch<T> extends Switch<T> {
    * @generated
    */
   public T caseSlizaaProject(SlizaaProject object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract User Defined Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract User Defined Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractUserDefinedType(AbstractUserDefinedType object) {
     return null;
   }
 
@@ -184,17 +227,62 @@ public class ModelSwitch<T> extends Switch<T> {
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Abstract User Defined Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Abstract User Defined Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAbstractUserDefinedType(AbstractUserDefinedType object) {
+  public T caseSlizaaExtensionBundle(SlizaaExtensionBundle object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle Extension</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle Extension</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSlizaaExtensionBundleExtension(SlizaaExtensionBundleExtension object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Annotation Type To Slizaa Project Extension Map</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Annotation Type To Slizaa Project Extension Map</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAnnotationTypeToSlizaaProjectExtensionMap(Map.Entry<Class<?>, List<SlizaaProjectExtension>> object) {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Annotation Type To Slizaa Bundle Extension Map</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Annotation Type To Slizaa Bundle Extension Map</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAnnotationTypeToSlizaaBundleExtensionMap(Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>> object) {
     return null;
   }
 

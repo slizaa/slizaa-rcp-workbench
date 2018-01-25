@@ -3,6 +3,11 @@
  */
 package org.slizaa.rcp.workbench.core.internal.extensions;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -25,6 +30,9 @@ public class SlizaaExtensionsJavaSourceHandler implements IJavaSourceHandler {
   @Override
   public void handleAddedOrChanged(IResource resource, CompilationUnit compilationUnit) throws CoreException {
 
+    //
+    deleteExtensionsForResource(resource);
+
     // visit the AST
     SlizaaExtensionsAstVisitor astVisitor = new SlizaaExtensionsAstVisitor(resource.getProject());
     compilationUnit.accept(astVisitor);
@@ -32,18 +40,38 @@ public class SlizaaExtensionsJavaSourceHandler implements IJavaSourceHandler {
     //
     if (!astVisitor.getExtensions().isEmpty()) {
 
+      //
       SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(resource.getProject());
 
+      //
       for (SlizaaProjectExtension extension : astVisitor.getExtensions()) {
-        extension.setResourcePath(resource.getProjectRelativePath().toString());
-      }
 
-      slizaaProject.getProjectExtensions().addAll(astVisitor.getExtensions());
+        // set the resource path
+        extension.setResourcePath(resource.getProjectRelativePath().toString());
+
+        //
+        List<SlizaaProjectExtension> slizaaProjectExtensions = new ArrayList<SlizaaProjectExtension>();
+
+        //
+        if (slizaaProject.getUserDefinedExtensions().containsKey(extension.getAnnotationType())) {
+          slizaaProjectExtensions.addAll(slizaaProject.getUserDefinedExtensions().get(extension.getAnnotationType()));
+        }
+
+        //
+        slizaaProjectExtensions.add(extension);
+
+        //
+        slizaaProject.getUserDefinedExtensions().put(extension.getAnnotationType(), slizaaProjectExtensions);
+
+        System.out.println(slizaaProject.getUserDefinedExtensions().get(extension.getAnnotationType()));
+      }
     }
   }
 
   @Override
   public void handleRemoved(IResource resource) throws CoreException {
+
+    //
     deleteExtensionsForResource(resource);
   }
 
@@ -59,13 +87,20 @@ public class SlizaaExtensionsJavaSourceHandler implements IJavaSourceHandler {
     // get the model
     SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(deletedResource.getProject());
 
-    // TODO
-    // //
-    // if (slizaaProject.getConfiguration() != null && deletedResource.getProjectRelativePath().toString()
-    // .equals(slizaaProject.getConfiguration().getResourcePath())) {
     //
-    // //
-    // ((ExtendedSlizaaProjectImpl) slizaaProject).setConfiguration(null);
-    // }
+    String resourcePath = deletedResource.getProjectRelativePath().toString();
+
+    //
+    for (Entry<Class<?>, List<SlizaaProjectExtension>> entry : slizaaProject.getUserDefinedExtensions().entrySet()) {
+
+      //
+      Iterator<SlizaaProjectExtension> iterator = entry.getValue().iterator();
+      while (iterator.hasNext()) {
+        SlizaaProjectExtension projectExtension = iterator.next();
+        if (projectExtension.getResourcePath().equals(resourcePath)) {
+          iterator.remove();
+        }
+      }
+    }
   }
 }

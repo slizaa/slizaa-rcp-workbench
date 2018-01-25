@@ -2,7 +2,7 @@
  */
 package org.slizaa.rcp.workbench.core.model;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,8 +17,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel#getConfigurationItems <em>Configuration Items</em>}</li>
  * </ul>
  *
- * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationModel()
- * @model
  * @generated
  */
 public interface SlizaaProjectConfigurationModel extends AbstractUserDefinedType {
@@ -32,11 +30,9 @@ public interface SlizaaProjectConfigurationModel extends AbstractUserDefinedType
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Problems</em>' reference list.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationModel_Problems()
-   * @model
    * @generated
    */
-  EList<SlizaaProjectConfigurationProblem> getProblems();
+  List<SlizaaProjectConfigurationProblem> getProblems();
 
   /**
    * Returns the value of the '<em><b>Configuration Items</b></em>' reference list.
@@ -48,16 +44,13 @@ public interface SlizaaProjectConfigurationModel extends AbstractUserDefinedType
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Configuration Items</em>' reference list.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationModel_ConfigurationItems()
-   * @model
    * @generated
    */
-  EList<SlizaaProjectConfigurationItemModel> getConfigurationItems();
+  List<SlizaaProjectConfigurationItemModel> getConfigurationItems();
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model
    * @generated
    */
   <T> T createNewConfigurationItemInstance(Class<T> type);

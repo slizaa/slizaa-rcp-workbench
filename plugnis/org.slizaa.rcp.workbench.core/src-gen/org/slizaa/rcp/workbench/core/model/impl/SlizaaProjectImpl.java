@@ -5,32 +5,55 @@ package org.slizaa.rcp.workbench.core.model.impl;
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
+
+import java.util.List;
+import java.util.Map;
 import org.eclipse.core.resources.IProject;
+
 import org.eclipse.core.runtime.IProgressMonitor;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.slizaa.hierarchicalgraph.HGRootNode;
+
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
-import org.slizaa.rcp.workbench.core.model.ModelPackage;
+
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
+
+import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
+
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;
 
 /**
- * <!-- begin-user-doc --> An implementation of the model object '<em><b>Slizaa Project</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Slizaa Project</b></em>'.
+ * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getProject <em>Project</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getConfiguration <em>Configuration</em>}</li>
- *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getProjectExtensions <em>Project Extensions</em>}</li>
+ *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getUserDefinedExtensions <em>User Defined Extensions</em>}</li>
+ *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getUserDefinedCypherStatements <em>User Defined Cypher Statements</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getGraphDatabaseInstance <em>Graph Database Instance</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getBoltClient <em>Bolt Client</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectImpl#getHierachicalGraph <em>Hierachical Graph</em>}</li>
@@ -41,23 +64,23 @@ import org.slizaa.scanner.core.api.graphdb.IGraphDb;
 public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements SlizaaProject {
   /**
    * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getProject()
    * @generated
    * @ordered
    */
-  protected static final IProject      PROJECT_EDEFAULT                 = null;
+  protected static final IProject PROJECT_EDEFAULT = null;
 
   /**
    * The cached value of the '{@link #getProject() <em>Project</em>}' attribute.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getProject()
    * @generated
    * @ordered
    */
-  protected IProject                   project                          = PROJECT_EDEFAULT;
+  protected IProject project = PROJECT_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getConfiguration() <em>Configuration</em>}' reference.
@@ -70,57 +93,68 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   protected SlizaaProjectConfigurationModel configuration;
 
   /**
-   * The cached value of the '{@link #getProjectExtensions() <em>Project Extensions</em>}' reference list.
+   * The cached value of the '{@link #getUserDefinedExtensions() <em>User Defined Extensions</em>}' map.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getProjectExtensions()
+   * @see #getUserDefinedExtensions()
    * @generated
    * @ordered
    */
-  protected EList<SlizaaProjectExtension> projectExtensions;
+  protected EMap<Class<?>, List<SlizaaProjectExtension>> userDefinedExtensions;
 
   /**
-   * The default value of the '{@link #getGraphDatabaseInstance() <em>Graph Database Instance</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getUserDefinedCypherStatements() <em>User Defined Cypher Statements</em>}' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getUserDefinedCypherStatements()
+   * @generated
+   * @ordered
+   */
+  protected EList<ICypherStatement> userDefinedCypherStatements;
+
+  /**
+   * The default value of the '{@link #getGraphDatabaseInstance() <em>Graph Database Instance</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getGraphDatabaseInstance()
    * @generated
    * @ordered
    */
-  protected static final IGraphDb      GRAPH_DATABASE_INSTANCE_EDEFAULT = null;
+  protected static final IGraphDb GRAPH_DATABASE_INSTANCE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getGraphDatabaseInstance() <em>Graph Database Instance</em>}' attribute. <!--
-   * begin-user-doc --> <!-- end-user-doc -->
-   * 
+   * The cached value of the '{@link #getGraphDatabaseInstance() <em>Graph Database Instance</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getGraphDatabaseInstance()
    * @generated
    * @ordered
    */
-  protected IGraphDb                   graphDatabaseInstance            = GRAPH_DATABASE_INSTANCE_EDEFAULT;
+  protected IGraphDb graphDatabaseInstance = GRAPH_DATABASE_INSTANCE_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getBoltClient() <em>Bolt Client</em>}' reference.
-   * <!-- begin-user-doc --> <!--
-   * end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getBoltClient()
    * @generated
    * @ordered
    */
-  protected Neo4jClient                boltClient;
+  protected Neo4jClient boltClient;
 
   /**
    * The cached value of the '{@link #getHierachicalGraph() <em>Hierachical Graph</em>}' reference.
-   * <!-- begin-user-doc
-   * --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @see #getHierachicalGraph()
    * @generated
    * @ordered
    */
-  protected HGRootNode                 hierachicalGraph;
+  protected HGRootNode hierachicalGraph;
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   protected SlizaaProjectImpl() {
@@ -128,42 +162,44 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   @Override
   protected EClass eStaticClass() {
-    return ModelPackage.Literals.SLIZAA_PROJECT;
+    return ModelPackageImpl.Literals.SLIZAA_PROJECT;
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public IProject getProject() {
     return project;
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public SlizaaProjectConfigurationModel getConfiguration() {
-    if (configuration != null && configuration.eIsProxy()) {
+    if (configuration != null && ((EObject)configuration).eIsProxy()) {
       InternalEObject oldConfiguration = (InternalEObject)configuration;
       configuration = (SlizaaProjectConfigurationModel)eResolveProxy(oldConfiguration);
       if (configuration != oldConfiguration) {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.SLIZAA_PROJECT__CONFIGURATION, oldConfiguration, configuration));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackageImpl.SLIZAA_PROJECT__CONFIGURATION, oldConfiguration, configuration));
       }
     }
     return configuration;
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   public SlizaaProjectConfigurationModel basicGetConfiguration() {
@@ -175,41 +211,54 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SlizaaProjectExtension> getProjectExtensions() {
-    if (projectExtensions == null) {
-      projectExtensions = new EObjectResolvingEList<SlizaaProjectExtension>(SlizaaProjectExtension.class, this, ModelPackage.SLIZAA_PROJECT__PROJECT_EXTENSIONS);
+  public Map<Class<?>, List<SlizaaProjectExtension>> getUserDefinedExtensions() {
+    if (userDefinedExtensions == null) {
+      userDefinedExtensions = new EcoreEMap<Class<?>,List<SlizaaProjectExtension>>(ModelPackageImpl.Literals.ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP, AnnotationTypeToSlizaaProjectExtensionMapImpl.class, this, ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_EXTENSIONS);
     }
-    return projectExtensions;
+    return userDefinedExtensions.map();
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
+  public List<ICypherStatement> getUserDefinedCypherStatements() {
+    if (userDefinedCypherStatements == null) {
+      userDefinedCypherStatements = new EDataTypeUniqueEList<ICypherStatement>(ICypherStatement.class, this, ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_CYPHER_STATEMENTS);
+    }
+    return userDefinedCypherStatements;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public IGraphDb getGraphDatabaseInstance() {
     return graphDatabaseInstance;
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public Neo4jClient getBoltClient() {
     if (boltClient != null && boltClient.eIsProxy()) {
       InternalEObject oldBoltClient = (InternalEObject)boltClient;
       boltClient = (Neo4jClient)eResolveProxy(oldBoltClient);
       if (boltClient != oldBoltClient) {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.SLIZAA_PROJECT__BOLT_CLIENT, oldBoltClient, boltClient));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT, oldBoltClient, boltClient));
       }
     }
     return boltClient;
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   public Neo4jClient basicGetBoltClient() {
@@ -217,24 +266,25 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public HGRootNode getHierachicalGraph() {
     if (hierachicalGraph != null && hierachicalGraph.eIsProxy()) {
       InternalEObject oldHierachicalGraph = (InternalEObject)hierachicalGraph;
       hierachicalGraph = (HGRootNode)eResolveProxy(oldHierachicalGraph);
       if (hierachicalGraph != oldHierachicalGraph) {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.SLIZAA_PROJECT__HIERACHICAL_GRAPH, oldHierachicalGraph, hierachicalGraph));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH, oldHierachicalGraph, hierachicalGraph));
       }
     }
     return hierachicalGraph;
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   public HGRootNode basicGetHierachicalGraph() {
@@ -253,10 +303,10 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void parse(IProgressMonitor monitor) {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
@@ -264,10 +314,10 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void startAndConnectDatabase(IProgressMonitor monitor) {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
@@ -275,10 +325,10 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
-  @Override
   public void dispose() {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
@@ -286,25 +336,43 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+    switch (featureID) {
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_EXTENSIONS:
+        return ((InternalEList<?>)((EMap.InternalMapView<Class<?>, List<SlizaaProjectExtension>>)getUserDefinedExtensions()).eMap()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT__PROJECT:
+      case ModelPackageImpl.SLIZAA_PROJECT__PROJECT:
         return getProject();
-      case ModelPackage.SLIZAA_PROJECT__CONFIGURATION:
+      case ModelPackageImpl.SLIZAA_PROJECT__CONFIGURATION:
         if (resolve) return getConfiguration();
         return basicGetConfiguration();
-      case ModelPackage.SLIZAA_PROJECT__PROJECT_EXTENSIONS:
-        return getProjectExtensions();
-      case ModelPackage.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE:
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_EXTENSIONS:
+        if (coreType) return ((EMap.InternalMapView<Class<?>, List<SlizaaProjectExtension>>)getUserDefinedExtensions()).eMap();
+        else return getUserDefinedExtensions();
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_CYPHER_STATEMENTS:
+        return getUserDefinedCypherStatements();
+      case ModelPackageImpl.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE:
         return getGraphDatabaseInstance();
-      case ModelPackage.SLIZAA_PROJECT__BOLT_CLIENT:
+      case ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT:
         if (resolve) return getBoltClient();
         return basicGetBoltClient();
-      case ModelPackage.SLIZAA_PROJECT__HIERACHICAL_GRAPH:
+      case ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH:
         if (resolve) return getHierachicalGraph();
         return basicGetHierachicalGraph();
     }
@@ -320,9 +388,12 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT__PROJECT_EXTENSIONS:
-        getProjectExtensions().clear();
-        getProjectExtensions().addAll((Collection<? extends SlizaaProjectExtension>)newValue);
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_EXTENSIONS:
+        ((EStructuralFeature.Setting)((EMap.InternalMapView<Class<?>, List<SlizaaProjectExtension>>)getUserDefinedExtensions()).eMap()).set(newValue);
+        return;
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_CYPHER_STATEMENTS:
+        getUserDefinedCypherStatements().clear();
+        getUserDefinedCypherStatements().addAll((Collection<? extends ICypherStatement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -336,53 +407,60 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT__PROJECT_EXTENSIONS:
-        getProjectExtensions().clear();
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_EXTENSIONS:
+        getUserDefinedExtensions().clear();
+        return;
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_CYPHER_STATEMENTS:
+        getUserDefinedCypherStatements().clear();
         return;
     }
     super.eUnset(featureID);
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT__PROJECT:
+      case ModelPackageImpl.SLIZAA_PROJECT__PROJECT:
         return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
-      case ModelPackage.SLIZAA_PROJECT__CONFIGURATION:
+      case ModelPackageImpl.SLIZAA_PROJECT__CONFIGURATION:
         return configuration != null;
-      case ModelPackage.SLIZAA_PROJECT__PROJECT_EXTENSIONS:
-        return projectExtensions != null && !projectExtensions.isEmpty();
-      case ModelPackage.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE:
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_EXTENSIONS:
+        return userDefinedExtensions != null && !userDefinedExtensions.isEmpty();
+      case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_CYPHER_STATEMENTS:
+        return userDefinedCypherStatements != null && !userDefinedCypherStatements.isEmpty();
+      case ModelPackageImpl.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE:
         return GRAPH_DATABASE_INSTANCE_EDEFAULT == null ? graphDatabaseInstance != null : !GRAPH_DATABASE_INSTANCE_EDEFAULT.equals(graphDatabaseInstance);
-      case ModelPackage.SLIZAA_PROJECT__BOLT_CLIENT:
+      case ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT:
         return boltClient != null;
-      case ModelPackage.SLIZAA_PROJECT__HIERACHICAL_GRAPH:
+      case ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH:
         return hierachicalGraph != null;
     }
     return super.eIsSet(featureID);
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   @Override
   public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
     switch (operationID) {
-      case ModelPackage.SLIZAA_PROJECT___CLEAN_BUILD:
+      case ModelPackageImpl.SLIZAA_PROJECT___CLEAN_BUILD:
         cleanBuild();
         return null;
-      case ModelPackage.SLIZAA_PROJECT___PARSE__IPROGRESSMONITOR:
+      case ModelPackageImpl.SLIZAA_PROJECT___PARSE__IPROGRESSMONITOR:
         parse((IProgressMonitor)arguments.get(0));
         return null;
-      case ModelPackage.SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR:
+      case ModelPackageImpl.SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR:
         startAndConnectDatabase((IProgressMonitor)arguments.get(0));
         return null;
-      case ModelPackage.SLIZAA_PROJECT___DISPOSE:
+      case ModelPackageImpl.SLIZAA_PROJECT___DISPOSE:
         dispose();
         return null;
     }
@@ -390,7 +468,8 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   }
 
   /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
    * @generated
    */
   @Override
@@ -400,10 +479,12 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (project: ");
     result.append(project);
+    result.append(", userDefinedCypherStatements: ");
+    result.append(userDefinedCypherStatements);
     result.append(", graphDatabaseInstance: ");
     result.append(graphDatabaseInstance);
     result.append(')');
     return result.toString();
   }
 
-} // SlizaaProjectImpl
+} //SlizaaProjectImpl

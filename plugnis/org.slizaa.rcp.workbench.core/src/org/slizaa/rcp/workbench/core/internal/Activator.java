@@ -14,7 +14,7 @@ import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slizaa.rcp.workbench.core.internal.classpathcontainer.SlizaaSpiApiBundleTracker;
 import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker;
-import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker.SlizaaExtensionsHolder;
+import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatementRegistry;
 import org.slizaa.scanner.core.api.graphdb.IGraphDbFactory;
 import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
@@ -67,7 +67,7 @@ public class Activator implements BundleActivator {
    *
    * @return
    */
-  public Map<Bundle, SlizaaExtensionsHolder> getTrackedExtensionBundles() {
+  public Map<Bundle, SlizaaExtensionBundle> getTrackedExtensionBundles() {
     return this._slizaaExtensionsTracker.getTracked();
   }
 
@@ -111,11 +111,12 @@ public class Activator implements BundleActivator {
         .registerCodeSourceClassLoaderProvider(Bundle.class, b -> b.adapt(BundleWiring.class).getClassLoader())
         .create();
 
-    _cypherStatementRegistry = new CypherStatementRegistry(() -> {
-      return _slizaaExtensionsTracker.getTracked().values().stream()
-          .flatMap(holder -> holder.getCypherExtensions().stream()).collect(Collectors.toList());
+    this._cypherStatementRegistry = new CypherStatementRegistry(() -> {
+      return this._slizaaExtensionsTracker.getTracked().values().stream()
+          .flatMap(extensionBundle -> extensionBundle.getDefinedCypherStatements().stream())
+          .collect(Collectors.toList());
     });
-    context.registerService(ICypherStatementRegistry.class, _cypherStatementRegistry, null);
+    context.registerService(ICypherStatementRegistry.class, this._cypherStatementRegistry, null);
   }
 
   /**
@@ -158,7 +159,7 @@ public class Activator implements BundleActivator {
    * @return
    */
   public CypherStatementRegistry getCypherStatementRegistry() {
-    return _cypherStatementRegistry;
+    return this._cypherStatementRegistry;
   }
 
   /**

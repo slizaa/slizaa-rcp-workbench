@@ -2,16 +2,16 @@
  */
 package org.slizaa.rcp.workbench.core.model;
 
+import java.util.List;
+import java.util.Map;
 import org.eclipse.core.resources.IProject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-
 import org.slizaa.hierarchicalgraph.HGRootNode;
 
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
+
+import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;
 
@@ -26,17 +26,16 @@ import org.slizaa.scanner.core.api.graphdb.IGraphDb;
  * <ul>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getProject <em>Project</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getConfiguration <em>Configuration</em>}</li>
- *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getProjectExtensions <em>Project Extensions</em>}</li>
+ *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getUserDefinedExtensions <em>User Defined Extensions</em>}</li>
+ *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getUserDefinedCypherStatements <em>User Defined Cypher Statements</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getGraphDatabaseInstance <em>Graph Database Instance</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getBoltClient <em>Bolt Client</em>}</li>
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getHierachicalGraph <em>Hierachical Graph</em>}</li>
  * </ul>
  *
- * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProject()
- * @model
  * @generated
  */
-public interface SlizaaProject extends EObject {
+public interface SlizaaProject {
   /**
    * Returns the value of the '<em><b>Project</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -46,8 +45,6 @@ public interface SlizaaProject extends EObject {
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Project</em>' attribute.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProject_Project()
-   * @model dataType="org.slizaa.rcp.workbench.core.model.IProject" transient="true" changeable="false"
    * @generated
    */
   IProject getProject();
@@ -61,27 +58,38 @@ public interface SlizaaProject extends EObject {
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Configuration</em>' reference.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProject_Configuration()
-   * @model changeable="false"
    * @generated
    */
   SlizaaProjectConfigurationModel getConfiguration();
 
   /**
-   * Returns the value of the '<em><b>Project Extensions</b></em>' reference list.
-   * The list contents are of type {@link org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension}.
+   * Returns the value of the '<em><b>User Defined Extensions</b></em>' map.
+   * The key is of type {@link java.lang.Class<?>},
+   * and the value is of type list of {@link org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension},
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Project Extensions</em>' reference list isn't clear,
+   * If the meaning of the '<em>User Defined Extensions</em>' map isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Project Extensions</em>' reference list.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProject_ProjectExtensions()
-   * @model
+   * @return the value of the '<em>User Defined Extensions</em>' map.
    * @generated
    */
-  EList<SlizaaProjectExtension> getProjectExtensions();
+  Map<Class<?>, List<SlizaaProjectExtension>> getUserDefinedExtensions();
+
+  /**
+   * Returns the value of the '<em><b>User Defined Cypher Statements</b></em>' attribute list.
+   * The list contents are of type {@link org.slizaa.scanner.core.api.cypherregistry.ICypherStatement}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>User Defined Cypher Statements</em>' attribute list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>User Defined Cypher Statements</em>' attribute list.
+   * @generated
+   */
+  List<ICypherStatement> getUserDefinedCypherStatements();
 
   /**
    * Returns the value of the '<em><b>Graph Database Instance</b></em>' attribute.
@@ -92,8 +100,6 @@ public interface SlizaaProject extends EObject {
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Graph Database Instance</em>' attribute.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProject_GraphDatabaseInstance()
-   * @model dataType="org.slizaa.rcp.workbench.core.model.IGraphDb" transient="true" changeable="false"
    * @generated
    */
   IGraphDb getGraphDatabaseInstance();
@@ -107,8 +113,6 @@ public interface SlizaaProject extends EObject {
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Bolt Client</em>' reference.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProject_BoltClient()
-   * @model changeable="false"
    * @generated
    */
   Neo4jClient getBoltClient();
@@ -122,8 +126,6 @@ public interface SlizaaProject extends EObject {
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Hierachical Graph</em>' reference.
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProject_HierachicalGraph()
-   * @model changeable="false"
    * @generated
    */
   HGRootNode getHierachicalGraph();
@@ -131,7 +133,6 @@ public interface SlizaaProject extends EObject {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model
    * @generated
    */
   void cleanBuild();
@@ -139,7 +140,6 @@ public interface SlizaaProject extends EObject {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model monitorDataType="org.slizaa.rcp.workbench.core.model.IProgressMonitor"
    * @generated
    */
   void parse(IProgressMonitor monitor);
@@ -147,7 +147,6 @@ public interface SlizaaProject extends EObject {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model monitorDataType="org.slizaa.rcp.workbench.core.model.IProgressMonitor"
    * @generated
    */
   void startAndConnectDatabase(IProgressMonitor monitor);
@@ -155,7 +154,6 @@ public interface SlizaaProject extends EObject {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @model
    * @generated
    */
   void dispose();

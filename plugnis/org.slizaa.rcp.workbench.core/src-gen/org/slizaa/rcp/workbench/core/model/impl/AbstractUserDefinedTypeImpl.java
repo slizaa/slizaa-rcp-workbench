@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType;
-import org.slizaa.rcp.workbench.core.model.ModelPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -106,7 +105,7 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
    */
   @Override
   protected EClass eStaticClass() {
-    return ModelPackage.Literals.ABSTRACT_USER_DEFINED_TYPE;
+    return ModelPackageImpl.Literals.ABSTRACT_USER_DEFINED_TYPE;
   }
 
   /**
@@ -127,7 +126,7 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
     IProject oldProject = project;
     project = newProject;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_USER_DEFINED_TYPE__PROJECT, oldProject, project));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__PROJECT, oldProject, project));
   }
 
   /**
@@ -148,7 +147,7 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
     String oldResourcePath = resourcePath;
     resourcePath = newResourcePath;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH, oldResourcePath, resourcePath));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH, oldResourcePath, resourcePath));
   }
 
   /**
@@ -169,7 +168,7 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
     String oldTypeName = typeName;
     typeName = newTypeName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME, oldTypeName, typeName));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME, oldTypeName, typeName));
   }
 
   /**
@@ -180,11 +179,11 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
         return getProject();
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
         return getResourcePath();
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
         return getTypeName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -198,13 +197,13 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
         setProject((IProject)newValue);
         return;
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
         setResourcePath((String)newValue);
         return;
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
         setTypeName((String)newValue);
         return;
     }
@@ -219,13 +218,13 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
         setProject(PROJECT_EDEFAULT);
         return;
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
         setResourcePath(RESOURCE_PATH_EDEFAULT);
         return;
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
         setTypeName(TYPE_NAME_EDEFAULT);
         return;
     }
@@ -240,11 +239,11 @@ public abstract class AbstractUserDefinedTypeImpl extends MinimalEObjectImpl.Con
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__PROJECT:
         return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__RESOURCE_PATH:
         return RESOURCE_PATH_EDEFAULT == null ? resourcePath != null : !RESOURCE_PATH_EDEFAULT.equals(resourcePath);
-      case ModelPackage.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
+      case ModelPackageImpl.ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME:
         return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
     }
     return super.eIsSet(featureID);

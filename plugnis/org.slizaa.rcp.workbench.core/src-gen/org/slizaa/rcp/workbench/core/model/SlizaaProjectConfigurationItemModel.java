@@ -2,7 +2,6 @@
  */
 package org.slizaa.rcp.workbench.core.model;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,11 +16,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel#getMethodName <em>Method Name</em>}</li>
  * </ul>
  *
- * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationItemModel()
- * @model
  * @generated
  */
-public interface SlizaaProjectConfigurationItemModel extends EObject {
+public interface SlizaaProjectConfigurationItemModel {
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -32,8 +29,6 @@ public interface SlizaaProjectConfigurationItemModel extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' attribute.
    * @see #setType(String)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationItemModel_Type()
-   * @model
    * @generated
    */
   String getType();
@@ -58,8 +53,6 @@ public interface SlizaaProjectConfigurationItemModel extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Method Name</em>' attribute.
    * @see #setMethodName(String)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationItemModel_MethodName()
-   * @model
    * @generated
    */
   String getMethodName();

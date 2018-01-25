@@ -121,7 +121,7 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
       String currentTypeName = this._currentTypeDeclaration.peek().resolveBinding().getQualifiedName();
 
       //
-      SlizaaProjectConfigurationModel configuration = ModelFactory.eINSTANCE.createSlizaaProjectConfigurationModel();
+      SlizaaProjectConfigurationModel configuration = ModelFactory.INSTANCE.createSlizaaProjectConfigurationModel();
       configuration.setTypeName(currentTypeName);
 
       //
@@ -136,7 +136,7 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
       if (this._currentMethodDeclaration.parameters().size() == 0) {
 
         //
-        SlizaaProjectConfigurationItemModel itemModel = ModelFactory.eINSTANCE
+        SlizaaProjectConfigurationItemModel itemModel = ModelFactory.INSTANCE
             .createSlizaaProjectConfigurationItemModel();
 
         //

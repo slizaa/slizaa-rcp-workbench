@@ -11,23 +11,35 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
+import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Slizaa Project Extension</b></em>'.
+ * An implementation of the model object '<em><b>Slizaa Extension Bundle Extension</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectExtensionImpl#getAnnotationType <em>Annotation Type</em>}</li>
+ *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleExtensionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleExtensionImpl#getAnnotationType <em>Annotation Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl implements SlizaaProjectExtension {
+public class SlizaaExtensionBundleExtensionImpl extends MinimalEObjectImpl.Container implements SlizaaExtensionBundleExtension {
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected Class<?> type;
+
   /**
    * The cached value of the '{@link #getAnnotationType() <em>Annotation Type</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -37,12 +49,13 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
    * @ordered
    */
   protected Class<?> annotationType;
+
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SlizaaProjectExtensionImpl() {
+  protected SlizaaExtensionBundleExtensionImpl() {
     super();
   }
 
@@ -53,7 +66,28 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
    */
   @Override
   protected EClass eStaticClass() {
-    return ModelPackageImpl.Literals.SLIZAA_PROJECT_EXTENSION;
+    return ModelPackageImpl.Literals.SLIZAA_EXTENSION_BUNDLE_EXTENSION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Class<?> getType() {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(Class<?> newType) {
+    Class<?> oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE, oldType, type));
   }
 
   /**
@@ -74,7 +108,7 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
     Class<?> oldAnnotationType = annotationType;
     annotationType = newAnnotationType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT_EXTENSION__ANNOTATION_TYPE, oldAnnotationType, annotationType));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE, oldAnnotationType, annotationType));
   }
 
   /**
@@ -96,7 +130,9 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION__ANNOTATION_TYPE:
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE:
+        return getType();
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE:
         return getAnnotationType();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -110,7 +146,10 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION__ANNOTATION_TYPE:
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE:
+        setType((Class<?>)newValue);
+        return;
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE:
         setAnnotationType((Class<?>)newValue);
         return;
     }
@@ -125,7 +164,10 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION__ANNOTATION_TYPE:
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE:
+        setType((Class<?>)null);
+        return;
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE:
         setAnnotationType((Class<?>)null);
         return;
     }
@@ -140,7 +182,9 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION__ANNOTATION_TYPE:
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE:
+        return type != null;
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE:
         return annotationType != null;
     }
     return super.eIsSet(featureID);
@@ -155,7 +199,7 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
   @SuppressWarnings({"rawtypes", "unchecked" })
   public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
     switch (operationID) {
-      case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION___CREATE_NEW_INSTANCE__CLASS:
+      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION___CREATE_NEW_INSTANCE__CLASS:
         return createNewInstance((Class)arguments.get(0));
     }
     return super.eInvoke(operationID, arguments);
@@ -171,10 +215,12 @@ public class SlizaaProjectExtensionImpl extends AbstractUserDefinedTypeImpl impl
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (annotationType: ");
+    result.append(" (type: ");
+    result.append(type);
+    result.append(", annotationType: ");
     result.append(annotationType);
     result.append(')');
     return result.toString();
   }
 
-} //SlizaaProjectExtensionImpl
+} //SlizaaExtensionBundleExtensionImpl

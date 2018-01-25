@@ -14,14 +14,22 @@
         changeable="false" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" eType="#//SlizaaProjectConfigurationModel"
         changeable="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="projectExtensions" upperBound="-1"
-        eType="#//SlizaaProjectExtension"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userDefinedExtensions"
+        upperBound="-1" eType="#//AnnotationTypeToSlizaaProjectExtensionMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userDefinedCypherStatements"
+        upperBound="-1" eType="#//ICypherStatement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="graphDatabaseInstance"
         eType="#//IGraphDb" changeable="false" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="boltClient" eType="ecore:EClass ../../org.slizaa.neo4j.dbadapter/model/neo4j-dbadapter.ecore#//Neo4jClient"
         changeable="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hierachicalGraph" eType="ecore:EClass ../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.ecore#//HGRootNode"
         changeable="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractUserDefinedType" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectConfigurationModel" eSuperTypes="#//AbstractUserDefinedType">
     <eOperations name="createNewConfigurationItemInstance">
@@ -57,13 +65,58 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extensionType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="annotationType">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractUserDefinedType" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"
-        transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourcePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SlizaaExtensionBundle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definedExtensions" upperBound="-1"
+        eType="#//AnnotationTypeToSlizaaBundleExtensionMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="definedCypherStatements"
+        upperBound="-1" eType="#//ICypherStatement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SlizaaExtensionBundleExtension">
+    <eOperations name="createNewInstance">
+      <eGenericType eTypeParameter="#//SlizaaExtensionBundleExtension/createNewInstance/T"/>
+      <eTypeParameters name="T"/>
+      <eParameters name="type">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//SlizaaExtensionBundleExtension/createNewInstance/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="annotationType">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationTypeToSlizaaProjectExtensionMap"
+      instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//SlizaaProjectExtension"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationTypeToSlizaaBundleExtensionMap"
+      instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//SlizaaExtensionBundleExtension"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"
       serializable="false"/>
@@ -71,4 +124,5 @@
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IGraphDb" instanceClassName="org.slizaa.scanner.core.api.graphdb.IGraphDb"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ICypherStatement" instanceClassName="org.slizaa.scanner.core.api.cypherregistry.ICypherStatement"/>
 </ecore:EPackage>

@@ -114,7 +114,7 @@ public final class SlizaaWorkbenchCore {
     if (slizaaProject == null) {
 
       // step 1: create the project
-      slizaaProject = ModelFactory.eINSTANCE.createSlizaaProject();
+      slizaaProject = ModelFactory.INSTANCE.createSlizaaProject();
       ((ExtendedSlizaaProjectImpl) slizaaProject).setProject(project);
 
       // step 2: cache the bundle maker project

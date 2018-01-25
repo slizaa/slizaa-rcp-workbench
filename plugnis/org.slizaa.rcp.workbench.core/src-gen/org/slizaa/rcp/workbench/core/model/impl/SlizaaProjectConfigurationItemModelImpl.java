@@ -3,11 +3,12 @@
 package org.slizaa.rcp.workbench.core.model.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.slizaa.rcp.workbench.core.model.ModelPackage;
+
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
 
 /**
@@ -81,7 +82,7 @@ public class SlizaaProjectConfigurationItemModelImpl extends MinimalEObjectImpl.
    */
   @Override
   protected EClass eStaticClass() {
-    return ModelPackage.Literals.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL;
+    return ModelPackageImpl.Literals.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL;
   }
 
   /**
@@ -102,7 +103,7 @@ public class SlizaaProjectConfigurationItemModelImpl extends MinimalEObjectImpl.
     String oldType = type;
     type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE, oldType, type));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE, oldType, type));
   }
 
   /**
@@ -123,7 +124,7 @@ public class SlizaaProjectConfigurationItemModelImpl extends MinimalEObjectImpl.
     String oldMethodName = methodName;
     methodName = newMethodName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME, oldMethodName, methodName));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME, oldMethodName, methodName));
   }
 
   /**
@@ -134,9 +135,9 @@ public class SlizaaProjectConfigurationItemModelImpl extends MinimalEObjectImpl.
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
         return getType();
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
         return getMethodName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -147,14 +148,13 @@ public class SlizaaProjectConfigurationItemModelImpl extends MinimalEObjectImpl.
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
         setType((String)newValue);
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
         setMethodName((String)newValue);
         return;
     }
@@ -169,10 +169,10 @@ public class SlizaaProjectConfigurationItemModelImpl extends MinimalEObjectImpl.
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
         setType(TYPE_EDEFAULT);
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
         setMethodName(METHOD_NAME_EDEFAULT);
         return;
     }
@@ -187,9 +187,9 @@ public class SlizaaProjectConfigurationItemModelImpl extends MinimalEObjectImpl.
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__TYPE:
         return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL__METHOD_NAME:
         return METHOD_NAME_EDEFAULT == null ? methodName != null : !METHOD_NAME_EDEFAULT.equals(methodName);
     }
     return super.eIsSet(featureID);

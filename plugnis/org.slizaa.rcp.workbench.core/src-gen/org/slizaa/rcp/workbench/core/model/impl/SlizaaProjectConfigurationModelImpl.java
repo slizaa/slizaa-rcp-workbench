@@ -5,12 +5,14 @@ package org.slizaa.rcp.workbench.core.model.impl;
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.Collection;
+
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
-import org.slizaa.rcp.workbench.core.model.ModelPackage;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem;
@@ -66,7 +68,7 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
    */
   @Override
   protected EClass eStaticClass() {
-    return ModelPackage.Literals.SLIZAA_PROJECT_CONFIGURATION_MODEL;
+    return ModelPackageImpl.Literals.SLIZAA_PROJECT_CONFIGURATION_MODEL;
   }
 
   /**
@@ -74,9 +76,9 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SlizaaProjectConfigurationProblem> getProblems() {
+  public List<SlizaaProjectConfigurationProblem> getProblems() {
     if (problems == null) {
-      problems = new EObjectResolvingEList<SlizaaProjectConfigurationProblem>(SlizaaProjectConfigurationProblem.class, this, ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS);
+      problems = new EObjectResolvingEList<SlizaaProjectConfigurationProblem>(SlizaaProjectConfigurationProblem.class, this, ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS);
     }
     return problems;
   }
@@ -86,9 +88,9 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<SlizaaProjectConfigurationItemModel> getConfigurationItems() {
+  public List<SlizaaProjectConfigurationItemModel> getConfigurationItems() {
     if (configurationItems == null) {
-      configurationItems = new EObjectResolvingEList<SlizaaProjectConfigurationItemModel>(SlizaaProjectConfigurationItemModel.class, this, ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS);
+      configurationItems = new EObjectResolvingEList<SlizaaProjectConfigurationItemModel>(SlizaaProjectConfigurationItemModel.class, this, ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS);
     }
     return configurationItems;
   }
@@ -112,9 +114,9 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
         return getProblems();
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
         return getConfigurationItems();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -129,11 +131,11 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
         getProblems().clear();
         getProblems().addAll((Collection<? extends SlizaaProjectConfigurationProblem>)newValue);
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
         getConfigurationItems().clear();
         getConfigurationItems().addAll((Collection<? extends SlizaaProjectConfigurationItemModel>)newValue);
         return;
@@ -149,10 +151,10 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
         getProblems().clear();
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
         getConfigurationItems().clear();
         return;
     }
@@ -167,9 +169,9 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS:
         return problems != null && !problems.isEmpty();
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL__CONFIGURATION_ITEMS:
         return configurationItems != null && !configurationItems.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -184,7 +186,7 @@ public class SlizaaProjectConfigurationModelImpl extends AbstractUserDefinedType
   @SuppressWarnings({"rawtypes", "unchecked" })
   public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
     switch (operationID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_MODEL___CREATE_NEW_CONFIGURATION_ITEM_INSTANCE__CLASS:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL___CREATE_NEW_CONFIGURATION_ITEM_INSTANCE__CLASS:
         return createNewConfigurationItemInstance((Class)arguments.get(0));
     }
     return super.eInvoke(operationID, arguments);

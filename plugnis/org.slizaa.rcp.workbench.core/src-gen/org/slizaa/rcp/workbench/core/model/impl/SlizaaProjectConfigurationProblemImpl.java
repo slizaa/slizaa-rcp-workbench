@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.slizaa.rcp.workbench.core.model.ModelPackage;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem;
 
 /**
@@ -104,7 +103,7 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
    */
   @Override
   protected EClass eStaticClass() {
-    return ModelPackage.Literals.SLIZAA_PROJECT_CONFIGURATION_PROBLEM;
+    return ModelPackageImpl.Literals.SLIZAA_PROJECT_CONFIGURATION_PROBLEM;
   }
 
   /**
@@ -125,7 +124,7 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
     String oldMessage = message;
     message = newMessage;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE, oldMessage, message));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE, oldMessage, message));
   }
 
   /**
@@ -146,7 +145,7 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
     int oldCharStart = charStart;
     charStart = newCharStart;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START, oldCharStart, charStart));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START, oldCharStart, charStart));
   }
 
   /**
@@ -167,7 +166,7 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
     int oldCharEnd = charEnd;
     charEnd = newCharEnd;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END, oldCharEnd, charEnd));
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END, oldCharEnd, charEnd));
   }
 
   /**
@@ -178,11 +177,11 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
         return getMessage();
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
         return getCharStart();
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
         return getCharEnd();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -196,13 +195,13 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
   @Override
   public void eSet(int featureID, Object newValue) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
         setMessage((String)newValue);
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
         setCharStart((Integer)newValue);
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
         setCharEnd((Integer)newValue);
         return;
     }
@@ -217,13 +216,13 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
   @Override
   public void eUnset(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
         setMessage(MESSAGE_EDEFAULT);
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
         setCharStart(CHAR_START_EDEFAULT);
         return;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
         setCharEnd(CHAR_END_EDEFAULT);
         return;
     }
@@ -238,11 +237,11 @@ public class SlizaaProjectConfigurationProblemImpl extends MinimalEObjectImpl.Co
   @Override
   public boolean eIsSet(int featureID) {
     switch (featureID) {
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__MESSAGE:
         return MESSAGE_EDEFAULT == null ? message != null : !MESSAGE_EDEFAULT.equals(message);
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_START:
         return charStart != CHAR_START_EDEFAULT;
-      case ModelPackage.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
+      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM__CHAR_END:
         return charEnd != CHAR_END_EDEFAULT;
     }
     return super.eIsSet(featureID);

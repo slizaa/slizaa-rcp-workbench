@@ -1,21 +1,17 @@
-/**
- *
- */
 package org.slizaa.rcp.workbench.core.internal.extensions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.BundleTracker;
-import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker.SlizaaExtensionsHolder;
-import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
+import org.slizaa.rcp.workbench.core.model.ModelFactory;
+import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
+import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension;
 import org.slizaa.scanner.core.classpathscanner.ClasspathScannerFactoryBuilder;
 import org.slizaa.scanner.core.classpathscanner.IClasspathScannerFactory;
 import org.slizaa.scanner.core.cypherregistry.SlizaaCypherFileParser;
@@ -28,36 +24,7 @@ import org.slizaa.scanner.core.spi.annotations.ParserFactory;
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  *
  */
-public class SlizaaExtensionsBundleTracker extends BundleTracker<SlizaaExtensionsHolder> {
-
-  public static class SlizaaExtensionsHolder {
-
-    /** - */
-    private Map<Class<?>, List<Class<?>>> _extensions       = new HashMap<>();
-
-    /** - */
-    private List<ICypherStatement>        _cypherExtensions = new LinkedList<>();
-
-    /**
-     * <p>
-     * </p>
-     *
-     * @return
-     */
-    public Map<Class<?>, List<Class<?>>> getExtensions() {
-      return _extensions;
-    }
-
-    /**
-     * <p>
-     * </p>
-     *
-     * @return
-     */
-    public List<ICypherStatement> getCypherExtensions() {
-      return _cypherExtensions;
-    }
-  }
+public class SlizaaExtensionsBundleTracker extends BundleTracker<SlizaaExtensionBundle> {
 
   /** - */
   private IClasspathScannerFactory _classpathScannerFactory;
@@ -74,10 +41,12 @@ public class SlizaaExtensionsBundleTracker extends BundleTracker<SlizaaExtension
 
     //
     this._classpathScannerFactory = ClasspathScannerFactoryBuilder.newClasspathScannerFactory()
+
         //
         .registerCodeSourceClassLoaderProvider(Bundle.class, (b) -> {
           return b.adapt(BundleWiring.class).getClassLoader();
         })
+
         //
         .create();
   }
@@ -86,7 +55,7 @@ public class SlizaaExtensionsBundleTracker extends BundleTracker<SlizaaExtension
    * {@inheritDoc}
    */
   @Override
-  public SlizaaExtensionsHolder addingBundle(Bundle bundle, BundleEvent event) {
+  public SlizaaExtensionBundle addingBundle(Bundle bundle, BundleEvent event) {
 
     //
     String slizaaExtension = bundle.getHeaders().get(IClasspathScannerFactory.SLIZAA_EXTENSION_BUNDLE_HEADER);
@@ -95,28 +64,54 @@ public class SlizaaExtensionsBundleTracker extends BundleTracker<SlizaaExtension
     if (slizaaExtension != null && !slizaaExtension.isEmpty()) {
 
       // create the result
-      SlizaaExtensionsHolder extensionsHolder = new SlizaaExtensionsHolder();
+      SlizaaExtensionBundle slizaaExtensionBundle = ModelFactory.INSTANCE.createSlizaaExtensionBundle();
 
       // scan the bundle
       this._classpathScannerFactory
+
           //
           .createScanner(bundle)
 
           // parser factory
-          .matchClassesWithAnnotation(ParserFactory.class,
-              (b, exts) -> extensionsHolder.getExtensions().computeIfAbsent(ParserFactory.class, k -> new ArrayList<>())
-                  .addAll(exts))
+          .matchClassesWithAnnotation(ParserFactory.class, (b, exts) -> {
+
+            //
+            List<SlizaaExtensionBundleExtension> bundleExtensions = exts.stream().map(clazz -> {
+              SlizaaExtensionBundleExtension bundleExtension = ModelFactory.INSTANCE
+                  .createSlizaaExtensionBundleExtension();
+              bundleExtension.setAnnotationType(ParserFactory.class);
+              bundleExtension.setType(clazz);
+              return bundleExtension;
+            }).collect(Collectors.toList());
+
+            //
+            if (!bundleExtensions.isEmpty()) {
+
+              List<SlizaaExtensionBundleExtension> extensionBundleExtensions = slizaaExtensionBundle
+                  .getDefinedExtensions().computeIfAbsent(ParserFactory.class, k -> new ArrayList<>());
+
+              extensionBundleExtensions.addAll(bundleExtensions);
+              slizaaExtensionBundle.getDefinedExtensions().put(ParserFactory.class, extensionBundleExtensions);
+            }
+          })
+
+          // TODO
+          // // parser factory
+          // .matchClassesWithAnnotation(SlizaaMappingProvider.class,
+          // (b, exts) -> slizaaExtensionBundle.getDefinedExtensions()
+          // .computeIfAbsent(SlizaaMappingProvider.class, k -> new ArrayList<>()).addAll(exts))
+          //
 
           // cypher extensions
           .matchFiles("cypher",
               (relativePath, inputStream, lengthBytes) -> SlizaaCypherFileParser.parse(relativePath, inputStream),
-              (b, contentList) -> extensionsHolder.getCypherExtensions().addAll(contentList))
+              (b, contentList) -> slizaaExtensionBundle.getDefinedCypherStatements().addAll(contentList))
 
           //
           .scan();
 
       //
-      return extensionsHolder;
+      return slizaaExtensionBundle;
     }
     //
     else {

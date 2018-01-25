@@ -2,7 +2,6 @@
  */
 package org.slizaa.rcp.workbench.core.model;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,11 +17,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem#getCharEnd <em>Char End</em>}</li>
  * </ul>
  *
- * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationProblem()
- * @model
  * @generated
  */
-public interface SlizaaProjectConfigurationProblem extends EObject {
+public interface SlizaaProjectConfigurationProblem {
   /**
    * Returns the value of the '<em><b>Message</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -33,8 +30,6 @@ public interface SlizaaProjectConfigurationProblem extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Message</em>' attribute.
    * @see #setMessage(String)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationProblem_Message()
-   * @model
    * @generated
    */
   String getMessage();
@@ -59,8 +54,6 @@ public interface SlizaaProjectConfigurationProblem extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Char Start</em>' attribute.
    * @see #setCharStart(int)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationProblem_CharStart()
-   * @model
    * @generated
    */
   int getCharStart();
@@ -85,8 +78,6 @@ public interface SlizaaProjectConfigurationProblem extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Char End</em>' attribute.
    * @see #setCharEnd(int)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getSlizaaProjectConfigurationProblem_CharEnd()
-   * @model
    * @generated
    */
   int getCharEnd();

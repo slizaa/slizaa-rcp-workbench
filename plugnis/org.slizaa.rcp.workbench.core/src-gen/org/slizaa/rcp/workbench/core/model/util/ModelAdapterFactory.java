@@ -2,21 +2,25 @@
  */
 package org.slizaa.rcp.workbench.core.model.util;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
 
 import org.slizaa.rcp.workbench.core.model.*;
+
+import org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.slizaa.rcp.workbench.core.model.ModelPackage
+ * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl
  * @generated
  */
 public class ModelAdapterFactory extends AdapterFactoryImpl {
@@ -26,7 +30,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static ModelPackage modelPackage;
+  protected static ModelPackageImpl modelPackage;
 
   /**
    * Creates an instance of the adapter factory.
@@ -36,7 +40,7 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
    */
   public ModelAdapterFactory() {
     if (modelPackage == null) {
-      modelPackage = ModelPackage.eINSTANCE;
+      modelPackage = ModelPackageImpl.eINSTANCE;
     }
   }
 
@@ -72,6 +76,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
         return createSlizaaProjectAdapter();
       }
       @Override
+      public Adapter caseAbstractUserDefinedType(AbstractUserDefinedType object) {
+        return createAbstractUserDefinedTypeAdapter();
+      }
+      @Override
       public Adapter caseSlizaaProjectConfigurationModel(SlizaaProjectConfigurationModel object) {
         return createSlizaaProjectConfigurationModelAdapter();
       }
@@ -88,8 +96,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
         return createSlizaaProjectExtensionAdapter();
       }
       @Override
-      public Adapter caseAbstractUserDefinedType(AbstractUserDefinedType object) {
-        return createAbstractUserDefinedTypeAdapter();
+      public Adapter caseSlizaaExtensionBundle(SlizaaExtensionBundle object) {
+        return createSlizaaExtensionBundleAdapter();
+      }
+      @Override
+      public Adapter caseSlizaaExtensionBundleExtension(SlizaaExtensionBundleExtension object) {
+        return createSlizaaExtensionBundleExtensionAdapter();
+      }
+      @Override
+      public Adapter caseAnnotationTypeToSlizaaProjectExtensionMap(Map.Entry<Class<?>, List<SlizaaProjectExtension>> object) {
+        return createAnnotationTypeToSlizaaProjectExtensionMapAdapter();
+      }
+      @Override
+      public Adapter caseAnnotationTypeToSlizaaBundleExtensionMap(Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>> object) {
+        return createAnnotationTypeToSlizaaBundleExtensionMapAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object) {
@@ -122,6 +142,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
   public Adapter createSlizaaProjectAdapter() {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType <em>Abstract User Defined Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType
+   * @generated
+   */
+  public Adapter createAbstractUserDefinedTypeAdapter() {
     return null;
   }
 
@@ -182,16 +216,58 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType <em>Abstract User Defined Type</em>}'.
+   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle <em>Slizaa Extension Bundle</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType
+   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle
    * @generated
    */
-  public Adapter createAbstractUserDefinedTypeAdapter() {
+  public Adapter createSlizaaExtensionBundleAdapter() {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension <em>Slizaa Extension Bundle Extension</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension
+   * @generated
+   */
+  public Adapter createSlizaaExtensionBundleExtensionAdapter() {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Annotation Type To Slizaa Project Extension Map</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see java.util.Map.Entry
+   * @generated
+   */
+  public Adapter createAnnotationTypeToSlizaaProjectExtensionMapAdapter() {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Annotation Type To Slizaa Bundle Extension Map</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see java.util.Map.Entry
+   * @generated
+   */
+  public Adapter createAnnotationTypeToSlizaaBundleExtensionMapAdapter() {
     return null;
   }
 

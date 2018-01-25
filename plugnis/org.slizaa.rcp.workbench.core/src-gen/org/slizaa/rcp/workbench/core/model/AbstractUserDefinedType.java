@@ -4,8 +4,6 @@ package org.slizaa.rcp.workbench.core.model;
 
 import org.eclipse.core.resources.IProject;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Abstract User Defined Type</b></em>'.
@@ -20,11 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType#getTypeName <em>Type Name</em>}</li>
  * </ul>
  *
- * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getAbstractUserDefinedType()
- * @model abstract="true"
  * @generated
  */
-public interface AbstractUserDefinedType extends EObject {
+public interface AbstractUserDefinedType {
   /**
    * Returns the value of the '<em><b>Project</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -35,8 +31,6 @@ public interface AbstractUserDefinedType extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Project</em>' attribute.
    * @see #setProject(IProject)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getAbstractUserDefinedType_Project()
-   * @model dataType="org.slizaa.rcp.workbench.core.model.IProject" transient="true"
    * @generated
    */
   IProject getProject();
@@ -61,8 +55,6 @@ public interface AbstractUserDefinedType extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Resource Path</em>' attribute.
    * @see #setResourcePath(String)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getAbstractUserDefinedType_ResourcePath()
-   * @model
    * @generated
    */
   String getResourcePath();
@@ -87,8 +79,6 @@ public interface AbstractUserDefinedType extends EObject {
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' attribute.
    * @see #setTypeName(String)
-   * @see org.slizaa.rcp.workbench.core.model.ModelPackage#getAbstractUserDefinedType_TypeName()
-   * @model
    * @generated
    */
   String getTypeName();

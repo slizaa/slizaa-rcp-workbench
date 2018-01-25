@@ -24,17 +24,16 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.slizaa.neo4j.dbadapter.DbAdapterFactory;
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
+import org.slizaa.rcp.workbench.core.BundleExtensionsUtils;
+import org.slizaa.rcp.workbench.core.ProjectExtensionsUtils;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.internal.Activator;
-import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker.SlizaaExtensionsHolder;
 import org.slizaa.rcp.workbench.core.internal.utils.BuildHelper;
-import org.slizaa.rcp.workbench.core.model.ModelPackage;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;
 import org.slizaa.scanner.core.api.importer.IModelImporter;
 import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
-import org.slizaa.scanner.core.spi.annotations.ParserFactory;
 import org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider;
 import org.slizaa.scanner.core.spi.parser.IParserFactory;
 
@@ -153,7 +152,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
 
     this.graphDatabaseInstance = newGraphDatabaseInstance;
     if (eNotificationRequired()) {
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE,
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE,
           oldGraphDatabaseInstance, this.graphDatabaseInstance));
     }
   }
@@ -170,7 +169,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
 
     this.boltClient = newBoltClient;
     if (eNotificationRequired()) {
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT__BOLT_CLIENT, oldBoltClient,
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT, oldBoltClient,
           this.boltClient));
     }
   }
@@ -189,7 +188,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
     //
     this.project = newProject;
     if (eNotificationRequired()) {
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT__PROJECT, oldProject,
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__PROJECT, oldProject,
           this.boltClient));
     }
   }
@@ -204,7 +203,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
     SlizaaProjectConfigurationModel oldConfiguration = this.configuration;
     this.configuration = newConfiguration;
     if (eNotificationRequired()) {
-      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SLIZAA_PROJECT__CONFIGURATION,
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__CONFIGURATION,
           oldConfiguration, this.configuration));
     }
   }
@@ -253,17 +252,12 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
     try {
       executeWithProperties(() -> {
 
+        System.out.println("Prase");
+
         // fetch all parser factories
         List<IParserFactory> parserFactories = new ArrayList<>();
-        for (SlizaaExtensionsHolder entry : Activator.instance().getTrackedExtensionBundles().values()) {
-          for (Class<?> clazz : entry.getExtensions().get(ParserFactory.class)) {
-            try {
-              parserFactories.add((IParserFactory) clazz.newInstance());
-            } catch (Exception e) {
-              e.printStackTrace();
-            }
-          }
-        }
+        parserFactories.addAll(ProjectExtensionsUtils.getProjectExtensions_ParserFactory(this));
+        parserFactories.addAll(BundleExtensionsUtils.getBundleExtensions_ParserFactory());
 
         // fetch all cypher statements
         List<ICypherStatement> cypherStatements = Activator.instance().getCypherStatementRegistry().getAllStatements();
