@@ -84,6 +84,19 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
    */
   @Override
   public void endVisit(TypeDeclaration node) {
+
+    //
+    if (!_currentSlizaaProjectConfigurationModel.isEmpty() /** TODO && getTypeName(). */
+    ) {
+
+      //
+      if (node.getMethods().length == 0) {
+
+        // _currentSlizaaProjectConfigurationModel.pop().getProblems().add(e);
+      }
+    }
+
+    //
     this._currentTypeDeclaration.pop();
   }
 

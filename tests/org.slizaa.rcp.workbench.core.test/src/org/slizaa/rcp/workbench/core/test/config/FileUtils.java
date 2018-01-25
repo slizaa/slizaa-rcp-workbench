@@ -1,7 +1,4 @@
-/**
- *
- */
-package org.slizaa.rcp.workbench.core.test;
+package org.slizaa.rcp.workbench.core.test.config;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,11 +11,7 @@ import java.io.Reader;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
 import org.slizaa.rcp.workbench.core.test.SlizaaProjectRule.ExampleContentCreator;
-import org.slizaa.scanner.core.contentdefinition.DirectoryBasedContentDefinitionProvider;
-import org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider;
 
 import com.google.common.io.CharStreams;
 
@@ -27,23 +20,8 @@ import com.google.common.io.CharStreams;
  * </p>
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
- *
  */
-public class SimpleTest {
-
-  @Rule
-  public SlizaaProjectRule _slizaaProjectRule = new SlizaaProjectRule(createExampleContent());
-
-  @Test
-  public void test() throws Exception {
-
-    //
-    IContentDefinitionProvider contentDefinitionProvider = this._slizaaProjectRule.getSlizaaProject().getConfiguration()
-        .createNewConfigurationItemInstance(IContentDefinitionProvider.class);
-
-    assertThat(contentDefinitionProvider).isNotNull();
-    assertThat(contentDefinitionProvider).isInstanceOf(DirectoryBasedContentDefinitionProvider.class);
-  }
+public class FileUtils {
 
   /**
    * <p>
@@ -51,7 +29,10 @@ public class SimpleTest {
    *
    * @return
    */
-  protected static ExampleContentCreator createExampleContent() {
+  public static ExampleContentCreator createExampleContent(Class<?> testClass) {
+
+    //
+    checkNotNull(testClass);
 
     //
     return (slizaaProject, packageFragmentRoot) -> {
@@ -61,7 +42,8 @@ public class SimpleTest {
 
       //
       ICompilationUnit cu = fragment.createCompilationUnit("Test.java",
-          loadExampleSource("/org/slizaa/rcp/workbench/core/test/SimpleTest_TestSource.txt"), false, null);
+          FileUtils.loadContentToString("/" + testClass.getName().replace('.', '/') + "_TestSource.txt"),
+          false, null);
 
       assertThat(cu).isNotNull();
     };
@@ -75,7 +57,7 @@ public class SimpleTest {
    * @return
    * @throws IOException
    */
-  private static String loadExampleSource(String fileName) {
+  public static String loadContentToString(String fileName) {
 
     // get the resource input stream
     InputStream inputStream = SimpleTest.class.getClassLoader().getResourceAsStream(checkNotNull(fileName));
