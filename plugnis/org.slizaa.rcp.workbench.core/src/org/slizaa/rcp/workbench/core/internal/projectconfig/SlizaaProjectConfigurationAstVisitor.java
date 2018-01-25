@@ -165,17 +165,7 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
     // handle annotation
     if (!this._currentTypeDeclaration.isEmpty()) {
 
-      System.out.println("NormalAnnotation");
-
-      // try {
-      // if (isComponentAnnotation(node)) {
-      // handleComponentAnnotation(node);
-      // } else if (isReferenceAnnotation(node)) {
-      // handleReferenceAnnotation(node);
-      // }
-      // } catch (Exception e) {
-      // handleException(node, e);
-      // }
+      // TODO
     }
 
     // only visit types and methods
@@ -191,13 +181,7 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
     // handle annotation
     if (!this._currentTypeDeclaration.isEmpty()) {
 
-      System.out.println("SingleMemberAnnotation");
-
-      // if (isComponentAnnotation(node)) {
-      // throw new UnsupportedOperationException();
-      // } else if (isReferenceAnnotation(node)) {
-      // throw new UnsupportedOperationException();
-      // }
+      // TODO
     }
 
     // only visit types and methods

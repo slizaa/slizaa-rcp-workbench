@@ -59,8 +59,6 @@ public class BundleExtensionsUtils {
     //
     Collection<SlizaaExtensionBundle> extensionBundles = Activator.instance().getTrackedExtensionBundles().values();
 
-    System.out.println("extensionBundles" + extensionBundles);
-
     return extensionBundles.stream()
 
         //
@@ -69,8 +67,6 @@ public class BundleExtensionsUtils {
 
         //
         .map(bundleExtension -> {
-
-          System.out.println(" bumbum " + bundleExtension);
 
           try {
             return bundleExtension.createNewInstance(instanceType);

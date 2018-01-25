@@ -252,8 +252,6 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
     try {
       executeWithProperties(() -> {
 
-        System.out.println("Prase");
-
         // fetch all parser factories
         List<IParserFactory> parserFactories = new ArrayList<>();
         parserFactories.addAll(ProjectExtensionsUtils.getProjectExtensions_ParserFactory(this));

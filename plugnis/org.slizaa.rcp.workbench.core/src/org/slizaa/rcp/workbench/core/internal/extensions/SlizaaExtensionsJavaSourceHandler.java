@@ -62,8 +62,6 @@ public class SlizaaExtensionsJavaSourceHandler implements IJavaSourceHandler {
 
         //
         slizaaProject.getUserDefinedExtensions().put(extension.getAnnotationType(), slizaaProjectExtensions);
-
-        System.out.println(slizaaProject.getUserDefinedExtensions().get(extension.getAnnotationType()));
       }
     }
   }
