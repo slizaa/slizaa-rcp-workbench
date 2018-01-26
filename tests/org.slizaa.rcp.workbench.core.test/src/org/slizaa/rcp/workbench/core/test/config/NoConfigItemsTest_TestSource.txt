@@ -7,9 +7,4 @@ import org.slizaa.rcp.workbench.core.api.annotations.SlizaaConfigurationItem;
 @SlizaaProjectConfiguration
 public class Test {
 
-  @SlizaaConfigurationItem
-  public org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider getValue() {
-    return new DirectoryBasedContentDefinitionProvider();
-  } 
-
 }

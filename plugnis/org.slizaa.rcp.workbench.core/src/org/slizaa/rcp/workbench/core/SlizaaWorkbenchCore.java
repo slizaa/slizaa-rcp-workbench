@@ -43,7 +43,7 @@ public final class SlizaaWorkbenchCore {
   public static final String SLIZAA_NATURE_ID                       = BUNDLE_ID + ".slizaanature";
 
   /** - */
-  public static final String SLIZAA_CONFIGURATION_PROBLEM_MARKER    = BUNDLE_ID + ".dsAnnotationProblem";
+  public static final String SLIZAA_CONFIGURATION_PROBLEM_MARKER    = BUNDLE_ID + ".slizaaConfigurationProblem";
 
   /** - */
   public static final String SLIZAA_BUILDER                         = BUNDLE_ID + ".slizaaProjectConfigurationBuilder";

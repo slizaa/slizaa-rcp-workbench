@@ -21,6 +21,7 @@ import org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
+import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem;
 
 /**
  * <p>
@@ -86,13 +87,17 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
   public void endVisit(TypeDeclaration node) {
 
     //
-    if (!_currentSlizaaProjectConfigurationModel.isEmpty() /** TODO && getTypeName(). */
-    ) {
+    if (!_currentSlizaaProjectConfigurationModel.isEmpty() && _currentSlizaaProjectConfigurationModel.peek()
+        .getTypeName().equals(node.resolveBinding().getQualifiedName())) {
 
       //
       if (node.getMethods().length == 0) {
 
-        // _currentSlizaaProjectConfigurationModel.pop().getProblems().add(e);
+        SlizaaProjectConfigurationProblem problem = createSlizaaProjectConfigurationProblem(
+            ProjectConfigurationErrorMessages.NO_CONFIGURATION_ITEMS_SPECIFIED, node.getStartPosition(),
+            node.getStartPosition() + node.getLength());
+
+        _currentSlizaaProjectConfigurationModel.peek().getProblems().add(problem);
       }
     }
 
@@ -199,5 +204,24 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
 
     // only visit types and methods
     return this._currentMethodDeclaration == null;
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param msg
+   * @param charStart
+   * @param charEnd
+   * @return
+   */
+  private SlizaaProjectConfigurationProblem createSlizaaProjectConfigurationProblem(String msg, int charStart,
+      int charEnd) {
+
+    SlizaaProjectConfigurationProblem result = ModelFactory.INSTANCE.createSlizaaProjectConfigurationProblem();
+    result.setMessage(checkNotNull(msg));
+    result.setCharStart(charStart);
+    result.setCharEnd(charEnd);
+    return result;
   }
 }

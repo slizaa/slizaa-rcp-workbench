@@ -12,6 +12,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.ServiceTracker;
+import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
 import org.slizaa.rcp.workbench.core.internal.classpathcontainer.SlizaaSpiApiBundleTracker;
 import org.slizaa.rcp.workbench.core.internal.extensions.SlizaaExtensionsBundleTracker;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
@@ -44,6 +45,9 @@ public class Activator implements BundleActivator {
 
   /** - */
   private ServiceTracker<IModelImporterFactory, IModelImporterFactory> _modelImporterFactoryTracker;
+
+  /** - */
+  private ServiceTracker<IMappingService, IMappingService>             _mappingServiceTracker;
 
   /** - */
   private IClasspathScannerFactory                                     _classpathScannerFactory;
@@ -91,6 +95,10 @@ public class Activator implements BundleActivator {
     _instance = this;
 
     //
+    this._mappingServiceTracker = new ServiceTracker<>(context, IMappingService.class, null);
+    this._mappingServiceTracker.open();
+
+    //
     this._slizaaExtensionsTracker = new SlizaaExtensionsBundleTracker(context);
     this._slizaaExtensionsTracker.open();
 
@@ -126,6 +134,9 @@ public class Activator implements BundleActivator {
   public void stop(BundleContext context) throws Exception {
 
     //
+    this._mappingServiceTracker.close();
+
+    //
     this._slizaaExtensionsTracker.close();
 
     //
@@ -140,6 +151,16 @@ public class Activator implements BundleActivator {
 
     //
     _instance = null;
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  public IMappingService getMappingService() {
+    return this._mappingServiceTracker.getService();
   }
 
   /**

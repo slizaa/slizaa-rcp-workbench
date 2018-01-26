@@ -34,6 +34,7 @@ import org.slizaa.hierarchicalgraph.HGRootNode;
 
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
 
+import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
@@ -329,6 +330,17 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor) {
+    // TODO: implement this method
+    // Ensure that you remove @generated or mark it @generated NOT
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public void dispose() {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
@@ -460,6 +472,8 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
       case ModelPackageImpl.SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR:
         startAndConnectDatabase((IProgressMonitor)arguments.get(0));
         return null;
+      case ModelPackageImpl.SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR:
+        return mapToHierachicalGraph((IMappingProvider)arguments.get(0), (IProgressMonitor)arguments.get(1));
       case ModelPackageImpl.SLIZAA_PROJECT___DISPOSE:
         dispose();
         return null;

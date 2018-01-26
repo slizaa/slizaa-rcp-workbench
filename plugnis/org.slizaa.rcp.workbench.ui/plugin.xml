@@ -131,7 +131,7 @@
 			</command>
 			
 			<command
-         		commandId="org.slizaa.core.ui.commands.OpenSlizaaProjectCommand"
+         		commandId="org.slizaa.core.ui.commands.StartAndConnectDatabaseCommand"
          		icon="icons/etools/bm-parse.png"
          		style="push">
          		<visibleWhen checkEnabled="false">
@@ -161,8 +161,8 @@
 				<reference definitionId="slizaaProjectSelected"></reference>
 			</enabledWhen>
 		</handler>
-		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.OpenSlizaaProjectHandler"
-			commandId="org.slizaa.core.ui.commands.OpenSlizaaProjectCommand">
+		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.StartAndConnectDatabaseHandler"
+			commandId="org.slizaa.core.ui.commands.StartAndConnectDatabaseCommand">
 			<activeWhen>
 				<reference definitionId="slizaaProjectSelected"></reference>
 			</activeWhen>
@@ -183,7 +183,7 @@
  	
  	<extension point="org.eclipse.ui.commands">
 		<command id="org.slizaa.core.ui.commands.ParseSlizaaProjectCommand" name="Parse" />
-		<command id="org.slizaa.core.ui.commands.OpenSlizaaProjectCommand" name="Launch" />
+		<command id="org.slizaa.core.ui.commands.StartAndConnectDatabaseCommand" name="Start/Connect Database" />
 		<command id="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand" name="Create Model" />
  	</extension>
  	

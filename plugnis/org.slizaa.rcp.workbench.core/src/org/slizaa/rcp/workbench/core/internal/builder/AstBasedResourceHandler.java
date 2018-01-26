@@ -58,6 +58,9 @@ public class AstBasedResourceHandler implements IResourceHandler {
   @Override
   public void handleAddedOrChanged(IResource resource) throws CoreException {
 
+    //
+    MarkerUtils.deleteMarker(resource);
+    
     // get the corresponding java element
     IJavaElement element = JavaCore.create(resource);
     IJavaProject javaProject = JavaCore.create(resource.getProject());
@@ -91,6 +94,10 @@ public class AstBasedResourceHandler implements IResourceHandler {
    */
   @Override
   public void handleRemoved(IResource resource) throws CoreException {
+    
+    //
+    MarkerUtils.deleteMarker(resource);
+    
     for (IJavaSourceHandler javaSourceHandler : this._javaSourceHandlers) {
       javaSourceHandler.handleRemoved(resource);
     }

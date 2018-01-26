@@ -15,20 +15,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
 
   /** - */
-  private String[]                     _markerTypesToDeleteOnClean;
-
-  /** - */
   private SlizaaProjectResourceVisitor _resourceVisitor;
 
   /**
    * <p>
    * Creates a new instance of type {@link SlizaaIncrementalProjectBuilder}.
    * </p>
-   *
-   * @param markersToDeleteOnClean
    */
-  public SlizaaIncrementalProjectBuilder(String[] markerTypesToDeleteOnClean, IResourceHandler... resourceHandlers) {
-    this._markerTypesToDeleteOnClean = markerTypesToDeleteOnClean;
+  public SlizaaIncrementalProjectBuilder(IResourceHandler... resourceHandlers) {
     this._resourceVisitor = new SlizaaProjectResourceVisitor(checkNotNull(resourceHandlers));
   }
 
@@ -82,17 +76,8 @@ public class SlizaaIncrementalProjectBuilder extends IncrementalProjectBuilder {
   @Override
   protected void clean(IProgressMonitor monitor) throws CoreException {
 
-    //
-    if (this._markerTypesToDeleteOnClean != null) {
-
-      Arrays.asList(this._markerTypesToDeleteOnClean).forEach(m -> {
-        try {
-          getProject().deleteMarkers(m, true, IResource.DEPTH_INFINITE);
-        } catch (CoreException e) {
-          // ignore
-        }
-      });
-    }
+    // delete all markers
+    MarkerUtils.deleteMarker(getProject());
 
     //
     super.clean(monitor);

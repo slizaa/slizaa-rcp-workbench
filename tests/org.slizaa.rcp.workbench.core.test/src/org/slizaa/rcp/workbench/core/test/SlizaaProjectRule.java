@@ -46,13 +46,16 @@ public class SlizaaProjectRule extends ExternalResource {
   /** - */
   private ExampleContentCreator _exampleContentCreator;
 
+  /** - */
+  private boolean               _shouldFailOnErrors = true;
+
   /**
    * <p>
    * Creates a new instance of type {@link SlizaaProjectRule}.
    * </p>
    */
   public SlizaaProjectRule() {
-    this(randomString(20), null);
+    this(randomString(20), null, true);
   }
 
   /**
@@ -61,7 +64,19 @@ public class SlizaaProjectRule extends ExternalResource {
    * </p>
    */
   public SlizaaProjectRule(ExampleContentCreator exampleContentCreator) {
-    this(randomString(20), exampleContentCreator);
+    this(randomString(20), exampleContentCreator, true);
+  }
+
+  /**
+   * <p>
+   * Creates a new instance of type {@link SlizaaProjectRule}.
+   * </p>
+   *
+   * @param exampleContentCreator
+   * @param shouldFailOnErrors
+   */
+  public SlizaaProjectRule(ExampleContentCreator exampleContentCreator, boolean shouldFailOnErrors) {
+    this(randomString(20), exampleContentCreator, shouldFailOnErrors);
   }
 
   /**
@@ -71,9 +86,11 @@ public class SlizaaProjectRule extends ExternalResource {
    *
    * @param projectName
    */
-  public SlizaaProjectRule(String projectName, ExampleContentCreator exampleContentCreator) {
+  public SlizaaProjectRule(String projectName, ExampleContentCreator exampleContentCreator,
+      boolean shouldFailOnErrors) {
     this._projectName = checkNotNull(projectName);
     this._exampleContentCreator = exampleContentCreator;
+    this._shouldFailOnErrors = shouldFailOnErrors;
   }
 
   public String getProjectName() {
@@ -129,7 +146,7 @@ public class SlizaaProjectRule extends ExternalResource {
 
       //
       if (shouldFailOnErrors()) {
-        failOnErrors(this._eclipseProject);
+        failOnErrors();
       }
     }
   }
@@ -148,19 +165,25 @@ public class SlizaaProjectRule extends ExternalResource {
     }
   }
 
-  /**
-   * @param project
-   * @throws CoreException
-   */
-  private static void failOnErrors(IProject project) throws CoreException {
+  public List<IMarker> getErrorMarkers() throws CoreException {
 
-    // check for errors
     List<IMarker> errors = new LinkedList<IMarker>();
-    for (IMarker marker : project.findMarkers(null, true, IResource.DEPTH_INFINITE)) {
+    for (IMarker marker : _eclipseProject.findMarkers(null, true, IResource.DEPTH_INFINITE)) {
       if (marker.getAttribute(IMarker.SEVERITY).equals(IMarker.SEVERITY_ERROR)) {
         errors.add(marker);
       }
     }
+    return errors;
+  }
+
+  /**
+   * @param project
+   * @throws CoreException
+   */
+  private void failOnErrors() throws CoreException {
+
+    // check for errors
+    List<IMarker> errors = getErrorMarkers();
 
     // fails if any errors
     if (!errors.isEmpty()) {
@@ -210,7 +233,7 @@ public class SlizaaProjectRule extends ExternalResource {
    * @return
    */
   private boolean shouldFailOnErrors() {
-    return true;
+    return _shouldFailOnErrors;
   }
 
   /**

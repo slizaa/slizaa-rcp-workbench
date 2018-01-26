@@ -10,7 +10,6 @@ package org.slizaa.rcp.workbench.ui.internal;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
 import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 /**
@@ -32,9 +31,6 @@ public class Activator extends AbstractUIPlugin {
 
   private ServiceTracker<SlizaaWorkbenchModel, SlizaaWorkbenchModel> _workbenchModelTracker;
 
-  /** - */
-  private ServiceTracker<IMappingService, IMappingService>           _mappingServiceTracker;
-
   /*
    * (non-Javadoc)
    *
@@ -47,11 +43,8 @@ public class Activator extends AbstractUIPlugin {
 
     //
     this._workbenchModelTracker = new ServiceTracker<>(context, SlizaaWorkbenchModel.class, null);
-    this._mappingServiceTracker = new ServiceTracker<>(context, IMappingService.class, null);
-
-    //
     this._workbenchModelTracker.open();
-    this._mappingServiceTracker.open();
+
   }
 
   /*
@@ -66,7 +59,6 @@ public class Activator extends AbstractUIPlugin {
 
     //
     this._workbenchModelTracker.close();
-    this._mappingServiceTracker.close();
   }
 
   /**
@@ -77,16 +69,6 @@ public class Activator extends AbstractUIPlugin {
    */
   public SlizaaWorkbenchModel getWorkbenchModel() {
     return this._workbenchModelTracker.getService();
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @return
-   */
-  public IMappingService getMappingService() {
-    return this._mappingServiceTracker.getService();
   }
 
   /**

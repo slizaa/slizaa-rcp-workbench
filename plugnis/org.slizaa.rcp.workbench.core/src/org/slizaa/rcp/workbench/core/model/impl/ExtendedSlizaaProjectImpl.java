@@ -22,8 +22,11 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.neo4j.dbadapter.DbAdapterFactory;
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
+import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
+import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.BundleExtensionsUtils;
 import org.slizaa.rcp.workbench.core.ProjectExtensionsUtils;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
@@ -141,6 +144,25 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
   }
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  public HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor) {
+
+    // get the mapping service
+    IMappingService mappingService = Activator.instance().getMappingService();
+
+    // get the root node
+    HGRootNode rootNode = mappingService.convert(mappingProvider, getBoltClient(), monitor);
+
+    //
+    setHierachicalGraph(rootNode);
+
+    //
+    return rootNode;
+  }
+
+  /**
    * <p>
    * </p>
    *
@@ -181,11 +203,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
    * @param newProject
    */
   public void setProject(IProject newProject) {
-
-    //
     IProject oldProject = this.project;
-
-    //
     this.project = newProject;
     if (eNotificationRequired()) {
       eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__PROJECT, oldProject,
@@ -206,6 +224,16 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
       eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__CONFIGURATION,
           oldConfiguration, this.configuration));
     }
+  }
+
+  /**
+   */
+  public void setHierachicalGraph(HGRootNode newHierachicalGraph) {
+    HGRootNode oldHierachicalGraph = hierachicalGraph;
+    hierachicalGraph = newHierachicalGraph;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH,
+          oldHierachicalGraph, hierachicalGraph));
   }
 
   /**

@@ -18,7 +18,6 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.ui.PlatformUI;
 import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog.MappingsProviderDialog;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
 import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.ProjectExtensionsUtils;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
@@ -51,9 +50,6 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
     slizaaProject.cleanBuild();
 
     //
-    IMappingService mappingService = Activator.getDefault().getMappingService();
-
-    //
     List<IMappingProvider> extensions = ProjectExtensionsUtils.getProjectExtensions_MappingProvider(slizaaProject);
 
     //
@@ -77,8 +73,12 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
 
             // execute with console
             ConsoleHelper.executeWithConsole(() -> {
-              HGRootNode rootNode = mappingService.convert(mappingProvider, slizaaProject.getBoltClient(), monitor);
-              Activator.getDefault().getWorkbenchModel().setRootNode(rootNode);
+
+              // set hgRootNode
+              HGRootNode hgRootNode = slizaaProject.mapToHierachicalGraph(mappingProvider, monitor);
+
+              // set global
+              Activator.getDefault().getWorkbenchModel().setRootNode(hgRootNode);
             });
 
           } catch (Exception e) {

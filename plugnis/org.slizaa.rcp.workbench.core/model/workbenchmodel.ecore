@@ -9,6 +9,10 @@
     <eOperations name="startAndConnectDatabase">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
+    <eOperations name="mapToHierachicalGraph" eType="ecore:EClass ../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.ecore#//HGRootNode">
+      <eParameters name="mappingProvider" eType="#//IMappingProvider"/>
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
     <eOperations name="dispose"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"
         changeable="false" transient="true"/>
@@ -125,4 +129,6 @@
   <eClassifiers xsi:type="ecore:EDataType" name="IGraphDb" instanceClassName="org.slizaa.scanner.core.api.graphdb.IGraphDb"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ICypherStatement" instanceClassName="org.slizaa.scanner.core.api.cypherregistry.ICypherStatement"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IMappingProvider" instanceClassName="org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider"
+      serializable="false"/>
 </ecore:EPackage>

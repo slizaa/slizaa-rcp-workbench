@@ -7,6 +7,7 @@
  ******************************************************************************/
 package org.slizaa.rcp.workbench.ui.internal.handler;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
@@ -14,11 +15,11 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.PlatformUI;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
-import org.slizaa.rcp.workbench.ui.internal.SlizaaProjectOpener;
 
-public class OpenSlizaaProjectHandler extends AbstractSlizaaHandler implements IHandler {
+public class StartAndConnectDatabaseHandler extends AbstractSlizaaHandler implements IHandler {
 
   @Override
   protected void execute(ExecutionEvent event, ISelection selection) throws Exception {
@@ -38,13 +39,27 @@ public class OpenSlizaaProjectHandler extends AbstractSlizaaHandler implements I
     //
     SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(project);
 
-    // // clear dependency store
-    // if (clearPersistentDependencyStore()) {
-    // BundleMakerCore.clearDependencyStore(bundleMakerProject);
-    // }
+    // Execute runnable via IProgressService
+    try {
+      PlatformUI.getWorkbench().getProgressService().busyCursorWhile((monitor) -> {
+        try {
 
-    // open the BundleMaker project
-    SlizaaProjectOpener.openProject(slizaaProject, false);
+          // execute with console
+          ConsoleHelper.executeWithConsole(() -> slizaaProject.startAndConnectDatabase(monitor));
+
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
+      });
+    } catch (InvocationTargetException ex) {
+
+      // Report Error to error log
+      Throwable cause = ex.getCause();
+      cause.printStackTrace();
+
+    } catch (InterruptedException ex) {
+      // ignore. User has canceled the operation
+    }
   }
 
   /**

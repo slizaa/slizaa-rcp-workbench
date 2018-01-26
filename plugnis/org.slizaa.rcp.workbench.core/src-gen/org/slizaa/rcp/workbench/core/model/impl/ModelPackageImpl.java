@@ -24,6 +24,7 @@ import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
 
 import org.slizaa.neo4j.dbadapter.DbAdapterPackage;
 
+import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
@@ -196,13 +197,22 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR = 2;
 
   /**
+   * The operation id for the '<em>Map To Hierachical Graph</em>' operation.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR = 3;
+
+  /**
    * The operation id for the '<em>Dispose</em>' operation.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT___DISPOSE = 3;
+  public static final int SLIZAA_PROJECT___DISPOSE = 4;
 
   /**
    * The number of operations of the '<em>Slizaa Project</em>' class.
@@ -211,7 +221,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT_OPERATION_COUNT = 4;
+  public static final int SLIZAA_PROJECT_OPERATION_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.AbstractUserDefinedTypeImpl <em>Abstract User Defined Type</em>}' class.
@@ -758,6 +768,16 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int ICYPHER_STATEMENT = 13;
 
   /**
+   * The meta object id for the '<em>IMapping Provider</em>' data type.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider
+   * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIMappingProvider()
+   * @generated
+   */
+  public static final int IMAPPING_PROVIDER = 14;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -854,6 +874,13 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    */
   private EDataType iCypherStatementEDataType = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EDataType iMappingProviderEDataType = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -1061,6 +1088,19 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#mapToHierachicalGraph(org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider, org.eclipse.core.runtime.IProgressMonitor) <em>Map To Hierachical Graph</em>}' operation.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the '<em>Map To Hierachical Graph</em>' operation.
+   * @see org.slizaa.rcp.workbench.core.model.SlizaaProject#mapToHierachicalGraph(org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider, org.eclipse.core.runtime.IProgressMonitor)
+   * @generated
+   */
+  public EOperation getSlizaaProject__MapToHierachicalGraph__IMappingProvider_IProgressMonitor() {
+    return slizaaProjectEClass.getEOperations().get(3);
+  }
+
+
+  /**
    * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#dispose() <em>Dispose</em>}' operation.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1069,7 +1109,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EOperation getSlizaaProject__Dispose() {
-    return slizaaProjectEClass.getEOperations().get(3);
+    return slizaaProjectEClass.getEOperations().get(4);
   }
 
   /**
@@ -1513,6 +1553,19 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for data type '{@link org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider <em>IMapping Provider</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for data type '<em>IMapping Provider</em>'.
+   * @see org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider
+   * @generated
+   */
+  public EDataType getIMappingProvider() {
+    return iMappingProviderEDataType;
+  }
+
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1553,6 +1606,7 @@ public class ModelPackageImpl extends EPackageImpl {
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___CLEAN_BUILD);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___PARSE__IPROGRESSMONITOR);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR);
+    createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___DISPOSE);
 
     abstractUserDefinedTypeEClass = createEClass(ABSTRACT_USER_DEFINED_TYPE);
@@ -1600,6 +1654,7 @@ public class ModelPackageImpl extends EPackageImpl {
     iProjectEDataType = createEDataType(IPROJECT);
     iGraphDbEDataType = createEDataType(IGRAPH_DB);
     iCypherStatementEDataType = createEDataType(ICYPHER_STATEMENT);
+    iMappingProviderEDataType = createEDataType(IMAPPING_PROVIDER);
   }
 
   /**
@@ -1653,6 +1708,10 @@ public class ModelPackageImpl extends EPackageImpl {
     addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     op = initEOperation(getSlizaaProject__StartAndConnectDatabase__IProgressMonitor(), null, "startAndConnectDatabase", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+    op = initEOperation(getSlizaaProject__MapToHierachicalGraph__IMappingProvider_IProgressMonitor(), theHierarchicalgraphPackage.getHGRootNode(), "mapToHierachicalGraph", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEParameter(op, this.getIMappingProvider(), "mappingProvider", 0, 1, IS_UNIQUE, IS_ORDERED);
     addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     initEOperation(getSlizaaProject__Dispose(), null, "dispose", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1741,6 +1800,7 @@ public class ModelPackageImpl extends EPackageImpl {
     initEDataType(iProjectEDataType, IProject.class, "IProject", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
     initEDataType(iGraphDbEDataType, IGraphDb.class, "IGraphDb", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
     initEDataType(iCypherStatementEDataType, ICypherStatement.class, "ICypherStatement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+    initEDataType(iMappingProviderEDataType, IMappingProvider.class, "IMappingProvider", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);
@@ -1849,6 +1909,14 @@ public class ModelPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EOperation SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR = eINSTANCE.getSlizaaProject__StartAndConnectDatabase__IProgressMonitor();
+
+    /**
+     * The meta object literal for the '<em><b>Map To Hierachical Graph</b></em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EOperation SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR = eINSTANCE.getSlizaaProject__MapToHierachicalGraph__IMappingProvider_IProgressMonitor();
 
     /**
      * The meta object literal for the '<em><b>Dispose</b></em>' operation.
@@ -2163,6 +2231,16 @@ public class ModelPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EDataType ICYPHER_STATEMENT = eINSTANCE.getICypherStatement();
+
+    /**
+     * The meta object literal for the '<em>IMapping Provider</em>' data type.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider
+     * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIMappingProvider()
+     * @generated
+     */
+    public static final EDataType IMAPPING_PROVIDER = eINSTANCE.getIMappingProvider();
 
   }
 
