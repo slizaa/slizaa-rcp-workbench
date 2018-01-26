@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -18,11 +20,14 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.neo4j.driver.v1.StatementResult;
 import org.osgi.service.component.annotations.Component;
 import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.selection.FilterSelections;
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
 import org.slizaa.neo4j.opencypher.openCypher.Cypher;
 import org.slizaa.neo4j.opencypher.util.CypherNormalizer;
+import org.slizaa.ui.shared.context.BusyCursor;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 
 @Component(service = ISlizaaActionContribution.class)
@@ -71,35 +76,28 @@ public class CypherBasedXRefFilterAction extends AbstractFilterAction {
           return;
         }
 
-        Neo4jClient neo4jClient = node.getRootNode().getExtension(Neo4jClient.class);
+        //
+        Neo4jClient boltClient = node.getRootNode().getExtension(Neo4jClient.class);
 
-//        BusyCursor.execute(Display.getCurrent().getActiveShell(), () -> {
-//
-//          Future<JsonObject> future = neo4jClient.executeCypherQuery(cypherQuery);
-//          JsonObject jsonObject;
-//          try {
-//            jsonObject = future.get();
-//
-//            // System.out.println(jsonObject);
-//            // TODO :ERROR CHECK!!
-//
-//            //
-//            List<Long> filteredNodeIds = new LinkedList<>();
-//            List<Void> rows = QueryResultConverter.convertRows(jsonObject, row -> {
-//              for (JsonElement jsonElement : row) {
-//                filteredNodeIds.add(jsonElement.getAsLong());
-//              }
-//              return null;
-//            });
-//
-//            //
-//            FilterSelections.setFilteredNodeIds(node.getRootNode(), filteredNodeIds);
-//
-//          } catch (InterruptedException | ExecutionException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//          }
-//        });
+        //
+        BusyCursor.execute(Display.getCurrent().getActiveShell(), () -> {
+
+          try {
+
+            //
+            Future<StatementResult> future = boltClient.executeCypherQuery(cypherQuery);
+
+            //
+            List<Long> filteredNodeIds = future.get().list(r -> r.get(0).asLong());
+
+            //
+            FilterSelections.setFilteredNodeIds(node.getRootNode(), filteredNodeIds);
+
+          } catch (InterruptedException | ExecutionException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        });
 
       } catch (IOException | CoreException e) {
         // TODO Auto-generated catch block

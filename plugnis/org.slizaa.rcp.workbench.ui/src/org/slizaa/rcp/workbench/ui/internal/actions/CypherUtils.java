@@ -26,6 +26,6 @@ public class CypherUtils {
     //
     return returnItems != null && !returnItems.isEmpty()
         && returnItems.get(returnItems.size() - 1).getExpression() instanceof FunctionInvocation && "id"
-            .equals(((FunctionInvocation) returnItems.get(returnItems.size() - 1).getExpression()).getFunctionName());
+            .equals(((FunctionInvocation) returnItems.get(returnItems.size() - 1).getExpression()).getFunctionName().getName());
   }
 }
