@@ -50,10 +50,12 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
     // grab resource and get the project
     IResource selectedResource = selectedObjects.get(0);
     SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(selectedResource.getProject());
-    slizaaProject.cleanBuild();
 
     //
-    List<IMappingProvider> extensions = ProjectExtensionsUtils.getProjectExtensions_MappingProvider(slizaaProject);
+    SlizaaWorkbenchCore.cleanBuildAll();
+
+    //
+    List<IMappingProvider> extensions = ProjectExtensionsUtils.getProjectExtensions_MappingProvider();
 
     //
     MappingsProviderDialog dialog = new MappingsProviderDialog(SlizaaUiUtils.getShell(), () -> extensions);
@@ -100,11 +102,11 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
       } catch (InterruptedException ex) {
         // ignore. User has canceled the operation
       }
-    }
 
-    //
-    Display.getDefault().asyncExec(() -> {
-      ViewUtils.bringViewToTop(HierarchicalGraphViewPart.PART_ID);
-    });
+      //
+      Display.getDefault().asyncExec(() -> {
+        ViewUtils.bringViewToTop(HierarchicalGraphViewPart.PART_ID);
+      });
+    }
   }
 }

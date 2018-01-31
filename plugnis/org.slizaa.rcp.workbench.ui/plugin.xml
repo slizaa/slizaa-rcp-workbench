@@ -39,11 +39,11 @@
             		canFinishEarly="false"
             		category="org.slizaa.rcp.workbench.ui.wizards.category"
             		class="org.slizaa.rcp.workbench.ui.internal.wizards.NewSlizaaProjectWizard"
-            		icon="icons/checked.gif"
+            		icon="icons/wizards/newSlizaaProject.png"
             		hasPages="true"
             		name="slizaa Project"
             		project="true">
-				  <description> Create a Slizaa project </description>
+				  <description>Create a Slizaa project </description>
             </wizard>
             <wizard id="org.slizaa.rcp.workbench.ui.newCypherWizard" 
             		canFinishEarly="false" 
@@ -111,6 +111,21 @@
                </toolbar>
             </menuContribution>
 	</extension>
+ 
+ 	<extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            adaptable="true"
+            class="org.slizaa.rcp.workbench.ui.internal.decorators.SlizaaProjectDecorator"
+            id="org.slizaa.rcp.workbench.ui.SlizaaProjectDecorator"
+            label="Slizaa Project Decorator"
+            lightweight="true"
+            state="true">
+         <enablement>
+            <objectState name="nature" value="org.slizaa.rcp.workbench.core.slizaanature"/>
+         </enablement>
+      </decorator>
+   </extension>
  
   	<!-- additional pop-up-menus in the project navigator -->
 	<extension point="org.eclipse.ui.menus">

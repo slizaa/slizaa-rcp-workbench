@@ -4,6 +4,7 @@
 package org.slizaa.rcp.workbench.core;
 
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +35,27 @@ public class ProjectExtensionsUtils {
    */
   public static final List<IParserFactory> getProjectExtensions_ParserFactory(SlizaaProject slizaaProject) {
     return getProjectExtensions(slizaaProject, ParserFactory.class, IParserFactory.class);
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param slizaaProject
+   * @return
+   */
+  public static final List<IMappingProvider> getProjectExtensions_MappingProvider() {
+
+    //
+    List<IMappingProvider> result = new ArrayList<>();
+
+    //
+    for (SlizaaProject slizaaProject : SlizaaWorkbenchCore.getSlizaaProjects()) {
+      result.addAll(getProjectExtensions(slizaaProject, SlizaaMappingProvider.class, IMappingProvider.class));
+    }
+
+    //
+    return result;
   }
 
   /**

@@ -6,7 +6,6 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.internal.e4.compatibility.ModeledPageLayout;
 import org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview.HierarchicalGraphViewPart;
-import org.slizaa.neo4j.queryresult.ui.QueryResultViewConstants;
 import org.slizaa.neo4j.ui.currentselection.CurrentSelectionViewPart;
 
 /**
@@ -43,9 +42,9 @@ public class VisualizeDependenciesPerspectiveFactory implements IPerspectiveFact
 
     //
     folderLayout = layout.createFolder(FOLDER_LOWER_LEFT, IPageLayout.BOTTOM, 0.6f, FOLDER_UPPER_LEFT);
-    folderLayout.addView(CurrentSelectionViewPart.PART_ID);
     folderLayout.addView("org.slizaa.ui.xref.ReferencedNodesPart");
     folderLayout.addView("org.slizaa.ui.xref.ReferencingNodesPart");
+    folderLayout.addView(CurrentSelectionViewPart.PART_ID);
 
     // http://stackoverflow.com/questions/26776802/eclipse-rcp-open-a-view-in-the-editor-area-3-8-e4-hybrid
     ((ModeledPageLayout) layout).stackView("org.slizaa.ui.klighd.SlizaaDiagramViewPart", IPageLayout.ID_EDITOR_AREA,
@@ -56,11 +55,10 @@ public class VisualizeDependenciesPerspectiveFactory implements IPerspectiveFact
 
     //
     folderLayout = layout.createFolder(FOLDER_LOWER_RIGHT, IPageLayout.BOTTOM, 0.6f, IPageLayout.ID_EDITOR_AREA);
-    folderLayout.addView("org.slizaa.neo4j.ui.cypherview.CypherViewPart");
-    folderLayout.addView(QueryResultViewConstants.VIEW_ID);
     folderLayout.addView("org.slizaa.ui.dependencytree.DependencyTreePart");
     folderLayout.addView("org.slizaa.ui.dependencytable.DependencyTablePart");
-    folderLayout.addPlaceholder(IConsoleConstants.ID_CONSOLE_VIEW);
+    folderLayout.addView("org.slizaa.neo4j.ui.cypherview.CypherViewPart");
+    folderLayout.addView(IConsoleConstants.ID_CONSOLE_VIEW);
 
     //
     layout.setEditorAreaVisible(true);

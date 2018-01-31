@@ -37,6 +37,7 @@ import org.slizaa.rcp.workbench.core.model.impl.ExtendedSlizaaProjectImpl;
  */
 public final class SlizaaWorkbenchCore {
 
+  /** - */
   public static final String BUNDLE_ID                              = SlizaaWorkbenchCore.class.getPackage().getName();
 
   /** the nature id */
@@ -56,6 +57,18 @@ public final class SlizaaWorkbenchCore {
 
   /** the bundle make directory name */
   public static final String SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME = ".slizaa";
+
+  /**
+   * <p>
+   * </p>
+   */
+  public static final void cleanBuildAll() {
+
+    //
+    for (SlizaaProject slizaaProject : SlizaaWorkbenchCore.getSlizaaProjects()) {
+      slizaaProject.cleanBuild();
+    }
+  }
 
   /**
    * <p>
@@ -125,48 +138,6 @@ public final class SlizaaWorkbenchCore {
     return slizaaProject;
   }
 
-  // /**
-  // * <p>
-  // * Create a simple project with the bundle maker nature.
-  // * </p>
-  // *
-  // * @param projectName
-  // * @return
-  // * @throws CoreException
-  // */
-  // public static IProject getOrCreateSimpleProjectWithSlizaaNature(String projectName) throws CoreException {
-  //
-  // // create the bundle maker project
-  // IProject project = EclipseProjectUtils.getOrCreateSimpleProject(projectName);
-  //
-  // // add the bundle maker nature
-  // SlizaaWorkbenchCore.addSlizaaNature(project);
-  //
-  // // return the newly created project
-  // return project;
-  // }
-
-  // /**
-  // * <p>
-  // * Adds the bundle maker nature to the given project.
-  // * </p>
-  // *
-  // * @param project
-  // * the project
-  // * @throws CoreException
-  // */
-  // public static void addSlizaaNature(IProject project) throws CoreException {
-  // addNature(project, SLIZAA_NATURE_ID);
-  // }
-
-  // public static void addJavaNature(IProject project) throws CoreException {
-  // addNature(project, JavaCore.NATURE_ID);
-  // }
-  //
-  // public static boolean isJavaProject(IProject project) throws CoreException {
-  // return project.hasNature(JavaCore.NATURE_ID);
-  // }
-
   /**
    * <p>
    * </p>
@@ -174,7 +145,6 @@ public final class SlizaaWorkbenchCore {
    * @return
    * @throws CoreException
    */
-  @SuppressWarnings("unchecked")
   public static Collection<SlizaaProject> getSlizaaProjects() {
     //
     IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();

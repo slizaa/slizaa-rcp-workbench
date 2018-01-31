@@ -35,7 +35,6 @@ import org.eclipse.ui.statushandlers.StatusAdapter;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
-import org.slizaa.rcp.workbench.ui.internal.SlizaaImages;
 import org.slizaa.rcp.workbench.ui.internal.SlizaaUiUtils;
 
 /**
@@ -64,7 +63,6 @@ public class NewSlizaaProjectWizard extends Wizard implements INewWizard, IExecu
   public void init(IWorkbench workbench, IStructuredSelection selection) {
     setNeedsProgressMonitor(true);
     setWindowTitle("New slizaa Project");
-    setDefaultPageImageDescriptor(SlizaaImages.SLIZAA_ICON.getImageDescriptor());
   }
 
   /**
@@ -176,7 +174,6 @@ public class NewSlizaaProjectWizard extends Wizard implements INewWizard, IExecu
     }
 
     try {
-
       SlizaaWorkbenchCore.configureSlizaaProject(newProjectHandle);
     }
     //
