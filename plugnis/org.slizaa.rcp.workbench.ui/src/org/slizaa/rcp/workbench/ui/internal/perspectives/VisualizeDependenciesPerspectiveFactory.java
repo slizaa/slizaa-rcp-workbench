@@ -5,7 +5,9 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.internal.e4.compatibility.ModeledPageLayout;
+import org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview.HierarchicalGraphViewPart;
 import org.slizaa.neo4j.queryresult.ui.QueryResultViewConstants;
+import org.slizaa.neo4j.ui.currentselection.CurrentSelectionViewPart;
 
 /**
  * <p>
@@ -37,11 +39,11 @@ public class VisualizeDependenciesPerspectiveFactory implements IPerspectiveFact
     IFolderLayout folderLayout = layout.createFolder(FOLDER_UPPER_LEFT, IPageLayout.LEFT, 0.2f,
         IPageLayout.ID_EDITOR_AREA);
     folderLayout.addView(IPageLayout.ID_PROJECT_EXPLORER);
-    folderLayout.addView("org.slizaa.neo4j.hierarchicalgraph.ui.HierarchicalGraphViewPart");
+    folderLayout.addView(HierarchicalGraphViewPart.PART_ID);
 
     //
     folderLayout = layout.createFolder(FOLDER_LOWER_LEFT, IPageLayout.BOTTOM, 0.6f, FOLDER_UPPER_LEFT);
-    folderLayout.addView("org.slizaa.neo4j.ui.currentselection.CurrentSelectionViewPart");
+    folderLayout.addView(CurrentSelectionViewPart.PART_ID);
     folderLayout.addView("org.slizaa.ui.xref.ReferencedNodesPart");
     folderLayout.addView("org.slizaa.ui.xref.ReferencingNodesPart");
 

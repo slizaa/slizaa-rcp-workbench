@@ -44,7 +44,9 @@ Require-Bundle:
  org.slizaa.rcp.workbench.discovery.ui;bundle-version="1.0.0",
  org.slizaa.scanner.core.spi-api;bundle-version="1.0.0",
  org.slizaa.scanner.core.classpathscanner;bundle-version="1.0.0",
- org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog;bundle-version="1.0.0"
+ org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.graphdb.ui.currentselectionview;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.OpenDsmTreeAction.xml,
  OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.CypherBasedXRefFilterAction.xml,

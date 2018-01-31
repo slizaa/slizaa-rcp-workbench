@@ -15,8 +15,10 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview.HierarchicalGraphViewPart;
 import org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog.MappingsProviderDialog;
 import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.ProjectExtensionsUtils;
@@ -24,6 +26,7 @@ import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.ui.internal.Activator;
 import org.slizaa.rcp.workbench.ui.internal.SlizaaUiUtils;
+import org.slizaa.rcp.workbench.ui.internal.ViewUtils;
 
 /**
  * <p>
@@ -100,9 +103,8 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
     }
 
     //
-    // Display.getDefault().asyncExec(() -> {
-    // MPart part = _partService.findPart(HierarchicalGraphViewPart.PART_ID);
-    // _partService.bringToTop(part);
-    // });
+    Display.getDefault().asyncExec(() -> {
+      ViewUtils.bringViewToTop(HierarchicalGraphViewPart.PART_ID);
+    });
   }
 }
