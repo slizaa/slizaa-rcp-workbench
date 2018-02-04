@@ -3,7 +3,6 @@
  */
 package org.slizaa.rcp.workbench.core.internal.projectconfig;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -11,7 +10,6 @@ import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.internal.builder.IJavaSourceHandler;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem;
 import org.slizaa.rcp.workbench.core.model.impl.ExtendedSlizaaProjectImpl;
 
 /**
@@ -52,30 +50,8 @@ public class SlizaaProjectConfigurationJavaSourceHandler implements IJavaSourceH
       configurationModel.setProject(resource.getProject());
       configurationModel.setResourcePath(resource.getProjectRelativePath().toString());
 
-      // handle problems...
-      if (!configurationModel.getProblems().isEmpty()) {
-
-        try {
-
-          for (SlizaaProjectConfigurationProblem problem : configurationModel.getProblems()) {
-            IMarker marker = resource.createMarker(SlizaaWorkbenchCore.SLIZAA_CONFIGURATION_PROBLEM_MARKER);
-            marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-            marker.setAttribute(IMarker.CHAR_START, problem.getCharStart());
-            marker.setAttribute(IMarker.CHAR_END, problem.getCharEnd());
-            marker.setAttribute(IMarker.MESSAGE, problem.getMessage());
-          }
-
-        } catch (CoreException e) {
-          //
-        }
-      }
-
       //
-      else {
-
-        //
-        addConfigurationModelForResource(resource, configurationModel);
-      }
+      addConfigurationModelForResource(resource, configurationModel);
     }
   }
 

@@ -16,19 +16,15 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.NormalAnnotation;
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.slizaa.rcp.workbench.core.api.annotations.SlizaaConfigurationItem;
-import org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration;
+import org.slizaa.rcp.workbench.core.api.SlizaaProjectConfiguration;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem;
 
 /**
  * <p>
  * </p>
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
- *
  */
 public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
 
@@ -87,21 +83,6 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
   public void endVisit(TypeDeclaration node) {
 
     //
-    if (!_currentSlizaaProjectConfigurationModel.isEmpty() && _currentSlizaaProjectConfigurationModel.peek()
-        .getTypeName().equals(node.resolveBinding().getQualifiedName())) {
-
-      //
-      if (node.getMethods().length == 0) {
-
-        SlizaaProjectConfigurationProblem problem = createSlizaaProjectConfigurationProblem(
-            ProjectConfigurationErrorMessages.NO_CONFIGURATION_ITEMS_SPECIFIED, node.getStartPosition(),
-            node.getStartPosition() + node.getLength());
-
-        _currentSlizaaProjectConfigurationModel.peek().getProblems().add(problem);
-      }
-    }
-
-    //
     this._currentTypeDeclaration.pop();
   }
 
@@ -147,29 +128,6 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
       this._slizaaProjectConfigurationModels.add(configuration);
     }
 
-    //
-    if (SlizaaConfigurationItem.class.getName().equals(annotationTypeName) && this._currentMethodDeclaration != null) {
-
-      //
-      if (this._currentMethodDeclaration.parameters().size() == 0) {
-
-        //
-        SlizaaProjectConfigurationItemModel itemModel = ModelFactory.INSTANCE
-            .createSlizaaProjectConfigurationItemModel();
-
-        //
-        itemModel.setType(this._currentMethodDeclaration.resolveBinding().getReturnType().getQualifiedName());
-        itemModel.setMethodName(this._currentMethodDeclaration.getName().getFullyQualifiedName());
-
-        //
-        this._currentSlizaaProjectConfigurationModel.peek().getConfigurationItems().add(itemModel);
-      }
-      //
-      else {
-        // TODO
-      }
-    }
-
     // only visit types and methods
     return this._currentMethodDeclaration == null;
   }
@@ -204,24 +162,5 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
 
     // only visit types and methods
     return this._currentMethodDeclaration == null;
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @param msg
-   * @param charStart
-   * @param charEnd
-   * @return
-   */
-  private SlizaaProjectConfigurationProblem createSlizaaProjectConfigurationProblem(String msg, int charStart,
-      int charEnd) {
-
-    SlizaaProjectConfigurationProblem result = ModelFactory.INSTANCE.createSlizaaProjectConfigurationProblem();
-    result.setMessage(checkNotNull(msg));
-    result.setCharStart(charStart);
-    result.setCharEnd(charEnd);
-    return result;
   }
 }

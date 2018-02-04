@@ -2,11 +2,20 @@ package org.slizaa.rcp.workbench.ui.internal.perspectives;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IPerspectiveFactory;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PerspectiveAdapter;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.internal.e4.compatibility.ModeledPageLayout;
 
 public class CrossReferencerPerspectiveFactory implements IPerspectiveFactory {
+
+  /** - */
+  private static final String PERSPECTIVE_ID = "org.slizaa.rcp.workbench.ui.CrossReferencerPerspective";
 
   /** - */
   private static final String FOLDER_UPPER_LEFT  = "upperleft";
@@ -42,14 +51,30 @@ public class CrossReferencerPerspectiveFactory implements IPerspectiveFactory {
     folderLayout.addView("org.slizaa.neo4j.ui.cypherview.CypherViewPart");
     folderLayout.addPlaceholder(IConsoleConstants.ID_CONSOLE_VIEW);
 
-    layout.setEditorAreaVisible(true);
-
     //
+    layout.setEditorAreaVisible(true);
     layout.addShowViewShortcut(IPageLayout.ID_PROJECT_EXPLORER);
     layout.addShowViewShortcut("org.slizaa.ui.xref.XRefPart");
     layout.addShowViewShortcut("org.slizaa.ui.klighd.SlizaaDiagramViewPart");
-    // layout.addShowViewShortcut(IPageLayout.ID_PROBLEM_VIEW);
-    // layout.addShowViewShortcut(IPageLayout.ID_PROGRESS_VIEW);
-    // layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
+
+    // ugly workaround: see https://www.eclipse.org/forums/index.php/t/1069917/
+    IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+    workbenchWindow.addPerspectiveListener(new PerspectiveAdapter() {
+
+      @Override
+      public void perspectiveOpened(IWorkbenchPage page, IPerspectiveDescriptor perspective) {
+        super.perspectiveOpened(page, perspective);
+        if (perspective.getId().equals(PERSPECTIVE_ID)) {
+          IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+          IViewReference viewRef = activePage.findViewReference(IPageLayout.ID_PROJECT_EXPLORER, null);
+          if (viewRef != null) {
+            activePage.setPartState(viewRef, IWorkbenchPage.STATE_MINIMIZED);
+          }
+
+          // the work is done so remove this listener
+          PlatformUI.getWorkbench().getActiveWorkbenchWindow().removePerspectiveListener(this);
+        }
+      }
+    });
   }
 }

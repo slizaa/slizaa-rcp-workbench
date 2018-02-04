@@ -229,11 +229,12 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
   /**
    */
   public void setHierachicalGraph(HGRootNode newHierachicalGraph) {
-    HGRootNode oldHierachicalGraph = hierachicalGraph;
-    hierachicalGraph = newHierachicalGraph;
-    if (eNotificationRequired())
+    HGRootNode oldHierachicalGraph = this.hierachicalGraph;
+    this.hierachicalGraph = newHierachicalGraph;
+    if (eNotificationRequired()) {
       eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH,
-          oldHierachicalGraph, hierachicalGraph));
+          oldHierachicalGraph, this.hierachicalGraph));
+    }
   }
 
   /**
@@ -289,8 +290,8 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
         List<ICypherStatement> cypherStatements = Activator.instance().getCypherStatementRegistry().getAllStatements();
 
         // TODO
-        IContentDefinitionProvider contentDefinitionProvider = getConfiguration()
-            .createNewConfigurationItemInstance(IContentDefinitionProvider.class);
+        IContentDefinitionProvider contentDefinitionProvider = getConfiguration().getInjector()
+            .getInstance(IContentDefinitionProvider.class);
 
         // create a new model importer...
         IModelImporterFactory modelImporterFactory = Activator.instance().getModelImporterFactory();

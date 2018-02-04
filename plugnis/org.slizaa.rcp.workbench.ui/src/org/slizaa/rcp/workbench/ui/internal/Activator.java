@@ -10,6 +10,7 @@ package org.slizaa.rcp.workbench.ui.internal;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
+import org.slizaa.rcp.workbench.ui.internal.decorators.SlizaaProjectListener;
 import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 /**
@@ -27,9 +28,14 @@ public class Activator extends AbstractUIPlugin {
   public static final String                                         CROSS_REFERENCER_PERSPECTIVE       = "org.slizaa.rcp.workbench.ui.CrossReferencerPerspective";
 
   // The shared instance
+  /** - */
   private static Activator                                           plugin;
 
+  /** - */
   private ServiceTracker<SlizaaWorkbenchModel, SlizaaWorkbenchModel> _workbenchModelTracker;
+
+  /** - */
+  private SlizaaProjectListener                                      _projectListener;
 
   /*
    * (non-Javadoc)
@@ -45,6 +51,9 @@ public class Activator extends AbstractUIPlugin {
     this._workbenchModelTracker = new ServiceTracker<>(context, SlizaaWorkbenchModel.class, null);
     this._workbenchModelTracker.open();
 
+    //
+    this._projectListener = new SlizaaProjectListener();
+    this._projectListener.initialize();
   }
 
   /*
@@ -59,6 +68,9 @@ public class Activator extends AbstractUIPlugin {
 
     //
     this._workbenchModelTracker.close();
+
+    //
+    this._projectListener.dispose();
   }
 
   /**

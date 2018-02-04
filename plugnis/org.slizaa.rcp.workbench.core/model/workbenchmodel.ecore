@@ -36,28 +36,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectConfigurationModel" eSuperTypes="#//AbstractUserDefinedType">
-    <eOperations name="createNewConfigurationItemInstance">
-      <eGenericType eTypeParameter="#//SlizaaProjectConfigurationModel/createNewConfigurationItemInstance/T"/>
-      <eTypeParameters name="T"/>
-      <eParameters name="type">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
-          <eTypeArguments eTypeParameter="#//SlizaaProjectConfigurationModel/createNewConfigurationItemInstance/T"/>
-        </eGenericType>
-      </eParameters>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="problems" upperBound="-1"
-        eType="#//SlizaaProjectConfigurationProblem"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="configurationItems" upperBound="-1"
-        eType="#//SlizaaProjectConfigurationItemModel"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectConfigurationItemModel">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="methodName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectConfigurationProblem">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="getInjector" eType="#//Injector"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SlizaaProjectExtension" eSuperTypes="#//AbstractUserDefinedType">
     <eOperations name="createNewInstance">
@@ -130,5 +109,7 @@
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ICypherStatement" instanceClassName="org.slizaa.scanner.core.api.cypherregistry.ICypherStatement"/>
   <eClassifiers xsi:type="ecore:EDataType" name="IMappingProvider" instanceClassName="org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Injector" instanceClassName="com.google.inject.Injector"
       serializable="false"/>
 </ecore:EPackage>

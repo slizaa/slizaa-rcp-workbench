@@ -38,24 +38,6 @@ public interface ModelFactory {
   SlizaaProjectConfigurationModel createSlizaaProjectConfigurationModel();
 
   /**
-   * Returns a new object of class '<em>Slizaa Project Configuration Item Model</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Slizaa Project Configuration Item Model</em>'.
-   * @generated
-   */
-  SlizaaProjectConfigurationItemModel createSlizaaProjectConfigurationItemModel();
-
-  /**
-   * Returns a new object of class '<em>Slizaa Project Configuration Problem</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Slizaa Project Configuration Problem</em>'.
-   * @generated
-   */
-  SlizaaProjectConfigurationProblem createSlizaaProjectConfigurationProblem();
-
-  /**
    * Returns a new object of class '<em>Slizaa Project Extension</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

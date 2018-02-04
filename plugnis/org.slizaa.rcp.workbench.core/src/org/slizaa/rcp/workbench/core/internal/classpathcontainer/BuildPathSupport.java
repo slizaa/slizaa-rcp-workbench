@@ -3,10 +3,12 @@ package org.slizaa.rcp.workbench.core.internal.classpathcontainer;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -15,6 +17,7 @@ import org.eclipse.jdt.core.IAccessRule;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.slizaa.rcp.workbench.core.internal.Activator;
 
 /**
@@ -37,6 +40,15 @@ public class BuildPathSupport {
 
     Map<Bundle, Set<Bundle>> spiApiBundles = Activator.instance().getTrackedSpiApiBundles();
     Set<Bundle> mergedResult = new HashSet<Bundle>();
+
+    //
+    List<Bundle> googleGuiceBundles = Arrays
+        .asList(FrameworkUtil.getBundle(BuildPathSupport.class).getBundleContext().getBundles()).stream()
+        .filter(b -> "com.google.inject".equals(b.getSymbolicName()) || "javax.inject".equals(b.getSymbolicName()))
+        .collect(Collectors.toList());
+
+    //
+    mergedResult.addAll(googleGuiceBundles);
 
     spiApiBundles.values().forEach(bundles -> mergedResult.addAll(bundles));
 

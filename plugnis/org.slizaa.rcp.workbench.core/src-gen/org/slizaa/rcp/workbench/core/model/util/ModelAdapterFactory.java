@@ -84,14 +84,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
         return createSlizaaProjectConfigurationModelAdapter();
       }
       @Override
-      public Adapter caseSlizaaProjectConfigurationItemModel(SlizaaProjectConfigurationItemModel object) {
-        return createSlizaaProjectConfigurationItemModelAdapter();
-      }
-      @Override
-      public Adapter caseSlizaaProjectConfigurationProblem(SlizaaProjectConfigurationProblem object) {
-        return createSlizaaProjectConfigurationProblemAdapter();
-      }
-      @Override
       public Adapter caseSlizaaProjectExtension(SlizaaProjectExtension object) {
         return createSlizaaProjectExtensionAdapter();
       }
@@ -170,34 +162,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
   public Adapter createSlizaaProjectConfigurationModelAdapter() {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel <em>Slizaa Project Configuration Item Model</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel
-   * @generated
-   */
-  public Adapter createSlizaaProjectConfigurationItemModelAdapter() {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem <em>Slizaa Project Configuration Problem</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem
-   * @generated
-   */
-  public Adapter createSlizaaProjectConfigurationProblemAdapter() {
     return null;
   }
 

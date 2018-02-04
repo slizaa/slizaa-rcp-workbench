@@ -11,14 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.slizaa.rcp.workbench.core.model.ModelFactory;
-import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
-import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension;
-import org.slizaa.rcp.workbench.core.model.SlizaaProject;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationProblem;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
+import org.slizaa.rcp.workbench.core.model.*;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 
 /**
@@ -69,8 +62,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
     switch (eClass.getClassifierID()) {
       case ModelPackageImpl.SLIZAA_PROJECT: return (EObject)createSlizaaProject();
       case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL: return (EObject)createSlizaaProjectConfigurationModel();
-      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_ITEM_MODEL: return (EObject)createSlizaaProjectConfigurationItemModel();
-      case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_PROBLEM: return (EObject)createSlizaaProjectConfigurationProblem();
       case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION: return (EObject)createSlizaaProjectExtension();
       case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE: return (EObject)createSlizaaExtensionBundle();
       case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION: return (EObject)createSlizaaExtensionBundleExtension();
@@ -129,26 +120,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
   public SlizaaProjectConfigurationModel createSlizaaProjectConfigurationModel() {
     SlizaaProjectConfigurationModelImpl slizaaProjectConfigurationModel = new ExtendedSlizaaProjectConfigurationModelImpl();
     return slizaaProjectConfigurationModel;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public SlizaaProjectConfigurationItemModel createSlizaaProjectConfigurationItemModel() {
-    SlizaaProjectConfigurationItemModelImpl slizaaProjectConfigurationItemModel = new SlizaaProjectConfigurationItemModelImpl();
-    return slizaaProjectConfigurationItemModel;
-  }
-
-  /**
-   * <!-- begin-user-doc --> <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public SlizaaProjectConfigurationProblem createSlizaaProjectConfigurationProblem() {
-    SlizaaProjectConfigurationProblemImpl slizaaProjectConfigurationProblem = new SlizaaProjectConfigurationProblemImpl();
-    return slizaaProjectConfigurationProblem;
   }
 
   /**

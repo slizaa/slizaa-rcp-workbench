@@ -28,11 +28,8 @@ public class SimpleTest {
   public void test() throws Exception {
 
     //
-    assertThat(this._slizaaProjectRule.getSlizaaProject().getConfiguration().getProblems()).hasSize(0);
-
-    //
     IContentDefinitionProvider contentDefinitionProvider = this._slizaaProjectRule.getSlizaaProject().getConfiguration()
-        .createNewConfigurationItemInstance(IContentDefinitionProvider.class);
+        .getInjector().getInstance(IContentDefinitionProvider.class);
 
     //
     assertThat(contentDefinitionProvider).isNotNull();

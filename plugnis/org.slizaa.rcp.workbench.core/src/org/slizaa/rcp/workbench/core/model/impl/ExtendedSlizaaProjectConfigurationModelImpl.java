@@ -3,12 +3,11 @@
  */
 package org.slizaa.rcp.workbench.core.model.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.lang.reflect.Method;
-
 import org.slizaa.rcp.workbench.core.internal.utils.BuildHelper;
-import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 /**
  * <p>
@@ -19,42 +18,40 @@ import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationItemModel;
  */
 public class ExtendedSlizaaProjectConfigurationModelImpl extends SlizaaProjectConfigurationModelImpl {
 
-  @SuppressWarnings("unchecked")
+  private Injector _injector;
+
   @Override
-  public <T> T createNewConfigurationItemInstance(Class<T> type) {
+  public Injector getInjector() {
 
     //
-    String typeName = checkNotNull(type.getName());
-
-    //
-    for (SlizaaProjectConfigurationItemModel configurationItemModel : this.configurationItems) {
-
-      //
-      if (typeName.equals(configurationItemModel.getType())) {
-
-        try {
-
-          //
-          Class<?> configurationClass = BuildHelper.createClassLoader(this.getProject()).loadClass(this.getTypeName());
-
-          Method method = configurationClass.getDeclaredMethod(configurationItemModel.getMethodName());
-
-          Object result = method.invoke(configurationClass.newInstance());
-
-          // TODO
-          return (T) result;
-        }
-        //
-        catch (Exception e) {
-          // TODO
-          e.printStackTrace();
-
-          //
-          return null;
-        }
-      }
+    if (this._injector == null) {
+      this._injector = createInjector();
     }
 
+    //
+    return this._injector;
+  }
+
+  private Injector createInjector() {
+
+    try {
+
+      //
+      Class<?> configurationClass = BuildHelper.createClassLoader(this.getProject()).loadClass(this.getTypeName());
+
+      if (AbstractModule.class.isAssignableFrom(configurationClass)) {
+
+        return Guice.createInjector((AbstractModule) configurationClass.newInstance());
+      }
+    }
+    //
+    catch (Exception e) {
+      // TODO
+      e.printStackTrace();
+
+      //
+      return null;
+    }
     //
     return null;
   }
