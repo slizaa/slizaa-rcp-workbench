@@ -8,6 +8,7 @@
 package org.slizaa.rcp.workbench.ui.internal.handler;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
@@ -21,6 +22,7 @@ import org.slizaa.hierarchicalgraph.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview.HierarchicalGraphViewPart;
 import org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog.MappingsProviderDialog;
 import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
+import org.slizaa.rcp.workbench.core.BundleExtensionsUtils;
 import org.slizaa.rcp.workbench.core.ProjectExtensionsUtils;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
@@ -55,7 +57,9 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
     SlizaaWorkbenchCore.cleanBuildAll();
 
     //
-    List<IMappingProvider> extensions = ProjectExtensionsUtils.getProjectExtensions_MappingProvider();
+    List<IMappingProvider> extensions = new ArrayList<>();
+    extensions.addAll(ProjectExtensionsUtils.getProjectExtensions_MappingProvider());
+    extensions.addAll(BundleExtensionsUtils.getBundleExtensions_MappingProvider());
 
     //
     MappingsProviderDialog dialog = new MappingsProviderDialog(SlizaaUiUtils.getShell(), () -> extensions);
