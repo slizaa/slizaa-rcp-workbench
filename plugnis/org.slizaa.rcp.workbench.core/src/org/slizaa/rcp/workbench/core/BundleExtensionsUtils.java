@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.slizaa.neo4j.hierarchicalgraph.mapping.annotations.SlizaaMappingProvider;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.annotations.SlizaaMappingProvider;
 import org.slizaa.rcp.workbench.core.internal.Activator;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
 import org.slizaa.scanner.core.spi.annotations.ParserFactory;

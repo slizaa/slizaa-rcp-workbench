@@ -18,9 +18,6 @@ import org.osgi.util.tracker.BundleTracker;
  */
 public class SlizaaSpiApiBundleTracker extends BundleTracker<Set<Bundle>> {
 
-  /** - */
-  private static final String SLIZAA_SPI_API_BUNDLE_HEADER = "Slizaa-SpiApi";
-
   /**
    * <p>
    * Creates a new instance of type {@link SlizaaSpiApiBundleTracker}.
@@ -39,11 +36,11 @@ public class SlizaaSpiApiBundleTracker extends BundleTracker<Set<Bundle>> {
   public Set<Bundle> addingBundle(Bundle bundle, BundleEvent event) {
 
     //
-    String slizaaSpiApi = bundle.getHeaders().get(SLIZAA_SPI_API_BUNDLE_HEADER);
+    String slizaaSpiApi = bundle.getHeaders().get(SpiApiClasspathContainerConstants.SLIZAA_SPI_API_BUNDLE_HEADER);
 
     //
     if (slizaaSpiApi != null && !slizaaSpiApi.isEmpty()) {
-      return new OSGiTransitiveClosureResolver(bundle, slizaaSpiApi).computeTransitiveClosure();
+      return new OSGiTransitiveClosureResolver(bundle).computeTransitiveClosure();
     }
     //
     else {

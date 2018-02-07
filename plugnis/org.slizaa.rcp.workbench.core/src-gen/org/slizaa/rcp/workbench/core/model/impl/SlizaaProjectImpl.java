@@ -31,10 +31,8 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.slizaa.hierarchicalgraph.HGRootNode;
-
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
-
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;

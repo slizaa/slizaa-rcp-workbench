@@ -34,11 +34,6 @@ public class ViewUtils {
     EPartService partService = getPartService();
 
     //
-    for (MPart part : partService.getParts()) {
-      System.out.println(part.getElementId());
-    }
-
-    //
     MPart part = partService.findPart(HierarchicalGraphViewPart.PART_ID);
     if (part != null) {
       partService.bringToTop(part);

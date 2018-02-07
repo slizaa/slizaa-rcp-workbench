@@ -27,10 +27,14 @@ Require-Bundle: org.slizaa.scanner.core.classpathscanner;bundle-version="1.0.0",
  org.eclipse.jdt.launching;bundle-version="3.9.51",
  org.eclipse.core.expressions;bundle-version="3.6.0",
  org.slizaa.hierarchicalgraph.graphdb.model;bundle-version="1.0.0",
- com.google.inject;bundle-version="3.0.0"
+ com.google.inject;bundle-version="3.0.0",
+ com.google.gson;bundle-version="2.5.0",
+ org.slizaa.hierarchicalgraph.graphdb.mapping.spi-api;bundle-version="1.0.0"
 Export-Package: org.slizaa.rcp.workbench.core,
  org.slizaa.rcp.workbench.core.model,
  org.slizaa.rcp.workbench.core.model.impl,
  org.slizaa.rcp.workbench.core.model.util
 Bundle-ActivationPolicy: lazy
+
+
 

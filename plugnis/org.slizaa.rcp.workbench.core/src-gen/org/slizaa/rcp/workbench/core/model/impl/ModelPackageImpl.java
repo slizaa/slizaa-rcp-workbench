@@ -22,10 +22,8 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
-
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.neo4j.dbadapter.DbAdapterPackage;
-
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
@@ -651,7 +649,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * The meta object id for the '<em>IMapping Provider</em>' data type.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider
+   * @see org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIMappingProvider()
    * @generated
    */
@@ -971,11 +969,11 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
-   * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#mapToHierachicalGraph(org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider, org.eclipse.core.runtime.IProgressMonitor) <em>Map To Hierachical Graph</em>}' operation.
+   * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#mapToHierachicalGraph(org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider, org.eclipse.core.runtime.IProgressMonitor) <em>Map To Hierachical Graph</em>}' operation.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the '<em>Map To Hierachical Graph</em>' operation.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaProject#mapToHierachicalGraph(org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider, org.eclipse.core.runtime.IProgressMonitor)
+   * @see org.slizaa.rcp.workbench.core.model.SlizaaProject#mapToHierachicalGraph(org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider, org.eclipse.core.runtime.IProgressMonitor)
    * @generated
    */
   public EOperation getSlizaaProject__MapToHierachicalGraph__IMappingProvider_IProgressMonitor() {
@@ -1322,11 +1320,11 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
-   * Returns the meta object for data type '{@link org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider <em>IMapping Provider</em>}'.
+   * Returns the meta object for data type '{@link org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider <em>IMapping Provider</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for data type '<em>IMapping Provider</em>'.
-   * @see org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider
+   * @see org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider
    * @generated
    */
   public EDataType getIMappingProvider() {
@@ -1915,7 +1913,7 @@ public class ModelPackageImpl extends EPackageImpl {
      * The meta object literal for the '<em>IMapping Provider</em>' data type.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider
+     * @see org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider
      * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIMappingProvider()
      * @generated
      */

@@ -16,7 +16,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IAccessRule;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.osgi.util.ManifestElement;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleException;
+import org.osgi.framework.Constants;
 import org.osgi.framework.FrameworkUtil;
 import org.slizaa.rcp.workbench.core.internal.Activator;
 
@@ -63,7 +66,7 @@ public class BuildPathSupport {
         // TODO: handle projects
         if (new File(bundleFile, ".classpath").isFile()) {
 
-          IAccessRule[] accessRules = getAccessRules();
+          IAccessRule[] accessRules = getAccessRules(bundle);
 
           if (jarLocationPath.toFile().exists()) {
             // TODO: resolve .classpath!
@@ -75,7 +78,7 @@ public class BuildPathSupport {
         //
         else {
 
-          IAccessRule[] accessRules = getAccessRules();
+          IAccessRule[] accessRules = getAccessRules(bundle);
 
           if (jarLocationPath.toFile().exists()) {
             entries.add(JavaCore.newLibraryEntry(jarLocationPath, jarLocationPath, new Path("OSGI-OPT\\src"),
@@ -92,10 +95,57 @@ public class BuildPathSupport {
     return entries.toArray(new IClasspathEntry[0]);
   }
 
-  public static IAccessRule[] getAccessRules() {
-    return new IAccessRule[] {
-        // JavaCore.newAccessRule(new Path("junit/"), IAccessRule.K_ACCESSIBLE), //$NON-NLS-1$
-        JavaCore.newAccessRule(new Path("**/*"), IAccessRule.K_ACCESSIBLE) //$NON-NLS-1$
-    };
+  /**
+   * <p>
+   * </p>
+   *
+   * @param bundle
+   * @return
+   */
+  public static IAccessRule[] getAccessRules(Bundle bundle) {
+
+    // first attempt
+    List<IAccessRule> accessRules = extractAccessRulesExportPackageHeader(bundle);
+
+    //
+    return (accessRules == null || accessRules.isEmpty())
+        ? new IAccessRule[] { JavaCore.newAccessRule(new Path("**/*"), IAccessRule.K_ACCESSIBLE) }
+        : accessRules.toArray(new IAccessRule[0]);
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param bundle
+   * @return
+   */
+  private static List<IAccessRule> extractAccessRulesExportPackageHeader(Bundle bundle) {
+
+    try {
+      //
+      String export_package = bundle.getHeaders().get(Constants.EXPORT_PACKAGE);
+
+      ManifestElement[] elements = ManifestElement.parseHeader(Constants.EXPORT_PACKAGE, export_package);
+
+      // create the result
+      List<IAccessRule> accessRules = new ArrayList<>();
+
+      //
+      for (ManifestElement manifestElement : elements) {
+        for (String valueComponent : manifestElement.getValueComponents()) {
+          accessRules.add(JavaCore.newAccessRule(new Path(valueComponent.replace('.', '/')), IAccessRule.K_ACCESSIBLE));
+        }
+      }
+
+      //
+      return accessRules;
+
+    } catch (BundleException e) {
+      e.printStackTrace();
+      // ignore
+    }
+
+    return null;
   }
 }

@@ -1,6 +1,6 @@
 package org.slizaa.rcp.workbench.mappings;
 
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.opencypher.AbstractQueryBasedDependencyProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.opencypher.AbstractQueryBasedDependencyProvider;
 
 public class JType_TypesOnly_DependencyProvider extends AbstractQueryBasedDependencyProvider {
 

@@ -1,7 +1,7 @@
 package org.slizaa.rcp.workbench.mappings;
 
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.ILabelDefinitionProvider;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.labelprovider.AbstractLabelDefinitionProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.AbstractLabelDefinitionProvider;
 
 /**
  * <p>

@@ -1,7 +1,7 @@
 package org.slizaa.rcp.workbench.mappings;
 
-import org.slizaa.neo4j.hierarchicalgraph.mapping.annotations.SlizaaMappingProvider;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider.DefaultMappingProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider.DefaultMappingProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.annotations.SlizaaMappingProvider;
 
 /**
  * <p>

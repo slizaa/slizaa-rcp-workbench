@@ -8,10 +8,8 @@ import org.eclipse.core.resources.IProject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.slizaa.hierarchicalgraph.HGRootNode;
-
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.neo4j.dbadapter.Neo4jClient;
-
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;

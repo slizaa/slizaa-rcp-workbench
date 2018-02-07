@@ -1,6 +1,6 @@
 package org.slizaa.rcp.workbench.mappings;
 
-import org.slizaa.neo4j.hierarchicalgraph.mapping.spi.opencypher.AbstractQueryBasedHierarchyProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.opencypher.AbstractQueryBasedHierarchyProvider;
 
 /**
  * <p>

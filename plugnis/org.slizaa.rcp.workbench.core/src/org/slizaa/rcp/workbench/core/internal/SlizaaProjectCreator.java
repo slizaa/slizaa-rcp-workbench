@@ -131,7 +131,6 @@ public class SlizaaProjectCreator {
     Bundle[] bundles = FrameworkUtil.getBundle(SlizaaProjectCreator.class).getBundleContext().getBundles();
     for (Bundle bundle : bundles) {
       if ("com.google.guava".equals(bundle.getSymbolicName())) {
-        System.out.println(bundle.getLocation());
 
         try {
 

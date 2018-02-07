@@ -16,7 +16,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.NormalAnnotation;
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.annotations.SlizaaMappingProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.annotations.SlizaaMappingProvider;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
 

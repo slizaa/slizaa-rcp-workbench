@@ -10,7 +10,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.util.tracker.BundleTracker;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.annotations.SlizaaMappingProvider;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.annotations.SlizaaMappingProvider;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension;
