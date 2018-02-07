@@ -212,13 +212,22 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int SLIZAA_PROJECT___DISPOSE = 4;
 
   /**
+   * The operation id for the '<em>Is Database Directory Populated</em>' operation.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SLIZAA_PROJECT___IS_DATABASE_DIRECTORY_POPULATED = 5;
+
+  /**
    * The number of operations of the '<em>Slizaa Project</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT_OPERATION_COUNT = 5;
+  public static final int SLIZAA_PROJECT_OPERATION_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.AbstractUserDefinedTypeImpl <em>Abstract User Defined Type</em>}' class.
@@ -994,6 +1003,19 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#isDatabaseDirectoryPopulated() <em>Is Database Directory Populated</em>}' operation.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the '<em>Is Database Directory Populated</em>' operation.
+   * @see org.slizaa.rcp.workbench.core.model.SlizaaProject#isDatabaseDirectoryPopulated()
+   * @generated
+   */
+  public EOperation getSlizaaProject__IsDatabaseDirectoryPopulated() {
+    return slizaaProjectEClass.getEOperations().get(5);
+  }
+
+
+  /**
    * Returns the meta object for class '{@link org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType <em>Abstract User Defined Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1388,6 +1410,7 @@ public class ModelPackageImpl extends EPackageImpl {
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___DISPOSE);
+    createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___IS_DATABASE_DIRECTORY_POPULATED);
 
     abstractUserDefinedTypeEClass = createEClass(ABSTRACT_USER_DEFINED_TYPE);
     createEAttribute(abstractUserDefinedTypeEClass, ABSTRACT_USER_DEFINED_TYPE__PROJECT);
@@ -1485,6 +1508,8 @@ public class ModelPackageImpl extends EPackageImpl {
     addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     initEOperation(getSlizaaProject__Dispose(), null, "dispose", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+    initEOperation(getSlizaaProject__IsDatabaseDirectoryPopulated(), ecorePackage.getEBoolean(), "isDatabaseDirectoryPopulated", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     initEClass(abstractUserDefinedTypeEClass, AbstractUserDefinedType.class, "AbstractUserDefinedType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractUserDefinedType_Project(), this.getIProject(), "project", null, 0, 1, AbstractUserDefinedType.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1678,6 +1703,14 @@ public class ModelPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EOperation SLIZAA_PROJECT___DISPOSE = eINSTANCE.getSlizaaProject__Dispose();
+
+    /**
+     * The meta object literal for the '<em><b>Is Database Directory Populated</b></em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EOperation SLIZAA_PROJECT___IS_DATABASE_DIRECTORY_POPULATED = eINSTANCE.getSlizaaProject__IsDatabaseDirectoryPopulated();
 
     /**
      * The meta object literal for the '{@link org.slizaa.rcp.workbench.core.model.impl.AbstractUserDefinedTypeImpl <em>Abstract User Defined Type</em>}' class.

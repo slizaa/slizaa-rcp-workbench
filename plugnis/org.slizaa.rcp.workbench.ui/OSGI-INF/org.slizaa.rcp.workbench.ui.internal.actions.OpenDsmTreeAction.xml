@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.slizaa.rcp.workbench.ui.internal.actions.OpenDsmTreeAction">
-   <service>
-      <provide interface="org.slizaa.ui.tree.ISlizaaActionContribution"/>
-   </service>
-   <implementation class="org.slizaa.rcp.workbench.ui.internal.actions.OpenDsmTreeAction"/>
-</scr:component>

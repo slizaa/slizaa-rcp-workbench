@@ -40,16 +40,31 @@
    
    <!-- -->
    <extension point="org.eclipse.core.expressions.propertyTesters">
+      <!-- -->
       <propertyTester
          id="org.slizaa.rcp.workbench.core.OSGiServiceTester"
          namespace="org.slizaa.rcp.workbench.core"
          type="java.lang.Object"
          properties="isServiceRegistered"
-         class="org.slizaa.rcp.workbench.core.internal.OSGiServicePropertyTester">
+         class="org.slizaa.rcp.workbench.core.internal.propertyTester.OSGiServicePropertyTester">
+      </propertyTester>
+      <!-- -->
+      <propertyTester
+         id="org.slizaa.rcp.workbench.core.DatabaseDirectoryPopulatedPropertyTester"
+         namespace="org.slizaa.rcp.workbench.core"
+         type="org.eclipse.core.resources.IProject"
+         properties="isDatabaseDirectoryPopulated"
+         class="org.slizaa.rcp.workbench.core.internal.propertyTester.DatabaseDirectoryPopulatedPropertyTester">
+      </propertyTester>
+      <!-- -->
+      <propertyTester
+         id="org.slizaa.rcp.workbench.core.DatabaseClientConnectedPropertyTester"
+         namespace="org.slizaa.rcp.workbench.core"
+         type="org.eclipse.core.resources.IProject"
+         properties="isDatabaseClientConnected"
+         class="org.slizaa.rcp.workbench.core.internal.propertyTester.DatabaseClientConnectedPropertyTester">
       </propertyTester>
    </extension>
-   
-
    
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated workbenchmodel -->

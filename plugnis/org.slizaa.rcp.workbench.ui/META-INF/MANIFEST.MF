@@ -49,7 +49,9 @@ Require-Bundle:
  org.slizaa.hierarchicalgraph.graphdb.ui.currentselectionview;bundle-version="1.0.0",
  org.slizaa.hierarchicalgraph.graphdb.mapping.spi-api;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.OpenDsmTreeAction.xml,
- OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.CypherBasedXRefFilterAction.xml,
- OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.OpenKlighdDiagramTreeAction.xml,
- OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.ResetFilterAction.xml
+Service-Component: OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.CypherBasedXRefFilterAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.ResetFilterAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.OpenDsmToolAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.SlizaaToolsActionGroup.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.OpenKlighdDiagramToolAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.OpenXRefToolAction.xml

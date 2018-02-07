@@ -179,19 +179,19 @@
 		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.StartAndConnectDatabaseHandler"
 			commandId="org.slizaa.core.ui.commands.StartAndConnectDatabaseCommand">
 			<activeWhen>
-				<reference definitionId="slizaaProjectSelected"></reference>
+				<reference definitionId="slizaaProjectSelectedAndDatabaseDirectoryPopulated"></reference>
 			</activeWhen>
 			<enabledWhen>
-				<reference definitionId="slizaaProjectSelected"></reference>
+				<reference definitionId="slizaaProjectSelectedAndDatabaseDirectoryPopulated"></reference>
 			</enabledWhen>
 		</handler>
 		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.CreateHierarchicalGraphHandler"
 			commandId="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand">
 			<activeWhen>
-				<reference definitionId="slizaaProjectSelected"></reference>
+				<reference definitionId="slizaaProjectSelectedAndDatabaseClientConnected"></reference>
 			</activeWhen>
 			<enabledWhen>
-				<reference definitionId="slizaaProjectSelected"></reference>
+				<reference definitionId="slizaaProjectSelectedAndDatabaseClientConnected"></reference>
 			</enabledWhen>
 		</handler>
  	</extension>
@@ -215,7 +215,7 @@
          					value="org.slizaa.scanner.core.api.importer.IModelImporterFactory"/>
 						<test
 							forcePluginActivation="true"
-	         				property="org.slizaa.scanner.core.api.graphdb.IGraphDbFactory"
+	         				property="org.slizaa.rcp.workbench.core.isServiceRegistered"
 	         				value="org.slizaa.scanner.core.api.graphdb.IGraphDbFactory"/>
      				</and>
   				</not>
@@ -243,7 +243,36 @@
 						</adapt>
 				</iterate>
 			</with>
-		</definition>		              
+		</definition>
+		
+		<definition id="slizaaProjectSelectedAndDatabaseDirectoryPopulated">
+			<with variable="selection">
+				<count value="1" />
+				<iterate ifEmpty="false" operator="and">
+						<adapt type="org.eclipse.core.resources.IProject">
+							<and>
+								<reference definitionId="slizaaProjectSelected" />
+								<test property="org.slizaa.rcp.workbench.core.isDatabaseDirectoryPopulated" />
+							</and> 	
+						</adapt>
+				</iterate>
+			</with>
+		</definition>	
+		
+		<definition id="slizaaProjectSelectedAndDatabaseClientConnected">
+			<with variable="selection">
+				<count value="1" />
+				<iterate ifEmpty="false" operator="and">
+						<adapt type="org.eclipse.core.resources.IProject">
+							<and>
+								<reference definitionId="slizaaProjectSelected" />
+								<test property="org.slizaa.rcp.workbench.core.isDatabaseClientConnected" />
+							</and> 	
+						</adapt>
+				</iterate>
+			</with>
+		</definition>	
+				              
 	</extension>
 
 </plugin>

@@ -9,7 +9,6 @@ package org.slizaa.rcp.workbench.core;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.io.File;
 import java.util.Collection;
 
 import org.eclipse.core.resources.IProject;
@@ -38,25 +37,22 @@ import org.slizaa.rcp.workbench.core.model.impl.ExtendedSlizaaProjectImpl;
 public final class SlizaaWorkbenchCore {
 
   /** - */
-  public static final String BUNDLE_ID                              = SlizaaWorkbenchCore.class.getPackage().getName();
+  public static final String BUNDLE_ID                           = SlizaaWorkbenchCore.class.getPackage().getName();
 
   /** the nature id */
-  public static final String SLIZAA_NATURE_ID                       = BUNDLE_ID + ".slizaanature";
+  public static final String SLIZAA_NATURE_ID                    = BUNDLE_ID + ".slizaanature";
 
   /** - */
-  public static final String SLIZAA_CONFIGURATION_PROBLEM_MARKER    = BUNDLE_ID + ".slizaaConfigurationProblem";
+  public static final String SLIZAA_CONFIGURATION_PROBLEM_MARKER = BUNDLE_ID + ".slizaaConfigurationProblem";
 
   /** - */
-  public static final String SLIZAA_BUILDER                         = BUNDLE_ID + ".slizaaProjectConfigurationBuilder";
+  public static final String SLIZAA_BUILDER                      = BUNDLE_ID + ".slizaaProjectConfigurationBuilder";
 
   /** - */
-  public static final String SLIZAA_CONTAINER_ID                    = BUNDLE_ID + ".SLIZAA_SPI_CONTAINER";
+  public static final String SLIZAA_CONTAINER_ID                 = BUNDLE_ID + ".SLIZAA_SPI_CONTAINER";
 
   /** - */
-  public final static IPath  SLIZAA_CONTAINER_PATH                  = new Path(SLIZAA_CONTAINER_ID);
-
-  /** the bundle make directory name */
-  public static final String SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME = ".slizaa";
+  public final static IPath  SLIZAA_CONTAINER_PATH               = new Path(SLIZAA_CONTAINER_ID);
 
   /**
    * <p>
@@ -80,17 +76,6 @@ public final class SlizaaWorkbenchCore {
    */
   public static SlizaaProject configureSlizaaProject(IProject project) throws CoreException {
     return SlizaaProjectCreator.configureSlizaaProject(checkNotNull(project));
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @param project
-   * @return
-   */
-  public static File getDatabaseDirectory(IProject project) {
-    return project.getFolder(SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME).getRawLocation().toFile();
   }
 
   /**

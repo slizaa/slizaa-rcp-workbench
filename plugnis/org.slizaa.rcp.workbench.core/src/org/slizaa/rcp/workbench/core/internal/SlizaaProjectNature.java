@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
+import org.slizaa.rcp.workbench.core.model.impl.ExtendedSlizaaProjectImpl;
 
 /**
  * <p>
@@ -56,7 +57,7 @@ public class SlizaaProjectNature implements IProjectNature {
   public void configure() throws CoreException {
 
     // create the default slizaa directory
-    createFolder(this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME));
+    createFolder(this._project.getFolder(ExtendedSlizaaProjectImpl.SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME));
 
     //
     IProjectDescription desc = this._project.getDescription();
@@ -88,7 +89,7 @@ public class SlizaaProjectNature implements IProjectNature {
   public void deconfigure() throws CoreException {
 
     //
-    this._project.getFolder(SlizaaWorkbenchCore.SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME).delete(true, null);
+    this._project.getFolder(ExtendedSlizaaProjectImpl.SLIZAA_DEFAULT_DATABASE_DIRECTORY_NAME).delete(true, null);
 
     // get the description
     IProjectDescription desc = this._project.getDescription();

@@ -1,4 +1,4 @@
-package org.slizaa.rcp.workbench.ui.internal.actions;
+package org.slizaa.rcp.workbench.ui.internal.actions.tools;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import org.slizaa.rcp.workbench.ui.internal.Activator;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 
 @Component(service = ISlizaaActionContribution.class)
-public class OpenKlighdDiagramTreeAction implements ISlizaaActionContribution {
+public class OpenKlighdDiagramToolAction implements ISlizaaActionContribution {
 
   @Override
   public String getParentGroupId() {
-    return null;
+    return SlizaaToolsActionGroup.ID;
   }
 
   @Override

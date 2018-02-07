@@ -14,6 +14,7 @@
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
     <eOperations name="dispose"/>
+    <eOperations name="isDatabaseDirectoryPopulated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="#//IProject"
         changeable="false" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" eType="#//SlizaaProjectConfigurationModel"
@@ -108,7 +109,7 @@
   <eClassifiers xsi:type="ecore:EDataType" name="IGraphDb" instanceClassName="org.slizaa.scanner.core.api.graphdb.IGraphDb"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="ICypherStatement" instanceClassName="org.slizaa.scanner.core.api.cypherregistry.ICypherStatement"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="IMappingProvider" instanceClassName="org.slizaa.neo4j.hierarchicalgraph.mapping.spi.IMappingProvider"
+  <eClassifiers xsi:type="ecore:EDataType" name="IMappingProvider" instanceClassName="org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Injector" instanceClassName="com.google.inject.Injector"
       serializable="false"/>

@@ -164,4 +164,11 @@ public interface SlizaaProject {
    */
   void dispose();
 
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  boolean isDatabaseDirectoryPopulated();
+
 } // SlizaaProject

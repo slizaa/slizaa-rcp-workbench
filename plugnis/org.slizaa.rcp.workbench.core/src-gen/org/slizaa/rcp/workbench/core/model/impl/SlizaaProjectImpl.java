@@ -350,6 +350,17 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public boolean isDatabaseDirectoryPopulated() {
+    // TODO: implement this method
+    // Ensure that you remove @generated or mark it @generated NOT
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
     switch (featureID) {
@@ -475,6 +486,8 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
       case ModelPackageImpl.SLIZAA_PROJECT___DISPOSE:
         dispose();
         return null;
+      case ModelPackageImpl.SLIZAA_PROJECT___IS_DATABASE_DIRECTORY_POPULATED:
+        return isDatabaseDirectoryPopulated();
     }
     return super.eInvoke(operationID, arguments);
   }

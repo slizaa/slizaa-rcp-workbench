@@ -1,4 +1,4 @@
-package org.slizaa.rcp.workbench.ui.internal.actions;
+package org.slizaa.rcp.workbench.ui.internal.actions.tools;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import org.slizaa.rcp.workbench.ui.internal.Activator;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 
 @Component(service = ISlizaaActionContribution.class)
-public class OpenDsmTreeAction implements ISlizaaActionContribution {
+public class OpenXRefToolAction implements ISlizaaActionContribution {
 
   @Override
   public String getParentGroupId() {
-    return null;
+    return SlizaaToolsActionGroup.ID;
   }
 
   @Override
@@ -49,9 +49,14 @@ public class OpenDsmTreeAction implements ISlizaaActionContribution {
 
     Display.getDefault().syncExec(() -> {
       try {
-        PlatformUI.getWorkbench().showPerspective(Activator.PERSPECTIVE_VISUALIZE_DEPENDENCIES,
+
+        // switch perspective
+        PlatformUI.getWorkbench().showPerspective(Activator.CROSS_REFERENCER_PERSPECTIVE,
             PlatformUI.getWorkbench().getActiveWorkbenchWindow());
-        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.slizaa.ui.dsm.DsmPart");
+
+        // open view
+        PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView("org.slizaa.ui.xref.XRefPart");
+
       } catch (WorkbenchException e) {
         // do nothing
       }
@@ -63,7 +68,7 @@ public class OpenDsmTreeAction implements ISlizaaActionContribution {
    */
   @Override
   public String getLabel(List<?> selection) {
-    return "Open DSM";
+    return "Open Xref";
   }
 
   /**
@@ -71,6 +76,6 @@ public class OpenDsmTreeAction implements ISlizaaActionContribution {
    */
   @Override
   public String getImagePath(List<?> selection) {
-    return "icons/actions/DSM.png";
+    return "icons/actions/XRef.png";
   }
 }

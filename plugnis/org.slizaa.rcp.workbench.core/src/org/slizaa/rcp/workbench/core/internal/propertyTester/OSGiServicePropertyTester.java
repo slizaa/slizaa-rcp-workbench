@@ -1,4 +1,4 @@
-package org.slizaa.rcp.workbench.core.internal;
+package org.slizaa.rcp.workbench.core.internal.propertyTester;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.osgi.framework.BundleContext;
