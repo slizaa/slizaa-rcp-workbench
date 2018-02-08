@@ -62,6 +62,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
     switch (eClass.getClassifierID()) {
       case ModelPackageImpl.SLIZAA_PROJECT: return (EObject)createSlizaaProject();
       case ModelPackageImpl.SLIZAA_PROJECT_CONFIGURATION_MODEL: return (EObject)createSlizaaProjectConfigurationModel();
+      case ModelPackageImpl.PROBLEM: return (EObject)createProblem();
       case ModelPackageImpl.SLIZAA_PROJECT_EXTENSION: return (EObject)createSlizaaProjectExtension();
       case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE: return (EObject)createSlizaaExtensionBundle();
       case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION: return (EObject)createSlizaaExtensionBundleExtension();
@@ -120,6 +121,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
   public SlizaaProjectConfigurationModel createSlizaaProjectConfigurationModel() {
     SlizaaProjectConfigurationModelImpl slizaaProjectConfigurationModel = new ExtendedSlizaaProjectConfigurationModelImpl();
     return slizaaProjectConfigurationModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Problem createProblem() {
+    ProblemImpl problem = new ProblemImpl();
+    return problem;
   }
 
   /**

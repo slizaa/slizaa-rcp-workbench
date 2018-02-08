@@ -9,5 +9,5 @@ package org.slizaa.rcp.workbench.core.internal.projectconfig;
 public interface ProjectConfigurationErrorMessages {
 
   /** - */
-  public static final String NO_CONFIGURATION_ITEMS_SPECIFIED = "No configuration items specified.";
+  public static final String NO_OR_INVALID_SUPERTYPE = "Configuration class '%s' must extend class 'com.google.inject.AbstractModule'.";
 }

@@ -11,6 +11,7 @@ import java.util.Stack;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.MarkerAnnotation;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.NormalAnnotation;
@@ -18,6 +19,7 @@ import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.slizaa.rcp.workbench.core.api.SlizaaProjectConfiguration;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
+import org.slizaa.rcp.workbench.core.model.Problem;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 
 /**
@@ -81,6 +83,38 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
    */
   @Override
   public void endVisit(TypeDeclaration node) {
+
+    // get the qualified name
+    String qualifiedName = node.resolveBinding().getQualifiedName();
+
+    //
+    if (!this._currentSlizaaProjectConfigurationModel.isEmpty()
+        && this._currentSlizaaProjectConfigurationModel.peek().getTypeName().equals(qualifiedName)) {
+
+      //
+      boolean extendsAbstractModule = false;
+      ITypeBinding superClass = node.getSuperclassType() != null ? node.getSuperclassType().resolveBinding() : null;
+
+      //
+      while (!extendsAbstractModule && superClass != null) {
+        extendsAbstractModule = "com.google.inject.AbstractModule".equals(superClass.getQualifiedName());
+        if (!extendsAbstractModule) {
+          superClass = superClass.getSuperclass();
+        }
+      }
+
+      //
+      if (!extendsAbstractModule) {
+
+        //
+        Problem problem = createProblem(
+            String.format(ProjectConfigurationErrorMessages.NO_OR_INVALID_SUPERTYPE, qualifiedName),
+            node.getStartPosition(), node.getStartPosition() + node.getLength());
+
+        //
+        this._currentSlizaaProjectConfigurationModel.peek().getProblems().add(problem);
+      }
+    }
 
     //
     this._currentTypeDeclaration.pop();
@@ -162,5 +196,23 @@ public class SlizaaProjectConfigurationAstVisitor extends ASTVisitor {
 
     // only visit types and methods
     return this._currentMethodDeclaration == null;
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param msg
+   * @param charStart
+   * @param charEnd
+   * @return
+   */
+  private Problem createProblem(String msg, int charStart, int charEnd) {
+
+    Problem result = ModelFactory.INSTANCE.createProblem();
+    result.setMessage(checkNotNull(msg));
+    result.setCharStart(charStart);
+    result.setCharEnd(charEnd);
+    return result;
   }
 }

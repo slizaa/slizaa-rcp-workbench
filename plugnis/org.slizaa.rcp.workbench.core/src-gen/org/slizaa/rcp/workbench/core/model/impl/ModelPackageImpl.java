@@ -26,6 +26,7 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.neo4j.dbadapter.DbAdapterPackage;
 import org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
+import org.slizaa.rcp.workbench.core.model.Problem;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
 import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
@@ -322,13 +323,22 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int SLIZAA_PROJECT_CONFIGURATION_MODEL__TYPE_NAME = ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME;
 
   /**
+   * The feature id for the '<em><b>Problems</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS = ABSTRACT_USER_DEFINED_TYPE_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Slizaa Project Configuration Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT_CONFIGURATION_MODEL_FEATURE_COUNT = ABSTRACT_USER_DEFINED_TYPE_FEATURE_COUNT + 0;
+  public static final int SLIZAA_PROJECT_CONFIGURATION_MODEL_FEATURE_COUNT = ABSTRACT_USER_DEFINED_TYPE_FEATURE_COUNT + 1;
 
   /**
    * The operation id for the '<em>Get Injector</em>' operation.
@@ -349,6 +359,61 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int SLIZAA_PROJECT_CONFIGURATION_MODEL_OPERATION_COUNT = ABSTRACT_USER_DEFINED_TYPE_OPERATION_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.ProblemImpl <em>Problem</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.slizaa.rcp.workbench.core.model.impl.ProblemImpl
+   * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getProblem()
+   * @generated
+   */
+  public static final int PROBLEM = 3;
+
+  /**
+   * The feature id for the '<em><b>Message</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROBLEM__MESSAGE = 0;
+
+  /**
+   * The feature id for the '<em><b>Char Start</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROBLEM__CHAR_START = 1;
+
+  /**
+   * The feature id for the '<em><b>Char End</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROBLEM__CHAR_END = 2;
+
+  /**
+   * The number of structural features of the '<em>Problem</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROBLEM_FEATURE_COUNT = 3;
+
+  /**
+   * The number of operations of the '<em>Problem</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int PROBLEM_OPERATION_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectExtensionImpl <em>Slizaa Project Extension</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -356,7 +421,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getSlizaaProjectExtension()
    * @generated
    */
-  public static final int SLIZAA_PROJECT_EXTENSION = 3;
+  public static final int SLIZAA_PROJECT_EXTENSION = 4;
 
   /**
    * The feature id for the '<em><b>Project</b></em>' attribute.
@@ -429,7 +494,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getSlizaaExtensionBundle()
    * @generated
    */
-  public static final int SLIZAA_EXTENSION_BUNDLE = 4;
+  public static final int SLIZAA_EXTENSION_BUNDLE = 5;
 
   /**
    * The feature id for the '<em><b>Defined Extensions</b></em>' map.
@@ -475,7 +540,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getSlizaaExtensionBundleExtension()
    * @generated
    */
-  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION = 5;
+  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION = 6;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -530,7 +595,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getAnnotationTypeToSlizaaProjectExtensionMap()
    * @generated
    */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP = 6;
+  public static final int ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP = 7;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -576,7 +641,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getAnnotationTypeToSlizaaBundleExtensionMap()
    * @generated
    */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP = 7;
+  public static final int ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP = 8;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -622,7 +687,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIProgressMonitor()
    * @generated
    */
-  public static final int IPROGRESS_MONITOR = 8;
+  public static final int IPROGRESS_MONITOR = 9;
 
   /**
    * The meta object id for the '<em>IProject</em>' data type.
@@ -632,7 +697,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIProject()
    * @generated
    */
-  public static final int IPROJECT = 9;
+  public static final int IPROJECT = 10;
 
   /**
    * The meta object id for the '<em>IGraph Db</em>' data type.
@@ -642,7 +707,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIGraphDb()
    * @generated
    */
-  public static final int IGRAPH_DB = 10;
+  public static final int IGRAPH_DB = 11;
 
   /**
    * The meta object id for the '<em>ICypher Statement</em>' data type.
@@ -652,7 +717,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getICypherStatement()
    * @generated
    */
-  public static final int ICYPHER_STATEMENT = 11;
+  public static final int ICYPHER_STATEMENT = 12;
 
   /**
    * The meta object id for the '<em>IMapping Provider</em>' data type.
@@ -662,7 +727,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIMappingProvider()
    * @generated
    */
-  public static final int IMAPPING_PROVIDER = 12;
+  public static final int IMAPPING_PROVIDER = 13;
 
   /**
    * The meta object id for the '<em>Injector</em>' data type.
@@ -672,7 +737,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getInjector()
    * @generated
    */
-  public static final int INJECTOR = 13;
+  public static final int INJECTOR = 14;
 
   /**
    * <!-- begin-user-doc -->
@@ -694,6 +759,13 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    */
   private EClass slizaaProjectConfigurationModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass problemEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1079,6 +1151,20 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the reference list '{@link org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel#getProblems <em>Problems</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Problems</em>'.
+   * @see org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel#getProblems()
+   * @see #getSlizaaProjectConfigurationModel()
+   * @generated
+   */
+  public EReference getSlizaaProjectConfigurationModel_Problems() {
+    return (EReference)slizaaProjectConfigurationModelEClass.getEStructuralFeatures().get(0);
+  }
+
+
+  /**
    * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel#getInjector() <em>Get Injector</em>}' operation.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1088,6 +1174,61 @@ public class ModelPackageImpl extends EPackageImpl {
    */
   public EOperation getSlizaaProjectConfigurationModel__GetInjector() {
     return slizaaProjectConfigurationModelEClass.getEOperations().get(0);
+  }
+
+
+  /**
+   * Returns the meta object for class '{@link org.slizaa.rcp.workbench.core.model.Problem <em>Problem</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Problem</em>'.
+   * @see org.slizaa.rcp.workbench.core.model.Problem
+   * @generated
+   */
+  public EClass getProblem() {
+    return problemEClass;
+  }
+
+
+  /**
+   * Returns the meta object for the attribute '{@link org.slizaa.rcp.workbench.core.model.Problem#getMessage <em>Message</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Message</em>'.
+   * @see org.slizaa.rcp.workbench.core.model.Problem#getMessage()
+   * @see #getProblem()
+   * @generated
+   */
+  public EAttribute getProblem_Message() {
+    return (EAttribute)problemEClass.getEStructuralFeatures().get(0);
+  }
+
+
+  /**
+   * Returns the meta object for the attribute '{@link org.slizaa.rcp.workbench.core.model.Problem#getCharStart <em>Char Start</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Char Start</em>'.
+   * @see org.slizaa.rcp.workbench.core.model.Problem#getCharStart()
+   * @see #getProblem()
+   * @generated
+   */
+  public EAttribute getProblem_CharStart() {
+    return (EAttribute)problemEClass.getEStructuralFeatures().get(1);
+  }
+
+
+  /**
+   * Returns the meta object for the attribute '{@link org.slizaa.rcp.workbench.core.model.Problem#getCharEnd <em>Char End</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Char End</em>'.
+   * @see org.slizaa.rcp.workbench.core.model.Problem#getCharEnd()
+   * @see #getProblem()
+   * @generated
+   */
+  public EAttribute getProblem_CharEnd() {
+    return (EAttribute)problemEClass.getEStructuralFeatures().get(2);
   }
 
 
@@ -1418,7 +1559,13 @@ public class ModelPackageImpl extends EPackageImpl {
     createEAttribute(abstractUserDefinedTypeEClass, ABSTRACT_USER_DEFINED_TYPE__TYPE_NAME);
 
     slizaaProjectConfigurationModelEClass = createEClass(SLIZAA_PROJECT_CONFIGURATION_MODEL);
+    createEReference(slizaaProjectConfigurationModelEClass, SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS);
     createEOperation(slizaaProjectConfigurationModelEClass, SLIZAA_PROJECT_CONFIGURATION_MODEL___GET_INJECTOR);
+
+    problemEClass = createEClass(PROBLEM);
+    createEAttribute(problemEClass, PROBLEM__MESSAGE);
+    createEAttribute(problemEClass, PROBLEM__CHAR_START);
+    createEAttribute(problemEClass, PROBLEM__CHAR_END);
 
     slizaaProjectExtensionEClass = createEClass(SLIZAA_PROJECT_EXTENSION);
     createEAttribute(slizaaProjectExtensionEClass, SLIZAA_PROJECT_EXTENSION__ANNOTATION_TYPE);
@@ -1517,8 +1664,14 @@ public class ModelPackageImpl extends EPackageImpl {
     initEAttribute(getAbstractUserDefinedType_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, AbstractUserDefinedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(slizaaProjectConfigurationModelEClass, SlizaaProjectConfigurationModel.class, "SlizaaProjectConfigurationModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSlizaaProjectConfigurationModel_Problems(), this.getProblem(), null, "problems", null, 0, -1, SlizaaProjectConfigurationModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEOperation(getSlizaaProjectConfigurationModel__GetInjector(), this.getInjector(), "getInjector", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+    initEClass(problemEClass, Problem.class, "Problem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getProblem_Message(), ecorePackage.getEString(), "message", null, 0, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProblem_CharStart(), ecorePackage.getEInt(), "charStart", null, 0, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getProblem_CharEnd(), ecorePackage.getEInt(), "charEnd", null, 0, 1, Problem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(slizaaProjectExtensionEClass, SlizaaProjectExtension.class, "SlizaaProjectExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     EGenericType g1 = createEGenericType(ecorePackage.getEJavaClass());
@@ -1757,12 +1910,54 @@ public class ModelPackageImpl extends EPackageImpl {
     public static final EClass SLIZAA_PROJECT_CONFIGURATION_MODEL = eINSTANCE.getSlizaaProjectConfigurationModel();
 
     /**
+     * The meta object literal for the '<em><b>Problems</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EReference SLIZAA_PROJECT_CONFIGURATION_MODEL__PROBLEMS = eINSTANCE.getSlizaaProjectConfigurationModel_Problems();
+
+    /**
      * The meta object literal for the '<em><b>Get Injector</b></em>' operation.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     public static final EOperation SLIZAA_PROJECT_CONFIGURATION_MODEL___GET_INJECTOR = eINSTANCE.getSlizaaProjectConfigurationModel__GetInjector();
+
+    /**
+     * The meta object literal for the '{@link org.slizaa.rcp.workbench.core.model.impl.ProblemImpl <em>Problem</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.slizaa.rcp.workbench.core.model.impl.ProblemImpl
+     * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getProblem()
+     * @generated
+     */
+    public static final EClass PROBLEM = eINSTANCE.getProblem();
+
+    /**
+     * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EAttribute PROBLEM__MESSAGE = eINSTANCE.getProblem_Message();
+
+    /**
+     * The meta object literal for the '<em><b>Char Start</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EAttribute PROBLEM__CHAR_START = eINSTANCE.getProblem_CharStart();
+
+    /**
+     * The meta object literal for the '<em><b>Char End</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EAttribute PROBLEM__CHAR_END = eINSTANCE.getProblem_CharEnd();
 
     /**
      * The meta object literal for the '{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaProjectExtensionImpl <em>Slizaa Project Extension</em>}' class.
