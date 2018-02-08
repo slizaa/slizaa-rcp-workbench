@@ -1,22 +1,22 @@
 package org.slizaa.examplecontent;
 
+import com.google.inject.Provides;
 import java.io.File;
-
-import org.slizaa.rcp.workbench.core.api.annotations.SlizaaConfigurationItem;
-import org.slizaa.rcp.workbench.core.api.annotations.SlizaaProjectConfiguration;
+import org.slizaa.rcp.workbench.core.api.AbstactSlizaaProjectConfigurationModule;
+import org.slizaa.rcp.workbench.core.api.SlizaaProjectConfiguration;
 import org.slizaa.scanner.core.contentdefinition.ContentDefinitionProviderFactory;
 import org.slizaa.scanner.core.spi.contentdefinition.IContentDefinitionProvider;
-
+ 
 @SlizaaProjectConfiguration
-public class ProjectConf {
+public class ProjectConf extends AbstactSlizaaProjectConfigurationModule {
 
-	@SlizaaConfigurationItem
-	public IContentDefinitionProvider getContentDefinitionProvider() {
-	
-		// the content directory (relative to the project location)
-		File contentDirectory = new File(System.getProperty("slizaa.project.directory"), "_content");
-	
-		// create the content definition provider
-		return ContentDefinitionProviderFactory.fromDirectory(contentDirectory);
-	}
+  @Provides
+  public IContentDefinitionProvider getContentDefinitionProvider() {
+
+    // the content directory (relative to the project location)
+    File contentDirectory = new File(System.getProperty("slizaa.project.directory"), "_content");
+
+    // create the content definition provider
+    return ContentDefinitionProviderFactory.fromDirectory(contentDirectory);
+  }
 }
