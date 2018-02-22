@@ -51,5 +51,13 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+         
+   <!-- TODO: REMOVE FROM FEATURE! -->
+   <plugin
+         id="org.slizaa.rcp.workbench.mappings"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
