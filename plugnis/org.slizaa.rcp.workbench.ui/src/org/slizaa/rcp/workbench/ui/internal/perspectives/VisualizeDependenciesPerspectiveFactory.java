@@ -55,9 +55,9 @@ public class VisualizeDependenciesPerspectiveFactory implements IPerspectiveFact
 
     //
     folderLayout = layout.createFolder(FOLDER_LOWER_RIGHT, IPageLayout.BOTTOM, 0.6f, IPageLayout.ID_EDITOR_AREA);
+    folderLayout.addView("org.slizaa.neo4j.ui.cypherview.CypherViewPart");
     folderLayout.addView("org.slizaa.ui.dependencytree.DependencyTreePart");
     folderLayout.addView("org.slizaa.ui.dependencytable.DependencyTablePart");
-    folderLayout.addView("org.slizaa.neo4j.ui.cypherview.CypherViewPart");
     folderLayout.addView(IConsoleConstants.ID_CONSOLE_VIEW);
 
     //
