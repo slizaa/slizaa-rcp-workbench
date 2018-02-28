@@ -9,7 +9,6 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.ui.PlatformUI;
-import org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview.HierarchicalGraphViewPart;
 
 /**
  * <p>
@@ -34,7 +33,7 @@ public class ViewUtils {
     EPartService partService = getPartService();
 
     //
-    MPart part = partService.findPart(HierarchicalGraphViewPart.PART_ID);
+    MPart part = partService.findPart(partId);
     if (part != null) {
       partService.bringToTop(part);
     }
