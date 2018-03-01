@@ -1,5 +1,8 @@
 package org.slizaa.rcp.workbench.mappings;
 
+import java.util.function.Function;
+
+import org.slizaa.hierarchicalgraph.HGNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.ILabelDefinitionProvider;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.AbstractLabelDefinitionProvider;
 
@@ -12,7 +15,10 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.labelprovider.AbstractLa
 public class JType_LabelProvider extends AbstractLabelDefinitionProvider implements ILabelDefinitionProvider {
 
   /** - */
-  private boolean _showFullyQualifiedName;
+  private boolean                     _showFullyQualifiedName;
+
+  /** - */
+  private final MethodSignatureParser _methodSignatureParser;
 
   /**
    * <p>
@@ -22,6 +28,9 @@ public class JType_LabelProvider extends AbstractLabelDefinitionProvider impleme
    */
   public JType_LabelProvider(boolean showFullyQualifiedName) {
     this._showFullyQualifiedName = showFullyQualifiedName;
+
+    //
+    _methodSignatureParser = new MethodSignatureParser();
   }
 
   /**
@@ -33,7 +42,7 @@ public class JType_LabelProvider extends AbstractLabelDefinitionProvider impleme
     // @formatter:off
 		return exclusiveChoice().
 
-		// Module
+		    // Module
 				when(nodeHasLabel("Module")).then(handleModule()).
 
 				// Package
@@ -45,6 +54,12 @@ public class JType_LabelProvider extends AbstractLabelDefinitionProvider impleme
 				// Type
 				when(nodeHasLabel("Type")).then(handleType()).
 
+        // Method
+        when(nodeHasLabel("Method")).then(handleMethod()).
+
+        // Field
+        when(nodeHasLabel("Field")).then(handleField()).
+				
 				// all other nodes
 				otherwise(setBaseImage(fromClasspath("icons/jar_obj.png")).and(setLabelText(propertyValue("name"))));
 
@@ -120,4 +135,60 @@ public class JType_LabelProvider extends AbstractLabelDefinitionProvider impleme
 		// @formatter:on
   }
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  protected LabelDefinitionProcessor handleMethod() {
+
+    // @formatter:off
+    return executeAll(
+
+        setLabelText(convertMethodSignature(propertyValue("fqn"))),
+
+        when(nodeHasPropertyWithValue("visibility", "public")).then(setBaseImage(fromClasspath("icons/methpub_obj.png"))),
+
+        when(nodeHasPropertyWithValue("visibility", "private")).then(setBaseImage(fromClasspath("icons/methpri_obj.png"))),
+
+        when(nodeHasPropertyWithValue("visibility", "protected")).then(setBaseImage(fromClasspath("icons/methpri_obj.png"))),
+
+        when(nodeHasPropertyWithValue("visibility", "default")).then(setBaseImage(fromClasspath("icons/methdef_obj.png"))));
+    // @formatter:on
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  protected LabelDefinitionProcessor handleField() {
+
+    // @formatter:off
+    return executeAll(
+
+        setLabelText(propertyValue("fqn")),
+
+        when(nodeHasPropertyWithValue("visibility", "public")).then(setBaseImage(fromClasspath("icons/field_public_obj.png"))),
+
+        when(nodeHasPropertyWithValue("visibility", "private")).then(setBaseImage(fromClasspath("icons/field_private_obj.png"))),
+
+        when(nodeHasPropertyWithValue("visibility", "protected")).then(setBaseImage(fromClasspath("icons/field_protected_obj.png"))),
+
+        when(nodeHasPropertyWithValue("visibility", "default")).then(setBaseImage(fromClasspath("icons/field_default_obj.png"))));
+    // @formatter:on
+  }
+  
+  /**
+   * <p>
+   * </p>
+   *
+   * @param key
+   * @return
+   */
+  protected Function<HGNode, String> convertMethodSignature(Function<HGNode, String> function) {
+    return (node) -> _methodSignatureParser.parse(function.apply(node));
+  }
 }
