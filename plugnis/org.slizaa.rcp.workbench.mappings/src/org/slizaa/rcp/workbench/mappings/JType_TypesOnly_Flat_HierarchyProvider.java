@@ -16,6 +16,7 @@ public class JType_TypesOnly_Flat_HierarchyProvider extends AbstractQueryBasedHi
    *
    * @return
    */
+  @Override
   protected String[] toplevelNodeIdQueries() {
     return new String[] { "Match (module:Module) Return id(module) as id" };
   }
@@ -26,12 +27,14 @@ public class JType_TypesOnly_Flat_HierarchyProvider extends AbstractQueryBasedHi
    *
    * @return
    */
+  @Override
   protected String[] parentChildNodeIdsQueries() {
     return new String[] {
         "Match (module:Module)-[:CONTAINS]->(d:Directory) WHERE d.isEmpty=false Return DISTINCT id(module), id(d)",
         "Match (d:Directory)-[:CONTAINS]->(r:Resource) Return id(d), id(r)",
-        "Match (r:Resource)-[:CONTAINS]->(t:Type) Return id(r), id(t)",
-        "Match (t:Type)-[:CONTAINS]->(m:Method) Return id(t), id(m)",
-        "Match (t:Type)-[:CONTAINS]->(f:Field) Return id(t), id(f)"};
+        "Match (r:Resource)-[:CONTAINS]->(t:Type) Return id(r), id(t)"
+        // ,"Match (t:Type)-[:CONTAINS]->(m:Method) Return id(t), id(m)",
+        // "Match (t:Type)-[:CONTAINS]->(f:Field) Return id(t), id(f)"
+    };
   }
 }
