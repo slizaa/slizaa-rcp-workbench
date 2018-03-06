@@ -16,8 +16,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -25,11 +25,11 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 import org.slizaa.rcp.workbench.core.EclipseProjectUtils;
 import org.slizaa.rcp.workbench.core.SlizaaWorkbenchCore;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 
+import com.google.common.base.Preconditions;
 import com.google.common.io.CharStreams;
 
 /**
@@ -61,6 +61,9 @@ public class SlizaaProjectCreator {
     // configure as JDT project
     configureJDT(project);
 
+    // create example project content
+    createDefaultContent(project);
+
     // return the project
     return result;
   }
@@ -91,9 +94,6 @@ public class SlizaaProjectCreator {
     // create folder by using resources package
     IFolder folder = project.getFolder("src");
     folder.create(true, true, null);
-
-    //
-    createDefaultContent(project);
   }
 
   /**
@@ -122,36 +122,25 @@ public class SlizaaProjectCreator {
     String content = loadFileContentToString("/" + SlizaaProjectCreator.class.getPackage().getName().replace('.', '/')
         + "/SlizaaProjectCreator_ProjectConf.template");
 
-    ICompilationUnit cu = fragment.createCompilationUnit("ProjectConf.java", content, false, null);
+    fragment.createCompilationUnit("ProjectConf.java", content, false, null);
 
     // create content folder
     IFolder contentFolder = project.getFolder("_content");
     contentFolder.create(true, true, null);
 
-    Bundle[] bundles = FrameworkUtil.getBundle(SlizaaProjectCreator.class).getBundleContext().getBundles();
-    for (Bundle bundle : bundles) {
-      if ("com.google.guava".equals(bundle.getSymbolicName())) {
+    //
+    URL exampleLocation = Preconditions.class.getProtectionDomain().getCodeSource().getLocation();
+    Bundle bundle = Platform.getBundle("com.google.guava");
+    try {
 
-        try {
-
-          IFile file = contentFolder.getFile(bundle.getSymbolicName() + "_" + bundle.getVersion() + ".jar");
-
-          String location = bundle.getLocation();
-          if (location.startsWith("reference:")) {
-            location = location.substring("reference:".length());
-          }
-
-          URL url = new URL(location);
-
-          try (InputStream inputStream = url.openStream()) {
-            file.create(inputStream, true, null);
-          }
-
-        } catch (Exception e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
+      IFile file = contentFolder.getFile(bundle.getSymbolicName() + "_" + bundle.getVersion() + ".jar");
+      try (InputStream inputStream = exampleLocation.openStream()) {
+        file.create(inputStream, true, null);
       }
+
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     }
   }
 
