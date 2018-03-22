@@ -38,13 +38,10 @@ public class VisualizeDependenciesPerspectiveFactory implements IPerspectiveFact
     IFolderLayout folderLayout = layout.createFolder(FOLDER_UPPER_LEFT, IPageLayout.LEFT, 0.2f,
         IPageLayout.ID_EDITOR_AREA);
     folderLayout.addView(IPageLayout.ID_PROJECT_EXPLORER);
-    folderLayout.addView(HierarchicalGraphViewPart.PART_ID);
 
     //
-    folderLayout = layout.createFolder(FOLDER_LOWER_LEFT, IPageLayout.BOTTOM, 0.6f, FOLDER_UPPER_LEFT);
-    folderLayout.addView(CurrentSelectionViewPart.PART_ID);
-    folderLayout.addView("org.slizaa.ui.xref.ReferencedNodesPart");
-    folderLayout.addView("org.slizaa.ui.xref.ReferencingNodesPart");
+    folderLayout = layout.createFolder(FOLDER_LOWER_LEFT, IPageLayout.BOTTOM, 0.35f, FOLDER_UPPER_LEFT);
+    folderLayout.addView(HierarchicalGraphViewPart.PART_ID);
 
     // http://stackoverflow.com/questions/26776802/eclipse-rcp-open-a-view-in-the-editor-area-3-8-e4-hybrid
     ((ModeledPageLayout) layout).stackView("org.slizaa.ui.klighd.SlizaaDiagramViewPart", IPageLayout.ID_EDITOR_AREA,
@@ -59,6 +56,7 @@ public class VisualizeDependenciesPerspectiveFactory implements IPerspectiveFact
     folderLayout.addView("org.slizaa.ui.dependencytree.DependencyTreePart");
     folderLayout.addView("org.slizaa.ui.dependencytable.DependencyTablePart");
     folderLayout.addView(IConsoleConstants.ID_CONSOLE_VIEW);
+    folderLayout.addView(CurrentSelectionViewPart.PART_ID);
 
     //
     layout.setEditorAreaVisible(true);
