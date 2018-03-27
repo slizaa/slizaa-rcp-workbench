@@ -33,9 +33,8 @@ public class JType_TypesOnly_Hierarchical_HierarchyProvider extends AbstractQuer
         "Match (module:Module)-[:CONTAINS]->(d:Directory) Where Not (:Directory)-[:CONTAINS]->(d) Return id(module), id(d)",
         "Match (d1:Directory)-[:CONTAINS]->(d2:Directory) Return id(d1), id(d2)",
         "Match (d:Directory)-[:CONTAINS]->(r:Resource) Return id(d), id(r)",
-        "Match (r:Resource)-[:CONTAINS]->(t:Type) Return id(r), id(t)"
-        // ,"Match (t:Type)-[:CONTAINS]->(m:Method) Return id(t), id(m)",
-        // "Match (t:Type)-[:CONTAINS]->(f:Field) Return id(t), id(f)"
-    };
+        "Match (r:Resource)-[:CONTAINS]->(t:Type) Return id(r), id(t)",
+        "Match (t:Type)-[:CONTAINS]->(m:Method) Return id(t), id(m)",
+        "Match (t:Type)-[:CONTAINS]->(f:Field) Return id(t), id(f)" };
   }
 }
