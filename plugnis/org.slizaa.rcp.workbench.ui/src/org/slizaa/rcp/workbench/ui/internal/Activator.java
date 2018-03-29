@@ -7,10 +7,16 @@
  ******************************************************************************/
 package org.slizaa.rcp.workbench.ui.internal;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slizaa.rcp.workbench.ui.internal.decorators.SlizaaProjectListener;
+import org.slizaa.workbench.model.ModelPackage;
 import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 /**
@@ -27,8 +33,7 @@ public class Activator extends AbstractUIPlugin {
   /** - */
   public static final String                                         CROSS_REFERENCER_PERSPECTIVE       = "org.slizaa.rcp.workbench.ui.CrossReferencerPerspective";
 
-  // The shared instance
-  /** - */
+  /** the shared instance */
   private static Activator                                           plugin;
 
   /** - */
@@ -37,18 +42,73 @@ public class Activator extends AbstractUIPlugin {
   /** - */
   private SlizaaProjectListener                                      _projectListener;
 
-  /*
-   * (non-Javadoc)
-   *
+  /** - */
+  private Adapter                                                    _adapter;
+
+  /**
    * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
    */
   @Override
   public void start(BundleContext context) throws Exception {
     super.start(context);
+
+    //
     plugin = this;
 
     //
-    this._workbenchModelTracker = new ServiceTracker<>(context, SlizaaWorkbenchModel.class, null);
+    _adapter = new AdapterImpl() {
+
+      @Override
+      public void notifyChanged(Notification msg) {
+        if (msg.getFeature() != null) {
+
+          //
+          Display.getDefault().syncExec(() -> {
+            //
+            if (msg.getFeature().equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_RootNode())) {
+              
+              //
+            }
+            //
+            else if (msg.getFeature()
+                .equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_MainDependencySelection())) {
+
+              //
+              ViewUtils.bringViewToTop("org.slizaa.ui.dependencytree.DependencyTreePart");
+            }
+            //
+            else if (msg.getFeature()
+                .equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_DetailDependencySelection())) {
+
+              //
+              ViewUtils.bringViewToTop("org.slizaa.ui.dependencytree.DependencyTreePart");
+            }
+            //
+            else if (msg.getFeature().equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_NodeSelection())) {
+              //
+            }
+          });
+        }
+      }
+    };
+
+    //
+    this._workbenchModelTracker = new ServiceTracker<SlizaaWorkbenchModel, SlizaaWorkbenchModel>(context,
+        SlizaaWorkbenchModel.class, null) {
+
+      @Override
+      public SlizaaWorkbenchModel addingService(ServiceReference<SlizaaWorkbenchModel> reference) {
+        SlizaaWorkbenchModel model = super.addingService(reference);
+        model.eAdapters().add(_adapter);
+        return model;
+      }
+
+      @Override
+      public void removedService(ServiceReference<SlizaaWorkbenchModel> reference, SlizaaWorkbenchModel model) {
+        model.eAdapters().remove(_adapter);
+        super.removedService(reference, model);
+      }
+    };
     this._workbenchModelTracker.open();
 
     //
