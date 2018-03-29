@@ -28,15 +28,15 @@
 <repository location="http://www.slizaa.org/p2/slizaa-opencypher-workbench"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.draw2d.sdk.feature.group" version="3.10.100.201606061308"/>
-<unit id="org.eclipse.draw2d.source.feature.group" version="3.10.100.201606061308"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.13.0.v20170609-0928"/>
-<unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.13.1.v20170811-1407"/>
-<unit id="org.eclipse.equinox.executable.feature.group" version="3.7.2.v20171108-1834"/>
-<unit id="org.eclipse.equinox.p2.discovery.feature.feature.group" version="1.1.1.v20170906-1259"/>
-<unit id="org.eclipse.jdt.feature.group" version="3.13.2.v20171130-0906"/>
-<unit id="org.eclipse.sdk.ide" version="4.7.2.M20171130-0510"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.12.0.v20170519-1412"/>
+<unit id="org.eclipse.draw2d.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.draw2d.source.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.equinox.p2.discovery.feature.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.sdk.ide" version="0.0.0"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
 <repository location="http://download.eclipse.org/releases/oxygen"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
