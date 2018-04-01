@@ -26,3 +26,10 @@ for i in `curl --ssl -k -s -l ftp://"$user":"$password"@"$ftp_ip/$target_dir/fea
        curl --ssl -k ftp://${ftp_ip}:${ftp_port}/$target_dir/features/${i} -u "$user:$password" -O --quote "DELE $target_dir/features/${i}"
 };
 done;
+
+for i in `curl --ssl -k -s -l ftp://"$user":"$password"@"$ftp_ip/$target_dir/releases/" | grep .jar`; do
+{
+       echo "deleting releases/$i";
+       curl --ssl -k ftp://${ftp_ip}:${ftp_port}/$target_dir/features/${i} -u "$user:$password" -O --quote "DELE $target_dir/releases/${i}"
+};
+done;
