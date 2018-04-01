@@ -24,6 +24,27 @@ public class ViewUtils {
    *
    * @param partId
    */
+  public static void activate(String partId, boolean requireFocus) {
+
+    //
+    checkNotNull(partId);
+
+    // get the part service
+    EPartService partService = getPartService();
+
+    //
+    MPart part = partService.findPart(partId);
+    if (part != null) {
+      partService.activate(part, requireFocus);
+    }
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @param partId
+   */
   public static void bringViewToTop(String partId) {
 
     //

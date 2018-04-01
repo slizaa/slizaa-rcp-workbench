@@ -56,7 +56,7 @@ public class Activator extends AbstractUIPlugin {
     plugin = this;
 
     //
-    _adapter = new AdapterImpl() {
+    this._adapter = new AdapterImpl() {
 
       @Override
       public void notifyChanged(Notification msg) {
@@ -66,7 +66,7 @@ public class Activator extends AbstractUIPlugin {
           Display.getDefault().syncExec(() -> {
             //
             if (msg.getFeature().equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_RootNode())) {
-              
+
               //
             }
             //
@@ -74,14 +74,14 @@ public class Activator extends AbstractUIPlugin {
                 .equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_MainDependencySelection())) {
 
               //
-              ViewUtils.bringViewToTop("org.slizaa.ui.dependencytree.DependencyTreePart");
+              ViewUtils.activate("org.slizaa.ui.dependencytree.DependencyTreePart", false);
             }
             //
             else if (msg.getFeature()
                 .equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_DetailDependencySelection())) {
 
               //
-              ViewUtils.bringViewToTop("org.slizaa.ui.dependencytree.DependencyTreePart");
+              ViewUtils.activate("org.slizaa.ui.dependencytree.DependencyTreePart", false);
             }
             //
             else if (msg.getFeature().equals(ModelPackage.eINSTANCE.getSlizaaWorkbenchModel_NodeSelection())) {
@@ -99,13 +99,13 @@ public class Activator extends AbstractUIPlugin {
       @Override
       public SlizaaWorkbenchModel addingService(ServiceReference<SlizaaWorkbenchModel> reference) {
         SlizaaWorkbenchModel model = super.addingService(reference);
-        model.eAdapters().add(_adapter);
+        model.eAdapters().add(Activator.this._adapter);
         return model;
       }
 
       @Override
       public void removedService(ServiceReference<SlizaaWorkbenchModel> reference, SlizaaWorkbenchModel model) {
-        model.eAdapters().remove(_adapter);
+        model.eAdapters().remove(Activator.this._adapter);
         super.removedService(reference, model);
       }
     };
