@@ -41,6 +41,9 @@ public class JType_LabelProvider extends AbstractLabelDefinitionProvider impleme
 
     // @formatter:off
 		return exclusiveChoice().
+		    
+        // Group
+        when(nodeHasLabel("Group")).then(handleGroup()).
 
 		    // Module
 				when(nodeHasLabel("Module")).then(handleModule()).
@@ -64,6 +67,10 @@ public class JType_LabelProvider extends AbstractLabelDefinitionProvider impleme
 				otherwise(setBaseImage(fromClasspath("icons/jar_obj.png")).and(setLabelText(propertyValue("name"))));
 
 		// @formatter:on
+  }
+
+  private LabelDefinitionProcessor handleGroup() {
+    return setBaseImage(fromClasspath("icons/fldr_obj.png")).and(setLabelText(propertyValue("name")));
   }
 
   /**

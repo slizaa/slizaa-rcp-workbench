@@ -11,14 +11,14 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.annotations.SlizaaMappin
  *
  */
 @SlizaaMappingProvider
-public class JType_TypesOnly_Hierarchical_MappingProvider extends DefaultMappingProvider {
+public class JType_Hierarchical_MappingProvider extends DefaultMappingProvider {
 
-	public JType_TypesOnly_Hierarchical_MappingProvider() {
+	public JType_Hierarchical_MappingProvider() {
 
 		//
 		super(IMappingProviderMetadata.createMetadata("org.slizaa.jtype.core.TypesOnly_Hierarchicalackages",
 				"Slizaa JType (types only, hierarchical packages)", null, null),
-				new JType_TypesOnly_Hierarchical_HierarchyProvider(), new JType_TypesOnly_DependencyProvider(),
+				new JType_Hierarchical_HierarchyProvider(), new JType_DependencyProvider(),
 				new JType_LabelProvider(false), new JType_NodeComparator());
 	}
 

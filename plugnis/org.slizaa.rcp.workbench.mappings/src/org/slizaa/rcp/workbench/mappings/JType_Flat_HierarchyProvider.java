@@ -8,7 +8,7 @@ import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.opencypher.AbstractQuery
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class JType_TypesOnly_Hierarchical_HierarchyProvider extends AbstractQueryBasedHierarchyProvider {
+public class JType_Flat_HierarchyProvider extends AbstractQueryBasedHierarchyProvider {
 
   /**
    * <p>
@@ -18,7 +18,8 @@ public class JType_TypesOnly_Hierarchical_HierarchyProvider extends AbstractQuer
    */
   @Override
   protected String[] toplevelNodeIdQueries() {
-    return new String[] { "Match (module:Module) Return id(module) as id" };
+    return new String[] { "MATCH (g:Group) WHERE NOT ()-[:CONTAINS]->(g) RETURN id(g)", 
+        "MATCH (m:Module) WHERE NOT ()-[:CONTAINS]->(m) RETURN id(m)" };
   }
 
   /**
@@ -30,11 +31,13 @@ public class JType_TypesOnly_Hierarchical_HierarchyProvider extends AbstractQuer
   @Override
   protected String[] parentChildNodeIdsQueries() {
     return new String[] {
-        "Match (module:Module)-[:CONTAINS]->(d:Directory) Where Not (:Directory)-[:CONTAINS]->(d) Return id(module), id(d)",
-        "Match (d1:Directory)-[:CONTAINS]->(d2:Directory) Return id(d1), id(d2)",
+        "MATCH (g:Group)-[:CONTAINS]->(m:Module) RETURN id(g), id(m)",
+        "MATCH (g1:Group)-[:CONTAINS]->(g2:Group) RETURN id(g1), id(g2)",
+        "Match (module:Module)-[:CONTAINS]->(d:Directory) WHERE d.isEmpty=false Return DISTINCT id(module), id(d)",
         "Match (d:Directory)-[:CONTAINS]->(r:Resource) Return id(d), id(r)",
         "Match (r:Resource)-[:CONTAINS]->(t:Type) Return id(r), id(t)",
         "Match (t:Type)-[:CONTAINS]->(m:Method) Return id(t), id(m)",
-        "Match (t:Type)-[:CONTAINS]->(f:Field) Return id(t), id(f)" };
+        "Match (t:Type)-[:CONTAINS]->(f:Field) Return id(t), id(f)"
+    };
   }
 }

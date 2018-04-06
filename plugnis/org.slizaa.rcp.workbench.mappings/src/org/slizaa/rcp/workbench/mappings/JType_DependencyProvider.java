@@ -2,7 +2,7 @@ package org.slizaa.rcp.workbench.mappings;
 
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.opencypher.AbstractQueryBasedDependencyProvider;
 
-public class JType_TypesOnly_DependencyProvider extends AbstractQueryBasedDependencyProvider {
+public class JType_DependencyProvider extends AbstractQueryBasedDependencyProvider {
 
   /**
    * {@inheritDoc}
