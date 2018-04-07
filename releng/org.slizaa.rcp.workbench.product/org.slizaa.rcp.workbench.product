@@ -105,6 +105,7 @@ offerings.
       <plugin id="org.slizaa.neo4j.queryresult.ui" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.ui.klighd" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.ui.klighd.synthesis" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.neo4j.ui.cypherview" autoStart="true" startLevel="0" />
    </configurations>
 
    <preferencesInfo>
