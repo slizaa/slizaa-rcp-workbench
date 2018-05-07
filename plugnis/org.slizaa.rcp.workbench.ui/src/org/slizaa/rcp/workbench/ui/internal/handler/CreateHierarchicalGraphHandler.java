@@ -85,6 +85,7 @@ public class CreateHierarchicalGraphHandler extends AbstractSlizaaHandler implem
 
               // set hgRootNode
               HGRootNode hgRootNode = slizaaProject.mapToHierachicalGraph(mappingProvider, monitor);
+              hgRootNode.registerExtension(SlizaaProject.class, slizaaProject);
 
               // set global
               Activator.getDefault().getWorkbenchModel().setRootNode(hgRootNode);

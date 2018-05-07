@@ -54,4 +54,5 @@ Service-Component: OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.CypherB
  OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.OpenDsmToolAction.xml,
  OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.SlizaaToolsActionGroup.xml,
  OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.OpenKlighdDiagramToolAction.xml,
- OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.OpenXRefToolAction.xml
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.tools.OpenXRefToolAction.xml,
+ OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.ReloadHierarchicalGraphAction.xml
