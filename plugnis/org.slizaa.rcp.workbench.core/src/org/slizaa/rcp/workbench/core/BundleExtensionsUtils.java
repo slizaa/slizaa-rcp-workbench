@@ -4,7 +4,6 @@
 package org.slizaa.rcp.workbench.core;
 
 import java.lang.annotation.Annotation;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.annotations.SlizaaMappingProvider;
 import org.slizaa.rcp.workbench.core.internal.Activator;
-import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
 import org.slizaa.scanner.core.spi.annotations.ParserFactory;
 import org.slizaa.scanner.core.spi.parser.IParserFactory;
 
@@ -53,23 +51,20 @@ public class BundleExtensionsUtils {
    * @param instanceType
    * @return
    */
-  private static final <T> List<T> getBundleExtensions(Class<? extends Annotation> annotationType,
+  public static final <T> List<T> getBundleExtensions(Class<? extends Annotation> annotationType,
       Class<T> instanceType) {
 
     //
-    Collection<SlizaaExtensionBundle> extensionBundles = Activator.instance().getTrackedExtensionBundles().values();
+    List<Class<T>> extensions = Activator.instance().getClasspathScannerService()
+        .getExtensionsWithClassAnnotation(annotationType, instanceType);
 
-    return extensionBundles.stream()
-
-        //
-        .flatMap(
-            exBundle -> exBundle.getDefinedExtensions().getOrDefault(annotationType, Collections.emptyList()).stream())
+    return extensions.stream()
 
         //
-        .map(bundleExtension -> {
+        .map(clazz -> {
 
           try {
-            return bundleExtension.createNewInstance(instanceType);
+            return clazz.newInstance();
           } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -81,5 +76,27 @@ public class BundleExtensionsUtils {
 
         //
         .collect(Collectors.toList());
+  }
+
+  public static final List<Class<?>> getBundleExtensionClasses(Class<? extends Annotation> annotationType) {
+
+    return Collections.emptyList();
+    // //
+    // Collection<SlizaaExtensionBundle> extensionBundles = Activator.instance().getTrackedExtensionBundles().values();
+    // System.out.println(extensionBundles);
+    // return extensionBundles.stream()
+    //
+    // //
+    // .flatMap(
+    // exBundle -> exBundle.getDefinedExtensions().getOrDefault(annotationType, Collections.emptyList()).stream())
+    //
+    // //
+    // .map(bundleExtension -> bundleExtension.getType())
+    //
+    // //
+    // .filter(type -> type != null)
+    //
+    // //
+    // .collect(Collectors.toList());
   }
 }

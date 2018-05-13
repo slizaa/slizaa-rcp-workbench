@@ -92,20 +92,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
         return createSlizaaProjectExtensionAdapter();
       }
       @Override
-      public Adapter caseSlizaaExtensionBundle(SlizaaExtensionBundle object) {
-        return createSlizaaExtensionBundleAdapter();
-      }
-      @Override
-      public Adapter caseSlizaaExtensionBundleExtension(SlizaaExtensionBundleExtension object) {
-        return createSlizaaExtensionBundleExtensionAdapter();
-      }
-      @Override
       public Adapter caseAnnotationTypeToSlizaaProjectExtensionMap(Map.Entry<Class<?>, List<SlizaaProjectExtension>> object) {
         return createAnnotationTypeToSlizaaProjectExtensionMapAdapter();
-      }
-      @Override
-      public Adapter caseAnnotationTypeToSlizaaBundleExtensionMap(Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>> object) {
-        return createAnnotationTypeToSlizaaBundleExtensionMapAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object) {
@@ -198,34 +186,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle <em>Slizaa Extension Bundle</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle
-   * @generated
-   */
-  public Adapter createSlizaaExtensionBundleAdapter() {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension <em>Slizaa Extension Bundle Extension</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension
-   * @generated
-   */
-  public Adapter createSlizaaExtensionBundleExtensionAdapter() {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Annotation Type To Slizaa Project Extension Map</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -236,20 +196,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
    * @generated
    */
   public Adapter createAnnotationTypeToSlizaaProjectExtensionMapAdapter() {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Annotation Type To Slizaa Bundle Extension Map</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see java.util.Map.Entry
-   * @generated
-   */
-  public Adapter createAnnotationTypeToSlizaaBundleExtensionMapAdapter() {
     return null;
   }
 

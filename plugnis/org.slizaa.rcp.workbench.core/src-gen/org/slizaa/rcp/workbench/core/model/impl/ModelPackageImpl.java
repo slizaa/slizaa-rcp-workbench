@@ -27,8 +27,6 @@ import org.slizaa.neo4j.dbadapter.DbAdapterPackage;
 import org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.Problem;
-import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle;
-import org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
@@ -487,107 +485,6 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int SLIZAA_PROJECT_EXTENSION_OPERATION_COUNT = ABSTRACT_USER_DEFINED_TYPE_OPERATION_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleImpl <em>Slizaa Extension Bundle</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleImpl
-   * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getSlizaaExtensionBundle()
-   * @generated
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE = 5;
-
-  /**
-   * The feature id for the '<em><b>Defined Extensions</b></em>' map.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE__DEFINED_EXTENSIONS = 0;
-
-  /**
-   * The feature id for the '<em><b>Defined Cypher Statements</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE__DEFINED_CYPHER_STATEMENTS = 1;
-
-  /**
-   * The number of structural features of the '<em>Slizaa Extension Bundle</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_FEATURE_COUNT = 2;
-
-  /**
-   * The number of operations of the '<em>Slizaa Extension Bundle</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_OPERATION_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleExtensionImpl <em>Slizaa Extension Bundle Extension</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleExtensionImpl
-   * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getSlizaaExtensionBundleExtension()
-   * @generated
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION = 6;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE = 0;
-
-  /**
-   * The feature id for the '<em><b>Annotation Type</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE = 1;
-
-  /**
-   * The number of structural features of the '<em>Slizaa Extension Bundle Extension</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION_FEATURE_COUNT = 2;
-
-  /**
-   * The operation id for the '<em>Create New Instance</em>' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION___CREATE_NEW_INSTANCE__CLASS = 0;
-
-  /**
-   * The number of operations of the '<em>Slizaa Extension Bundle Extension</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int SLIZAA_EXTENSION_BUNDLE_EXTENSION_OPERATION_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.AnnotationTypeToSlizaaProjectExtensionMapImpl <em>Annotation Type To Slizaa Project Extension Map</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -595,7 +492,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getAnnotationTypeToSlizaaProjectExtensionMap()
    * @generated
    */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP = 7;
+  public static final int ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP = 5;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -634,52 +531,6 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP_OPERATION_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.AnnotationTypeToSlizaaBundleExtensionMapImpl <em>Annotation Type To Slizaa Bundle Extension Map</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.slizaa.rcp.workbench.core.model.impl.AnnotationTypeToSlizaaBundleExtensionMapImpl
-   * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getAnnotationTypeToSlizaaBundleExtensionMap()
-   * @generated
-   */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP = 8;
-
-  /**
-   * The feature id for the '<em><b>Key</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP__KEY = 0;
-
-  /**
-   * The feature id for the '<em><b>Value</b></em>' reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP__VALUE = 1;
-
-  /**
-   * The number of structural features of the '<em>Annotation Type To Slizaa Bundle Extension Map</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP_FEATURE_COUNT = 2;
-
-  /**
-   * The number of operations of the '<em>Annotation Type To Slizaa Bundle Extension Map</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  public static final int ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP_OPERATION_COUNT = 0;
-
-  /**
    * The meta object id for the '<em>IProgress Monitor</em>' data type.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -687,7 +538,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIProgressMonitor()
    * @generated
    */
-  public static final int IPROGRESS_MONITOR = 9;
+  public static final int IPROGRESS_MONITOR = 6;
 
   /**
    * The meta object id for the '<em>IProject</em>' data type.
@@ -697,7 +548,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIProject()
    * @generated
    */
-  public static final int IPROJECT = 10;
+  public static final int IPROJECT = 7;
 
   /**
    * The meta object id for the '<em>IGraph Db</em>' data type.
@@ -707,7 +558,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIGraphDb()
    * @generated
    */
-  public static final int IGRAPH_DB = 11;
+  public static final int IGRAPH_DB = 8;
 
   /**
    * The meta object id for the '<em>ICypher Statement</em>' data type.
@@ -717,7 +568,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getICypherStatement()
    * @generated
    */
-  public static final int ICYPHER_STATEMENT = 12;
+  public static final int ICYPHER_STATEMENT = 9;
 
   /**
    * The meta object id for the '<em>IMapping Provider</em>' data type.
@@ -727,7 +578,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIMappingProvider()
    * @generated
    */
-  public static final int IMAPPING_PROVIDER = 13;
+  public static final int IMAPPING_PROVIDER = 10;
 
   /**
    * The meta object id for the '<em>Injector</em>' data type.
@@ -737,7 +588,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getInjector()
    * @generated
    */
-  public static final int INJECTOR = 14;
+  public static final int INJECTOR = 11;
 
   /**
    * <!-- begin-user-doc -->
@@ -779,28 +630,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass slizaaExtensionBundleEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass slizaaExtensionBundleExtensionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass annotationTypeToSlizaaProjectExtensionMapEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass annotationTypeToSlizaaBundleExtensionMapEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1271,94 +1101,6 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
-   * Returns the meta object for class '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle <em>Slizaa Extension Bundle</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Slizaa Extension Bundle</em>'.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle
-   * @generated
-   */
-  public EClass getSlizaaExtensionBundle() {
-    return slizaaExtensionBundleEClass;
-  }
-
-  /**
-   * Returns the meta object for the map '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle#getDefinedExtensions <em>Defined Extensions</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the map '<em>Defined Extensions</em>'.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle#getDefinedExtensions()
-   * @see #getSlizaaExtensionBundle()
-   * @generated
-   */
-  public EReference getSlizaaExtensionBundle_DefinedExtensions() {
-    return (EReference)slizaaExtensionBundleEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle#getDefinedCypherStatements <em>Defined Cypher Statements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Defined Cypher Statements</em>'.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundle#getDefinedCypherStatements()
-   * @see #getSlizaaExtensionBundle()
-   * @generated
-   */
-  public EAttribute getSlizaaExtensionBundle_DefinedCypherStatements() {
-    return (EAttribute)slizaaExtensionBundleEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * Returns the meta object for class '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension <em>Slizaa Extension Bundle Extension</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Slizaa Extension Bundle Extension</em>'.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension
-   * @generated
-   */
-  public EClass getSlizaaExtensionBundleExtension() {
-    return slizaaExtensionBundleExtensionEClass;
-  }
-
-  /**
-   * Returns the meta object for the attribute '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Type</em>'.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension#getType()
-   * @see #getSlizaaExtensionBundleExtension()
-   * @generated
-   */
-  public EAttribute getSlizaaExtensionBundleExtension_Type() {
-    return (EAttribute)slizaaExtensionBundleExtensionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * Returns the meta object for the attribute '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension#getAnnotationType <em>Annotation Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Annotation Type</em>'.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension#getAnnotationType()
-   * @see #getSlizaaExtensionBundleExtension()
-   * @generated
-   */
-  public EAttribute getSlizaaExtensionBundleExtension_AnnotationType() {
-    return (EAttribute)slizaaExtensionBundleExtensionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension#createNewInstance(java.lang.Class) <em>Create New Instance</em>}' operation.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the '<em>Create New Instance</em>' operation.
-   * @see org.slizaa.rcp.workbench.core.model.SlizaaExtensionBundleExtension#createNewInstance(java.lang.Class)
-   * @generated
-   */
-  public EOperation getSlizaaExtensionBundleExtension__CreateNewInstance__Class() {
-    return slizaaExtensionBundleExtensionEClass.getEOperations().get(0);
-  }
-
-  /**
    * Returns the meta object for class '{@link java.util.Map.Entry <em>Annotation Type To Slizaa Project Extension Map</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1394,44 +1136,6 @@ public class ModelPackageImpl extends EPackageImpl {
    */
   public EReference getAnnotationTypeToSlizaaProjectExtensionMap_Value() {
     return (EReference)annotationTypeToSlizaaProjectExtensionMapEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * Returns the meta object for class '{@link java.util.Map.Entry <em>Annotation Type To Slizaa Bundle Extension Map</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Annotation Type To Slizaa Bundle Extension Map</em>'.
-   * @see java.util.Map.Entry
-   * @generated
-   */
-  public EClass getAnnotationTypeToSlizaaBundleExtensionMap() {
-    return annotationTypeToSlizaaBundleExtensionMapEClass;
-  }
-
-  /**
-   * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Key</em>'.
-   * @see java.util.Map.Entry
-   * @see #getAnnotationTypeToSlizaaBundleExtensionMap()
-   * @generated
-   */
-  public EAttribute getAnnotationTypeToSlizaaBundleExtensionMap_Key() {
-    return (EAttribute)annotationTypeToSlizaaBundleExtensionMapEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * Returns the meta object for the reference list '{@link java.util.Map.Entry <em>Value</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference list '<em>Value</em>'.
-   * @see java.util.Map.Entry
-   * @see #getAnnotationTypeToSlizaaBundleExtensionMap()
-   * @generated
-   */
-  public EReference getAnnotationTypeToSlizaaBundleExtensionMap_Value() {
-    return (EReference)annotationTypeToSlizaaBundleExtensionMapEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1571,22 +1275,9 @@ public class ModelPackageImpl extends EPackageImpl {
     createEAttribute(slizaaProjectExtensionEClass, SLIZAA_PROJECT_EXTENSION__ANNOTATION_TYPE);
     createEOperation(slizaaProjectExtensionEClass, SLIZAA_PROJECT_EXTENSION___CREATE_NEW_INSTANCE__CLASS);
 
-    slizaaExtensionBundleEClass = createEClass(SLIZAA_EXTENSION_BUNDLE);
-    createEReference(slizaaExtensionBundleEClass, SLIZAA_EXTENSION_BUNDLE__DEFINED_EXTENSIONS);
-    createEAttribute(slizaaExtensionBundleEClass, SLIZAA_EXTENSION_BUNDLE__DEFINED_CYPHER_STATEMENTS);
-
-    slizaaExtensionBundleExtensionEClass = createEClass(SLIZAA_EXTENSION_BUNDLE_EXTENSION);
-    createEAttribute(slizaaExtensionBundleExtensionEClass, SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE);
-    createEAttribute(slizaaExtensionBundleExtensionEClass, SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE);
-    createEOperation(slizaaExtensionBundleExtensionEClass, SLIZAA_EXTENSION_BUNDLE_EXTENSION___CREATE_NEW_INSTANCE__CLASS);
-
     annotationTypeToSlizaaProjectExtensionMapEClass = createEClass(ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP);
     createEAttribute(annotationTypeToSlizaaProjectExtensionMapEClass, ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP__KEY);
     createEReference(annotationTypeToSlizaaProjectExtensionMapEClass, ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP__VALUE);
-
-    annotationTypeToSlizaaBundleExtensionMapEClass = createEClass(ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP);
-    createEAttribute(annotationTypeToSlizaaBundleExtensionMapEClass, ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP__KEY);
-    createEReference(annotationTypeToSlizaaBundleExtensionMapEClass, ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP__VALUE);
 
     // Create data types
     iProgressMonitorEDataType = createEDataType(IPROGRESS_MONITOR);
@@ -1688,42 +1379,12 @@ public class ModelPackageImpl extends EPackageImpl {
     g1 = createEGenericType(t1);
     initEOperation(op, g1);
 
-    initEClass(slizaaExtensionBundleEClass, SlizaaExtensionBundle.class, "SlizaaExtensionBundle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSlizaaExtensionBundle_DefinedExtensions(), this.getAnnotationTypeToSlizaaBundleExtensionMap(), null, "definedExtensions", null, 0, -1, SlizaaExtensionBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getSlizaaExtensionBundle_DefinedCypherStatements(), this.getICypherStatement(), "definedCypherStatements", null, 0, -1, SlizaaExtensionBundle.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(slizaaExtensionBundleExtensionEClass, SlizaaExtensionBundleExtension.class, "SlizaaExtensionBundleExtension", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    g1 = createEGenericType(ecorePackage.getEJavaClass());
-    g2 = createEGenericType();
-    g1.getETypeArguments().add(g2);
-    initEAttribute(getSlizaaExtensionBundleExtension_Type(), g1, "type", null, 0, 1, SlizaaExtensionBundleExtension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    g1 = createEGenericType(ecorePackage.getEJavaClass());
-    g2 = createEGenericType();
-    g1.getETypeArguments().add(g2);
-    initEAttribute(getSlizaaExtensionBundleExtension_AnnotationType(), g1, "annotationType", null, 0, 1, SlizaaExtensionBundleExtension.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    op = initEOperation(getSlizaaExtensionBundleExtension__CreateNewInstance__Class(), null, "createNewInstance", 0, 1, IS_UNIQUE, IS_ORDERED);
-    t1 = addETypeParameter(op, "T");
-    g1 = createEGenericType(ecorePackage.getEJavaClass());
-    g2 = createEGenericType(t1);
-    g1.getETypeArguments().add(g2);
-    addEParameter(op, g1, "type", 0, 1, IS_UNIQUE, IS_ORDERED);
-    g1 = createEGenericType(t1);
-    initEOperation(op, g1);
-
     initEClass(annotationTypeToSlizaaProjectExtensionMapEClass, Map.Entry.class, "AnnotationTypeToSlizaaProjectExtensionMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
     g1 = createEGenericType(ecorePackage.getEJavaClass());
     g2 = createEGenericType();
     g1.getETypeArguments().add(g2);
     initEAttribute(getAnnotationTypeToSlizaaProjectExtensionMap_Key(), g1, "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAnnotationTypeToSlizaaProjectExtensionMap_Value(), this.getSlizaaProjectExtension(), null, "value", null, 0, -1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(annotationTypeToSlizaaBundleExtensionMapEClass, Map.Entry.class, "AnnotationTypeToSlizaaBundleExtensionMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-    g1 = createEGenericType(ecorePackage.getEJavaClass());
-    g2 = createEGenericType();
-    g1.getETypeArguments().add(g2);
-    initEAttribute(getAnnotationTypeToSlizaaBundleExtensionMap_Key(), g1, "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAnnotationTypeToSlizaaBundleExtensionMap_Value(), this.getSlizaaExtensionBundleExtension(), null, "value", null, 0, -1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize data types
     initEDataType(iProgressMonitorEDataType, IProgressMonitor.class, "IProgressMonitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1986,66 +1647,6 @@ public class ModelPackageImpl extends EPackageImpl {
     public static final EOperation SLIZAA_PROJECT_EXTENSION___CREATE_NEW_INSTANCE__CLASS = eINSTANCE.getSlizaaProjectExtension__CreateNewInstance__Class();
 
     /**
-     * The meta object literal for the '{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleImpl <em>Slizaa Extension Bundle</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleImpl
-     * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getSlizaaExtensionBundle()
-     * @generated
-     */
-    public static final EClass SLIZAA_EXTENSION_BUNDLE = eINSTANCE.getSlizaaExtensionBundle();
-
-    /**
-     * The meta object literal for the '<em><b>Defined Extensions</b></em>' map feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EReference SLIZAA_EXTENSION_BUNDLE__DEFINED_EXTENSIONS = eINSTANCE.getSlizaaExtensionBundle_DefinedExtensions();
-
-    /**
-     * The meta object literal for the '<em><b>Defined Cypher Statements</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EAttribute SLIZAA_EXTENSION_BUNDLE__DEFINED_CYPHER_STATEMENTS = eINSTANCE.getSlizaaExtensionBundle_DefinedCypherStatements();
-
-    /**
-     * The meta object literal for the '{@link org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleExtensionImpl <em>Slizaa Extension Bundle Extension</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.slizaa.rcp.workbench.core.model.impl.SlizaaExtensionBundleExtensionImpl
-     * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getSlizaaExtensionBundleExtension()
-     * @generated
-     */
-    public static final EClass SLIZAA_EXTENSION_BUNDLE_EXTENSION = eINSTANCE.getSlizaaExtensionBundleExtension();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EAttribute SLIZAA_EXTENSION_BUNDLE_EXTENSION__TYPE = eINSTANCE.getSlizaaExtensionBundleExtension_Type();
-
-    /**
-     * The meta object literal for the '<em><b>Annotation Type</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EAttribute SLIZAA_EXTENSION_BUNDLE_EXTENSION__ANNOTATION_TYPE = eINSTANCE.getSlizaaExtensionBundleExtension_AnnotationType();
-
-    /**
-     * The meta object literal for the '<em><b>Create New Instance</b></em>' operation.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EOperation SLIZAA_EXTENSION_BUNDLE_EXTENSION___CREATE_NEW_INSTANCE__CLASS = eINSTANCE.getSlizaaExtensionBundleExtension__CreateNewInstance__Class();
-
-    /**
      * The meta object literal for the '{@link org.slizaa.rcp.workbench.core.model.impl.AnnotationTypeToSlizaaProjectExtensionMapImpl <em>Annotation Type To Slizaa Project Extension Map</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2070,32 +1671,6 @@ public class ModelPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EReference ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP__VALUE = eINSTANCE.getAnnotationTypeToSlizaaProjectExtensionMap_Value();
-
-    /**
-     * The meta object literal for the '{@link org.slizaa.rcp.workbench.core.model.impl.AnnotationTypeToSlizaaBundleExtensionMapImpl <em>Annotation Type To Slizaa Bundle Extension Map</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.slizaa.rcp.workbench.core.model.impl.AnnotationTypeToSlizaaBundleExtensionMapImpl
-     * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getAnnotationTypeToSlizaaBundleExtensionMap()
-     * @generated
-     */
-    public static final EClass ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP = eINSTANCE.getAnnotationTypeToSlizaaBundleExtensionMap();
-
-    /**
-     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EAttribute ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP__KEY = eINSTANCE.getAnnotationTypeToSlizaaBundleExtensionMap_Key();
-
-    /**
-     * The meta object literal for the '<em><b>Value</b></em>' reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public static final EReference ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP__VALUE = eINSTANCE.getAnnotationTypeToSlizaaBundleExtensionMap_Value();
 
     /**
      * The meta object literal for the '<em>IProgress Monitor</em>' data type.

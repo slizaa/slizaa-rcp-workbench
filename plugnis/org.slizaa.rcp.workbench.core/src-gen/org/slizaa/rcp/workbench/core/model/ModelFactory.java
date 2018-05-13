@@ -55,22 +55,4 @@ public interface ModelFactory {
    */
   SlizaaProjectExtension createSlizaaProjectExtension();
 
-  /**
-   * Returns a new object of class '<em>Slizaa Extension Bundle</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Slizaa Extension Bundle</em>'.
-   * @generated
-   */
-  SlizaaExtensionBundle createSlizaaExtensionBundle();
-
-  /**
-   * Returns a new object of class '<em>Slizaa Extension Bundle Extension</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Slizaa Extension Bundle Extension</em>'.
-   * @generated
-   */
-  SlizaaExtensionBundleExtension createSlizaaExtensionBundleExtension();
-
 } //ModelFactory

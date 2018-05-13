@@ -102,27 +102,9 @@ public class ModelSwitch<T> extends Switch<T> {
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE: {
-        SlizaaExtensionBundle slizaaExtensionBundle = (SlizaaExtensionBundle)theEObject;
-        T result = caseSlizaaExtensionBundle(slizaaExtensionBundle);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ModelPackageImpl.SLIZAA_EXTENSION_BUNDLE_EXTENSION: {
-        SlizaaExtensionBundleExtension slizaaExtensionBundleExtension = (SlizaaExtensionBundleExtension)theEObject;
-        T result = caseSlizaaExtensionBundleExtension(slizaaExtensionBundleExtension);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case ModelPackageImpl.ANNOTATION_TYPE_TO_SLIZAA_PROJECT_EXTENSION_MAP: {
         @SuppressWarnings("unchecked") Map.Entry<Class<?>, List<SlizaaProjectExtension>> annotationTypeToSlizaaProjectExtensionMap = (Map.Entry<Class<?>, List<SlizaaProjectExtension>>)theEObject;
         T result = caseAnnotationTypeToSlizaaProjectExtensionMap(annotationTypeToSlizaaProjectExtensionMap);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ModelPackageImpl.ANNOTATION_TYPE_TO_SLIZAA_BUNDLE_EXTENSION_MAP: {
-        @SuppressWarnings("unchecked") Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>> annotationTypeToSlizaaBundleExtensionMap = (Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>>)theEObject;
-        T result = caseAnnotationTypeToSlizaaBundleExtensionMap(annotationTypeToSlizaaBundleExtensionMap);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -206,36 +188,6 @@ public class ModelSwitch<T> extends Switch<T> {
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSlizaaExtensionBundle(SlizaaExtensionBundle object) {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle Extension</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Slizaa Extension Bundle Extension</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSlizaaExtensionBundleExtension(SlizaaExtensionBundleExtension object) {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Annotation Type To Slizaa Project Extension Map</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -247,21 +199,6 @@ public class ModelSwitch<T> extends Switch<T> {
    * @generated
    */
   public T caseAnnotationTypeToSlizaaProjectExtensionMap(Map.Entry<Class<?>, List<SlizaaProjectExtension>> object) {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Annotation Type To Slizaa Bundle Extension Map</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Annotation Type To Slizaa Bundle Extension Map</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAnnotationTypeToSlizaaBundleExtensionMap(Map.Entry<Class<?>, List<SlizaaExtensionBundleExtension>> object) {
     return null;
   }
 

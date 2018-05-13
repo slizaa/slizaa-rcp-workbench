@@ -35,6 +35,7 @@ Export-Package: org.slizaa.rcp.workbench.core,
  org.slizaa.rcp.workbench.core.model.impl,
  org.slizaa.rcp.workbench.core.model.util
 Bundle-ActivationPolicy: lazy
+Import-Package: javax.ws.rs
 
 
 

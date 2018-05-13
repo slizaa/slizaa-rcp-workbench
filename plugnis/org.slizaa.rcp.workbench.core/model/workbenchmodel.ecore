@@ -62,33 +62,6 @@
       </eGenericType>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SlizaaExtensionBundle">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="definedExtensions" upperBound="-1"
-        eType="#//AnnotationTypeToSlizaaBundleExtensionMap" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="definedCypherStatements"
-        upperBound="-1" eType="#//ICypherStatement"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SlizaaExtensionBundleExtension">
-    <eOperations name="createNewInstance">
-      <eGenericType eTypeParameter="#//SlizaaExtensionBundleExtension/createNewInstance/T"/>
-      <eTypeParameters name="T"/>
-      <eParameters name="type">
-        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
-          <eTypeArguments eTypeParameter="#//SlizaaExtensionBundleExtension/createNewInstance/T"/>
-        </eGenericType>
-      </eParameters>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
-        <eTypeArguments/>
-      </eGenericType>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="annotationType">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
-        <eTypeArguments/>
-      </eGenericType>
-    </eStructuralFeatures>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AnnotationTypeToSlizaaProjectExtensionMap"
       instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key">
@@ -98,16 +71,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
         eType="#//SlizaaProjectExtension"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AnnotationTypeToSlizaaBundleExtensionMap"
-      instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
-        <eTypeArguments/>
-      </eGenericType>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
-        eType="#//SlizaaExtensionBundleExtension"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="IProgressMonitor" instanceClassName="org.eclipse.core.runtime.IProgressMonitor"
       serializable="false"/>
