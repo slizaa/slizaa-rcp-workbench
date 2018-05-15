@@ -3,6 +3,8 @@
  */
 package org.slizaa.rcp.workbench.core.internal;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -145,7 +147,7 @@ public class Activator implements BundleActivator {
    * @return
    */
   public IClasspathScannerService getClasspathScannerService() {
-    return this._classpathScannerService.getService();
+    return service(this._classpathScannerService, IClasspathScannerService.class);
   }
 
   /**
@@ -155,7 +157,7 @@ public class Activator implements BundleActivator {
    * @return
    */
   public IMappingService getMappingService() {
-    return this._mappingServiceTracker.getService();
+    return service(this._mappingServiceTracker, IMappingService.class);
   }
 
   /**
@@ -176,17 +178,7 @@ public class Activator implements BundleActivator {
    * @return
    */
   public IModelImporterFactory getModelImporterFactory() {
-
-    IModelImporterFactory result = this._modelImporterFactoryTracker.getService();
-
-    if (result == null) {
-      // startRequiredBundles();
-      // if (result == null) {
-      throw new RuntimeException("Service IModelImporterFactory not found.");
-      // }
-    }
-
-    return result;
+    return service(this._modelImporterFactoryTracker, IModelImporterFactory.class);
   }
 
   /**
@@ -196,16 +188,27 @@ public class Activator implements BundleActivator {
    * @return
    */
   public IGraphDbFactory getGraphDbFactory() {
+    return service(this._graphDbFactoryTracker, IGraphDbFactory.class);
+  }
+  
+  /**
+   * <p>
+   * </p>
+   *
+   * @param serviceType
+   * @return
+   */
+  private static <T> T service(ServiceTracker<T, T> serviceTracker, Class<T> serviceType) {
 
-    IGraphDbFactory result = this._graphDbFactoryTracker.getService();
+    //
+    T result = checkNotNull(serviceTracker).getService();
 
+    //
     if (result == null) {
-      // startRequiredBundles();
-      // if (result == null) {
-      throw new RuntimeException("Service IGraphDbFactory not found.");
-      // }
+      throw new RuntimeException(String.format("Service of type '%s' not found.", serviceType.getName()));
     }
 
+    //
     return result;
   }
 }
