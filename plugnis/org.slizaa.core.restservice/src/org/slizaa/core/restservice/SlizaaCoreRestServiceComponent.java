@@ -4,7 +4,6 @@ import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.ws.rs.ext.RuntimeDelegate;
@@ -29,29 +28,26 @@ import org.slizaa.scanner.core.classpathscanner.IClasspathScannerService;
 @Component
 public class SlizaaCoreRestServiceComponent {
 
-  /** - */
+  /** the slizaa rest service alias */
   private static final String                   SLIZAA_REST_ALIAS = "/slizaa-rest";
 
-  /** LOGGER */
-  private static final Logger                   LOGGER            = Logger
-      .getLogger(SlizaaCoreRestServiceComponent.class.getName());
-
-  /** - */
+  /** the HttpService */
   @Reference(cardinality = ReferenceCardinality.MANDATORY, policy = ReferencePolicy.STATIC)
   private HttpService                           _httpService;
 
-  /** - */
+  /** the IClasspathScannerService */
   @Reference(cardinality = ReferenceCardinality.MANDATORY, policy = ReferencePolicy.STATIC)
   private IClasspathScannerService              _classpathScannerService;
 
-  /** - */
+  /** the instance */
   private static SlizaaCoreRestServiceComponent instance;
 
   /**
    * <p>
+   * Returns the component instance
    * </p>
    *
-   * @return
+   * @return the component instance
    */
   public static SlizaaCoreRestServiceComponent instance() {
     return instance;
@@ -59,20 +55,20 @@ public class SlizaaCoreRestServiceComponent {
 
   /**
    * <p>
+   * Return all known extension classes with the given annotation
    * </p>
    *
    * @param annotationType
-   * @return
+   * @return the list of classes
    */
   public static final List<Class<?>> getBundleExtensionClasses(Class<? extends Annotation> annotationType) {
-
-    //
     return instance != null ? instance()._classpathScannerService.getExtensionsWithClassAnnotation(annotationType)
         : Collections.emptyList();
   }
 
   /**
    * <p>
+   * Activates this component instance.
    * </p>
    *
    * @throws ServletException
@@ -81,71 +77,37 @@ public class SlizaaCoreRestServiceComponent {
   @Activate
   public void activate() throws ServletException, NamespaceException {
 
+    // Workaround:
+    // https://stackoverflow.com/questions/48525205/how-to-resolve-jersey-internal-runtimedelegateimpl-with-jersey-on-osgi
     RuntimeDelegate.setInstance(new org.glassfish.jersey.internal.RuntimeDelegateImpl());
-    
-    //
-    LOGGER.info("SlizaaCoreRestServiceComponent.activate()");
 
-    //
+    // the component instance
     SlizaaCoreRestServiceComponent.instance = this;
 
-    //
-    executeWithThreadContextClassLoader(() -> {
-      try {
-        this._httpService.registerServlet(SLIZAA_REST_ALIAS, new ServletContainer(), new Hashtable<String, String>() {
-          {
-            put("javax.ws.rs.Application", JerseyApplication.class.getName());
-            put("jersey.config.server.provider.packages", "com.fasterxml.jackson.jaxrs.json");
-          }
-        }, null);
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
-    });
+    try {
+      this._httpService.registerServlet(SLIZAA_REST_ALIAS, new ServletContainer(), new Hashtable<String, String>() {
+        {
+          put("javax.ws.rs.Application", SlizaaJerseyApplication.class.getName());
+          put("jersey.config.server.provider.packages", "com.fasterxml.jackson.jaxrs.json");
+        }
+      }, null);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
-  // <init-param>
-  // <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-  // <param-value>true</param-value>
-  // </init-param>
-  //
   /**
    * <p>
+   * Deactivates this component instance.
    * </p>
    */
   @Deactivate
   public void deactivate() {
 
     //
-    LOGGER.info("SlizaaCoreRestServiceComponent.deactivate()");
-
-    //
     SlizaaCoreRestServiceComponent.instance = null;
 
     //
     this._httpService.unregister(SLIZAA_REST_ALIAS);
-  }
-
-  /**
-   * <p>
-   * </p>
-   *
-   * @param runnable
-   */
-  private void executeWithThreadContextClassLoader(Runnable runnable) {
-
-    //
-    ClassLoader originalContextClassLoader = Thread.currentThread().getContextClassLoader();
-
-    //
-    try {
-      ClassLoader bundleClassLoader = getClass().getClassLoader();
-      //Thread.currentThread().setContextClassLoader(bundleClassLoader);
-      runnable.run();
-    }
-    //
-    finally {
-      Thread.currentThread().setContextClassLoader(originalContextClassLoader);
-    }
   }
 }

@@ -10,22 +10,24 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 
 /**
  * <p>
+ * Configures the
  * </p>
  *
  * @author Gerd W&uuml;therich (gerd@gerd-wuetherich.de)
  */
-public class JerseyApplication extends Application {
+public class SlizaaJerseyApplication extends Application {
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public Set<Class<?>> getClasses() {
-    // https://stackoverflow.com/questions/48525205/how-to-resolve-jersey-internal-runtimedelegateimpl-with-jersey-on-osgi
-    //
+
+    // create the result set
     Set<Class<?>> result = new HashSet<Class<?>>();
 
-    //
+    // add the jackson feature
     result.add(JacksonFeature.class);
-
-    //
     result.add(StatusResource.class);
 
     //
