@@ -1,0 +1,2 @@
+http://localhost:9090/jersey-http-service/status
+http://localhost:9090/jersey-http-service/sponk

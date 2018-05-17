@@ -4,7 +4,6 @@
 package org.slizaa.rcp.workbench.core;
 
 import java.lang.annotation.Annotation;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,25 +77,14 @@ public class BundleExtensionsUtils {
         .collect(Collectors.toList());
   }
 
+  /**
+   * <p>
+   * </p>
+   *
+   * @param annotationType
+   * @return
+   */
   public static final List<Class<?>> getBundleExtensionClasses(Class<? extends Annotation> annotationType) {
-
-    return Collections.emptyList();
-    // //
-    // Collection<SlizaaExtensionBundle> extensionBundles = Activator.instance().getTrackedExtensionBundles().values();
-    // System.out.println(extensionBundles);
-    // return extensionBundles.stream()
-    //
-    // //
-    // .flatMap(
-    // exBundle -> exBundle.getDefinedExtensions().getOrDefault(annotationType, Collections.emptyList()).stream())
-    //
-    // //
-    // .map(bundleExtension -> bundleExtension.getType())
-    //
-    // //
-    // .filter(type -> type != null)
-    //
-    // //
-    // .collect(Collectors.toList());
+    return Activator.instance().getClasspathScannerService().getExtensionsWithClassAnnotation(annotationType);
   }
 }
