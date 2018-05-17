@@ -70,7 +70,7 @@
 <repository location="http://eclipse.jeeeyul.net/update/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.scanner.core.eclipse.feature.feature.group" version="1.0.0.20180516135910"/>
+<unit id="org.slizaa.scanner.core.eclipse.feature.feature.group" version="0.0.0"/>
 <repository location="http://www.slizaa.org/p2/slizaa-scanner-core"/>
 </location>
 </locations>

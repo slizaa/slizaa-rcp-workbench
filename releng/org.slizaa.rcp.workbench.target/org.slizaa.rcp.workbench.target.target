@@ -56,11 +56,7 @@
 <repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph-core"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.scanner.core.classpathscanner" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.contentdefinition" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.cypherregistry" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.mvnresolver.uber" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.spi-api" version="0.0.0"/>
+<unit id="org.slizaa.scanner.core.eclipse.feature.feature.group" version="0.0.0"/>
 <repository location="http://www.slizaa.org/p2/slizaa-scanner-core"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
