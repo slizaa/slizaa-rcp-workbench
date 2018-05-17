@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Generated from Eclipse Platform" sequenceNumber="39">
+<?pde version="3.8"?><target name="Generated from Eclipse Platform" sequenceNumber="42">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.cau.cs.kieler.klighd.draw2d.feature.feature.group" version="0.0.0"/>
@@ -14,6 +14,17 @@
 <unit id="org.slizaa.hierarchicalgraph.graphdb.test.feature.feature.group" version="0.0.0"/>
 <unit id="org.slizaa.hierarchicalgraph.graphdb.test.feature.source.feature.group" version="0.0.0"/>
 <repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph-graphdb"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.thirdparty.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.thirdparty.feature.source.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.thirdparty.test.feature.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.thirdparty.test.feature.source.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-thirdparty-dependencies"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.scanner.jtype.eclipse.feature.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-scanner-jtype"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.slizaa.opencypher.workbench.feature.feature.group" version="0.0.0"/>
@@ -51,31 +62,16 @@
 <repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph-core"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.scanner.core.classpathscanner" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.contentdefinition" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.cypherregistry" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.mvnresolver.uber" version="0.0.0"/>
-<unit id="org.slizaa.scanner.core.spi-api" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-scanner-core"/>
+<unit id="org.slizaa.scanner.neo4j.eclipse.feature.feature.group" version="0.0.0"/>
+<repository location="http://www.slizaa.org/p2/slizaa-scanner-neo4j"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="net.jeeeyul.eclipse.themes.feature.feature.group" version="2.3.0.I20151022-090442"/>
 <repository location="http://eclipse.jeeeyul.net/update/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.scanner.neo4j.eclipse.feature.feature.group" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-scanner-neo4j"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.scanner.jtype.eclipse.feature.feature.group" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-scanner-jtype"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.thirdparty.feature.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.thirdparty.feature.source.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.thirdparty.test.feature.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.thirdparty.test.feature.source.feature.group" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-thirdparty-dependencies"/>
+<unit id="org.slizaa.scanner.core.eclipse.feature.feature.group" version="1.0.0.20180516135910"/>
+<repository location="http://www.slizaa.org/p2/slizaa-scanner-core"/>
 </location>
 </locations>
 </target>

@@ -8,10 +8,10 @@
             name="Slizaa" 
             point="org.eclipse.core.runtime.products">
             <product application="org.eclipse.ui.ide.workbench" description="Slizaa" name="Slizaa Software Architecture Workbench">
-                  <property name="appName" value="Slizaa"></property>
+                  <property name="appName" value="Slizaa Software Architecture Workbench"></property>
                   <property
                         name="aboutText"
-                        value="Slizaa Software Architecture Workbench&#x0A;&#x0A;(c) Copyright Gerd Wütherich. 2015-2018. All rights reserved.&#x0A;&#x0A;Visit http://www.slizaa.org&#x0A;&#x0A;This offering is powered by Eclipse technology &#x0A;and includes Eclipse plug-ins that can be &#x0A;installed and used with other Eclipse-based &#x0A;offerings."></property>
+                        value="slizaa architecture workbench&#x0A;&#x0A;(c) Copyright Gerd Wütherich. 2015-2018. All rights reserved.&#x0A;&#x0A;Visit http://www.slizaa.org&#x0A;&#x0A;This offering is powered by Eclipse technology &#x0A;and includes Eclipse plug-ins that can be &#x0A;installed and used with other Eclipse-based &#x0A;offerings."></property>
                   <property name="windowImages" value="icons/slizaa_16.png,icons/slizaa_32.png,icons/slizaa_48.png,icons/slizaa_64.png,icons/slizaa_128.png,icons/slizaa_256.png"></property>
                   <property name="startupProgressRect" value="0,180,463,16"></property>
                   <!-- disable this property to enable the IThemeEngine (needed for the jeeeyul ui) -->
