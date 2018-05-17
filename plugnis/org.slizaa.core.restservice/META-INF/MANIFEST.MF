@@ -28,7 +28,8 @@ Bundle-ClassPath: .,
  libs/ext/validation-api-1.1.0.Final.jar,
  libs/ext/yasson-1.0.jar,
  libs/lib/jersey-media-json-binding.jar,
- libs/lib/jersey-media-json-jackson-2.27.jar
+ libs/lib/jersey-media-json-jackson-2.27.jar,
+ libs/lib/jersey-entity-filtering-2.27.jar
 Require-Bundle: org.eclipse.osgi;bundle-version="3.12.100",
  org.eclipse.osgi.services;bundle-version="3.6.0",
  javax.servlet;bundle-version="3.1.0",
@@ -36,7 +37,9 @@ Require-Bundle: org.eclipse.osgi;bundle-version="3.12.100",
  org.eclipse.jetty.server;bundle-version="9.4.8",
  org.slizaa.rcp.workbench.core;bundle-version="1.0.0",
  com.google.guava;bundle-version="21.0.0",
- com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.8.11"
+ com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.8.11",
+ com.fasterxml.jackson.core.jackson-core;bundle-version="2.8.11",
+ com.fasterxml.jackson.core.jackson-databind;bundle-version="2.8.11"
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.annotation;version="1.2.0",
  javax.annotation.security;version="1.2.0",

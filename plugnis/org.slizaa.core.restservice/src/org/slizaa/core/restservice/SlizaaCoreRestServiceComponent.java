@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
+import javax.ws.rs.ext.RuntimeDelegate;
 
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.osgi.service.component.annotations.Activate;
@@ -80,6 +81,8 @@ public class SlizaaCoreRestServiceComponent {
   @Activate
   public void activate() throws ServletException, NamespaceException {
 
+    RuntimeDelegate.setInstance(new org.glassfish.jersey.internal.RuntimeDelegateImpl());
+    
     //
     LOGGER.info("SlizaaCoreRestServiceComponent.activate()");
 
@@ -92,7 +95,7 @@ public class SlizaaCoreRestServiceComponent {
         this._httpService.registerServlet(SLIZAA_REST_ALIAS, new ServletContainer(), new Hashtable<String, String>() {
           {
             put("javax.ws.rs.Application", JerseyApplication.class.getName());
-            // put("jersey.config.server.provider.packages", "com.fasterxml.jackson.jaxrs.json");
+            put("jersey.config.server.provider.packages", "com.fasterxml.jackson.jaxrs.json");
           }
         }, null);
       } catch (Exception e) {
@@ -137,7 +140,7 @@ public class SlizaaCoreRestServiceComponent {
     //
     try {
       ClassLoader bundleClassLoader = getClass().getClassLoader();
-      Thread.currentThread().setContextClassLoader(bundleClassLoader);
+      //Thread.currentThread().setContextClassLoader(bundleClassLoader);
       runnable.run();
     }
     //

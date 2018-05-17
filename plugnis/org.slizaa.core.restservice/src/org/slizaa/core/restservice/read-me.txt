@@ -1,2 +1,6 @@
-http://localhost:9090/jersey-http-service/status
-http://localhost:9090/jersey-http-service/sponk
+http://localhost:9090/slizaa-rest/status
+http://localhost:9090/slizaa-rest/sponk
+
+https://stackoverflow.com/questions/48525205/how-to-resolve-jersey-internal-runtimedelegateimpl-with-jersey-on-osgi
+https://projects.eclipse.org/proposals/eclipse-lsphub
+https://github.com/apache/aries-jax-rs-whiteboard
