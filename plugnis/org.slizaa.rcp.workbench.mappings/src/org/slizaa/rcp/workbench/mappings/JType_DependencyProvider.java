@@ -12,6 +12,6 @@ public class JType_DependencyProvider extends AbstractQueryBasedDependencyProvid
 
     //
     addProxyDependencyDefinitions(
-        "Match (t1:Type)-[r:DEPENDS_ON]->(t2:Type) RETURN id(t1), id(t2), id(r), 'DEPENDS_ON'", new String[0]);
+        "Match (t1:Type)-[r:DEPENDS_ON]->(t2:Type) RETURN id(t1), id(t2), id(r), 'DEPENDS_ON'", new String[] {});
   }
 }
