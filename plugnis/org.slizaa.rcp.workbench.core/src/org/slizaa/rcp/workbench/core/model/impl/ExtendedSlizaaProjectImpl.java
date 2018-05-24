@@ -330,8 +330,11 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
             getDatabaseDirectory(getProject()), parserFactories, cypherStatements);
 
         // ... and parse the content
-        modelImporter.parse(progressMonitor);
+        modelImporter.parse(progressMonitor, () -> Activator.instance().getGraphDbFactory()
+            .newGraphDb(5001, getDatabaseDirectory(getProject())).withUserObject(this).create());
 
+        //
+        this.graphDatabaseInstance = modelImporter.getGraphDb();
       });
     } catch (CoreException coreException) {
       coreException.printStackTrace();
