@@ -5,8 +5,6 @@ package org.slizaa.rcp.workbench.core.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,13 +14,10 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
 import org.slizaa.rcp.workbench.core.internal.classpathcontainer.SlizaaSpiApiBundleTracker;
-import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatementRegistry;
 import org.slizaa.scanner.core.api.graphdb.IGraphDbFactory;
 import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
 import org.slizaa.scanner.core.classpathscanner.IClasspathScannerService;
-import org.slizaa.scanner.core.cypherregistry.CypherStatementRegistry;
-import org.slizaa.scanner.core.cypherregistry.SlizaaCypherFileParser;
 
 /**
  * <p>
@@ -51,7 +46,7 @@ public class Activator implements BundleActivator {
   private ServiceTracker<IClasspathScannerService, IClasspathScannerService> _classpathScannerService;
 
   /** - */
-  private CypherStatementRegistry                                            _cypherStatementRegistry;
+  private ServiceTracker<ICypherStatementRegistry, ICypherStatementRegistry> _cypherStatementRegistryTracker;
 
   /**
    * <p>
@@ -94,27 +89,13 @@ public class Activator implements BundleActivator {
     this._modelImporterFactoryTracker = new ServiceTracker<>(context, IModelImporterFactory.class, null);
     this._graphDbFactoryTracker = new ServiceTracker<>(context, IGraphDbFactory.class, null);
     this._classpathScannerService = new ServiceTracker<>(context, IClasspathScannerService.class, null);
+    this._cypherStatementRegistryTracker = new ServiceTracker<>(context, ICypherStatementRegistry.class, null);
 
     this._modelImporterFactoryTracker.open();
     this._graphDbFactoryTracker.open();
     this._classpathScannerService.open();
-
-    // TODO: OSGi Service!
-    this._cypherStatementRegistry = new CypherStatementRegistry(() -> {
-
-      // get the classpath scanner service...
-      IClasspathScannerService classpathScannerService = this._classpathScannerService.getService();
-
-      //
-      List<ICypherStatement> result = classpathScannerService != null
-          ? classpathScannerService.getFiles("cypher", ICypherStatement.class,
-              (name, stream) -> SlizaaCypherFileParser.parse(name, stream))
-          : Collections.emptyList();
-
-      return result;
-    });
-    context.registerService(ICypherStatementRegistry.class, this._cypherStatementRegistry, null);
-  }
+    this._cypherStatementRegistryTracker.open();
+   }
 
   /**
    * {@inheritDoc}
@@ -132,6 +113,7 @@ public class Activator implements BundleActivator {
     this._modelImporterFactoryTracker.close();
     this._graphDbFactoryTracker.close();
     this._classpathScannerService.close();
+    this._cypherStatementRegistryTracker.close();
 
     this._modelImporterFactoryTracker = null;
     this._graphDbFactoryTracker = null;
@@ -166,9 +148,8 @@ public class Activator implements BundleActivator {
    *
    * @return
    */
-  public CypherStatementRegistry getCypherStatementRegistry() {
-    this._cypherStatementRegistry.rescan();
-    return this._cypherStatementRegistry;
+  public ICypherStatementRegistry getCypherStatementRegistry() {
+    return service(this._cypherStatementRegistryTracker, ICypherStatementRegistry.class);
   }
 
   /**
@@ -190,7 +171,7 @@ public class Activator implements BundleActivator {
   public IGraphDbFactory getGraphDbFactory() {
     return service(this._graphDbFactoryTracker, IGraphDbFactory.class);
   }
-  
+
   /**
    * <p>
    * </p>
