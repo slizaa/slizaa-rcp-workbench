@@ -93,8 +93,8 @@ offerings.
       <feature id="org.eclipse.emf"/>
       <feature id="org.eclipse.jdt"/>
       <feature id="org.eclipse.xtext.redist"/>
-      <feature id="org.eclipse.equinox.p2.discovery.feature" version="1.1.1.v20170906-1259"/>
-      <feature id="org.slizaa.scanner.core.eclipse.feature" version="1.0.0.20180516135910"/>
+      <feature id="org.eclipse.equinox.p2.discovery.feature"/>
+      <feature id="org.slizaa.scanner.core.eclipse.feature"/>
    </features>
 
    <configurations>
