@@ -321,6 +321,11 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
         List<ICypherStatement> cypherStatements = Activator.instance().getCypherStatementRegistry().getAllStatements();
 
         // TODO
+        for (ICypherStatement cypherStatement : cypherStatements) {
+          System.out.println("cypherStatement: " + cypherStatement);
+        }
+
+        // TODO
         IContentDefinitionProvider contentDefinitionProvider = getConfiguration().getInjector()
             .getInstance(IContentDefinitionProvider.class);
 

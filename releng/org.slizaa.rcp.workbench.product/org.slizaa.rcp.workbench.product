@@ -105,6 +105,9 @@ offerings.
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
       <plugin id="org.slizaa.neo4j.queryresult.ui" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.neo4j.ui.cypherview" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.scanner.core.classpathscanner" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.scanner.core.cypherregistry" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.scanner.core.jersey-osgi" autoStart="false" startLevel="0" />
       <plugin id="org.slizaa.ui.klighd" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.ui.klighd.synthesis" autoStart="true" startLevel="0" />
    </configurations>
