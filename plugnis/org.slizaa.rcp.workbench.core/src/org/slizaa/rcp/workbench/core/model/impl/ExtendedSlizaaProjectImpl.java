@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -340,6 +341,9 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
 
         //
         this.graphDatabaseInstance = modelImporter.getGraphDb();
+
+        // refresh local
+        getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
       });
     } catch (CoreException coreException) {
       coreException.printStackTrace();
