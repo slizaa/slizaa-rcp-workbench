@@ -7,9 +7,8 @@ import java.util.Map;
 import org.eclipse.core.resources.IProject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
-import org.slizaa.neo4j.dbadapter.Neo4jClient;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;
@@ -104,17 +103,28 @@ public interface SlizaaProject {
   IGraphDb getGraphDatabaseInstance();
 
   /**
-   * Returns the value of the '<em><b>Bolt Client</b></em>' reference.
+   * Returns the value of the '<em><b>Bolt Client</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Bolt Client</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Bolt Client</em>' reference.
+   * @return the value of the '<em>Bolt Client</em>' attribute.
+   * @see #setBoltClient(IBoltClient)
    * @generated
    */
-  Neo4jClient getBoltClient();
+  IBoltClient getBoltClient();
+
+  /**
+   * Sets the value of the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getBoltClient <em>Bolt Client</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Bolt Client</em>' attribute.
+   * @see #getBoltClient()
+   * @generated
+   */
+  void setBoltClient(IBoltClient value);
 
   /**
    * Returns the value of the '<em><b>Hierachical Graph</b></em>' reference.
@@ -127,7 +137,7 @@ public interface SlizaaProject {
    * @return the value of the '<em>Hierachical Graph</em>' reference.
    * @generated
    */
-  HGRootNode getHierachicalGraph();
+  org.slizaa.hierarchicalgraph.core.model.HGRootNode getHierachicalGraph();
 
   /**
    * <!-- begin-user-doc -->
@@ -155,7 +165,7 @@ public interface SlizaaProject {
    * <!-- end-user-doc -->
    * @generated
    */
-  HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor);
+  org.slizaa.hierarchicalgraph.core.model.HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor);
 
   /**
    * <!-- begin-user-doc -->

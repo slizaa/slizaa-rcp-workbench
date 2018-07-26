@@ -4,7 +4,7 @@
     modelName="Workbenchmodel" rootExtendsInterface="" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     suppressEMFTypes="true" suppressEMFMetaData="true" suppressEMFModelTags="true"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    usedGenPackages="../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.genmodel#//hierarchicalgraph ../../org.slizaa.neo4j.dbadapter/model/neo4j-dbadapter.genmodel#//dbadapter"
+    usedGenPackages="../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.genmodel#//model"
     operationReflection="true" importOrganizing="true">
   <foreignModel>workbenchmodel.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="org.slizaa.rcp.workbench.core" disposableProviderFactory="true"
@@ -13,13 +13,16 @@
     <genDataTypes ecoreDataType="workbenchmodel.ecore#//IProject"/>
     <genDataTypes ecoreDataType="workbenchmodel.ecore#//IGraphDb"/>
     <genDataTypes ecoreDataType="workbenchmodel.ecore#//ICypherStatement"/>
+    <genDataTypes ecoreDataType="workbenchmodel.ecore#//IMappingProvider"/>
+    <genDataTypes ecoreDataType="workbenchmodel.ecore#//Injector"/>
+    <genDataTypes ecoreDataType="workbenchmodel.ecore#//IBoltClient"/>
     <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaProject">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProject/project"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProject/configuration"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProject/userDefinedExtensions"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProject/userDefinedCypherStatements"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProject/graphDatabaseInstance"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProject/boltClient"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProject/boltClient"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProject/hierachicalGraph"/>
       <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProject/cleanBuild"/>
       <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProject/parse">
@@ -28,7 +31,12 @@
       <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProject/startAndConnectDatabase">
         <genParameters ecoreParameter="workbenchmodel.ecore#//SlizaaProject/startAndConnectDatabase/monitor"/>
       </genOperations>
+      <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProject/mapToHierachicalGraph">
+        <genParameters ecoreParameter="workbenchmodel.ecore#//SlizaaProject/mapToHierachicalGraph/mappingProvider"/>
+        <genParameters ecoreParameter="workbenchmodel.ecore#//SlizaaProject/mapToHierachicalGraph/monitor"/>
+      </genOperations>
       <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProject/dispose"/>
+      <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProject/isDatabaseDirectoryPopulated"/>
     </genClasses>
     <genClasses image="false" ecoreClass="workbenchmodel.ecore#//AbstractUserDefinedType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//AbstractUserDefinedType/project"/>
@@ -37,47 +45,23 @@
     </genClasses>
     <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaProjectConfigurationModel">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProjectConfigurationModel/problems"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaProjectConfigurationModel/configurationItems"/>
-      <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProjectConfigurationModel/createNewConfigurationItemInstance">
-        <genParameters ecoreParameter="workbenchmodel.ecore#//SlizaaProjectConfigurationModel/createNewConfigurationItemInstance/type"/>
-        <genTypeParameters ecoreTypeParameter="workbenchmodel.ecore#//SlizaaProjectConfigurationModel/createNewConfigurationItemInstance/T"/>
-      </genOperations>
+      <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProjectConfigurationModel/getInjector"/>
     </genClasses>
-    <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaProjectConfigurationItemModel">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProjectConfigurationItemModel/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProjectConfigurationItemModel/methodName"/>
-    </genClasses>
-    <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaProjectConfigurationProblem">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProjectConfigurationProblem/message"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProjectConfigurationProblem/charStart"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProjectConfigurationProblem/charEnd"/>
+    <genClasses ecoreClass="workbenchmodel.ecore#//Problem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//Problem/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//Problem/charStart"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//Problem/charEnd"/>
     </genClasses>
     <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaProjectExtension">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProjectExtension/extensionType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaProjectExtension/annotationType"/>
       <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaProjectExtension/createNewInstance">
         <genParameters ecoreParameter="workbenchmodel.ecore#//SlizaaProjectExtension/createNewInstance/type"/>
         <genTypeParameters ecoreTypeParameter="workbenchmodel.ecore#//SlizaaProjectExtension/createNewInstance/T"/>
       </genOperations>
     </genClasses>
-    <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaExtensionBundle">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//SlizaaExtensionBundle/definedExtensions"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaExtensionBundle/definedCypherStatements"/>
-    </genClasses>
-    <genClasses ecoreClass="workbenchmodel.ecore#//SlizaaExtensionBundleExtension">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaExtensionBundleExtension/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//SlizaaExtensionBundleExtension/annotationType"/>
-      <genOperations ecoreOperation="workbenchmodel.ecore#//SlizaaExtensionBundleExtension/createNewInstance">
-        <genParameters ecoreParameter="workbenchmodel.ecore#//SlizaaExtensionBundleExtension/createNewInstance/type"/>
-        <genTypeParameters ecoreTypeParameter="workbenchmodel.ecore#//SlizaaExtensionBundleExtension/createNewInstance/T"/>
-      </genOperations>
-    </genClasses>
     <genClasses ecoreClass="workbenchmodel.ecore#//AnnotationTypeToSlizaaProjectExtensionMap">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//AnnotationTypeToSlizaaProjectExtensionMap/key"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//AnnotationTypeToSlizaaProjectExtensionMap/value"/>
-    </genClasses>
-    <genClasses ecoreClass="workbenchmodel.ecore#//AnnotationTypeToSlizaaBundleExtensionMap">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute workbenchmodel.ecore#//AnnotationTypeToSlizaaBundleExtensionMap/key"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference workbenchmodel.ecore#//AnnotationTypeToSlizaaBundleExtensionMap/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

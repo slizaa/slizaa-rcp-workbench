@@ -3,7 +3,7 @@ package org.slizaa.rcp.workbench.ui.internal.actions;
 import java.util.List;
 
 import org.eclipse.jface.viewers.Viewer;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.rcp.workbench.ui.internal.Activator;
 import org.slizaa.ui.shared.UiUtils;
 import org.slizaa.ui.tree.ISlizaaActionContribution;

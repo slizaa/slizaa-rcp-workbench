@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.osgi.service.component.annotations.Component;
-import org.slizaa.hierarchicalgraph.HGNode;
+import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.rcp.workbench.ui.internal.Activator;
 import org.slizaa.ui.tree.ISlizaaActionContribution;
 

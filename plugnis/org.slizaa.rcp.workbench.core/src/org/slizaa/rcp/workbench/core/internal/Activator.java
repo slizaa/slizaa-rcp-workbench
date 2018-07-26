@@ -7,17 +7,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executors;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
+import org.slizaa.core.boltclient.IBoltClientFactory;
+import org.slizaa.core.classpathscanner.IClasspathScannerService;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.service.IMappingService;
 import org.slizaa.rcp.workbench.core.internal.classpathcontainer.SlizaaSpiApiBundleTracker;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatementRegistry;
 import org.slizaa.scanner.core.api.graphdb.IGraphDbFactory;
 import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
-import org.slizaa.scanner.core.classpathscanner.IClasspathScannerService;
 
 /**
  * <p>
@@ -47,6 +49,9 @@ public class Activator implements BundleActivator {
 
   /** - */
   private ServiceTracker<ICypherStatementRegistry, ICypherStatementRegistry> _cypherStatementRegistryTracker;
+
+  /** - */
+  private IBoltClientFactory                                                 _boltClientFactory;
 
   /**
    * <p>
@@ -78,6 +83,9 @@ public class Activator implements BundleActivator {
     _instance = this;
 
     //
+    _boltClientFactory = IBoltClientFactory.newInstance(Executors.newFixedThreadPool(15));
+
+    //
     this._mappingServiceTracker = new ServiceTracker<>(context, IMappingService.class, null);
     this._mappingServiceTracker.open();
 
@@ -95,7 +103,7 @@ public class Activator implements BundleActivator {
     this._graphDbFactoryTracker.open();
     this._classpathScannerService.open();
     this._cypherStatementRegistryTracker.open();
-   }
+  }
 
   /**
    * {@inheritDoc}
@@ -119,7 +127,20 @@ public class Activator implements BundleActivator {
     this._graphDbFactoryTracker = null;
 
     //
+    _boltClientFactory = null;
+
+    //
     _instance = null;
+  }
+
+  /**
+   * <p>
+   * </p>
+   *
+   * @return
+   */
+  public IBoltClientFactory getBoltClientFactory() {
+    return _boltClientFactory;
   }
 
   /**

@@ -30,9 +30,8 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
-import org.slizaa.neo4j.dbadapter.Neo4jClient;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectExtension;
@@ -132,14 +131,24 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
   protected IGraphDb graphDatabaseInstance = GRAPH_DATABASE_INSTANCE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getBoltClient() <em>Bolt Client</em>}' reference.
+   * The default value of the '{@link #getBoltClient() <em>Bolt Client</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getBoltClient()
    * @generated
    * @ordered
    */
-  protected Neo4jClient boltClient;
+  protected static final IBoltClient BOLT_CLIENT_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getBoltClient() <em>Bolt Client</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBoltClient()
+   * @generated
+   * @ordered
+   */
+  protected IBoltClient boltClient = BOLT_CLIENT_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getHierachicalGraph() <em>Hierachical Graph</em>}' reference.
@@ -149,7 +158,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * @generated
    * @ordered
    */
-  protected HGRootNode hierachicalGraph;
+  protected org.slizaa.hierarchicalgraph.core.model.HGRootNode hierachicalGraph;
 
   /**
    * <!-- begin-user-doc -->
@@ -243,15 +252,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public Neo4jClient getBoltClient() {
-    if (boltClient != null && boltClient.eIsProxy()) {
-      InternalEObject oldBoltClient = (InternalEObject)boltClient;
-      boltClient = (Neo4jClient)eResolveProxy(oldBoltClient);
-      if (boltClient != oldBoltClient) {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT, oldBoltClient, boltClient));
-      }
-    }
+  public IBoltClient getBoltClient() {
     return boltClient;
   }
 
@@ -260,8 +261,11 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public Neo4jClient basicGetBoltClient() {
-    return boltClient;
+  public void setBoltClient(IBoltClient newBoltClient) {
+    IBoltClient oldBoltClient = boltClient;
+    boltClient = newBoltClient;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT, oldBoltClient, boltClient));
   }
 
   /**
@@ -269,10 +273,10 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public HGRootNode getHierachicalGraph() {
+  public org.slizaa.hierarchicalgraph.core.model.HGRootNode getHierachicalGraph() {
     if (hierachicalGraph != null && hierachicalGraph.eIsProxy()) {
       InternalEObject oldHierachicalGraph = (InternalEObject)hierachicalGraph;
-      hierachicalGraph = (HGRootNode)eResolveProxy(oldHierachicalGraph);
+      hierachicalGraph = (org.slizaa.hierarchicalgraph.core.model.HGRootNode)eResolveProxy(oldHierachicalGraph);
       if (hierachicalGraph != oldHierachicalGraph) {
         if (eNotificationRequired())
           eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH, oldHierachicalGraph, hierachicalGraph));
@@ -286,7 +290,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public HGRootNode basicGetHierachicalGraph() {
+  public org.slizaa.hierarchicalgraph.core.model.HGRootNode basicGetHierachicalGraph() {
     return hierachicalGraph;
   }
 
@@ -328,7 +332,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor) {
+  public org.slizaa.hierarchicalgraph.core.model.HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor) {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
     throw new UnsupportedOperationException();
@@ -391,8 +395,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
       case ModelPackageImpl.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE:
         return getGraphDatabaseInstance();
       case ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT:
-        if (resolve) return getBoltClient();
-        return basicGetBoltClient();
+        return getBoltClient();
       case ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH:
         if (resolve) return getHierachicalGraph();
         return basicGetHierachicalGraph();
@@ -416,6 +419,9 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
         getUserDefinedCypherStatements().clear();
         getUserDefinedCypherStatements().addAll((Collection<? extends ICypherStatement>)newValue);
         return;
+      case ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT:
+        setBoltClient((IBoltClient)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -433,6 +439,9 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
         return;
       case ModelPackageImpl.SLIZAA_PROJECT__USER_DEFINED_CYPHER_STATEMENTS:
         getUserDefinedCypherStatements().clear();
+        return;
+      case ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT:
+        setBoltClient(BOLT_CLIENT_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -457,7 +466,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
       case ModelPackageImpl.SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE:
         return GRAPH_DATABASE_INSTANCE_EDEFAULT == null ? graphDatabaseInstance != null : !GRAPH_DATABASE_INSTANCE_EDEFAULT.equals(graphDatabaseInstance);
       case ModelPackageImpl.SLIZAA_PROJECT__BOLT_CLIENT:
-        return boltClient != null;
+        return BOLT_CLIENT_EDEFAULT == null ? boltClient != null : !BOLT_CLIENT_EDEFAULT.equals(boltClient);
       case ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH:
         return hierachicalGraph != null;
     }
@@ -508,6 +517,8 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
     result.append(userDefinedCypherStatements);
     result.append(", graphDatabaseInstance: ");
     result.append(graphDatabaseInstance);
+    result.append(", boltClient: ");
+    result.append(boltClient);
     result.append(')');
     return result.toString();
   }

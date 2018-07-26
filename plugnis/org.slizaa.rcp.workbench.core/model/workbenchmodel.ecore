@@ -25,8 +25,7 @@
         upperBound="-1" eType="#//ICypherStatement"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="graphDatabaseInstance"
         eType="#//IGraphDb" changeable="false" transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="boltClient" eType="ecore:EClass ../../org.slizaa.neo4j.dbadapter/model/neo4j-dbadapter.ecore#//Neo4jClient"
-        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boltClient" eType="#//IBoltClient"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hierachicalGraph" eType="ecore:EClass ../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.ecore#//HGRootNode"
         changeable="false"/>
   </eClassifiers>
@@ -83,4 +82,5 @@
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Injector" instanceClassName="com.google.inject.Injector"
       serializable="false"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="IBoltClient" instanceClassName="org.slizaa.core.boltclient.IBoltClient"/>
 </ecore:EPackage>

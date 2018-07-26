@@ -21,9 +21,8 @@ import org.eclipse.emf.ecore.ETypeParameter;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.slizaa.hierarchicalgraph.HierarchicalgraphPackage;
+import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
-import org.slizaa.neo4j.dbadapter.DbAdapterPackage;
 import org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
 import org.slizaa.rcp.workbench.core.model.Problem;
@@ -139,7 +138,7 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE = 4;
 
   /**
-   * The feature id for the '<em><b>Bolt Client</b></em>' reference.
+   * The feature id for the '<em><b>Bolt Client</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -591,6 +590,16 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int INJECTOR = 11;
 
   /**
+   * The meta object id for the '<em>IBolt Client</em>' data type.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.slizaa.core.boltclient.IBoltClient
+   * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIBoltClient()
+   * @generated
+   */
+  public static final int IBOLT_CLIENT = 12;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -675,6 +684,13 @@ public class ModelPackageImpl extends EPackageImpl {
   private EDataType injectorEDataType = null;
 
   /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EDataType iBoltClientEDataType = null;
+
+  /**
    * Creates an instance of the model <b>Package</b>, registered with
    * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
    * package URI value.
@@ -721,8 +737,7 @@ public class ModelPackageImpl extends EPackageImpl {
     isInited = true;
 
     // Initialize simple dependencies
-    HierarchicalgraphPackage.eINSTANCE.eClass();
-    DbAdapterPackage.eINSTANCE.eClass();
+    org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theModelPackage.createPackageContents();
@@ -818,16 +833,16 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
-   * Returns the meta object for the reference '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getBoltClient <em>Bolt Client</em>}'.
+   * Returns the meta object for the attribute '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#getBoltClient <em>Bolt Client</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Bolt Client</em>'.
+   * @return the meta object for the attribute '<em>Bolt Client</em>'.
    * @see org.slizaa.rcp.workbench.core.model.SlizaaProject#getBoltClient()
    * @see #getSlizaaProject()
    * @generated
    */
-  public EReference getSlizaaProject_BoltClient() {
-    return (EReference)slizaaProjectEClass.getEStructuralFeatures().get(5);
+  public EAttribute getSlizaaProject_BoltClient() {
+    return (EAttribute)slizaaProjectEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -1213,6 +1228,19 @@ public class ModelPackageImpl extends EPackageImpl {
 
 
   /**
+   * Returns the meta object for data type '{@link org.slizaa.core.boltclient.IBoltClient <em>IBolt Client</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for data type '<em>IBolt Client</em>'.
+   * @see org.slizaa.core.boltclient.IBoltClient
+   * @generated
+   */
+  public EDataType getIBoltClient() {
+    return iBoltClientEDataType;
+  }
+
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1248,7 +1276,7 @@ public class ModelPackageImpl extends EPackageImpl {
     createEReference(slizaaProjectEClass, SLIZAA_PROJECT__USER_DEFINED_EXTENSIONS);
     createEAttribute(slizaaProjectEClass, SLIZAA_PROJECT__USER_DEFINED_CYPHER_STATEMENTS);
     createEAttribute(slizaaProjectEClass, SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE);
-    createEReference(slizaaProjectEClass, SLIZAA_PROJECT__BOLT_CLIENT);
+    createEAttribute(slizaaProjectEClass, SLIZAA_PROJECT__BOLT_CLIENT);
     createEReference(slizaaProjectEClass, SLIZAA_PROJECT__HIERACHICAL_GRAPH);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___CLEAN_BUILD);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___PARSE__IPROGRESSMONITOR);
@@ -1286,6 +1314,7 @@ public class ModelPackageImpl extends EPackageImpl {
     iCypherStatementEDataType = createEDataType(ICYPHER_STATEMENT);
     iMappingProviderEDataType = createEDataType(IMAPPING_PROVIDER);
     injectorEDataType = createEDataType(INJECTOR);
+    iBoltClientEDataType = createEDataType(IBOLT_CLIENT);
   }
 
   /**
@@ -1312,8 +1341,7 @@ public class ModelPackageImpl extends EPackageImpl {
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
-    DbAdapterPackage theDbAdapterPackage = (DbAdapterPackage)EPackage.Registry.INSTANCE.getEPackage(DbAdapterPackage.eNS_URI);
-    HierarchicalgraphPackage theHierarchicalgraphPackage = (HierarchicalgraphPackage)EPackage.Registry.INSTANCE.getEPackage(HierarchicalgraphPackage.eNS_URI);
+    org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage theHierarchicalgraphPackage = (org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage)EPackage.Registry.INSTANCE.getEPackage(org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage.eNS_URI);
 
     // Create type parameters
 
@@ -1330,7 +1358,7 @@ public class ModelPackageImpl extends EPackageImpl {
     initEReference(getSlizaaProject_UserDefinedExtensions(), this.getAnnotationTypeToSlizaaProjectExtensionMap(), null, "userDefinedExtensions", null, 0, -1, SlizaaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSlizaaProject_UserDefinedCypherStatements(), this.getICypherStatement(), "userDefinedCypherStatements", null, 0, -1, SlizaaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getSlizaaProject_GraphDatabaseInstance(), this.getIGraphDb(), "graphDatabaseInstance", null, 0, 1, SlizaaProject.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSlizaaProject_BoltClient(), theDbAdapterPackage.getNeo4jClient(), null, "boltClient", null, 0, 1, SlizaaProject.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSlizaaProject_BoltClient(), this.getIBoltClient(), "boltClient", null, 0, 1, SlizaaProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSlizaaProject_HierachicalGraph(), theHierarchicalgraphPackage.getHGRootNode(), null, "hierachicalGraph", null, 0, 1, SlizaaProject.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEOperation(getSlizaaProject__CleanBuild(), null, "cleanBuild", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1393,6 +1421,7 @@ public class ModelPackageImpl extends EPackageImpl {
     initEDataType(iCypherStatementEDataType, ICypherStatement.class, "ICypherStatement", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
     initEDataType(iMappingProviderEDataType, IMappingProvider.class, "IMappingProvider", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
     initEDataType(injectorEDataType, Injector.class, "Injector", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+    initEDataType(iBoltClientEDataType, IBoltClient.class, "IBoltClient", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);
@@ -1463,12 +1492,12 @@ public class ModelPackageImpl extends EPackageImpl {
     public static final EAttribute SLIZAA_PROJECT__GRAPH_DATABASE_INSTANCE = eINSTANCE.getSlizaaProject_GraphDatabaseInstance();
 
     /**
-     * The meta object literal for the '<em><b>Bolt Client</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Bolt Client</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    public static final EReference SLIZAA_PROJECT__BOLT_CLIENT = eINSTANCE.getSlizaaProject_BoltClient();
+    public static final EAttribute SLIZAA_PROJECT__BOLT_CLIENT = eINSTANCE.getSlizaaProject_BoltClient();
 
     /**
      * The meta object literal for the '<em><b>Hierachical Graph</b></em>' reference feature.
@@ -1731,6 +1760,16 @@ public class ModelPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EDataType INJECTOR = eINSTANCE.getInjector();
+
+    /**
+     * The meta object literal for the '<em>IBolt Client</em>' data type.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.slizaa.core.boltclient.IBoltClient
+     * @see org.slizaa.rcp.workbench.core.model.impl.ModelPackageImpl#getIBoltClient()
+     * @generated
+     */
+    public static final EDataType IBOLT_CLIENT = eINSTANCE.getIBoltClient();
 
   }
 

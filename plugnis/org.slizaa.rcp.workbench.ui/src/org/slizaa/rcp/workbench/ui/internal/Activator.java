@@ -15,9 +15,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
+import org.slizaa.hierarchicalgraph.core.workbench.model.ModelPackage;
+import org.slizaa.hierarchicalgraph.core.workbench.model.SlizaaWorkbenchModel;
 import org.slizaa.rcp.workbench.ui.internal.decorators.SlizaaProjectListener;
-import org.slizaa.workbench.model.ModelPackage;
-import org.slizaa.workbench.model.SlizaaWorkbenchModel;
 
 /**
  * The activator class controls the plug-in life cycle

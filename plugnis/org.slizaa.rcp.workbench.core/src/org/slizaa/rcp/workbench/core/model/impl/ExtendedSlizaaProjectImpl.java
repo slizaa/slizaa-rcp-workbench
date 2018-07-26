@@ -24,11 +24,10 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.slizaa.hierarchicalgraph.HGRootNode;
+import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.graphdb.mapping.service.IMappingService;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
-import org.slizaa.neo4j.dbadapter.DbAdapterFactory;
-import org.slizaa.neo4j.dbadapter.Neo4jClient;
-import org.slizaa.neo4j.hierarchicalgraph.mapping.service.IMappingService;
 import org.slizaa.rcp.workbench.core.BundleExtensionsUtils;
 import org.slizaa.rcp.workbench.core.ProjectExtensionsUtils;
 import org.slizaa.rcp.workbench.core.internal.Activator;
@@ -145,10 +144,11 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
     if (this.boltClient == null) {
 
       //
-      Neo4jClient boltClient = DbAdapterFactory.eINSTANCE.createNeo4jClient();
-      boltClient.setUri("bolt://localhost:" + this.graphDatabaseInstance.getPort());
-      boltClient.setName(this.getProject().getName());
-      boltClient.setDescription(this.getProject().getName());
+      IBoltClient boltClient = Activator.instance().getBoltClientFactory().createBoltClient(
+          "bolt://localhost:" + this.graphDatabaseInstance.getPort(), this.getProject().getName(),
+          this.getProject().getName());
+      
+      //
       boltClient.connect();
 
       //
@@ -217,9 +217,9 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
    *
    * @param newBoltClient
    */
-  public void setBoltClient(Neo4jClient newBoltClient) {
+  public void setBoltClient(IBoltClient newBoltClient) {
 
-    Neo4jClient oldBoltClient = this.boltClient;
+    IBoltClient oldBoltClient = this.boltClient;
 
     this.boltClient = newBoltClient;
     if (eNotificationRequired()) {
