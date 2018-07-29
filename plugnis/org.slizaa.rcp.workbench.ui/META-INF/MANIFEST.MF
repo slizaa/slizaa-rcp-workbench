@@ -38,7 +38,13 @@ Require-Bundle:
  org.slizaa.rcp.workbench.discovery.ui;bundle-version="1.0.0",
  org.slizaa.scanner.core.spi-api;bundle-version="1.0.0",
  org.slizaa.hierarchicalgraph.graphdb.mapping.spi;bundle-version="1.0.0",
- org.slizaa.core.boltclient;bundle-version="1.0.0"
+ org.slizaa.core.boltclient;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.graphdb.ui.currentselectionview;bundle-version="1.0.0",
+ org.neo4j.driver.neo4j-java-driver;bundle-version="1.6.1",
+ org.slizaa.hierarchicalgraph.core.selections;bundle-version="1.0.0",
+ org.slizaa.neo4j.opencypher;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.CypherBasedXRefFilterAction.xml,
  OSGI-INF/org.slizaa.rcp.workbench.ui.internal.actions.ResetFilterAction.xml,

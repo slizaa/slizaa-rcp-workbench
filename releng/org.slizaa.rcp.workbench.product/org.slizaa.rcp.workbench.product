@@ -62,13 +62,15 @@ offerings.
    </plugins>
 
    <features>
+      <feature id="org.slizaa.thirdparty.feature"/>
+      <feature id="org.slizaa.core.feature"/>
+      <feature id="org.slizaa.scanner.core.feature"/>
+      <feature id="org.slizaa.hierarchicalgraph.feature"/>
       <feature id="org.slizaa.hierarchicalgraph.core.feature"/>
       <feature id="org.slizaa.hierarchicalgraph.graphdb.feature"/>
-      <feature id="org.slizaa.rcp.workbench.dependencies.feature"/>
-      <feature id="org.slizaa.rcp.workbench.feature"/>
       <feature id="org.slizaa.neo4j.opencypher.feature"/>
-      <feature id="org.slizaa.thirdparty.feature"/>
       <feature id="org.slizaa.opencypher.workbench.feature"/>
+      <feature id="org.slizaa.rcp.workbench.feature"/>
       <feature id="org.eclipse.e4.rcp"/>
       <feature id="org.eclipse.emf.ecore"/>
       <feature id="org.eclipse.equinox.p2.user.ui"/>
@@ -94,7 +96,6 @@ offerings.
       <feature id="org.eclipse.jdt"/>
       <feature id="org.eclipse.xtext.redist"/>
       <feature id="org.eclipse.equinox.p2.discovery.feature"/>
-      <feature id="org.slizaa.scanner.core.eclipse.feature"/>
    </features>
 
    <configurations>
@@ -103,13 +104,13 @@ offerings.
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.slizaa.core.classpathscanner" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.core.jersey.osgi" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.hierarchicalgraph.core.ui.klighd" autoStart="true" startLevel="0" />
+      <plugin id="org.slizaa.hierarchicalgraph.core.ui.klighd.synthesis" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.neo4j.queryresult.ui" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.neo4j.ui.cypherview" autoStart="true" startLevel="0" />
-      <plugin id="org.slizaa.scanner.core.classpathscanner" autoStart="true" startLevel="0" />
       <plugin id="org.slizaa.scanner.core.cypherregistry" autoStart="true" startLevel="0" />
-      <plugin id="org.slizaa.scanner.core.jersey-osgi" autoStart="false" startLevel="0" />
-      <plugin id="org.slizaa.ui.klighd" autoStart="true" startLevel="0" />
-      <plugin id="org.slizaa.ui.klighd.synthesis" autoStart="true" startLevel="0" />
    </configurations>
 
    <preferencesInfo>

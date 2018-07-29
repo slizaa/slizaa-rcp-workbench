@@ -17,11 +17,62 @@
    </license>
 
    <requires>
-      <import feature="org.slizaa.hierarchicalgraph.core.feature"/>
-      <import feature="org.slizaa.hierarchicalgraph.graphdb.feature"/>
-      <import feature="org.slizaa.neo4j.opencypher.feature"/>
-      <import feature="org.slizaa.opencypher.workbench.feature"/>
-      <import feature="org.slizaa.rcp.workbench.dependencies.feature"/>
+      <import plugin="org.slizaa.scanner.core.contentdefinition" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.core.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.rcp.workbench.core.spi-api" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.scanner.core.spi-api" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.scanner.core.cypherregistry"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.equinox.common"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.jobs"/>
+      <import plugin="org.eclipse.jdt.core" version="3.13.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.13.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="com.google.guava" version="21.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.launching" version="3.9.51" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.graphdb.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
+      <import plugin="com.google.gson" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.core.boltclient" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.graphdb.mapping.spi" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.core.classpathscanner" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.graphdb.mapping.service" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="javax.ws.rs-api"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.e4.ui.di"/>
+      <import plugin="org.eclipse.e4.core.di.annotations"/>
+      <import plugin="org.eclipse.e4.ui.model.workbench"/>
+      <import plugin="org.eclipse.ui" version="3.108.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.core.contexts" version="1.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi.services" version="3.5.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.e4.ui.workbench" version="1.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.console" version="3.6.200" match="greaterOrEqual"/>
+      <import plugin="com.google.guava" version="15.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.navigator"/>
+      <import plugin="org.eclipse.ui.ide" version="3.12.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xtext" version="2.10.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.core.ui.tree" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.core.ui.shared" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.slizaa.rcp.workbench.core" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.core.workbench.model" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit" version="2.12.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.12.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.rcp.workbench.discovery.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.graphdb.ui.currentselectionview" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.neo4j.driver.neo4j-java-driver" version="1.6.1" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.core.selections" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.neo4j.opencypher" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.p2.ui.discovery" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.p2.discovery" version="1.0.400" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.p2.discovery.compatibility" version="1.0.200" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.common" version="3.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.12.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.pde.ds.lib"/>
    </requires>
 
    <plugin
@@ -51,10 +102,16 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
-   <!-- TODO: REMOVE FROM FEATURE! -->
+
    <plugin
-         id="org.slizaa.rcp.workbench.mappings"
+         id="net.jeeeyul.eclipse.themes"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="net.jeeeyul.swtend"
          download-size="0"
          install-size="0"
          version="0.0.0"

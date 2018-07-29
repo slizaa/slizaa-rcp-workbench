@@ -22,9 +22,9 @@ import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.neo4j.driver.v1.StatementResult;
 import org.osgi.service.component.annotations.Component;
+import org.slizaa.core.boltclient.IBoltClient;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
-import org.slizaa.hierarchicalgraph.selection.FilterSelections;
-import org.slizaa.neo4j.dbadapter.Neo4jClient;
+import org.slizaa.hierarchicalgraph.core.selections.FilterSelections;
 import org.slizaa.neo4j.opencypher.openCypher.Cypher;
 import org.slizaa.neo4j.opencypher.util.CypherNormalizer;
 import org.slizaa.ui.shared.context.BusyCursor;
@@ -77,7 +77,7 @@ public class CypherBasedXRefFilterAction extends AbstractFilterAction {
         }
 
         //
-        Neo4jClient boltClient = node.getRootNode().getExtension(Neo4jClient.class);
+        IBoltClient boltClient = node.getRootNode().getExtension(IBoltClient.class);
 
         //
         BusyCursor.execute(Display.getCurrent().getActiveShell(), () -> {
@@ -85,7 +85,7 @@ public class CypherBasedXRefFilterAction extends AbstractFilterAction {
           try {
 
             //
-            Future<StatementResult> future = boltClient.executeCypherQuery(cypherQuery);
+            Future<StatementResult> future = boltClient.asyncExecCypherQuery(cypherQuery);
 
             //
             List<Long> filteredNodeIds = future.get().list(r -> r.get(0).asLong());
@@ -113,7 +113,7 @@ public class CypherBasedXRefFilterAction extends AbstractFilterAction {
 
   /**
    * Reads the stream into a string
-   * 
+   *
    * @param iStream
    *          the input stream
    * @return the string read from the stream
