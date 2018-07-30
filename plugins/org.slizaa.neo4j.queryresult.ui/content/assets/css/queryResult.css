@@ -1,0 +1,63 @@
+body {
+    font-family: Segoe UI, Arial, sans-serif;
+    margin: 0px;
+    margin: 0px;
+}
+
+.ReactTable {
+    display: block;
+    border: none;
+}
+
+.ReactTable .-pagination {
+    padding: 0px;
+    box-shadow: none;
+    border-top: none;
+    font-family: Segoe UI, Arial, sans-serif;
+    font-size: 9pt;
+    border-bottom: solid #efefef 1px;
+}
+
+.ReactTable .-pagination .-btn {
+    background-color: #fff;
+    border:none; 
+}
+
+.ReactTable .-pagination .-btn[disabled] {
+    opacity: .0;
+}
+.ReactTable .-pagination .-btn:not([disabled]):hover{
+    background:#7698B9;
+    color:#fff
+}
+
+.ReactTable.-striped .rt-tr.-odd {
+    background: rgba(0,0,0,0.03);
+  }
+
+.ReactTable .rt-tbody .rt-tr-group {
+    border-bottom: solid #efefef 1px;
+}
+
+.ReactTable .rt-tbody .rt-td {
+    border-right: solid #efefef 1px;
+}
+
+.ReactTable .rt-thead.-header {
+    box-shadow: none;
+    border-bottom: solid #efefef 1px;
+}
+
+.ReactTable .rt-thead .rt-resizable-header-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: Segoe UI, Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 2px;
+}
+
+.ReactTable .rt-thead .rt-th, .ReactTable .rt-thead .rt-td {
+    border-right: solid #efefef 1px;
+}

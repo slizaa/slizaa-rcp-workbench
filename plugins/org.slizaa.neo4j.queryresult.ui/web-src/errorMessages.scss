@@ -1,0 +1,14 @@
+$font-stack:  Segoe UI, Arial, sans-serif;
+
+div.header {
+  font-family: $font-stack;
+  font-size: 22pt;
+  padding-bottom: 20px;
+}
+
+div.errorMessageBox {
+  overflow-y: hidden; 
+  overflow-x: auto; 
+  width: 100%;
+  height: 150px;
+}

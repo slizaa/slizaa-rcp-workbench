@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog.test
+Bundle-SymbolicName: org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.swtbot.eclipse.core;bundle-version="2.5.0",
+ org.eclipse.swtbot.junit4_x;bundle-version="2.5.0",
+ org.eclipse.swtbot.swt.finder;bundle-version="2.5.0",
+ org.eclipse.swt;bundle-version="3.105.2",
+ org.junit;bundle-version="4.12.0",
+ org.apache.log4j;bundle-version="1.2.15",
+ org.eclipse.e4.core.di;bundle-version="1.6.1",
+ org.eclipse.xtext;bundle-version="2.10.0",
+ org.slizaa.hierarchicalgraph.graphdb.testfwk;bundle-version="1.0.0",
+ org.assertj.core;bundle-version="3.3.0",
+ org.slizaa.hierarchicalgraph.core.testfwk.ui;bundle-version="1.0.0",
+ org.mockito.mockito-all;bundle-version="1.10.19",
+ org.eclipse.equinox.common
+

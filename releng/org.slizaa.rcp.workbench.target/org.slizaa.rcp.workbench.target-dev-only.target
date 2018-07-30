@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="target" sequenceNumber="30">
+<?pde version="3.8"?><target name="target" sequenceNumber="19">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.cau.cs.kieler.klighd.draw2d.feature.feature.group" version="0.0.0"/>
@@ -44,25 +44,8 @@
 <repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.hierarchicalgraph.core.feature.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.hierarchicalgraph.core.feature.source.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.hierarchicalgraph.core.testfwk.feature.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.hierarchicalgraph.core.testfwk.feature.source.feature.group" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph-core"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.hierarchicalgraph.graphdb.feature.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.hierarchicalgraph.graphdb.feature.source.feature.group" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-hierarchicalgraph-graphdb"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.slizaa.neo4j.opencypher.feature.feature.group" version="0.0.0"/>
 <repository location="http://www.slizaa.org/p2/slizaa-opencypher-xtext"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.opencypher.workbench.feature.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.opencypher.workbench.feature.source.feature.group" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-opencypher-workbench"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.slizaa.core.feature.feature.group" version="0.0.0"/>

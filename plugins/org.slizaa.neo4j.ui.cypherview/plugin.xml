@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <!-- -->
+   <extension
+         point="org.eclipse.ui.views">
+      <e4view
+            name="Cypher Queries"
+            class="org.slizaa.neo4j.ui.cypherview.CypherViewPart"
+            restorable="true"
+            icon="icons/cypherView.png"
+            id="org.slizaa.neo4j.ui.cypherview.CypherViewPart">
+      </e4view>
+   </extension>
+   
+   <!-- -->
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.slizaa.neo4j.ui.cypherview.executeCypherQuery"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+RETURN">
+      </key>
+      <key
+            commandId="org.slizaa.neo4j.ui.cypherview.saveCypherQuery"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+S">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            id="org.slizaa.neo4j.ui.cypherview.context"
+            name="org.slizaa.neo4j.ui.cypherview.context">
+      </context>
+   </extension>
+   
+   <!-- -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="org.slizaa.neo4j.ui.cypherview.executeCypherQuery"
+            name="Execute Cypher Query">
+      </command>
+      <command
+            id="org.slizaa.neo4j.ui.cypherview.saveCypherQuery"
+            name="Save Cypher Query">
+      </command>      
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.slizaa.neo4j.ui.cypherview.internal.handler.ExecuteQueryHandler"
+            commandId="org.slizaa.neo4j.ui.cypherview.executeCypherQuery">
+      </handler>
+	  <handler
+            class="org.slizaa.neo4j.ui.cypherview.internal.handler.SaveAsCypherFileHandler"
+            commandId="org.slizaa.neo4j.ui.cypherview.saveCypherQuery">
+      </handler>
+   </extension>
+
+</plugin>

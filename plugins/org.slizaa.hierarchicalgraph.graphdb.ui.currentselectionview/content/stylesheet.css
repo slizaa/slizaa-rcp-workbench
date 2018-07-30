@@ -1,0 +1,58 @@
+body {
+    font-family: Segoe UI, Arial, sans-serif;
+    margin: 0px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr {
+    border-bottom: none;
+}
+
+tr .query-result-table-header {
+    padding: 8px 10px;
+}
+
+table.node {
+    width: 99%;
+    background: #e0e8f0;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin: 3px;
+}
+
+tr .node_row {
+    text-align: left;
+    border-bottom: none;
+    margin: 5px 0px;
+}
+
+tr .node_row .node_labels {
+    font-weight: 500;
+    padding-bottom: 6px;
+    border-bottom: solid #bbbbbb 1px;
+}
+
+tr .node_row .node_id {
+    font-weight: 500;
+}
+
+thead {
+    color: black;
+    font-weight: bold;
+}
+
+th, td {
+    vertical-align: top;
+    text-align: left;
+    padding: 2.5px 5px;
+    font-size: 75%;
+}
+
+td.node_data_value {
+	width: 100%;
+}
+

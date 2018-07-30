@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <e4view
+            allowMultiple="false"
+            class="org.slizaa.neo4j.queryresult.ui.internal.QueryResultViewPart"
+            icon="icons/queryResultView.png"
+            id="org.slizaa.neo4j.queryresult.ui.QueryResultViewPart"
+            name="Query Result"
+            restorable="true">
+      </e4view>
+   </extension>
+</plugin>

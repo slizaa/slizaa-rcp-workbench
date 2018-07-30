@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            class="org.slizaa.ui.klighd.SlizaaDiagramViewPart"
+            icon="icons/full/etool16/diagrams_view.gif"
+            id="org.slizaa.ui.klighd.SlizaaDiagramViewPart"
+            name="Diagram"
+            restorable="false">
+      </view>
+   </extension>
+   
+  <extension
+         point="de.cau.cs.kieler.klighd.diagramSyntheses">
+   <diagramSynthesis
+         class="de.cau.cs.kieler.klighd.syntheses.GuiceBasedSynthesisFactory:org.slizaa.ui.klighd.nullmodel.NullModelDiagramSynthesis"
+         id="org.slizaa.ui.klighd.nullmodel.NullModelDiagramSynthesis">
+   </diagramSynthesis>
+   </extension>
+   
+</plugin>

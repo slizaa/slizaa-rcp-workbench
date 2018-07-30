@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <e4view
+            class="org.slizaa.neo4j.ui.currentselection.CurrentSelectionViewPart"
+            id="org.slizaa.neo4j.ui.currentselection.CurrentSelectionViewPart"
+            name="Properties"
+            restorable="true"
+            icon="icons/currentSelectionView.gif">
+      </e4view>
+   </extension>
+</plugin>

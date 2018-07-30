@@ -1,0 +1,5 @@
+build with maven:
+mvn clean install (execute in slizaa-opencypher-workbench)
+
+build with webpack:
+org.slizaa.neo4j.queryresult.ui>webpack

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <e4view
+            class="org.slizaa.ui.dsm.DsmPart"
+            icon="icons/DSM.png"
+            id="org.slizaa.ui.dsm.DsmPart"
+            name="DSM"
+            restorable="true">
+      </e4view>
+   </extension>
+
+</plugin>

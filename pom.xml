@@ -10,20 +10,38 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>plugnis/org.slizaa.rcp.workbench.core</module>
-		<module>plugnis/org.slizaa.rcp.workbench.core.spi-api</module>
-		<module>plugnis/org.slizaa.rcp.workbench.discovery.ui</module>
-		<module>plugnis/org.slizaa.rcp.workbench.ui</module>
-		
-		<!-- remove from here -->
-		<module>plugnis/org.slizaa.rcp.workbench.mappings</module>
+
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.dependencytable</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.dependencytree</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.dsm</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.klighd</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.klighd.synthesis</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.shared</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.tree</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.widget.dsm</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.core.ui.xref</module>
+
+		<module>plugins/org.slizaa.hierarchicalgraph.graphdb.ui.currentselectionview</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.graphdb.ui.hierarchicalgraphview</module>
+		<module>plugins/org.slizaa.hierarchicalgraph.graphdb.ui.mappingsdialog</module>
+
+		<module>plugins/org.slizaa.neo4j.queryresult.ui</module>
+		<module>plugins/org.slizaa.neo4j.ui.cypherview</module>
+
+		<module>plugins/org.slizaa.rcp.workbench.core</module>
+		<module>plugins/org.slizaa.rcp.workbench.core.spi-api</module>
+		<module>plugins/org.slizaa.rcp.workbench.discovery.ui</module>
+		<module>plugins/org.slizaa.rcp.workbench.ui</module>
+
+		<module>releng/org.slizaa.hierarchicalgraph.core.feature</module>
+		<module>releng/org.slizaa.hierarchicalgraph.graphdb.feature</module>
+		<module>releng/org.slizaa.opencypher.workbench.feature</module>
+		<module>releng/org.slizaa.rcp.workbench.feature</module>
 
 		<module>releng/org.slizaa.rcp.workbench.target</module>
-		<module>releng/org.slizaa.rcp.workbench.feature</module>
-		<module>releng/org.slizaa.rcp.workbench.dependencies.feature</module>
 		<module>releng/org.slizaa.rcp.workbench.p2</module>
 		<module>releng/org.slizaa.rcp.workbench.product</module>
-
+		
 		<module>extensions/org.slizaa.rcp.workbench.extensions</module>
 	</modules>
 
@@ -55,6 +73,13 @@
 						</configuration>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.platform</groupId>
+						<artifactId>org.eclipse.equinox.common</artifactId>
+						<version>3.10.0</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 			<!-- enable tycho build extension -->

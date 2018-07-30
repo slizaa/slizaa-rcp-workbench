@@ -1,0 +1,123 @@
+$background-color: #d3dee9;
+$collection-border-color: #cccccc;
+$separator-color: #97a5b3;
+$font-stack:  Segoe UI, Arial, sans-serif;
+// #eff4fa; #b2c2d1 ; #97a5b3; #d3dee9
+%table_object {
+  table-layout:fixed;
+  width: 100%;
+  font-family: $font-stack;
+  font-size: 9pt;
+  background: $background-color;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+table.graphNode {
+  @extend %table_object;
+}
+
+table.graphPath {
+  @extend %table_object;
+  background: $collection-border-color;
+  border: 3px solid $collection-border-color;
+}
+
+table.graphList {
+  @extend %table_object;
+  background: $collection-border-color;
+  border: 3px solid $collection-border-color;
+}
+
+table.graphListSimple {
+  @extend %table_object;
+  background: none;
+}
+
+td.graphNode {
+  padding-left: 3px;
+  text-align: left;
+  font-family: $font-stack;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+td.graphPath_relationship {
+  padding-top: 3px ;
+  padding-bottom: 3px ;
+}
+
+td.graphNode_labels {
+  @extend td.graphNode;
+  padding-bottom: 6px;
+  border-bottom: solid $separator-color 1px;
+}
+
+td.graphNode_propkey {
+  @extend td.graphNode;
+  width: 120px;
+}
+
+td.graphNode_listItem {
+  @extend td.graphNode;
+  padding-left: 0px;
+  text-align: left;
+  font-family: $font-stack;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+
+
+
+$primary-color: #e0e8f0;
+$font-stack:    Segoe UI, Arial, sans-serif;
+
+.tableSpace {
+  width: 100%;
+  height: 100%;
+}
+
+.tableHeader {
+  font-family:  $font-stack;
+}
+
+.nodeKey {
+  width: 150px;
+  font-family: $font-stack;
+}
+
+.tableColumn {
+ color: black;
+}
+
+.nodeTable {
+  font-family: $font-stack;
+    background: $primary-color;
+    font-size: 9pt;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 4px 2px;
+    width: 100%;
+  }
+
+.attributeValue {
+  font-family: $font-stack;
+  font-size: 9pt;
+}
+
+.noRows {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  color: #bdbdbd;
+}
+

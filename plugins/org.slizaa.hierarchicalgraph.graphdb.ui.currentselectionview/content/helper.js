@@ -1,0 +1,3 @@
+function currentNodeSelection() {
+	return '[{"id":"113275","labels":["MODULE"],"properties":{"fqn":"com.sun.jersey.contribs.jersey-multipart","version":"1.19.0","name":"com.sun.jersey.contribs.jersey-multipart","contentEntryId":"0000000033-1"}}, {"id":"11968","labels":["METHOD","CONSTRUCTOR"],"properties":{"visibility":"public","fqn":"void <init>(long,com.kenai.jffi.ClosurePool$Proxy)","name":"<init>"}}]'
+}

@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.slizaa.hierarchicalgraph.core.ui.dependencytree
+Bundle-SymbolicName: org.slizaa.hierarchicalgraph.core.ui.dependencytree;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: javax.inject
+Require-Bundle: org.slizaa.hierarchicalgraph.core.model;bundle-version="0.0.3",
+ org.slizaa.hierarchicalgraph.core.algorithms;bundle-version="0.0.3",
+ org.slizaa.hierarchicalgraph.core.workbench.model;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.core.selections;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.core.ui.shared;bundle-version="1.0.0",
+ org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;bundle-version="2.13.0",
+ com.google.guava;bundle-version="15.0.0",
+ org.eclipse.e4.ui.di;bundle-version="1.1.0",
+ org.eclipse.e4.core.di.extensions;bundle-version="0.13.0",
+ org.slizaa.hierarchicalgraph.core.ui.tree;bundle-version="0.0.3",
+ org.eclipse.e4.core.di.annotations;bundle-version="1.5.0",
+ org.eclipse.e4.ui.model.workbench;bundle-version="1.2.0",
+ org.eclipse.e4.core.contexts;bundle-version="1.5.0",
+ com.google.inject;bundle-version="3.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.slizaa.hierarchicalgraph.core.ui.dependencytree.internal.osgi.Activator
+
+
