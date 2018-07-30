@@ -36,7 +36,8 @@ Export-Package: org.slizaa.rcp.workbench.core,
  org.slizaa.rcp.workbench.core.model.impl,
  org.slizaa.rcp.workbench.core.model.util
 Bundle-ActivationPolicy: lazy
-Import-Package: javax.ws.rs
+Import-Package: javax.ws.rs,
+ org.osgi.service.component.annotations;version="1.2.0"
 Service-Component: OSGI-INF/org.slizaa.rcp.workbench.core.internal.BoltClientToMetaDataproviderAdapterComponent.xml
 
 
