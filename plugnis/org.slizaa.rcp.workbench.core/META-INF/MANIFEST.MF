@@ -27,8 +27,9 @@ Require-Bundle: org.slizaa.scanner.core.contentdefinition;bundle-version="1.0.0"
  com.google.inject;bundle-version="3.0.0",
  com.google.gson;bundle-version="2.5.0",
  org.slizaa.core.boltclient;bundle-version="1.0.0",
- org.slizaa.hierarchicalgraph.graphdb.mapping.spi;bundle-version="1.0.0",
  org.slizaa.core.classpathscanner;bundle-version="1.0.0",
+ org.slizaa.neo4j.opencypher;bundle-version="1.0.0",
+ org.slizaa.hierarchicalgraph.graphdb.mapping.spi;bundle-version="1.0.0",
  org.slizaa.hierarchicalgraph.graphdb.mapping.service;bundle-version="1.0.0"
 Export-Package: org.slizaa.rcp.workbench.core,
  org.slizaa.rcp.workbench.core.model,
@@ -36,6 +37,7 @@ Export-Package: org.slizaa.rcp.workbench.core,
  org.slizaa.rcp.workbench.core.model.util
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.ws.rs
+Service-Component: OSGI-INF/org.slizaa.rcp.workbench.core.internal.BoltClientToMetaDataproviderAdapterComponent.xml
 
 
 
