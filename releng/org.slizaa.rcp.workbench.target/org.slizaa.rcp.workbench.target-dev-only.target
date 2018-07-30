@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="target" sequenceNumber="19">
+<?pde version="3.8"?><target name="target" sequenceNumber="20">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="de.cau.cs.kieler.klighd.draw2d.feature.feature.group" version="0.0.0"/>
@@ -33,8 +33,8 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.slizaa.thirdparty.feature.feature.group" version="0.0.0"/>
-<unit id="org.slizaa.thirdparty.test.feature.feature.group" version="0.0.0"/>
 <unit id="org.slizaa.thirdparty.feature.source.feature.group" version="0.0.0"/>
+<unit id="org.slizaa.thirdparty.test.feature.feature.group" version="0.0.0"/>
 <unit id="org.slizaa.thirdparty.test.feature.source.feature.group" version="0.0.0"/>
 <repository location="http://www.slizaa.org/p2/slizaa-thirdparty-dependencies"/>
 </location>
@@ -56,12 +56,12 @@
 <repository location="http://www.slizaa.org/p2/slizaa-scanner-core"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.scanner.jtype.eclipse.feature.feature.group" version="0.0.0"/>
-<repository location="http://www.slizaa.org/p2/slizaa-scanner-jtype"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.slizaa.scanner.neo4j.feature.feature.group" version="0.0.0"/>
 <repository location="http://www.slizaa.org/p2/slizaa-scanner-neo4j"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.slizaa.scanner.jtype.feature.feature.group" version="1.0.0.20180730200908"/>
+<repository location="http://www.slizaa.org/p2/slizaa-jtype"/>
 </location>
 </locations>
 </target>

@@ -37,7 +37,7 @@ public class BoltClientToMetaDataproviderAdapterComponent {
    * @param bundleContext
    */
   public void activate(BundleContext bundleContext) {
-    _bundleContext = bundleContext;
+    this._bundleContext = bundleContext;
   }
 
   /**
@@ -53,11 +53,11 @@ public class BoltClientToMetaDataproviderAdapterComponent {
     MetaDataproviderAdapter adapter = new MetaDataproviderAdapter(boltClient);
 
     //
-    ServiceRegistration<IGraphMetaDataProvider> registration = _bundleContext
+    ServiceRegistration<IGraphMetaDataProvider> registration = this._bundleContext
         .registerService(IGraphMetaDataProvider.class, adapter, null);
 
     //
-    _providerMap.put(boltClient, registration);
+    this._providerMap.put(boltClient, registration);
   }
 
   /**
@@ -69,8 +69,8 @@ public class BoltClientToMetaDataproviderAdapterComponent {
   public void removeBoltClient(IBoltClient boltClient) {
 
     //
-    if (_providerMap.containsKey(boltClient)) {
-      _providerMap.remove(boltClient).unregister();
+    if (this._providerMap.containsKey(boltClient)) {
+      this._providerMap.remove(boltClient).unregister();
       ;
     }
   }
@@ -95,7 +95,7 @@ public class BoltClientToMetaDataproviderAdapterComponent {
      * @param boltClient
      */
     public MetaDataproviderAdapter(IBoltClient boltClient) {
-      _boltClient = checkNotNull(boltClient);
+      this._boltClient = checkNotNull(boltClient);
     }
 
     /**
@@ -103,7 +103,7 @@ public class BoltClientToMetaDataproviderAdapterComponent {
      */
     @Override
     public List<String> getNodeLabels() {
-      return _boltClient.getNodeLabels();
+      return this._boltClient.getNodeLabels();
     }
 
     /**
@@ -111,7 +111,7 @@ public class BoltClientToMetaDataproviderAdapterComponent {
      */
     @Override
     public List<String> getPropertyKeys() {
-      return _boltClient.getPropertyKeys();
+      return this._boltClient.getPropertyKeys();
     }
 
     /**
@@ -119,7 +119,7 @@ public class BoltClientToMetaDataproviderAdapterComponent {
      */
     @Override
     public List<String> getRelationshipTypes() {
-      return _boltClient.getRelationshipTypes();
+      return this._boltClient.getRelationshipTypes();
     }
   }
 }
