@@ -33,9 +33,13 @@ public class ViewUtils {
     EPartService partService = getPartService();
 
     //
-    MPart part = partService.findPart(partId);
-    if (part != null) {
-      partService.activate(part, requireFocus);
+    try {
+      MPart part = partService.findPart(partId);
+      if (part != null) {
+        partService.activate(part, requireFocus);
+      }
+    } catch (Exception e) {
+      // ignore
     }
   }
 

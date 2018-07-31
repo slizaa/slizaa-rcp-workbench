@@ -60,7 +60,7 @@
 <repository location="http://www.slizaa.org/p2/slizaa-scanner-neo4j"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.slizaa.scanner.jtype.feature.feature.group" version="1.0.0.20180730200908"/>
+<unit id="org.slizaa.scanner.jtype.feature.feature.group" version="0.0.0"/>
 <repository location="http://www.slizaa.org/p2/slizaa-jtype"/>
 </location>
 </locations>
