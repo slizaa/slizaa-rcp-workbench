@@ -34,6 +34,7 @@ import org.slizaa.rcp.workbench.core.internal.Activator;
 import org.slizaa.rcp.workbench.core.internal.utils.BuildHelper;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
+import org.slizaa.scanner.core.api.cypherregistry.ICypherStatementRegistry;
 import org.slizaa.scanner.core.api.graphdb.IGraphDb;
 import org.slizaa.scanner.core.api.importer.IModelImporter;
 import org.slizaa.scanner.core.api.importer.IModelImporterFactory;
@@ -147,7 +148,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
       IBoltClient boltClient = Activator.instance().getBoltClientFactory().createBoltClient(
           "bolt://localhost:" + this.graphDatabaseInstance.getPort(), this.getProject().getName(),
           this.getProject().getName());
-      
+
       //
       boltClient.connect();
 
@@ -217,6 +218,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
    *
    * @param newBoltClient
    */
+  @Override
   public void setBoltClient(IBoltClient newBoltClient) {
 
     IBoltClient oldBoltClient = this.boltClient;
@@ -319,7 +321,9 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
         parserFactories.addAll(BundleExtensionsUtils.getBundleExtensions_ParserFactory());
 
         // fetch all cypher statements
-        List<ICypherStatement> cypherStatements = Activator.instance().getCypherStatementRegistry().getAllStatements();
+        ICypherStatementRegistry cypherStatementRegistry = Activator.instance().getCypherStatementRegistry();
+        cypherStatementRegistry.rescan();
+        List<ICypherStatement> cypherStatements = cypherStatementRegistry.getAllStatements();
 
         // TODO
         for (ICypherStatement cypherStatement : cypherStatements) {

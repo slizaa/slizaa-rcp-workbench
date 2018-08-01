@@ -138,7 +138,7 @@ public class DependencyTablePart extends AbstractSlizaaWorkbenchModelComponent {
 
             //
             if (dependency instanceof HGProxyDependency) {
-              return "<<lazy dependency>>";
+              return ((HGCoreDependency) dependency).getType() + " <aggregated>";
             }
             //
             else {
