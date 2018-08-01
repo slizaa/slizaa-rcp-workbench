@@ -168,6 +168,7 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
 
     // get the root node
     HGRootNode rootNode = mappingService.convert(mappingProvider, getBoltClient(), monitor);
+    rootNode.setName("Default Model");
 
     //
     setHierachicalGraph(rootNode);
