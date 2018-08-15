@@ -19,6 +19,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.slizaa.hierarchicalgraph.core.model.HGNode;
 import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
+import org.slizaa.hierarchicalgraph.core.model.spi.INodeComparator;
 import org.slizaa.hierarchicalgraph.core.model.spi.INodeLabelProvider;
 import org.slizaa.ui.shared.context.RootObject;
 import org.slizaa.ui.tree.ISlizaaActionContributionProvider;
@@ -71,7 +72,8 @@ public class SlizaaTreeViewerCreator {
     new SlizaaTreeMenuBuilder(treeViewer, this._slizaaActionContributionProvider, this._contextSupplier).populateMenu();
 
     // https://www.eclipse.org/forums/index.php/t/1082215/
-    treeViewer.setLabelProvider(createLabelProvider(treeViewer));
+    treeViewer.setLabelProvider(
+        new DefaultInterceptableLabelProviderAdapter(createExtensionSupplier(treeViewer, INodeLabelProvider.class)));
 
     // set the layout data
     treeViewer.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -131,6 +133,9 @@ public class SlizaaTreeViewerCreator {
     final SlizaaTreeViewer treeViewer = new SlizaaTreeViewer(parent, SWT.NO_SCROLL | SWT.V_SCROLL | style,
         eventInterceptor, autoExpandLevel);
 
+    treeViewer.setComparator(
+        new NodeComparator2ViewerComparatorAdapter(createExtensionSupplier(treeViewer, INodeComparator.class)));
+
     treeViewer.setUseHashlookup(true);
 
     treeViewer.addDoubleClickListener(event -> {
@@ -162,7 +167,8 @@ public class SlizaaTreeViewerCreator {
     new SlizaaTreeMenuBuilder(treeViewer, this._slizaaActionContributionProvider, this._contextSupplier).populateMenu();
 
     //
-    treeViewer.setLabelProvider(createLabelProvider(treeViewer));
+    treeViewer.setLabelProvider(
+        new DefaultInterceptableLabelProviderAdapter(createExtensionSupplier(treeViewer, INodeLabelProvider.class)));
 
     // set the layout data
     treeViewer.getTree().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -216,11 +222,13 @@ public class SlizaaTreeViewerCreator {
    * </p>
    *
    * @param contentViewer
+   * @param clazz
    * @return
    */
-  private DefaultInterceptableLabelProviderAdapter createLabelProvider(final ContentViewer contentViewer) {
+  private <T> Supplier<T> createExtensionSupplier(final ContentViewer contentViewer, final Class<T> clazz) {
+
     //
-    Supplier<INodeLabelProvider> supplier = () -> {
+    return () -> {
 
       //
       Object input = contentViewer.getInput();
@@ -228,11 +236,7 @@ public class SlizaaTreeViewerCreator {
       HGRootNode rootNode = input instanceof RootObject ? (HGRootNode) ((RootObject) input).getRoot()
           : ((HGNode) input).getRootNode();
 
-      return rootNode.getExtension(INodeLabelProvider.class);
+      return rootNode.getExtension(clazz);
     };
-
-    DefaultInterceptableLabelProviderAdapter labelProvider = new DefaultInterceptableLabelProviderAdapter(supplier);
-    return labelProvider;
   }
-
 }
