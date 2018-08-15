@@ -15,7 +15,7 @@
                style="push">
             <parameter
                   name="org.eclipse.equinox.p2.ui.discovery.commands.DirectoryParameter"
-                  value="http://www.slizaa.org/p2/slizaa-extensions/directory.xml">
+                  value="%slizaa.extensions.url">
             </parameter>
          </command>
       </menuContribution>
@@ -33,7 +33,7 @@
                style="push">
             <parameter
                   name="org.eclipse.equinox.p2.ui.discovery.commands.DirectoryParameter"
-                  value="http://www.slizaa.org/p2/slizaa-extensions/directory.xml">
+                  value="%slizaa.extensions.url">
             </parameter>
             <visibleWhen checkEnabled="false">
             	<not>

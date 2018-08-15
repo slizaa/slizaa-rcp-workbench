@@ -22,7 +22,7 @@
             license="GPL 3.0"
             name="Slizaa Neo4j Backend"
             provider="slizaa.org" 
-            siteUrl="http://www.slizaa.org/p2/slizaa-extensions/M2/slizaa-scanner-neo4j/">
+            siteUrl="%slizaa.extensions.neo4j.url">
          <icon
                image32="images/slizaa.png"></icon>
          <iu
@@ -37,7 +37,7 @@
             license="GPL 3.0"
             name="Slizaa JType (Java Parser)"
             provider="slizaa.org" 
-            siteUrl="http://www.slizaa.org/p2/slizaa-extensions/M2/slizaa-scanner-jtype/">
+            siteUrl="%slizaa.extensions.jtype.url">
          <icon
                image32="images/slizaa.png"></icon>
          <iu

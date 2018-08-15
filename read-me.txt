@@ -1,0 +1,3 @@
+change extensions directory;
+- /slizaa-rcp-workbench/plugins/org.slizaa.rcp.workbench.discovery.ui/plugin.properties
+- 
