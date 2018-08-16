@@ -21,7 +21,7 @@ import org.eclipse.ui.commands.ICommandService;
 public class ShowBundleCatalogCommandExecuter {
 
   /** - */
-  public static String SLIZAA_EXTENSIONS_URL = "http://www.slizaa.org/p2/slizaa-extensions/directory.xml";
+  public static String SLIZAA_EXTENSIONS_URL = "http://www.slizaa.org/p2/slizaa-extensions/M3/directory.xml";
 
   /**
    * <p>

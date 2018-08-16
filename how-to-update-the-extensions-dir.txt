@@ -1,0 +1,4 @@
+change extensions directory;
+- /slizaa-rcp-workbench/plugins/org.slizaa.rcp.workbench.discovery.ui/plugin.properties
+- /slizaa-rcp-workbench/plugins/org.slizaa.rcp.workbench.discovery.ui/src/org/slizaa/rcp/workbench/discovery/ui/ShowBundleCatalogCommandExecuter.java
+- /slizaa-rcp-workbench/extensions/org.slizaa.rcp.workbench.extensions/plugin.properties
