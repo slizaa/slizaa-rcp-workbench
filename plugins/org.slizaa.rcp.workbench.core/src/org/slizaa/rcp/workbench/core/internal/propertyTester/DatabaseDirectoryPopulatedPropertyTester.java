@@ -29,6 +29,7 @@ public class DatabaseDirectoryPopulatedPropertyTester extends PropertyTester {
       IProject project = (IProject) receiver;
       try {
         SlizaaProject slizaaProject = SlizaaWorkbenchCore.getSlizaaProject(project);
+        project.refreshLocal(1, null);
         return slizaaProject.isDatabaseDirectoryPopulated();
       } catch (CoreException e) {
         //

@@ -9,6 +9,9 @@
     <eOperations name="startAndConnectDatabase">
       <eParameters name="monitor" eType="#//IProgressMonitor"/>
     </eOperations>
+    <eOperations name="disconnectAndStopDatabase">
+      <eParameters name="monitor" eType="#//IProgressMonitor"/>
+    </eOperations>
     <eOperations name="mapToHierachicalGraph" eType="ecore:EClass ../../org.slizaa.hierarchicalgraph.core.model/model/hierarchicalgraph.ecore#//HGRootNode">
       <eParameters name="mappingProvider" eType="#//IMappingProvider"/>
       <eParameters name="monitor" eType="#//IProgressMonitor"/>

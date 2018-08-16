@@ -8,6 +8,7 @@ import org.eclipse.core.resources.IProject;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.scanner.core.api.cypherregistry.ICypherStatement;
 
@@ -137,7 +138,7 @@ public interface SlizaaProject {
    * @return the value of the '<em>Hierachical Graph</em>' reference.
    * @generated
    */
-  org.slizaa.hierarchicalgraph.core.model.HGRootNode getHierachicalGraph();
+  HGRootNode getHierachicalGraph();
 
   /**
    * <!-- begin-user-doc -->
@@ -165,7 +166,14 @@ public interface SlizaaProject {
    * <!-- end-user-doc -->
    * @generated
    */
-  org.slizaa.hierarchicalgraph.core.model.HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor);
+  void disconnectAndStopDatabase(IProgressMonitor monitor);
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor);
 
   /**
    * <!-- begin-user-doc -->

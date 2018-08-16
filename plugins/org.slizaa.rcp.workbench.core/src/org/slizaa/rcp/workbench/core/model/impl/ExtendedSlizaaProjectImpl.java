@@ -161,6 +161,33 @@ public class ExtendedSlizaaProjectImpl extends SlizaaProjectImpl {
    * {@inheritDoc}
    */
   @Override
+  public void disconnectAndStopDatabase(IProgressMonitor monitor) {
+
+    //
+    if (this.boltClient != null) {
+
+      //
+      boltClient.disconnect();
+
+      //
+      setBoltClient(null);
+    }
+
+    //
+    if (this.graphDatabaseInstance != null) {
+
+      //
+      this.graphDatabaseInstance.shutdown();
+
+      //
+      setGraphDatabaseInstance(null);
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor) {
 
     // get the mapping service

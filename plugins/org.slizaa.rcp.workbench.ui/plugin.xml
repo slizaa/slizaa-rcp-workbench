@@ -155,6 +155,15 @@
 			</command>
 			
 			<command
+         		commandId="org.slizaa.core.ui.commands.DisconnectAndStopDatabaseCommand"
+         		icon="icons/etools/bm-parse.png"
+         		style="push">
+         		<visibleWhen checkEnabled="false">
+					<reference definitionId="slizaaProjectSelected" />
+				</visibleWhen>         		
+			</command>
+			
+			<command
          		commandId="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand"
          		icon="icons/etools/bm-parse.png"
          		style="push">
@@ -185,6 +194,15 @@
 				<reference definitionId="slizaaProjectSelectedAndDatabaseDirectoryPopulated"></reference>
 			</enabledWhen>
 		</handler>
+		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.DisconnectAndStopDatabaseHandler"
+			commandId="org.slizaa.core.ui.commands.DisconnectAndStopDatabaseCommand">
+			<activeWhen>
+				<reference definitionId="slizaaProjectSelectedAndDatabaseClientConnected"></reference>
+			</activeWhen>
+			<enabledWhen>
+				<reference definitionId="slizaaProjectSelectedAndDatabaseClientConnected"></reference>
+			</enabledWhen>
+		</handler>
 		<handler class="org.slizaa.rcp.workbench.ui.internal.handler.CreateHierarchicalGraphHandler"
 			commandId="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand">
 			<activeWhen>
@@ -199,6 +217,7 @@
  	<extension point="org.eclipse.ui.commands">
 		<command id="org.slizaa.core.ui.commands.ParseSlizaaProjectCommand" name="Parse" />
 		<command id="org.slizaa.core.ui.commands.StartAndConnectDatabaseCommand" name="Start/Connect Database" />
+		<command id="org.slizaa.core.ui.commands.DisconnectAndStopDatabaseCommand" name="Disconnect/Stop Database" />
 		<command id="org.slizaa.core.ui.commands.CreateHierarchicalGraphCommand" name="Create Hierarchical Graph..." />
  	</extension>
  	
@@ -253,6 +272,9 @@
 							<and>
 								<reference definitionId="slizaaProjectSelected" />
 								<test property="org.slizaa.rcp.workbench.core.isDatabaseDirectoryPopulated" />
+								<not>
+									<test property="org.slizaa.rcp.workbench.core.isDatabaseClientConnected" />
+								</not>
 							</and> 	
 						</adapt>
 				</iterate>

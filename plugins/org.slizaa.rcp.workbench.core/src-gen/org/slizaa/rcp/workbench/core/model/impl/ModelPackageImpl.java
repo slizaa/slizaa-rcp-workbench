@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.model.AbstractUserDefinedType;
 import org.slizaa.rcp.workbench.core.model.ModelFactory;
@@ -192,13 +193,22 @@ public class ModelPackageImpl extends EPackageImpl {
   public static final int SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR = 2;
 
   /**
+   * The operation id for the '<em>Disconnect And Stop Database</em>' operation.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  public static final int SLIZAA_PROJECT___DISCONNECT_AND_STOP_DATABASE__IPROGRESSMONITOR = 3;
+
+  /**
    * The operation id for the '<em>Map To Hierachical Graph</em>' operation.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR = 3;
+  public static final int SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR = 4;
 
   /**
    * The operation id for the '<em>Dispose</em>' operation.
@@ -207,7 +217,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT___DISPOSE = 4;
+  public static final int SLIZAA_PROJECT___DISPOSE = 5;
 
   /**
    * The operation id for the '<em>Is Database Directory Populated</em>' operation.
@@ -216,7 +226,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT___IS_DATABASE_DIRECTORY_POPULATED = 5;
+  public static final int SLIZAA_PROJECT___IS_DATABASE_DIRECTORY_POPULATED = 6;
 
   /**
    * The number of operations of the '<em>Slizaa Project</em>' class.
@@ -225,7 +235,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    * @ordered
    */
-  public static final int SLIZAA_PROJECT_OPERATION_COUNT = 6;
+  public static final int SLIZAA_PROJECT_OPERATION_COUNT = 7;
 
   /**
    * The meta object id for the '{@link org.slizaa.rcp.workbench.core.model.impl.AbstractUserDefinedTypeImpl <em>Abstract User Defined Type</em>}' class.
@@ -737,7 +747,7 @@ public class ModelPackageImpl extends EPackageImpl {
     isInited = true;
 
     // Initialize simple dependencies
-    org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage.eINSTANCE.eClass();
+    HierarchicalgraphPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theModelPackage.createPackageContents();
@@ -895,6 +905,19 @@ public class ModelPackageImpl extends EPackageImpl {
   }
 
   /**
+   * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#disconnectAndStopDatabase(org.eclipse.core.runtime.IProgressMonitor) <em>Disconnect And Stop Database</em>}' operation.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the '<em>Disconnect And Stop Database</em>' operation.
+   * @see org.slizaa.rcp.workbench.core.model.SlizaaProject#disconnectAndStopDatabase(org.eclipse.core.runtime.IProgressMonitor)
+   * @generated
+   */
+  public EOperation getSlizaaProject__DisconnectAndStopDatabase__IProgressMonitor() {
+    return slizaaProjectEClass.getEOperations().get(3);
+  }
+
+
+  /**
    * Returns the meta object for the '{@link org.slizaa.rcp.workbench.core.model.SlizaaProject#mapToHierachicalGraph(org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider, org.eclipse.core.runtime.IProgressMonitor) <em>Map To Hierachical Graph</em>}' operation.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -903,7 +926,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EOperation getSlizaaProject__MapToHierachicalGraph__IMappingProvider_IProgressMonitor() {
-    return slizaaProjectEClass.getEOperations().get(3);
+    return slizaaProjectEClass.getEOperations().get(4);
   }
 
 
@@ -916,7 +939,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EOperation getSlizaaProject__Dispose() {
-    return slizaaProjectEClass.getEOperations().get(4);
+    return slizaaProjectEClass.getEOperations().get(5);
   }
 
   /**
@@ -928,7 +951,7 @@ public class ModelPackageImpl extends EPackageImpl {
    * @generated
    */
   public EOperation getSlizaaProject__IsDatabaseDirectoryPopulated() {
-    return slizaaProjectEClass.getEOperations().get(5);
+    return slizaaProjectEClass.getEOperations().get(6);
   }
 
 
@@ -1281,6 +1304,7 @@ public class ModelPackageImpl extends EPackageImpl {
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___CLEAN_BUILD);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___PARSE__IPROGRESSMONITOR);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR);
+    createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___DISCONNECT_AND_STOP_DATABASE__IPROGRESSMONITOR);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___DISPOSE);
     createEOperation(slizaaProjectEClass, SLIZAA_PROJECT___IS_DATABASE_DIRECTORY_POPULATED);
@@ -1341,7 +1365,7 @@ public class ModelPackageImpl extends EPackageImpl {
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
-    org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage theHierarchicalgraphPackage = (org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage)EPackage.Registry.INSTANCE.getEPackage(org.slizaa.hierarchicalgraph.core.model.HierarchicalgraphPackage.eNS_URI);
+    HierarchicalgraphPackage theHierarchicalgraphPackage = (HierarchicalgraphPackage)EPackage.Registry.INSTANCE.getEPackage(HierarchicalgraphPackage.eNS_URI);
 
     // Create type parameters
 
@@ -1367,6 +1391,9 @@ public class ModelPackageImpl extends EPackageImpl {
     addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     op = initEOperation(getSlizaaProject__StartAndConnectDatabase__IProgressMonitor(), null, "startAndConnectDatabase", 0, 1, IS_UNIQUE, IS_ORDERED);
+    addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+    op = initEOperation(getSlizaaProject__DisconnectAndStopDatabase__IProgressMonitor(), null, "disconnectAndStopDatabase", 0, 1, IS_UNIQUE, IS_ORDERED);
     addEParameter(op, this.getIProgressMonitor(), "monitor", 0, 1, IS_UNIQUE, IS_ORDERED);
 
     op = initEOperation(getSlizaaProject__MapToHierachicalGraph__IMappingProvider_IProgressMonitor(), theHierarchicalgraphPackage.getHGRootNode(), "mapToHierachicalGraph", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1530,6 +1557,14 @@ public class ModelPackageImpl extends EPackageImpl {
      * @generated
      */
     public static final EOperation SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR = eINSTANCE.getSlizaaProject__StartAndConnectDatabase__IProgressMonitor();
+
+    /**
+     * The meta object literal for the '<em><b>Disconnect And Stop Database</b></em>' operation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static final EOperation SLIZAA_PROJECT___DISCONNECT_AND_STOP_DATABASE__IPROGRESSMONITOR = eINSTANCE.getSlizaaProject__DisconnectAndStopDatabase__IProgressMonitor();
 
     /**
      * The meta object literal for the '<em><b>Map To Hierachical Graph</b></em>' operation.

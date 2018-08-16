@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.slizaa.core.boltclient.IBoltClient;
+import org.slizaa.hierarchicalgraph.core.model.HGRootNode;
 import org.slizaa.hierarchicalgraph.graphdb.mapping.spi.IMappingProvider;
 import org.slizaa.rcp.workbench.core.model.SlizaaProject;
 import org.slizaa.rcp.workbench.core.model.SlizaaProjectConfigurationModel;
@@ -158,7 +159,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * @generated
    * @ordered
    */
-  protected org.slizaa.hierarchicalgraph.core.model.HGRootNode hierachicalGraph;
+  protected HGRootNode hierachicalGraph;
 
   /**
    * <!-- begin-user-doc -->
@@ -273,10 +274,10 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.slizaa.hierarchicalgraph.core.model.HGRootNode getHierachicalGraph() {
+  public HGRootNode getHierachicalGraph() {
     if (hierachicalGraph != null && hierachicalGraph.eIsProxy()) {
       InternalEObject oldHierachicalGraph = (InternalEObject)hierachicalGraph;
-      hierachicalGraph = (org.slizaa.hierarchicalgraph.core.model.HGRootNode)eResolveProxy(oldHierachicalGraph);
+      hierachicalGraph = (HGRootNode)eResolveProxy(oldHierachicalGraph);
       if (hierachicalGraph != oldHierachicalGraph) {
         if (eNotificationRequired())
           eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackageImpl.SLIZAA_PROJECT__HIERACHICAL_GRAPH, oldHierachicalGraph, hierachicalGraph));
@@ -290,7 +291,7 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.slizaa.hierarchicalgraph.core.model.HGRootNode basicGetHierachicalGraph() {
+  public HGRootNode basicGetHierachicalGraph() {
     return hierachicalGraph;
   }
 
@@ -332,7 +333,18 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
    * <!-- end-user-doc -->
    * @generated
    */
-  public org.slizaa.hierarchicalgraph.core.model.HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor) {
+  public void disconnectAndStopDatabase(IProgressMonitor monitor) {
+    // TODO: implement this method
+    // Ensure that you remove @generated or mark it @generated NOT
+    throw new UnsupportedOperationException();
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public HGRootNode mapToHierachicalGraph(IMappingProvider mappingProvider, IProgressMonitor monitor) {
     // TODO: implement this method
     // Ensure that you remove @generated or mark it @generated NOT
     throw new UnsupportedOperationException();
@@ -489,6 +501,9 @@ public class SlizaaProjectImpl extends MinimalEObjectImpl.Container implements S
         return null;
       case ModelPackageImpl.SLIZAA_PROJECT___START_AND_CONNECT_DATABASE__IPROGRESSMONITOR:
         startAndConnectDatabase((IProgressMonitor)arguments.get(0));
+        return null;
+      case ModelPackageImpl.SLIZAA_PROJECT___DISCONNECT_AND_STOP_DATABASE__IPROGRESSMONITOR:
+        disconnectAndStopDatabase((IProgressMonitor)arguments.get(0));
         return null;
       case ModelPackageImpl.SLIZAA_PROJECT___MAP_TO_HIERACHICAL_GRAPH__IMAPPINGPROVIDER_IPROGRESSMONITOR:
         return mapToHierachicalGraph((IMappingProvider)arguments.get(0), (IProgressMonitor)arguments.get(1));
